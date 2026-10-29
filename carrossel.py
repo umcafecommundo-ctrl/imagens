@@ -12,15 +12,29 @@ JSON:
   ]
 }
 """
-import json, os, sys, textwrap
-from PIL import Image, ImageDraw, ImageFont
+import json, math, os, sys, textwrap
+from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 W, H = 1080, 1350
 BG = (58, 36, 24)        # marrom café
 CREAM = (243, 230, 211)
-TEAL = (63, 143, 138)
+TEAL = (240, 178, 72)    # cor de destaque: âmbar (nome mantido por compatibilidade com reel.py)
+ON_ACCENT = BG           # texto sobre fundo âmbar
 MUTED = (201, 180, 156)
 PAD = 90
+
+# Globo terrestre do logo
+OCEAN = (46, 118, 168)
+OCEAN_HI = (86, 160, 205)
+LAND = (104, 168, 92)
+CONTINENTES = [
+    [(-.80, -.50), (-.62, -.72), (-.38, -.82), (-.10, -.78), (.02, -.62), (-.06, -.48), (-.20, -.40), (-.18, -.28), (-.30, -.18), (-.34, -.06), (-.46, -.10), (-.58, -.24), (-.72, -.30), (-.86, -.36)],
+    [(.08, -.92), (.30, -.95), (.36, -.80), (.22, -.70), (.10, -.76)],
+    [(-.34, -.06), (-.24, .02), (-.16, .08), (-.20, .12), (-.30, .04)],
+    [(-.18, .10), (.04, .08), (.22, .16), (.40, .30), (.36, .46), (.20, .58), (.08, .76), (-.02, .92), (-.10, .80), (-.10, .56), (-.16, .40), (-.26, .26)],
+    [(.62, -.50), (.76, -.66), (.96, -.62), (1.05, -.40), (.82, -.32), (.66, -.36)],
+    [(.60, -.18), (.84, -.24), (1.05, -.10), (1.05, .50), (.88, .62), (.78, .42), (.70, .18), (.58, .04)],
+]
 
 def font_serif(size, bold=True):
     for p in ["/usr/share/fonts/truetype/google-fonts/Lora-Variable.ttf"]:
@@ -72,14 +86,49 @@ def draw_lines(draw, xy, lines, f, size, fill, spacing=1.22):
         y += size * spacing
     return y
 
-def logo(draw, cx, cy, s):
-    """Xícara com globo, em escala s (1 = 100px de largura aprox.)."""
-    r = 34 * s
-    gy = cy - 8 * s
-    draw.ellipse([cx - r, gy - r, cx + r, gy + r], fill=TEAL, outline=CREAM, width=max(2, int(3 * s)))
-    draw.line([cx, gy - r, cx, gy + r], fill=CREAM, width=max(1, int(2 * s)))
-    draw.line([cx - r, gy, cx + r, gy], fill=CREAM, width=max(1, int(2 * s)))
-    draw.ellipse([cx - r * 0.45, gy - r, cx + r * 0.45, gy + r], outline=CREAM, width=max(1, int(2 * s)))
+def globo(D):
+    """Globo terrestre (oceano azul, continentes verdes) de diâmetro D, RGBA."""
+    k = 4
+    S = D * k
+    r = S / 2
+    g = Image.new("RGBA", (S, S), (0, 0, 0, 0))
+    d = ImageDraw.Draw(g)
+    d.ellipse([0, 0, S - 1, S - 1], fill=OCEAN)
+    hi = Image.new("L", (S, S), 0)
+    ImageDraw.Draw(hi).ellipse([S * .08, S * .06, S * .62, S * .58], fill=110)
+    hi = hi.filter(ImageFilter.GaussianBlur(S * .12))
+    g = Image.composite(Image.new("RGBA", (S, S), OCEAN_HI + (255,)), g, hi)
+    d = ImageDraw.Draw(g)
+    for pts in CONTINENTES:
+        d.polygon([(r + x * r, r + (y - .14) * r) for x, y in pts], fill=LAND)
+    lines = Image.new("RGBA", (S, S), (0, 0, 0, 0))
+    dl = ImageDraw.Draw(lines)
+    a = (255, 255, 255, 55)
+    w = max(2, int(S * .008))
+    for f in (.35, .72):
+        dl.ellipse([r - r * f, 0, r + r * f, S - 1], outline=a, width=w)
+    dl.line([r, 0, r, S], fill=a, width=w)
+    for yy in (-.5, 0, .5):
+        hw = r * math.sqrt(1 - yy * yy)
+        dl.line([r - hw, r + yy * r, r + hw, r + yy * r], fill=a, width=w)
+    g = Image.alpha_composite(g, lines)
+    sh = Image.new("L", (S, S), 0)
+    ImageDraw.Draw(sh).ellipse([S * .30, S * .25, S * 1.35, S * 1.3], fill=90)
+    sh = sh.filter(ImageFilter.GaussianBlur(S * .12))
+    g = Image.composite(Image.new("RGBA", (S, S), (10, 30, 50, 255)), g, Image.eval(sh, lambda v: int(v * .6)))
+    mask = Image.new("L", (S, S), 0)
+    ImageDraw.Draw(mask).ellipse([0, 0, S - 1, S - 1], fill=255)
+    out = Image.new("RGBA", (S, S), (0, 0, 0, 0))
+    out.paste(g, (0, 0), mask)
+    ImageDraw.Draw(out).ellipse([0, 0, S - 1, S - 1], outline=CREAM + (255,), width=int(S * .025))
+    return out.resize((D, D), Image.LANCZOS)
+
+def logo(img, draw, cx, cy, s):
+    """Xícara com globo terrestre, em escala s (1 = 100px de largura aprox.)."""
+    D = int(80 * s)
+    gy = int(cy - 16 * s)
+    gl = globo(D)
+    img.paste(gl, (int(cx - D / 2), int(gy - D / 2)), gl)
     top = cy + 2 * s
     draw.polygon([(cx - 44 * s, top), (cx + 44 * s, top), (cx + 36 * s, top + 44 * s), (cx - 36 * s, top + 44 * s)], fill=CREAM)
     draw.arc([cx + 30 * s, top + 6 * s, cx + 60 * s, top + 34 * s], -90, 90, fill=CREAM, width=max(2, int(7 * s)))
@@ -97,7 +146,7 @@ def base(n, total):
 
 def capa(dados, total):
     img, d = base(1, total)
-    logo(d, W // 2, 250, 2.2)
+    logo(img, d, W // 2, 250, 2.2)
     y = 470
     ed = dados.get("edicao", "Giro do mundo").upper()
     f = font_sans(30, "Bold")
@@ -125,7 +174,7 @@ def slide_noticia(nt, idx, total):
     f = font_sans(28, "Bold")
     tw = d.textlength(tag, font=f)
     d.rounded_rectangle([PAD, y, PAD + tw + 44, y + 58], radius=29, fill=TEAL)
-    d.text((PAD + 22, y + 12), tag, font=f, fill=CREAM)
+    d.text((PAD + 22, y + 12), tag, font=f, fill=ON_ACCENT)
     y += 110
     f, lines, size = fit_block(d, nt["titulo"], W - 2 * PAD, 380, 72, 48)
     y = draw_lines(d, (PAD, y), lines, f, size, CREAM, 1.18) + 40
@@ -147,12 +196,12 @@ def slide_noticia(nt, idx, total):
 
 def final(dados, total):
     img, d = base(total, total)
-    logo(d, W // 2, 330, 2.2)
+    logo(img, d, W // 2, 330, 2.2)
     y = 560
     for txt, f, col in [
         ("Gostou do giro?", font_serif(76), CREAM),
         ("Siga para receber as notícias do mundo", font_sans(36, "Medium"), MUTED),
-        ("às 7h, 12h e 18h", font_sans(36, "Medium"), MUTED),
+        ("às 10h, 12h e 18h", font_sans(36, "Medium"), MUTED),
     ]:
         d.text(((W - d.textlength(txt, font=f)) / 2, y), txt, font=f, fill=col)
         y += 100 if txt == "Gostou do giro?" else 52
@@ -161,7 +210,7 @@ def final(dados, total):
     t = "@umcafecommundo"
     tw = d.textlength(t, font=f)
     d.rounded_rectangle([(W - tw) / 2 - 40, y, (W + tw) / 2 + 40, y + 80], radius=40, fill=TEAL)
-    d.text(((W - tw) / 2, y + 18), t, font=f, fill=CREAM)
+    d.text(((W - tw) / 2, y + 18), t, font=f, fill=ON_ACCENT)
     return img
 
 def main(src, out):
