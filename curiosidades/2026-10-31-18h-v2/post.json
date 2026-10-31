@@ -1,0 +1,8 @@
+{"tipo":"explica","rotulo":"CIÊNCIA","capa":{"titulo":"Por que o céu é azul","destaque":"se a luz do Sol é branca?","sub":"A explicação cabe em poucos slides."},
+"slides":[
+{"titulo":"A luz branca","destaque":"é uma mistura.","texto":"Ela carrega todas as cores do arco-íris juntas.","extra":"Cada cor é uma onda de tamanho diferente: o azul tem onda curta, o vermelho tem onda longa."},
+{"titulo":"O ar espalha","destaque":"o azul.","texto":"As moléculas do ar desviam muito mais as ondas curtas, como o azul, do que as longas.","extra":"Esse azul espalhado chega ao seu olho vindo de todo o céu. O nome disso é espalhamento de Rayleigh."},
+{"titulo":"E por que","destaque":"não violeta?","texto":"O violeta se espalha ainda mais, mas o Sol emite menos dele e nossos olhos são menos sensíveis a essa cor.","extra":"O resultado que o cérebro enxerga é o azul."},
+{"titulo":"No fim da tarde,","destaque":"o céu fica laranja.","texto":"Com o Sol baixo, a luz atravessa muito mais ar até chegar em você.","extra":"No caminho, quase todo o azul se espalha antes. Sobram os tons de laranja e vermelho."},
+{"titulo":"Em Marte","destaque":"é ao contrário.","texto":"Lá o céu é alaranjado de dia e o pôr do sol é azulado.","extra":"A poeira fina de Marte muda o jeito como a luz se espalha."}],
+"final":{"titulo":"Agora você sabe","destaque":"explicar pra alguém.","texto":"Comenta qual tema a IA deve explicar no próximo post.","acoes":["Salva pra lembrar depois","Manda pra um amigo curioso","Segue pra mais curiosidades"]}}

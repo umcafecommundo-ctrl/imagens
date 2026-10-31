@@ -66,19 +66,19 @@ body{{margin:0;width:{W}px;height:{H}px;background:{bg};color:{fg};font-family:I
 .topo{{display:flex;justify-content:space-between;font-size:26px;font-weight:600;letter-spacing:3px;color:{lab};flex:none}}
 .miolo{{flex:1;min-height:0;display:flex;flex-direction:column;justify-content:center;gap:calc(var(--s)*44px);overflow:hidden}}
 .rod{{flex:none;font-size:28px;font-weight:800;letter-spacing:2px}}
-h1,h2{{margin:0;font-family:Anton,sans-serif;font-weight:400;text-transform:uppercase;line-height:1}}
+h1,h2{{margin:0;font-family:Anton,sans-serif;font-weight:400;text-transform:uppercase;line-height:1.14;padding-top:.06em}}
 .h1{{font-size:calc(var(--s)*160px)}}
 .h2{{font-size:calc(var(--s)*118px)}}
 .d{{color:var(--dest)}}
 p{{margin:0}}
 .t1{{font-size:calc(var(--s)*44px);line-height:1.35;font-weight:800}}
 .t2{{font-size:calc(var(--s)*36px);line-height:1.45;color:var(--fg2)}}
-.num{{font-family:Anton,sans-serif;font-size:calc(var(--s)*200px);line-height:.9;color:var(--dest)}}
+.num{{font-family:Anton,sans-serif;font-size:calc(var(--s)*200px);line-height:1.05;color:var(--dest)}}
 .pill{{align-self:flex-start;font-weight:800;font-size:calc(var(--s)*30px);letter-spacing:3px;padding:14px 28px;border-radius:999px}}
 .op{{display:flex;align-items:center;gap:32px;border:3px solid rgba(128,128,128,.35);border-radius:20px;padding:calc(var(--s)*28px) 36px;font-size:calc(var(--s)*44px);font-weight:800}}
 .op b{{font-family:Anton,sans-serif;font-weight:400;font-size:calc(var(--s)*56px);color:var(--dest);width:40px;flex:none}}
 .ok{{display:flex;align-items:center;gap:28px;background:{LARANJA};color:{ESCURO};border-radius:24px;padding:calc(var(--s)*36px) 44px}}
-.ok span{{font-family:Anton,sans-serif;font-size:calc(var(--s)*104px);line-height:1;text-transform:uppercase}}
+.ok span{{font-family:Anton,sans-serif;font-size:calc(var(--s)*84px);line-height:1.14;text-transform:uppercase}}
 .ok svg{{margin-left:auto;flex:none}}
 .grade{{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}}
 .card{{background:{ESCURO};color:{CREME};border-radius:20px;padding:calc(var(--s)*28px) 32px;display:flex;flex-direction:column;gap:8px}}
@@ -151,7 +151,7 @@ def slides_quiz(p, fmt, arroba):
             f'<div class="op"><b>{letras[j]}</b>{e(o)}</div>' for j, o in enumerate(q["opcoes"])) + "</div>"
         out.append(pagina(fmt, "escuro", f"PERGUNTA {i + 1} DE {len(qs)}", f"{k:02d} / {n:02d}", miolo, "PENSOU? ARRASTA PRA VER →", None))
         cert = q["certa"]
-        miolo = f'<div class="ok"><span>{letras[cert]}</span><span>{e(q["opcoes"][cert])}</span>{CHECK}</div>'
+        miolo = f'<div class="ok"><span>{letras[cert]} - {e(q["opcoes"][cert])}</span>{CHECK}</div>'
         miolo += f'<p class="t1">{e(q["explicacao"])}</p>'
         if q.get("extra"):
             miolo += f'<p class="t2">{e(q["extra"])}</p>'
