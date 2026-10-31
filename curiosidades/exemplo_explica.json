@@ -1,0 +1,8 @@
+{"tipo":"explica","rotulo":"CURIOSIDADE","capa":{"titulo":"Por que o avião não tem paraquedas","destaque":"para os passageiros?","sub":"A resposta mistura física, frio e estatística."},
+"slides":[
+{"titulo":"A maioria dos acidentes","destaque":"acontece perto do chão.","texto":"Decolagem e pouso concentram a maior parte dos acidentes graves.","extra":"Nessas fases o avião está baixo demais para alguém saltar e o paraquedas abrir."},
+{"numero":"-50 °C","titulo":"Lá em cima","destaque":"é hostil.","texto":"Na altitude de cruzeiro, perto de 11 mil metros, faz uns 50 graus negativos e o ar é rarefeito.","extra":"Sem oxigênio extra, uma pessoa perde a consciência em poucos instantes."},
+{"numero":"800+ km/h","titulo":"Saltar assim","destaque":"não é como no filme.","texto":"Paraquedistas saltam de aviões lentos e mais baixos, treinados para isso.","extra":"Na velocidade de um jato comercial, o vento na saída seria violento demais."},
+{"titulo":"A porta nem abre","destaque":"em pleno voo.","texto":"Com a cabine pressurizada, a pressão de dentro empurra a porta contra o batente.","extra":"Ela funciona como uma rolha: quanto mais alto, mais presa ela fica."},
+{"titulo":"E ainda tem o peso,","destaque":"o custo e o treino.","texto":"Equipar centenas de pessoas e ensinar todas a saltar não compensa.","extra":"Investir na segurança do próprio avião salva muito mais vidas. Voar segue entre os meios de transporte mais seguros."}],
+"final":{"titulo":"Você já tinha pensado nisso?","texto":"Comenta: você teria coragem de saltar de paraquedas?","acoes":["Salva pra mostrar pra alguém","Manda pra quem tem medo de avião","Segue pra mais curiosidades"]}}

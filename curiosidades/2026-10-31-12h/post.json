@@ -1,0 +1,45 @@
+{
+ "tipo": "quiz",
+ "capa": {
+  "titulo": "Você acerta as 3?",
+  "selo": "3 PERGUNTAS · CORPO E ESPAÇO"
+ },
+ "perguntas": [
+  {
+   "pergunta": "Qual é o maior órgão",
+   "destaque": "do corpo humano?",
+   "opcoes": [
+    "Fígado",
+    "Pele",
+    "Pulmão"
+   ],
+   "certa": 1,
+   "explicacao": "A pele é o maior órgão do corpo.",
+   "extra": "Num adulto, ela cobre cerca de 2 metros quadrados e protege tudo o que está por dentro."
+  },
+  {
+   "pergunta": "Quantas vezes por dia",
+   "destaque": "seu coração bate?",
+   "opcoes": [
+    "Umas 10 mil",
+    "Umas 100 mil",
+    "Umas 1 milhão"
+   ],
+   "certa": 1,
+   "explicacao": "Batendo uns 70 vezes por minuto, dá perto de 100 mil batidas por dia.",
+   "extra": "Ao longo de uma vida, passa de 2 bilhões de batidas, sem nenhuma pausa."
+  },
+  {
+   "pergunta": "Em qual planeta o dia",
+   "destaque": "dura mais que o ano?",
+   "opcoes": [
+    "Marte",
+    "Vênus",
+    "Júpiter"
+   ],
+   "certa": 1,
+   "explicacao": "Vênus leva uns 243 dias terrestres para girar em torno de si e uns 225 para dar a volta no Sol.",
+   "extra": "E ainda gira ao contrário: lá, o Sol nasce no oeste."
+  }
+ ]
+}

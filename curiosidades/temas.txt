@@ -1,0 +1,5 @@
+# Temas já publicados (um por linha: data | horário | tipo | tema). Não repita.
+2026-10-31 | 08h27 | quiz | morcego voa; polvo tem 3 corações; estribo é o menor osso
+2026-10-31 | 10h | explica | por que o avião não tem paraquedas para os passageiros
+2026-10-31 | 12h | quiz | pele maior órgão; 100 mil batidas do coração por dia; dia de Vênus mais longo que o ano
+2026-10-31 | 18h | explica | por que o céu é azul (e o pôr do sol laranja; em Marte é ao contrário)
