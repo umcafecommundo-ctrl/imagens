@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """Gera os slides da página Curiosidades da IA a partir de um JSON.
 
-Uso: python3 gerar.py <post.json> <pasta_saida> [--formato tiktok|instagram]
+Uso: python3 gerar.py <post.json> <pasta_saida> [--formato tiktok|instagram] [--layout padrao|caderno]
 
 tiktok    = 1080x1920 (9:16), com margem de segurança para os botões do app
+layout padrao  = cores chapadas (escuro, creme, laranja)
+layout caderno = papel quadriculado, marca-texto e anotações à mão (só tiktok; ver caderno.py)
 instagram = 1080x1350 (4:5)
 
 Tipos de post (campo "tipo"):
@@ -167,23 +169,36 @@ def slides_quiz(p, fmt, arroba):
 
 # reduz a escala do texto até caber no espaço
 AJUSTE = """() => { const m = document.getElementById('m'); let s = 1;
-  while ((m.scrollHeight > m.clientHeight + 1 || m.scrollWidth > m.clientWidth + 1) && s > 0.5) {
+  while ((m.scrollHeight > m.clientHeight + 1 || m.scrollWidth > m.clientWidth + 90) && s > 0.5) {
     s -= 0.03; document.body.style.setProperty('--s', s); }
   return s; }"""
 
 
 def main():
-    args = [a for a in sys.argv[1:] if not a.startswith("--")]
-    fmt = "instagram" if "--formato" in sys.argv and sys.argv[sys.argv.index("--formato") + 1] == "instagram" else "tiktok"
-    if fmt == "instagram" and "instagram" in args:
-        args.remove("instagram")
-    if "tiktok" in args:
-        args.remove("tiktok")
+    argv = sys.argv[1:]
+    opcoes = {}
+    args = []
+    i = 0
+    while i < len(argv):
+        if argv[i].startswith("--"):
+            opcoes[argv[i][2:]] = argv[i + 1]
+            i += 2
+        else:
+            args.append(argv[i])
+            i += 1
+    fmt = opcoes.get("formato", "tiktok")
+    layout = opcoes.get("layout", "padrao")
     post = json.loads(pathlib.Path(args[0]).read_text())
     saida = pathlib.Path(args[1])
     saida.mkdir(parents=True, exist_ok=True)
     arroba = post.get("arroba", "@curiosidadesda.iia" if fmt == "tiktok" else "@curiosidadesda.ia")
-    htmls = (slides_quiz if post["tipo"] == "quiz" else slides_explica)(post, fmt, arroba)
+    if layout == "caderno":
+        if fmt != "tiktok":
+            sys.exit("O layout caderno só existe no formato tiktok (1080x1920).")
+        import caderno
+        htmls = (caderno.slides_quiz if post["tipo"] == "quiz" else caderno.slides_explica)(post, arroba)
+    else:
+        htmls = (slides_quiz if post["tipo"] == "quiz" else slides_explica)(post, fmt, arroba)
     H = 1920 if fmt == "tiktok" else 1350
     chrome = "/usr/bin/google-chrome"
     avisos = []
