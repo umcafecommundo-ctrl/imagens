@@ -1,0 +1,8 @@
+{"tipo":"explica","rotulo":"CIÊNCIA","capa":{"titulo":"Por que a cebola","destaque":"faz a gente chorar?","sub":"Tem uma reação química acontecendo na sua tábua.","nota":"pergunta de cozinha, resposta de química:"},
+"slides":[
+{"titulo":"Tudo começa","destaque":"na faca.","texto":"Ao cortar a cebola, você rompe as células dela e mistura substâncias que estavam separadas.","extra":"Enzimas entram em contato com compostos de enxofre e começam uma reação em cadeia.","nota":"é química, não drama"},
+{"titulo":"Nasce um gás","destaque":"irritante.","texto":"Uma enzima específica transforma esses compostos num gás que evapora fácil.","extra":"Os cientistas chamam esse gás de fator lacrimogêneo. Ele sobe da tábua direto pro seu rosto."},
+{"titulo":"O olho reage","destaque":"com lágrimas.","texto":"O gás se dissolve na umidade dos olhos e irrita a superfície deles.","extra":"Para se proteger, o corpo produz lágrimas e tenta lavar o incômodo. É irritação leve, não faz mal.","nota":"o olho só quer se defender"},
+{"titulo":"É uma defesa","destaque":"da planta.","texto":"Cientistas acreditam que esse truque químico ajuda a cebola a afastar quem tenta comê-la.","extra":"O alho é parente da cebola, mas quase não faz chorar: o composto dele é outro."},
+{"titulo":"Quer chorar menos?","destaque":"Gela antes.","texto":"Cebola gelada deixa a reação mais lenta e solta menos gás.","extra":"Cortar perto do exaustor ligado também ajuda a levar o gás embora antes de chegar nos olhos."}],
+"final":{"titulo":"Agora você sabe","destaque":"por que chora.","texto":"Comenta: você chora cortando cebola ou é imune?","acoes":["Salva pra lembrar na cozinha","Manda pra quem sempre chora","Segue pra mais curiosidades"]}}
