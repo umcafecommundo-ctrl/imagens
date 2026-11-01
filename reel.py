@@ -2,7 +2,7 @@
 
 Uso: python3 reel.py noticias.json saida.mp4
 
-Cada slide do carrossel vira uma cena: capa 3s, cada notícia 6s, final 3s,
+Cada slide do carrossel vira uma cena: capa 3s, cada notícia 6s (e o esporte, se houver, 6s), final 3s,
 com transição suave e leve zoom. Inclui faixa de áudio silenciosa.
 """
 import json, os, subprocess, sys, tempfile
@@ -30,11 +30,16 @@ def frame_from_slide(slide, topo):
 
 def main(src, out):
     dados = json.load(open(src, encoding="utf-8"))
-    total = len(dados["noticias"]) + 2
+    # Campo opcional "esporte" (mesmo formato de uma notícia): vira uma cena extra
+    # depois das notícias, antes do final.
+    itens = list(dados["noticias"])
+    if dados.get("esporte"):
+        itens.append(dados["esporte"])
+    total = len(itens) + 2
     slides = [c.capa(dados, total)]
-    slides += [c.slide_noticia(nt, i + 2, total) for i, nt in enumerate(dados["noticias"])]
+    slides += [c.slide_noticia(nt, i + 2, total) for i, nt in enumerate(itens)]
     slides.append(c.final(dados, total))
-    durs = [3.0] + [6.0] * len(dados["noticias"]) + [3.0]
+    durs = [3.0] + [6.0] * len(itens) + [3.0]
     topo = dados.get("topo", "NOTÍCIAS DO MUNDO")
 
     tmp = tempfile.mkdtemp()
