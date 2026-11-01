@@ -5,6 +5,9 @@ Uso: python3 carrossel_tiktok.py noticias.json pasta_saida
 Usa o mesmo JSON do carrossel do Instagram. Cada slide 1080x1350 é centralizado
 num fundo 9:16, com o topo "NOTÍCIAS DO MUNDO" e "Siga @umcafecommundo" embaixo,
 deixando livres as margens que a interface do TikTok cobre.
+
+Se o JSON tiver o campo opcional "esporte" (mesmo formato de uma notícia),
+o carrossel ganha um slide extra de esportes depois das notícias.
 """
 import json, os, sys
 
@@ -16,9 +19,14 @@ from reel import frame_from_slide
 def main(src, out):
     dados = json.load(open(src, encoding="utf-8"))
     os.makedirs(out, exist_ok=True)
-    total = len(dados["noticias"]) + 2
+    # Slide extra de esportes (só no TikTok): campo opcional "esporte" no JSON,
+    # no mesmo formato de uma notícia. Entra depois das 3 notícias, antes do final.
+    itens = list(dados["noticias"])
+    if dados.get("esporte"):
+        itens.append(dados["esporte"])
+    total = len(itens) + 2
     slides = [c.capa(dados, total)]
-    slides += [c.slide_noticia(nt, i + 2, total) for i, nt in enumerate(dados["noticias"])]
+    slides += [c.slide_noticia(nt, i + 2, total) for i, nt in enumerate(itens)]
     slides.append(c.final(dados, total))
     topo = dados.get("topo", "NOTÍCIAS DO MUNDO")
     for i, s in enumerate(slides, 1):

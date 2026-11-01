@@ -1,0 +1,47 @@
+# Temas já publicados no @umcafecommundo (Instagram, Facebook e TikTok repetem o mesmo post).
+# Uma linha por notícia: data | horário | tipo | tema (palavras-chave) | fato novo
+# Antes de escolher uma notícia, procure aqui (e no Metricool, últimos 7 dias) o mesmo assunto.
+# Só repita um tema se houver FATO NOVO relevante (desdobramento), e escreva qual é na última coluna.
+2026-10-27 | 22h | mundo | Israel eleição boca de urna Netanyahu Likud | -
+2026-10-27 | 22h | mundo | ebola Congo 10 mil casos | -
+2026-10-27 | 22h | mundo | ONU Rússia crimes contra a humanidade Ucrânia | -
+2026-10-28 | 07h | mundo | Israel apuração Likud sem maioria | apuração parcial
+2026-10-28 | 07h | mundo | Oleshky trégua local Ucrânia ajuda e saída de civis | -
+2026-10-28 | 07h | curiosidade | Holanda fora do Eurovision 2027 | -
+2026-10-28 | 21h | mundo | ONU embargo EUA Cuba votação | -
+2026-10-28 | 21h | bolso | Fed mantém juros EUA 3,75%-4% | -
+2026-10-28 | 21h | mundo | Israel 90% dos votos sem maioria | apuração avançada
+2026-10-28 | 21h | curiosidade | possível novo planeta anão 2026 ED138 Vera Rubin Chile além de Plutão/Netuno | -
+2026-10-29 | 10h | mundo | Vance carta Irã, plano de 7 dias para reabrir Ormuz | -
+2026-10-29 | 10h | bolso | petróleo Brent ~US$ 114 gasolina | -
+2026-10-29 | 10h | curiosidade | Estação Espacial painel solar enrolável (iROSA) | -
+2026-10-29 | 12h | mundo | drone russo estação de trem Dnipro 13 mortos | -
+2026-10-29 | 12h | bolso | PIB EUA 3,4% 3º trimestre juros | -
+2026-10-29 | 12h | curiosidade | aranhas-saltadoras dormem / sono REM (Bonn) | -
+2026-10-29 | 18h | mundo | choque de trens-bala Toledo Espanha (Urda) 69 mortos | -
+2026-10-29 | 18h | bolso | BCE mantém juros 2,5% inflação euro 3,8% Lagarde | -
+2026-10-29 | 18h | curiosidade | espada de bronze 3.300 anos lago de vulcão Itália | -
+2026-10-30 | 10h | mundo | Ormuz explosivos petroleiro, houthis atacam refinarias sauditas | -
+2026-10-30 | 10h | bolso | Binance hack US$ 6,3 bi saques suspensos | -
+2026-10-30 | 10h | curiosidade | planeta anão 2026 ED138 Vera Rubin | REPETIDO
+2026-10-30 | 12h | mundo | Israel resultado bloco Netanyahu 53 cadeiras, Likud fala em fraude | resultado
+2026-10-30 | 12h | bolso | Intel cai 25%, Amazon, Nasdaq, IA | -
+2026-10-30 | 12h | curiosidade | fungo gigante D-rex China | -
+2026-10-30 | 18h | mundo | Israel resultado final 53 x 48 | resumo da semana
+2026-10-30 | 18h | bolso | Fed juros 2 votos por alta | resumo da semana
+2026-10-30 | 18h | curiosidade | planeta anão 2026 ED138 | resumo da semana
+2026-10-31 | 10h | mundo | Polônia Tribunal Constitucional Tusk x Nawrocki | -
+2026-10-31 | 10h | bolso | Europa libera 42,6 mi barris de petróleo das reservas, diesel | -
+2026-10-31 | 10h | curiosidade | crocodilos sobreviveram ao asteroide pelo calor (UCL) | -
+2026-10-31 | 12h | mundo | EUA vendem 500 mísseis Patriot à Ucrânia | -
+2026-10-31 | 12h | bolso | petroleiros em chamas minas Ormuz, Brent US$ 117 | -
+2026-10-31 | 12h | curiosidade | Neandertal morto por lança 75 mil anos (Cambridge) | -
+2026-10-31 | 18h | mundo | Polônia Nawrocki força entrada na Corte Constitucional | confronto de madrugada
+2026-10-31 | 18h | bolso | acordo Mercosul-UE exportações brasileiras +21% | -
+2026-10-31 | 18h | curiosidade | bactéria intestinal toxina câncer Johns Hopkins | -
+2026-11-01 | 10h | mundo | Irã propõe reabrir Ormuz em 48h com condições (Araghchi, Catar) | proposta nova
+2026-11-01 | 10h | bolso | eleição de meio de mandato EUA 3/11 Congresso | -
+2026-11-01 | 10h | curiosidade | Estação Espacial caminhada espacial instala 7º painel enrolável | instalação feita
+2026-11-01 | 12h | mundo | Oleshky trégua, centenas de civis retirados, apelo do papa Leão XIV | evacuação concluída / apelo do papa
+2026-11-01 | 12h | bolso | FBI culpa Coreia do Norte pelo hack da Binance, saques reabertos | autoria do FBI
+2026-11-01 | 12h | curiosidade | planeta anão 2026 ED138 | REPETIDO (3ª vez, erro)
