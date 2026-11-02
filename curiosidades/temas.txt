@@ -6,3 +6,6 @@
 2026-11-01 | 10h | explica | caderno | por que a cebola faz a gente chorar
 2026-11-01 | 12h | quiz | caderno | digitais do coala; luz do Sol leva ~8 min; bebê tem mais ossos que adulto
 2026-11-01 | 18h | explica | caderno | por que ninguém afunda no Mar Morto
+2026-11-02 | 10h | explica | padrao | como o micro-ondas esquenta a comida (magnetron, água, grade da porta, Percy Spencer)
+2026-11-02 | 12h | quiz | padrao | real em 1994; Pico da Neblina ponto mais alto; Amazonas maior estado
+2026-11-02 | 18h | explica | padrao | por que nunca vemos o outro lado da Lua (rotação sincronizada, Luna 3)

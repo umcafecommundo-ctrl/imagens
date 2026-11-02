@@ -1,0 +1,5 @@
+{"tipo":"quiz","capa":{"titulo":"Você acerta as 3?","selo":"3 PERGUNTAS · BRASIL"},
+"perguntas":[
+{"pergunta":"Em que ano o real","destaque":"virou nossa moeda?","opcoes":["1986","1990","1994"],"certa":2,"explicacao":"O real começou a circular em 1º de julho de 1994, com o Plano Real.","extra":"Na troca, cada real valia 2.750 cruzeiros reais, a moeda que existia antes.","nota":"pergunta pros seus pais","nota_resposta":"acertou?"},
+{"pergunta":"Qual é o ponto","destaque":"mais alto do Brasil?","opcoes":["Pico da Neblina","Pico da Bandeira","Monte Roraima"],"certa":0,"explicacao":"O Pico da Neblina tem quase 3 mil metros e fica na fronteira com a Venezuela.","extra":"Para os yanomami, ele se chama Yaripo, que quer dizer \"montanha do vento\".","nota_resposta":"muita gente chuta Bandeira"},
+{"pergunta":"Qual é o maior estado","destaque":"do Brasil?","opcoes":["Pará","Amazonas","Mato Grosso"],"certa":1,"explicacao":"O Amazonas tem cerca de 1,56 milhão de km².","extra":"Sozinho, ele ocupa perto de 18% de todo o território brasileiro.","nota":"essa vale ponto extra","nota_resposta":"gigante, né?"}]}
