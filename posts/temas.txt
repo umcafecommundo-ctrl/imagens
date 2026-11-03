@@ -61,3 +61,7 @@
 2026-11-02 | 18h | bolso | ISM indústria EUA 55,5 em outubro, PCE 3,6%, expectativa de alta de juros do Fed em dezembro, dólar | -
 2026-11-02 | 18h | curiosidade | Karl Bushby volta a Hull após 28 anos a pé ao redor do mundo, 50 mil km, Punta Arenas 1998 | -
 2026-11-02 | 18h | esporte | Racing Santander 0x3 Real Madrid Mbappé Bellingham Diomande La Liga 27 pts Barcelona 30 | -
+2026-11-03 | 10h | mundo | eleição de meio de mandato EUA votação hoje Câmara Senado governadores, aprovação Trump 32% | dia da votação
+2026-11-03 | 10h | bolso | petróleo cai 7% na segunda e volta a subir após ataque dos EUA à ilha de Qeshm (Irã), Brent ~US$ 106 | ataque a Qeshm / Irã diz acordo distante
+2026-11-03 | 10h | curiosidade | sonda Hera ESA enxerga Didymos e Dimorphos separados, DART, fotos 25/11 | -
+2026-11-03 | 10h | esporte | Bragantino 2x1 Santos Brasileirão 34ª rodada Coutinho Wallace Yan | -
