@@ -75,3 +75,4 @@
 2026-11-03 | 18h | esporte | Galatasaray 2x0 Stuttgart Liga dos Campeões Batrakov 2 gols | -
 2026-11-04 | 00h | mundo | eleição de meio de mandato EUA democratas vencem a Câmara (projeção NBC), Senado indefinido (reel) | democratas vencem a Câmara
 2026-11-04 | 06h | mundo | eleição de meio de mandato EUA democratas vencem o Senado (AP/NBC/CBS), 6 viradas Texas Ohio Kansas Iowa Carolinas, Congresso inteiro (reel) | democratas vencem o Senado
+2026-11-04 | 10h | bolso | dólar cai no mundo após vitória democrata no Congresso EUA, índice -0,5%, ouro passa US$ 4 mil, real R$ 5,49 (reel) | queda do dólar global após resultado da eleição
