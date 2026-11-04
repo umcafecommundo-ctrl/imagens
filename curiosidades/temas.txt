@@ -13,3 +13,4 @@
 2026-11-03 | 12h | quiz | caderno | mel dura milhares de anos; diamante e grafite são carbono; fêmur osso mais longo
 2026-11-03 | 18h | explica | caderno | como funciona o código de barras (luz e sombra, preço no sistema, Woodland 1949, chiclete 1974, prefixo 789)
 2026-11-04 | 06h | explica-video | padrao | por que o gelo boia na água (expande ~9%, ligações de hidrogênio, 90% do iceberg submerso, lagos congelam por cima)
+2026-11-04 | 00h | explica-video | padrao | por que o flamingo é rosa (carotenoides da comida, filhote cinza, come de bico virado, pigmento na ração do zoo)
