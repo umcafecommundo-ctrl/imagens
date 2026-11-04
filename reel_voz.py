@@ -15,7 +15,7 @@ Lê o campo "reel" do JSON:
     {"tipo": "importa", "texto": "por que isso importa, em 1 frase", "fala": "..."}
   ]
 }
-A cena final ("Siga @umcafecommundo") é automática. Legenda palavra a palavra sincronizada com a voz.
+A cena final ("Siga o perfil", sem @, porque o mesmo vídeo vai para Instagram, Facebook e TikTok) é automática. Legenda palavra a palavra sincronizada com a voz.
 Requer: pip install --break-system-packages edge-tts  (domínio speech.platform.bing.com liberado).
 Sai com código 2 e "AVISO" se o vídeo ficar com menos de 30 s (acrescente detalhe nas falas).
 """
@@ -245,11 +245,14 @@ def cena_final(img, d, cena, p, t, R):
     f = c.font_serif(96)
     centro(d, 820, "Um Café", f, CREAM)
     centro(d, 930, "com o Mundo", f, CREAM)
+    # sem @ no vídeo: o mesmo arquivo vai para Instagram (@umcafecommundo),
+    # Facebook (página) e TikTok (@umcafecomomundo)
     f2 = c.font_sans(56, "Bold")
-    tw = d.textlength("@umcafecommundo", font=f2)
+    txt = "Siga o perfil"
+    tw = d.textlength(txt, font=f2)
     esc = 1 + 0.03 * math.sin(t * 5)
-    d.rounded_rectangle((W / 2 - tw / 2 - 50 * esc, 1100, W / 2 + tw / 2 + 50 * esc, 1210), 55, fill=AMBAR)
-    centro(d, 1122, "@umcafecommundo", f2, c.ON_ACCENT)
+    d.rounded_rectangle((W / 2 - tw / 2 - 60 * esc, 1100, W / 2 + tw / 2 + 60 * esc, 1210), 55, fill=AMBAR)
+    centro(d, 1122, txt, f2, c.ON_ACCENT)
 
 
 DESENHO = {"manchete": cena_manchete, "numero": cena_numero, "lista": cena_lista,
