@@ -1,0 +1,9 @@
+{"reel": {"rotulo": "O MUNDO EXPLICADO", "manchete": "Hackers deixaram freezers de mercado a 50 graus", "fonte": "AP, Euronews",
+"cenas": [
+{"tipo": "manchete", "fala": "Hackers invadiram freezers de supermercados na Europa e deixaram a temperatura em 50 graus."},
+{"tipo": "lista", "titulo": "Onde aconteceu", "itens": ["Bélgica", "Suécia", "Irlanda", "Holanda", "Estônia"], "fala": "Foi na madrugada de segunda. Lojas da Bélgica, Suécia, Irlanda, Holanda e Estônia amanheceram com geladeiras e freezers desregulados."},
+{"tipo": "numero", "valor": "75", "rotulo": "lojas atingidas", "sub": "só na Bélgica", "fala": "A Bélgica foi o país mais atingido, com cerca de 75 lojas. Na Irlanda, foram 13 supermercados."},
+{"tipo": "frase", "texto": "Não é a primeira vez", "destaque": "primeira", "fala": "E não é a primeira vez. Em outubro, centenas de mercados na França sofreram o mesmo tipo de ataque."},
+{"tipo": "frase", "texto": "Ninguém assumiu o ataque", "destaque": "Ninguém", "fala": "Até agora, ninguém assumiu a autoria. A promotoria federal da Bélgica abriu uma investigação."},
+{"tipo": "importa", "texto": "Aparelhos comuns ligados à internet viraram alvo de hackers.", "fala": "Por que isso importa? Porque aparelhos comuns, ligados à internet, viraram alvo. E uma falha assim pode estragar comida e dar prejuízo."}
+]}}
