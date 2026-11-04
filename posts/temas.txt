@@ -76,3 +76,4 @@
 2026-11-04 | 00h | mundo | eleição de meio de mandato EUA democratas vencem a Câmara (projeção NBC), Senado indefinido (reel) | democratas vencem a Câmara
 2026-11-04 | 06h | mundo | eleição de meio de mandato EUA democratas vencem o Senado (AP/NBC/CBS), 6 viradas Texas Ohio Kansas Iowa Carolinas, Congresso inteiro (reel) | democratas vencem o Senado
 2026-11-04 | 10h | bolso | dólar cai no mundo após vitória democrata no Congresso EUA, índice -0,5%, ouro passa US$ 4 mil, real R$ 5,49 (reel) | queda do dólar global após resultado da eleição
+2026-11-04 | 12h | curiosidade | telescópio Hubble caindo, NASA pede ajuda a empresas (RFI 29/10) reboost/conserto/reentrada controlada, missão até 2032, reentrada 2033-2034 (reel) | -
