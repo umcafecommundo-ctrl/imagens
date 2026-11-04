@@ -1,0 +1,8 @@
+{"tipo":"explica","rotulo":"CIÊNCIA","capa":{"titulo":"Por que a água do mar","destaque":"é salgada?","sub":"E por que a água dos rios não é?","nota":"pergunta de criança, resposta de cientista"},
+"slides":[
+{"titulo":"Tudo começa","destaque":"com a chuva.","texto":"A chuva absorve um pouco de gás carbônico do ar e fica levemente ácida.","extra":"É uma acidez fraquinha, mas em milhões de anos ela desgasta as rochas."},
+{"titulo":"As rochas","destaque":"soltam sais.","texto":"A chuva dissolve minerais das rochas, e as enxurradas levam tudo para os rios.","extra":"Os rios despejam esses sais no mar o tempo todo, em pequenas doses.","nota":"rio também tem sal, só que pouquinho"},
+{"titulo":"O sol leva a água,","destaque":"o sal fica.","texto":"A água do mar evapora, mas os sais não vão junto com o vapor.","extra":"Assim, ao longo de muito tempo, o sal foi se acumulando no oceano."},
+{"numero":"3,5%","titulo":"Quanto sal","destaque":"tem no mar?","texto":"Cerca de 3,5% do peso da água do mar são sais dissolvidos.","extra":"Sódio e cloreto, os mesmos do sal de cozinha, somam mais de 90% deles.","nota":"o mesmo do seu arroz"},
+{"numero":"160+ m","titulo":"E se espalhasse","destaque":"todo esse sal?","texto":"O sal do mar cobriria a terra firme com uma camada de mais de 160 metros.","extra":"É mais ou menos a altura de um prédio de 40 andares."}],
+"final":{"titulo":"Você sabia dessa?","texto":"Comenta: qual outra pergunta de criança você quer ver respondida?","acoes":["Salva pra explicar pra alguém","Manda pra quem ama praia","Segue pra mais curiosidades"]}}

@@ -1,0 +1,5 @@
+{"tipo":"quiz","capa":{"titulo":"Você acerta as 3?","selo":"3 PERGUNTAS · ANIMAIS"},
+"perguntas":[
+{"pergunta":"Qual é o animal","destaque":"terrestre mais rápido?","opcoes":["Leão","Guepardo","Cavalo"],"certa":1,"explicacao":"O guepardo pode passar de 100 km/h numa arrancada.","extra":"Mas ele só aguenta essa velocidade por poucos segundos, em trechos curtos.","nota":"começando leve","nota_resposta":"essa foi fácil?"},
+{"pergunta":"De que cor é a pele","destaque":"do urso-polar?","opcoes":["Branca","Rosa","Preta"],"certa":2,"explicacao":"Debaixo do pelo, a pele do urso-polar é preta.","extra":"Os pelos não têm pigmento e são transparentes. Eles espalham a luz, como a neve, e parecem brancos.","nota_resposta":"pegadinha!"},
+{"pergunta":"Qual é o maior animal","destaque":"que já existiu?","opcoes":["Baleia-azul","Megalodon","Argentinossauro"],"certa":0,"explicacao":"A baleia-azul é o maior animal que já viveu na Terra.","extra":"Chega a uns 30 metros e pode passar de 150 toneladas. Maior que qualquer dinossauro conhecido.","nota":"agora a difícil","nota_resposta":"quase ninguém acerta"}]}

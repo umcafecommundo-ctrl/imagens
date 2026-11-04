@@ -1,0 +1,8 @@
+{"tipo":"explica","rotulo":"HISTÓRIA","capa":{"titulo":"Por que a Estátua da Liberdade","destaque":"é verde?","sub":"Ela não nasceu dessa cor.","nota":"spoiler: já foi cor de moeda"},
+"slides":[
+{"titulo":"Ela nasceu","destaque":"cor de cobre.","texto":"Inaugurada em 1886, em Nova York, ela brilhava num tom marrom-avermelhado, como moeda nova.","extra":"Foi um presente do povo francês aos americanos, criada pelo escultor Bartholdi."},
+{"titulo":"A pele dela","destaque":"é fininha.","texto":"As chapas de cobre de fora têm mais ou menos a espessura de duas moedas.","extra":"Por dentro, uma estrutura de ferro projetada por Gustave Eiffel segura tudo.","nota":"sim, o Eiffel da torre"},
+{"titulo":"Ar, chuva","destaque":"e maresia.","texto":"O cobre reage com o ar, a umidade e o sal do mar e forma uma camada verde-azulada.","extra":"Essa camada se chama pátina. É o mesmo que acontece com telhados de cobre antigos."},
+{"numero":"~1920","titulo":"Ficou verde","destaque":"aos poucos.","texto":"Em 1910, ela estava meio cobre, meio verde. Por volta de 1920, já era toda verde.","extra":"A mudança completa levou mais de três décadas desde a inauguração."},
+{"titulo":"E quase","destaque":"pintaram ela.","texto":"Em 1906, o governo americano chegou a reservar dinheiro para devolver a cor original.","extra":"Houve protestos e a ideia caiu. E a pátina ainda protege o cobre de baixo contra a corrosão.","nota":"ainda bem que não"}],
+"final":{"titulo":"E você, prefere","destaque":"qual cor?","texto":"Comenta: verde como hoje ou cor de cobre como no começo?","acoes":["Salva pra sua próxima viagem","Manda pra quem ama história","Segue pra mais curiosidades"]}}
