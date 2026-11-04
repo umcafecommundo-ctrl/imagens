@@ -1,0 +1,8 @@
+{"tipo":"explica","rotulo":"CIÊNCIA","capa":{"titulo":"Por que o gelo","destaque":"boia na água?","sub":"Quase toda coisa sólida afunda no próprio líquido. A água não.","nota":"a água é do contra"},
+"slides":[
+{"titulo":"O normal seria","destaque":"afundar.","texto":"Na maioria das substâncias, a versão sólida é mais compacta e pesada que a líquida.","extra":"Com a água acontece o contrário: o gelo é menos denso que a água líquida."},
+{"numero":"+9%","titulo":"Ao congelar,","destaque":"a água incha.","texto":"Quando vira gelo, a água ocupa cerca de 9% mais espaço.","extra":"É por isso que uma garrafa cheia esquecida no congelador pode estourar.","nota":"quem nunca?"},
+{"titulo":"O segredo está","destaque":"nas moléculas.","texto":"No gelo, as moléculas se prendem por ligações de hidrogênio num desenho de hexágonos.","extra":"Essa estrutura cheia de espaços vazios deixa o gelo mais leve que a água do mesmo tamanho."},
+{"numero":"90%","titulo":"O iceberg esconde","destaque":"quase tudo.","texto":"Como o gelo é só um pouco mais leve, só uma pontinha fica para fora.","extra":"Cerca de 90% de um iceberg fica debaixo d'água. Daí vem a expressão \"ponta do iceberg\".","nota":"o perigo mora embaixo"},
+{"titulo":"E isso","destaque":"salva vidas.","texto":"Lagos congelam de cima para baixo, e o gelo da superfície protege a água lá embaixo.","extra":"Peixes e outros seres seguem vivos no inverno. Se o gelo afundasse, muitos lagos congelariam por inteiro."}],
+"final":{"titulo":"Sabia dessa","destaque":"do gelo?","texto":"Comenta: qual outra coisa do dia a dia você quer entender?","acoes":["Salva pra explicar pra alguém","Manda pra quem ama ciência","Segue pra mais curiosidades"]}}
