@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 """Gera os slides da página Curiosidades da IA a partir de um JSON.
 
-Uso: python3 gerar.py <post.json> <pasta_saida> [--formato tiktok|instagram] [--layout padrao|caderno]
+Uso: python3 gerar.py <post.json> <pasta_saida> [--formato tiktok|instagram] [--layout padrao|caderno] [--video sim]
+
+--video sim = slides para vídeo narrado: sem "arrasta pro lado"/"continua", texto alinhado no topo
+              e grava zonas.json com o espaço livre de cada slide (usado pelo video.py para as figurinhas)
 
 tiktok    = 1080x1920 (9:16), com margem de segurança para os botões do app
 layout padrao  = cores chapadas (escuro, creme, laranja)
@@ -14,7 +17,7 @@ Tipos de post (campo "tipo"):
 
 Veja exemplo_explica.json e exemplo_quiz.json nesta pasta.
 """
-import base64, html, json, os, pathlib, sys
+import base64, html, json, os, pathlib, re, sys
 
 from PIL import Image
 from playwright.sync_api import sync_playwright
@@ -200,6 +203,12 @@ def main():
     else:
         htmls = (slides_quiz if post["tipo"] == "quiz" else slides_explica)(post, fmt, arroba)
     H = 1920 if fmt == "tiktok" else 1350
+    video = opcoes.get("video", "nao") in ("sim", "1", "true")
+    if video:
+        css = ".miolo{justify-content:flex-start!important;padding-top:40px!important}"
+        htmls = [re.sub(r'<div class="rod"[^>]*>.*?</div>', "", h, flags=re.S).replace("</style>", css + "</style>", 1)
+                 for h in htmls]
+    zonas = {}
     chrome = "/usr/bin/google-chrome"
     avisos = []
     with sync_playwright() as pw:
@@ -211,11 +220,19 @@ def main():
             s = pg.evaluate(AJUSTE)
             if s < 0.75:
                 avisos.append(f"slide_{i:02d}: texto reduzido para {s:.2f}x, considere encurtar")
+            if video:
+                fim = pg.evaluate("""() => { let b = 0; for (const el of document.querySelectorAll('#m *')) {
+                    const r = el.getBoundingClientRect(); if (r.height > 0 && r.width > 0) b = Math.max(b, r.bottom); }
+                    for (const el of document.querySelectorAll('.arroba')) { const r = el.getBoundingClientRect(); if (r.height) b = Math.max(b, r.bottom); }
+                    return Math.round(b); }""")
+                zonas[f"slide_{i:02d}.jpg"] = {"y0": fim + 30, "y1": H - 330, "x0": 90, "x1": 930}
             png = saida / f"slide_{i:02d}.png"
             pg.screenshot(path=str(png), clip={"x": 0, "y": 0, "width": 1080, "height": H})
             Image.open(png).convert("RGB").save(saida / f"slide_{i:02d}.jpg", quality=92)
             png.unlink()
         b.close()
+    if video:
+        (saida / "zonas.json").write_text(json.dumps(zonas, indent=1))
     print(f"{len(htmls)} slides em {saida}")
     for a in avisos:
         print("AVISO:", a)

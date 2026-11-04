@@ -1,7 +1,68 @@
-["Por que o gelo boia na água? Quase toda coisa sólida afunda no próprio líquido. A água não.",
-"O normal seria afundar. Na maioria das substâncias, o sólido é mais compacto que o líquido. Com a água é o contrário: o gelo é menos denso.",
-"Ao congelar, a água incha. Ela passa a ocupar cerca de nove por cento mais espaço. Por isso a garrafa esquecida no congelador pode estourar.",
-"O segredo está nas moléculas. No gelo, elas se prendem por ligações de hidrogênio num desenho de hexágonos, cheio de espaços vazios. Isso deixa o gelo mais leve.",
-"Como o gelo é só um pouco mais leve, só a pontinha do iceberg fica de fora. Cerca de noventa por cento dele fica debaixo d'água.",
-"E isso salva vidas. Os lagos congelam de cima para baixo, e o gelo da superfície protege a água e os peixes lá embaixo durante o inverno.",
-"Sabia dessa do gelo? Comenta qual outra coisa do dia a dia você quer entender, e segue pra mais curiosidades!"]
+[
+ {
+  "fala": "Por que o gelo boia na água? Quase toda coisa sólida afunda no próprio líquido. A água não.",
+  "imagens": [
+   {
+    "emoji": "🧊",
+    "legenda": "gelo",
+    "palavra": "gelo"
+   }
+  ]
+ },
+ {
+  "fala": "O normal seria afundar. Na maioria das substâncias, o sólido é mais compacto que o líquido. Com a água é o contrário: o gelo é menos denso.",
+  "imagens": [
+   {
+    "emoji": "🪨",
+    "legenda": "sólido afunda",
+    "palavra": "sólido"
+   },
+   {
+    "emoji": "🧊",
+    "legenda": "gelo boia",
+    "palavra": "contrário"
+   }
+  ]
+ },
+ {
+  "fala": "Ao congelar, a água incha. Ela passa a ocupar cerca de nove por cento mais espaço. Por isso a garrafa esquecida no congelador pode estourar.",
+  "imagens": [
+   {
+    "emoji": "🍾",
+    "legenda": "garrafa estourada",
+    "palavra": "garrafa"
+   }
+  ]
+ },
+ {
+  "fala": "O segredo está nas moléculas. No gelo, elas se prendem por ligações de hidrogênio num desenho de hexágonos, cheio de espaços vazios. Isso deixa o gelo mais leve.",
+  "imagens": [
+   {
+    "emoji": "❄️",
+    "legenda": "hexágonos",
+    "palavra": "hexágonos"
+   }
+  ]
+ },
+ {
+  "fala": "Como o gelo é só um pouco mais leve, só a pontinha do iceberg fica de fora. Cerca de noventa por cento dele fica debaixo d'água.",
+  "imagens": [
+   {
+    "emoji": "🧊",
+    "legenda": "90% submerso",
+    "palavra": "noventa"
+   }
+  ]
+ },
+ {
+  "fala": "E isso salva vidas. Os lagos congelam de cima para baixo, e o gelo da superfície protege a água e os peixes lá embaixo durante o inverno.",
+  "imagens": [
+   {
+    "emoji": "🐟",
+    "legenda": "vida sob o gelo",
+    "palavra": "peixes"
+   }
+  ]
+ },
+ "Sabia dessa do gelo? Comenta qual outra coisa do dia a dia você quer entender, e segue pra mais curiosidades!"
+]
