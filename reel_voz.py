@@ -32,6 +32,7 @@ BG, CREAM, AMBAR, MUTED, BOX = c.BG, c.CREAM, c.TEAL, c.MUTED, (78, 52, 37)
 RED = (226, 74, 51)
 FIM = "Siga o Um Café com o Mundo para entender o mundo em um minuto."
 GAP = 0.28
+EFEITO = None  # reel_novo.py liga aqui o zoom/flash de cada cena
 
 
 # ---------- voz ----------
@@ -289,6 +290,8 @@ def main(src, out):
                 legenda(d, palavras, k / FPS)
             else:
                 centro(d, 1300, "Entenda o mundo em 1 minuto", c.font_sans(54, "Bold"), CREAM)
+            if EFEITO and fr >= FPS:
+                img = EFEITO(img, k, n)
             img.save(os.path.join(fdir, f"f{fr:05d}.jpg"), quality=90)
             fr += 1
         t0 += n / FPS
