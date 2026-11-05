@@ -1,0 +1,58 @@
+[
+ {
+  "fala": "Só um em dez acerta as três. Valendo!",
+  "imagens": [
+   {
+    "emoji": "🪐",
+    "legenda": "quiz do espaço",
+    "palavra": "pessoas"
+   }
+  ]
+ },
+ {
+  "fala": "Planeta mais quente? A: Mercúrio, B: Marte, ou C: Vênus?",
+  "pausa": 3
+ },
+ {
+  "fala": "Letra C, Vênus! O gás carbônico prende o calor lá.",
+  "imagens": [
+   {
+    "emoji": "🔥",
+    "legenda": "460 °C",
+    "palavra": "calor"
+   }
+  ]
+ },
+ {
+  "fala": "Qual planeta gira deitado? A: Urano, B: Saturno, ou C: Netuno?",
+  "pausa": 3
+ },
+ {
+  "fala": "Letra A, Urano! Ele rola de lado, feito uma bola.",
+  "imagens": [
+   {
+    "emoji": "🎳",
+    "legenda": "rola de lado",
+    "palavra": "rola"
+   }
+  ]
+ },
+ {
+  "fala": "Última: o Sol é feito mais de quê? A: hélio, B: hidrogênio, ou C: oxigênio?",
+  "pausa": 3
+ },
+ {
+  "fala": "Letra B, hidrogênio! O hélio vem em segundo.",
+  "imagens": [
+   {
+    "emoji": "☀️",
+    "legenda": "o Sol",
+    "palavra": "Sol"
+   }
+  ]
+ },
+ {
+  "fala": "Quantas você acertou? Comenta o número aqui embaixo e segue pra mais quiz!",
+  "fala_youtube": "Quantas você acertou? Se inscreve pra mais quiz!"
+ }
+]

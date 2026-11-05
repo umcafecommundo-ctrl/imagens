@@ -1,0 +1,48 @@
+{
+ "tipo": "quiz",
+ "capa": {
+  "titulo": "Só 1 em 10",
+  "destaque": "acerta as 3",
+  "selo": "3 PERGUNTAS · ESPAÇO",
+  "sub": "Responde de cabeça. Valendo!"
+ },
+ "perguntas": [
+  {
+   "pergunta": "Qual é o planeta",
+   "destaque": "mais quente?",
+   "opcoes": [
+    "Mercúrio",
+    "Marte",
+    "Vênus"
+   ],
+   "certa": 2,
+   "explicacao": "Cerca de 460 °C! O gás carbônico prende o calor.",
+   "nota": "não é o mais perto do Sol",
+   "nota_resposta": "pegadinha!"
+  },
+  {
+   "pergunta": "Qual planeta gira",
+   "destaque": "deitado de lado?",
+   "opcoes": [
+    "Urano",
+    "Saturno",
+    "Netuno"
+   ],
+   "certa": 0,
+   "explicacao": "O eixo dele é inclinado quase 98 graus.",
+   "nota_resposta": "rola igual uma bola"
+  },
+  {
+   "pergunta": "O Sol é feito",
+   "destaque": "mais de quê?",
+   "opcoes": [
+    "Hélio",
+    "Hidrogênio",
+    "Oxigênio"
+   ],
+   "certa": 1,
+   "explicacao": "Hidrogênio é o principal. O hélio vem em segundo.",
+   "nota_resposta": "acertou?"
+  }
+ ]
+}

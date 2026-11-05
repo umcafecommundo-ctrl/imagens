@@ -1,0 +1,48 @@
+{
+ "tipo": "quiz",
+ "capa": {
+  "titulo": "Só 1 em 10",
+  "destaque": "acerta as 3",
+  "selo": "3 PERGUNTAS · INVENÇÕES",
+  "sub": "Responde de cabeça. Valendo!"
+ },
+ "perguntas": [
+  {
+   "pergunta": "O que foi inventado",
+   "destaque": "primeiro?",
+   "opcoes": [
+    "Isqueiro",
+    "Fósforo",
+    "Os dois juntos"
+   ],
+   "certa": 0,
+   "explicacao": "Isqueiro em 1823. O fósforo de riscar, em 1826.",
+   "nota_resposta": "pegadinha!"
+  },
+  {
+   "pergunta": "O plástico-bolha",
+   "destaque": "foi feito pra quê?",
+   "opcoes": [
+    "Embalagem",
+    "Papel de parede",
+    "Brinquedo"
+   ],
+   "certa": 1,
+   "explicacao": "Em 1957 ele era pra ser papel de parede!",
+   "nota": "imagina a parede",
+   "nota_resposta": "ninguém espera essa"
+  },
+  {
+   "pergunta": "O velcro foi inspirado",
+   "destaque": "em quê?",
+   "opcoes": [
+    "Teia de aranha",
+    "Pata de lagartixa",
+    "Carrapicho"
+   ],
+   "certa": 2,
+   "explicacao": "Carrapichos grudados no pelo de um cachorro, em 1941.",
+   "nota_resposta": "acertou?"
+  }
+ ]
+}

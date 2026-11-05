@@ -1,0 +1,41 @@
+{
+ "tipo": "explica",
+ "rotulo": "CIÊNCIA",
+ "capa": {
+  "titulo": "A pipoca é",
+  "destaque": "bomba de vapor",
+  "sub": "Tem água escondida no grão.",
+  "nota": "cinema nunca mais será igual"
+ },
+ "slides": [
+  {
+   "numero": "14%",
+   "titulo": "Água",
+   "destaque": "dentro do grão",
+   "texto": "No calor, ela vira vapor e fica presa lá dentro.",
+   "nota": "uma panela de pressão mini"
+  },
+  {
+   "numero": "180 °C",
+   "titulo": "A casca",
+   "destaque": "não aguenta mais",
+   "texto": "A pressão fica enorme e a casca dura estoura."
+  },
+  {
+   "titulo": "Até 50 vezes",
+   "destaque": "maior",
+   "texto": "O amido vira uma espuma que esfria e endurece.",
+   "nota": "por isso fica fofinha"
+  }
+ ],
+ "final": {
+  "titulo": "Você come",
+  "destaque": "pipoca doce?",
+  "texto": "Comenta: doce ou salgada?",
+  "acoes": [
+   "Salva pra contar na sessão de cinema",
+   "Manda pra quem ama pipoca",
+   "Segue pra mais curiosidades"
+  ]
+ }
+}

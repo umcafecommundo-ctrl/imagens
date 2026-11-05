@@ -1,0 +1,56 @@
+[
+ {
+  "fala": "A pipoca é uma bomba de vapor! Ela estoura por causa de um pinguinho de água escondido dentro do grão.",
+  "imagens": [
+   {
+    "emoji": "🍿",
+    "legenda": "pipoca",
+    "palavra": "pipoca"
+   },
+   {
+    "emoji": "💧",
+    "legenda": "água escondida",
+    "palavra": "pinguinho"
+   }
+  ]
+ },
+ {
+  "fala": "Uns catorze por cento do grão é água. Quando esquenta, essa água vira vapor e fica presa lá dentro, como numa panela de pressão.",
+  "imagens": [
+   {
+    "emoji": "🌽",
+    "legenda": "grão de milho",
+    "palavra": "grão"
+   },
+   {
+    "emoji": "♨️",
+    "legenda": "vapor preso",
+    "palavra": "vapor"
+   }
+  ]
+ },
+ {
+  "fala": "A casca da pipoca é bem mais dura que a do milho comum. Lá pelos cento e oitenta graus, a pressão fica enorme e ela estoura.",
+  "imagens": [
+   {
+    "emoji": "💥",
+    "legenda": "pou!",
+    "palavra": "estoura"
+   }
+  ]
+ },
+ {
+  "fala": "Aí o amido de dentro vira uma espuma, que esfria e endurece. O grão fica até cinquenta vezes maior!",
+  "imagens": [
+   {
+    "emoji": "☁️",
+    "legenda": "espuma de amido",
+    "palavra": "espuma"
+   }
+  ]
+ },
+ {
+  "fala": "E você, prefere pipoca doce ou salgada? Comenta aqui embaixo e segue pra mais!",
+  "fala_youtube": "Se inscreve no canal pra mais curiosidades assim!"
+ }
+]

@@ -1,0 +1,58 @@
+[
+ {
+  "fala": "Só um em dez acerta as três. Valendo!",
+  "imagens": [
+   {
+    "emoji": "💡",
+    "legenda": "invenções",
+    "palavra": "acerta"
+   }
+  ]
+ },
+ {
+  "fala": "O que veio primeiro? A: isqueiro, B: fósforo, ou C: os dois juntos?",
+  "pausa": 3
+ },
+ {
+  "fala": "Letra A, isqueiro! Em mil oitocentos e vinte e três, três anos antes do fósforo.",
+  "imagens": [
+   {
+    "emoji": "🔥",
+    "legenda": "isqueiro",
+    "palavra": "isqueiro"
+   }
+  ]
+ },
+ {
+  "fala": "Plástico-bolha foi feito pra quê? A: embalagem, B: papel de parede, ou C: brinquedo?",
+  "pausa": 3
+ },
+ {
+  "fala": "Letra B, papel de parede! Era pra decorar a casa.",
+  "imagens": [
+   {
+    "emoji": "🫧",
+    "legenda": "plástico-bolha",
+    "palavra": "parede"
+   }
+  ]
+ },
+ {
+  "fala": "Última: o velcro veio de quê? A: teia de aranha, B: pata de lagartixa, ou C: carrapicho?",
+  "pausa": 3
+ },
+ {
+  "fala": "Letra C, carrapicho! Grudado no pelo de um cachorro.",
+  "imagens": [
+   {
+    "emoji": "🐕",
+    "legenda": "o cachorro",
+    "palavra": "cachorro"
+   }
+  ]
+ },
+ {
+  "fala": "Quantas você acertou? Comenta o número aqui embaixo e segue pra mais quiz!",
+  "fala_youtube": "Quantas você acertou? Se inscreve pra mais quiz!"
+ }
+]
