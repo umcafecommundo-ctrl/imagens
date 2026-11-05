@@ -18,3 +18,4 @@
 2026-11-04 | 12h | quiz-video | padrao | guepardo mais rápido; pele do urso-polar é preta; baleia-azul maior animal que já existiu
 2026-11-04 | 18h | explica-video | padrao | por que a Estátua da Liberdade é verde (cobre, pátina, 1886, Eiffel, verde por volta de 1920, quase pintada em 1906)
 2026-11-04 | 22h | explica-video | padrao | por que a Lua parece maior no horizonte (ilusão, fotos com mesmo zoom, atmosfera achata, cérebro e distância, tábua assíria ~700 a.C., teste do tubo e do dedo)
+2026-11-05 | 06h | explica-video | caderno | por que o galo canta de manhã (relógio interno, luz constante, canta fora de hora mais fraco, chefe canta primeiro, 100+ dB, ouvido se fecha)
