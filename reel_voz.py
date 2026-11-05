@@ -15,6 +15,7 @@ Lê o campo "reel" do JSON:
     {"tipo": "importa", "texto": "por que isso importa, em 1 frase", "fala": "..."}
   ]
 }
+Visual: o novo (reel_novo.py) é o padrão; TEMA=cafe volta ao marrom.
 A cena final ("Siga o perfil", sem @, porque o mesmo vídeo vai para Instagram, Facebook e TikTok) é automática. Legenda palavra a palavra sincronizada com a voz.
 Requer: pip install --break-system-packages edge-tts  (domínio speech.platform.bing.com liberado).
 Sai com código 2 e "AVISO" se o vídeo ficar com menos de 30 s (acrescente detalhe nas falas).
@@ -311,4 +312,10 @@ def main(src, out):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1], sys.argv[2])
+    # Visual novo (azul-noite, amarelo e vermelho) é o padrão desde 05/11/2026, a pedido do Luis.
+    # Para o visual antigo (marrom café): TEMA=cafe python3 reel_voz.py ...
+    if os.environ.get("TEMA", "novo") != "cafe":
+        import reel_novo
+        reel_novo.rv.main(sys.argv[1], sys.argv[2])
+    else:
+        main(sys.argv[1], sys.argv[2])
