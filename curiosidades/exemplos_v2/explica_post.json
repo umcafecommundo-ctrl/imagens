@@ -1,0 +1,40 @@
+{
+ "tipo": "explica",
+ "rotulo": "ANIMAIS",
+ "capa": {
+  "titulo": "O galo não canta",
+  "destaque": "por causa do sol",
+  "sub": "Ele tem um relógio dentro dele.",
+  "nota": "bom dia pra quem acordou com um"
+ },
+ "slides": [
+  {
+   "titulo": "Luz ligada",
+   "destaque": "o tempo todo",
+   "texto": "E mesmo assim os galos cantaram todo dia ao amanhecer.",
+   "nota": "nem precisa ver o sol"
+  },
+  {
+   "titulo": "O chefe",
+   "destaque": "canta primeiro",
+   "texto": "Os outros galos esperam a vez dele.",
+   "nota": "hierarquia até no galinheiro"
+  },
+  {
+   "numero": "100+ dB",
+   "titulo": "Alto como",
+   "destaque": "uma motosserra",
+   "texto": "Por isso o ouvido dele se fecha quando ele abre o bico."
+  }
+ ],
+ "final": {
+  "titulo": "Tem galo",
+  "destaque": "perto de você?",
+  "texto": "Comenta: sim ou não?",
+  "acoes": [
+   "Salva pra contar no café",
+   "Manda pra quem odeia acordar cedo",
+   "Segue pra mais curiosidades"
+  ]
+ }
+}

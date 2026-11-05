@@ -1,0 +1,58 @@
+[
+ {
+  "fala": "Quase ninguém acerta as três. Responde de cabeça, valendo!",
+  "imagens": [
+   {
+    "emoji": "🧠",
+    "legenda": "valendo!",
+    "palavra": "cabeça"
+   }
+  ]
+ },
+ {
+  "fala": "Qual é o animal terrestre mais rápido? A: leão, B: guepardo, ou C: cavalo?",
+  "pausa": 3
+ },
+ {
+  "fala": "Letra B, guepardo! Passa de cem quilômetros por hora numa arrancada curta.",
+  "imagens": [
+   {
+    "emoji": "🐆",
+    "legenda": "guepardo",
+    "palavra": "guepardo"
+   }
+  ]
+ },
+ {
+  "fala": "De que cor é a pele do urso-polar? A: branca, B: rosa, ou C: preta?",
+  "pausa": 3
+ },
+ {
+  "fala": "Letra C, preta! O pelo dele é transparente e só parece branco.",
+  "imagens": [
+   {
+    "emoji": "🐻‍❄️",
+    "legenda": "urso-polar",
+    "palavra": "preta"
+   }
+  ]
+ },
+ {
+  "fala": "Última: qual é o maior animal que já existiu? A: baleia-azul, B: megalodon, ou C: argentinossauro?",
+  "pausa": 3
+ },
+ {
+  "fala": "Letra A, baleia-azul! Ela é maior que qualquer dinossauro conhecido.",
+  "imagens": [
+   {
+    "emoji": "🐋",
+    "legenda": "baleia-azul",
+    "palavra": "baleia"
+   }
+  ]
+ },
+ {
+  "fala": "Quantas você acertou? Comenta o número aqui embaixo e segue pra mais quiz!",
+  "fala_youtube": "Quantas você acertou? Se inscreve pra mais quiz!"
+ }
+]

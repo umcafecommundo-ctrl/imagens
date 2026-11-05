@@ -1,0 +1,47 @@
+{
+ "tipo": "quiz",
+ "capa": {
+  "titulo": "Só 1 em 10",
+  "destaque": "acerta as 3",
+  "selo": "3 PERGUNTAS · ANIMAIS",
+  "sub": "Responde de cabeça. Valendo!"
+ },
+ "perguntas": [
+  {
+   "pergunta": "Qual é o animal",
+   "destaque": "terrestre mais rápido?",
+   "opcoes": [
+    "Leão",
+    "Guepardo",
+    "Cavalo"
+   ],
+   "certa": 1,
+   "explicacao": "Passa de 100 km/h numa arrancada curta.",
+   "nota_resposta": "essa foi fácil?"
+  },
+  {
+   "pergunta": "De que cor é a pele",
+   "destaque": "do urso-polar?",
+   "opcoes": [
+    "Branca",
+    "Rosa",
+    "Preta"
+   ],
+   "certa": 2,
+   "explicacao": "Preta! O pelo é transparente e só parece branco.",
+   "nota_resposta": "pegadinha!"
+  },
+  {
+   "pergunta": "Qual é o maior animal",
+   "destaque": "que já existiu?",
+   "opcoes": [
+    "Baleia-azul",
+    "Megalodon",
+    "Argentinossauro"
+   ],
+   "certa": 0,
+   "explicacao": "Maior que qualquer dinossauro conhecido.",
+   "nota_resposta": "quase ninguém acerta"
+  }
+ ]
+}
