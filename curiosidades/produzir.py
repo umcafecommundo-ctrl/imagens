@@ -45,6 +45,9 @@ def slides(post, pasta, layout):
     if dados.get("final", {}).get("acoes"):
         ac = [x.replace("Segue a página", "Se inscreve no canal").replace("Segue", "Se inscreve") for x in dados["final"]["acoes"]]
         dados_yt["final"] = dict(dados["final"], acoes=ac)
+    if dados.get("tipo") == "quiz":
+        pl = dados.get("placar") or ["Segue a página, urgente", "Tá no caminho", "Mandou bem", "Gênio. Prova nos comentários"]
+        dados_yt["placar"] = [x.replace("Segue a página", "Se inscreve no canal") for x in pl]
     jy = os.path.join(tmp, "post.json")
     json.dump(dados_yt, open(jy, "w", encoding="utf-8"), ensure_ascii=False)
     subprocess.run([sys.executable, ger, jy, tmp, "--formato", "tiktok", "--layout", layout, "--video", "sim"],
