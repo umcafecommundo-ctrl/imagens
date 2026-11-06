@@ -17,7 +17,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, AQUI)
-import art, personagens as P
+import art, personagens as P, cenarios
 from art import Pen, INK, ell_pts, curve, hexc, mul, face, SKINS
 
 FPS = 30; OW, OH = 1080, 1920; BW, BH = 1242, 2208
@@ -67,6 +67,13 @@ def BG(name, W=BW):
     """'day' | 'golden' | 'dusk' = campo com céu; 'lab' = laboratório (janela de noite)."""
     if name == 'lab': return P.lab_bg()
     return art.background(name, W)
+
+
+def CEN(nome, luz='day'):
+    """cenário pronto pelo nome (veja cenarios.NOMES): quarto, sala, cozinha, banheiro, escola, escritorio, cidade, praia,
+    fundo_mar, floresta, deserto, neve, montanha, espaco, estacao, corpo, antiga, museu, mapa, fabrica, lab, pasto.
+    Escolha o lugar onde a história acontece; o pasto só para histórias de campo."""
+    return cenarios.cenario(nome, luz)
 
 
 # ------------------------------------------------------------ sprites com cache

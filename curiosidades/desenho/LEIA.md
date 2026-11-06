@@ -38,7 +38,19 @@ Português falado, frases curtas, números por extenso nas LINES (na CAPTXT pode
 - **Sincronia**: `wt(N, 'palavra')` = quadro em que a voz fala a palavra (sem acento tanto faz).
   Faça cada ação cair 0-3 quadros ANTES da palavra (`back(ramp(f, k-3, k+6))` para pular na tela).
 - **Luz**: 'day' história normal; 'golden' tempo passando/decadência; 'dusk' explicação ou fim.
-  Fundos prontos: `BG('day'|'golden'|'dusk')` (campo com céu) e `BG('lab')` (laboratório, janela de noite).
+  Fundos: `CEN('nome', luz)` (ver abaixo); `BG('day'|'golden'|'dusk')` é o PASTO e `BG('lab')` o laboratório.
+
+## Cenário = o lugar da história (OBRIGATÓRIO, decisão do Luis em 06/11/2026)
+Cada cena acontece no lugar de que a frase fala. O pasto (`BG('day')`/`CEN('pasto')`) só serve para histórias
+de campo, fazenda ou bichos do campo; nunca use o pasto como fundo "neutro".
+`CEN(nome, luz)` (cenarios.py, 1242x2208, chão em y≈1500-1650; luz muda céu/janela):
+quarto, sala, cozinha, banheiro, escola, escritorio, fabrica, museu, lab (interiores);
+cidade, praia, fundo_mar, floresta, deserto, neve, montanha, antiga (Roma/Grécia), pasto (exteriores);
+espaco, estacao (estação espacial), corpo (dentro do corpo), mapa (mar com continente).
+Ex.: comida/cozinhar -> cozinha; dormir/acordar -> quarto; tecnologia/computador -> escritorio ou quarto;
+oceano/peixe -> fundo_mar ou praia; país/lugar -> mapa + o tipo de paisagem do lugar; história antiga -> antiga.
+Se nenhum servir, desenhe o cenário certo no historia.py com a Pen (como `estrada_bg` em 2026-11-06-20h).
+Antes de montar as cenas, escreva para você mesmo o cenário de cada cena.
 - **Câmera**: nunca parada — puxe para trás no gancho, desça de grua até o detalhe, aproxime na virada,
   `kick(f, f0)` em impactos, roll 2-4° no drama. Corte seco só quando muda lugar/tempo.
 - **Legenda** fica em y≈1600 da saída: rostos e a ação principal ACIMA disso.
