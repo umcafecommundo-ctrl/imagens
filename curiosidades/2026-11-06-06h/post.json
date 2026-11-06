@@ -1,0 +1,41 @@
+{
+ "tipo": "explica",
+ "rotulo": "CORPO HUMANO",
+ "capa": {
+  "titulo": "Dedo enruga",
+  "destaque": "por ordem dos nervos",
+  "sub": "Não é a pele inchando de água.",
+  "nota": "olha a mão depois do banho"
+ },
+ "slides": [
+  {
+   "titulo": "Os vasos",
+   "destaque": "se apertam",
+   "texto": "Os nervos fecham vasinhos sob a pele, e ela afunda.",
+   "nota": "tudo no automático"
+  },
+  {
+   "numero": "Anos 1930",
+   "titulo": "Nervo lesionado",
+   "destaque": "não enruga",
+   "texto": "Médicos notaram: sem o nervo, o dedo fica liso."
+  },
+  {
+   "numero": "12%",
+   "titulo": "Mais firmeza",
+   "destaque": "no molhado",
+   "texto": "Num teste, pegaram bolinhas molhadas 12% mais rápido.",
+   "nota": "pneu de chuva da mão"
+  }
+ ],
+ "final": {
+  "titulo": "Banho",
+  "destaque": "demorado?",
+  "texto": "Comenta: sim ou não?",
+  "acoes": [
+   "Salva pra lembrar no próximo banho",
+   "Manda pra quem vive na piscina",
+   "Segue pra mais curiosidades"
+  ]
+ }
+}

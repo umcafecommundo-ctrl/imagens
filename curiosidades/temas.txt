@@ -23,3 +23,4 @@
 2026-11-05 | 12h | explica-v2 | caderno | por que a pipoca estoura (~14% de água no grão, vira vapor, casca dura estoura ~180 °C, amido vira espuma, até 50x maior)
 2026-11-05 | 18h | quiz-v2 | caderno | quiz invenções: isqueiro (1823) antes do fósforo (1826); plástico-bolha era papel de parede (1957); velcro inspirado no carrapicho (1941)
 2026-11-05 | 23h | explica-desenho | desenho | Guerra dos Emus (Austrália 1932, ~20 mil emus no trigo, 3 soldados e caminhão, emus ~50 km/h, exército recuou)
+2026-11-06 | 06h | explica-v2 | padrao | por que o dedo enruga na água (nervos apertam vasos sob a pele, nervo lesionado não enruga - anos 1930, teste Newcastle 2013: bolinhas molhadas 12% mais rápido) [post extra pedido pelo Luis]
