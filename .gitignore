@@ -1,2 +1,7 @@
 __pycache__/
 *.pyc
+__pycache__/
+*.pyc
+curiosidades/*/scenes/
+curiosidades/*/voz/
+curiosidades/*/quadro.jpg
