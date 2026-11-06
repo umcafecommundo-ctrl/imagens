@@ -101,10 +101,12 @@ def selo(h, im):
     t = getattr(h, 'SELO', None)
     if not t: return im
     bg, fg = getattr(h, 'SELO_CORES', ((74, 44, 29), (255, 196, 92)))
-    d = ImageDraw.Draw(im); f = ImageFont.truetype(kit.FONT.path, 40)
+    d = ImageDraw.Draw(im); fs = 40; f = ImageFont.truetype(kit.FONT.path, fs)
+    while d.textlength(t, font=f) > OW - 110 and fs > 26:  # rótulo longo: diminui a fonte para caber
+        fs -= 1; f = ImageFont.truetype(kit.FONT.path, fs)
     w = d.textlength(t, font=f); x0 = (OW - w) / 2 - 28
     d.rounded_rectangle([x0, 92, x0 + w + 56, 160], 34, fill=bg, outline=INK, width=5)
-    d.text((x0 + 28, 103), t, font=f, fill=fg)
+    d.text((x0 + 28, 103 + (40 - fs) / 2), t, font=f, fill=fg)
     return im
 
 
