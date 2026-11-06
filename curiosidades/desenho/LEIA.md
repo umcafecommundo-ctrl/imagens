@@ -3,7 +3,9 @@
 Desenho animado curto e narrado, feito 100% em código: personagens "feijão" com contorno ameixa
 (#241726), sombra em 2 tons, bichos de lado com olho grande, câmera que se mexe sem parar,
 legenda grande palavra por palavra, música e efeitos BAIXOS (a voz manda). Voz: pt-BR-AntonioNeural +15%.
-Exemplo completo: `exemplos/galo/historia.py` (por que o galo canta de manhã).
+Exemplos completos: `exemplos/galo/historia.py` (Curiosidades da IA, voz Antonio) e
+`exemplos/cafe_curiosidade/historia.py` (Um Café com o Mundo, notícia de curiosidade, voz Francisca,
+etiqueta SELO no topo). Na historia.py dá para trocar `VOZ`, `RATE`, `ARROBA`, `SELO` e `SELO_CORES`.
 
 ## Passo a passo de um post
 
