@@ -9,7 +9,7 @@ Cada post é uma pasta com um historia.py (veja exemplos/galo/historia.py e o LE
   python3 curiosidades/desenho/motor.py render  <pasta>   # cenas em vídeo (2 processos) + cena final do TikTok
   python3 curiosidades/desenho/motor.py final   <pasta>   # áudio (voz + música/efeitos baixos), junta, confere:
         -> <pasta>/video_tiktok.mp4 (história + "comenta/segue")  e  <pasta>/video_youtube.mp4 (só a história)
-        -> <pasta>/conferir_video.jpg ; apaga intermediários (scenes/, voz/*.wav)
+        -> <pasta>/conferir_video.jpg ; apaga scenes/ (voz/ fica, ignorada pelo git)
 
 Áudio: a voz manda. Música ~15 dB abaixo da voz, efeitos ~12 dB abaixo, tudo a -14 LUFS.
 """
@@ -19,6 +19,7 @@ sys.path.insert(0, AQUI)
 import numpy as np
 import kit
 from kit import *
+from PIL import ImageDraw, ImageFont
 
 VOZ = 'pt-BR-AntonioNeural'; RATE = '+15%'
 LEAD, TAIL, END_HOLD = .15, .35, 1.6
@@ -44,7 +45,7 @@ def narrar(pasta):
     linhas = list(h.LINES) + [getattr(h, 'FALA_TIKTOK', 'Você sabia dessa? Comenta aqui, e segue pra mais curiosidades!')]
 
     async def one(i, text):
-        c = edge_tts.Communicate(text, VOZ, rate=RATE, proxy=proxy, boundary='WordBoundary')
+        c = edge_tts.Communicate(text, getattr(h, 'VOZ', VOZ), rate=getattr(h, 'RATE', RATE), proxy=proxy, boundary='WordBoundary')
         words = []
         mp3 = os.path.join(pasta, 'voz', f'l{i}.mp3')
         with open(mp3, 'wb') as f:
@@ -95,15 +96,34 @@ def caps(h):
     return out
 
 
+def selo(h, im):
+    """etiqueta fixa no topo (ex.: marca/rótulo). historia.SELO = 'TEXTO', SELO_CORES = (fundo, texto)."""
+    t = getattr(h, 'SELO', None)
+    if not t: return im
+    bg, fg = getattr(h, 'SELO_CORES', ((74, 44, 29), (255, 196, 92)))
+    d = ImageDraw.Draw(im); f = ImageFont.truetype(kit.FONT.path, 40)
+    w = d.textlength(t, font=f); x0 = (OW - w) / 2 - 28
+    d.rounded_rectangle([x0, 92, x0 + w + 56, 160], 34, fill=bg, outline=INK, width=5)
+    d.text((x0 + 28, 103), t, font=f, fill=fg)
+    return im
+
+
 def frame(h, SC, CAPS, g, total, cta_len):
+    return selo(h, _frame(h, SC, CAPS, g, total, cta_len))
+
+
+def _frame(h, SC, CAPS, g, total, cta_len):
     n = len(h.LINES)
     if g >= total:  # cena final do TikTok: última cena continua + chamada
         si, lf = n - 1, g - SC[-1][0]; cl = g - total
         c, cam, light = h.SCENES[si](lf)
         im = grade(camera(c, cam), light)
         a = Image.new('RGBA', im.size, (0, 0, 0, 0))
-        paste_c(a, txt(getattr(h, 'CTA_TEXTO', 'COMENTA AQUI!'), 96, -4), OW / 2, 520, back(ramp(cl, 2, 10)))
-        paste_c(a, txt(ARROBA, 60), OW / 2, 700, back(ramp(cl, 8, 16)))
+        pa = back(ramp(cl, 0, 8))
+        if pa > .05:
+            ImageDraw.Draw(a).rounded_rectangle([OW / 2 - 470 * pa, 600 - 190 * pa, OW / 2 + 470 * pa, 600 + 190 * pa], 40, fill=(30, 20, 30, 225))
+        paste_c(a, txt(getattr(h, 'CTA_TEXTO', 'COMENTA AQUI!'), 96, -4), OW / 2, 540, back(ramp(cl, 2, 10)))
+        paste_c(a, txt(getattr(h, 'ARROBA', ARROBA), 60), OW / 2, 690, back(ramp(cl, 8, 16)))
         im = im.convert('RGBA'); im.alpha_composite(a); im = im.convert('RGB')
         act = [ws for s, ws in CAPS if s == n and cl >= ws[0][1] - 2]
         return draw_caption(im, act[-1], cl) if act else im
@@ -287,8 +307,7 @@ def final(pasta):
     subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', os.path.join(pasta, 'video_tiktok.mp4'), '-vf', 'fps=1,scale=180:320,tile=8x6', '-frames:v', '1',
                     os.path.join(pasta, 'conferir_video.jpg')], check=True)
     shutil.rmtree(sd, ignore_errors=True)
-    for f in glob.glob(os.path.join(pasta, 'voz', '*.wav')): os.remove(f)
-    if os.path.isdir(os.path.join(pasta, 'voz')) and not os.listdir(os.path.join(pasta, 'voz')): os.rmdir(os.path.join(pasta, 'voz'))
+    # voz/ fica (está no .gitignore) para poder renderizar de novo sem narrar outra vez
     for f in ('quadro.jpg',):
         if os.path.exists(os.path.join(pasta, f)): os.remove(os.path.join(pasta, f))
     print('pronto:', os.path.join(pasta, 'video_tiktok.mp4'), os.path.join(pasta, 'video_youtube.mp4'), os.path.join(pasta, 'conferir_video.jpg'))
