@@ -2,4 +2,4 @@ AAAA-MM-DD | HHh | competição/tipo | tema com palavras-chave | fato novo, ou -
 2026-11-08 | 10h | COPA DO BRASIL | Grêmio 1º finalista (1x1 Atlético-MG, agregado 3x1); hoje Vasco x Palmeiras 17h São Januário decide o outro; final 06/12 Brasília | -
 2026-11-08 | 12h | LALIGA | Atlético de Madrid x Barcelona hoje 17h Metropolitano, 1º (Barça 30) x 2º (Atleti 28), Raphinha capitão, vale a liderança (desenho) | -
 2026-11-08 | 18h | PREMIER LEAGUE | Manchester United 4x4 Aston Villa em Old Trafford, Alysson (ex-Grêmio) gol no 1º minuto, Villa 4x2, Zirkzee e Dorgu empatam nos acréscimos, United no Z3 (desenho) | -
-2026-11-08 | 21h | COPA DO BRASIL | Palmeiras elimina Vasco nos pênaltis (Vasco 2x1 em São Januário, agregado 2x2, pênaltis 5x4, Carlos Miguel defende 2), final Palmeiras x Grêmio 06/12 Brasília (reservado) | finalista definido: Palmeiras
+2026-11-08 | 21h | COPA DO BRASIL | Palmeiras elimina Vasco nos pênaltis (Vasco 2x1 em São Januário, agregado 2x2, pênaltis 5x4, Carlos Miguel defende 2), final Palmeiras x Grêmio 06/12 Brasília (desenho) | finalista definido: Palmeiras
