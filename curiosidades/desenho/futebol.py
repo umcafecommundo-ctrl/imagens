@@ -39,6 +39,9 @@ TIMES = {
     'REAL MADRID': (('#ffffff', '#f2c94c', '#ffffff'), None),
     'BARCELONA': (('#a50044', '#004d98', '#004d98'), 'v'),
     'ATLÉTICO DE MADRID': (('#d4282c', '#ffffff', '#ffffff'), 'v'),
+    'MANCHESTER UNITED': (('#da291c', '#ffffff', '#ffffff'), None),
+    'ASTON VILLA': (('#7a1e3f', '#ffffff', '#ffffff'), None),
+    'LIVERPOOL': (('#c8102e', '#c8102e', '#c8102e'), None),
     'GENÉRICO': (('#555a66', '#555a66', '#555a66'), None),
 }
 
