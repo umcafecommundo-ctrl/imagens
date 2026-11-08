@@ -38,6 +38,7 @@ TIMES = {
     'PORTUGAL': (('#c8102e', '#1f7a4a', '#1f7a4a'), None),
     'REAL MADRID': (('#ffffff', '#f2c94c', '#ffffff'), None),
     'BARCELONA': (('#a50044', '#004d98', '#004d98'), 'v'),
+    'ATLÉTICO DE MADRID': (('#d4282c', '#ffffff', '#ffffff'), 'v'),
     'GENÉRICO': (('#555a66', '#555a66', '#555a66'), None),
 }
 
