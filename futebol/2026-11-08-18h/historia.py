@@ -11,7 +11,7 @@ from futebol import *
 
 VOZ = 'pt-BR-AntonioNeural'; RATE = '+12%'
 ARROBA = ''  # cartão final vem de futebol.py (CTA_CARD): pergunta + SIGA PARA MAIS, sem @
-SELO = 'PREMIER LEAGUE  ·  11ª RODADA'
+SELO = 'PREMIER LEAGUE  ·  10ª RODADA'
 SELO_CORES = ((22, 92, 52), (255, 255, 255))
 
 LINES = [
