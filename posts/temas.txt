@@ -2,6 +2,13 @@
 # Uma linha por notícia: data | horário | tipo | tema (palavras-chave) | fato novo
 # Antes de escolher uma notícia, procure aqui (e no Metricool, últimos 7 dias) o mesmo assunto.
 # Só repita um tema se houver FATO NOVO relevante (desdobramento), e escreva qual é na última coluna.
+# REGRA DO LUIS (08/11/2026): "já é a 3ª ou 4ª vez na semana que posta sobre o estreito, está ficando repetitivo".
+#   ASSUNTO-MÃE "guerra EUA-Irã" = estreito de Ormuz, bloqueio naval, navios/petroleiros atacados, ilha de Qeshm, Irã nuclear/Catar,
+#   e petróleo/combustível quando a causa é Ormuz. Tudo isso conta como O MESMO assunto.
+#   - No máximo 1 post desse assunto-mãe a cada 3 dias (Instagram/Facebook/TikTok juntos). Último: 2026-11-08 09h (navio Huda).
+#     Próximo permitido: a partir de 2026-11-11, e só com fato GRANDE (acordo assinado, cessar-fogo, reabertura do estreito, guerra retomada).
+#   - Mesmo sendo a notícia mais forte do dia, escolha outra. No BOLSO, não use petróleo/Brent se a causa for Ormuz/Irã.
+#   - Regra geral: nenhum assunto-mãe (ex.: Irã, eleição de Israel, eleição dos EUA) mais de 2 vezes por semana, exceto no "Resumo da semana" de sexta.
 2026-10-27 | 22h | mundo | Israel eleição boca de urna Netanyahu Likud | -
 2026-10-27 | 22h | mundo | ebola Congo 10 mil casos | -
 2026-10-27 | 22h | mundo | ONU Rússia crimes contra a humanidade Ucrânia | -
@@ -98,3 +105,4 @@
 2026-11-07 | 18h | mundo | Israel Herzog dá a Eisenkot mandato para formar governo, 67 recomendações contra 46 de Netanyahu, 28 dias, partidos árabes, Knesset (desenho) | mandato entregue a Eisenkot / 67x46
 2026-11-07 | 19h | mundo | ataque a tiros na Praça do Mercado de Cracóvia, Polônia, atirador de dentro de carro, pelo menos 6 mortos 15 feridos, policial grave, suspeito detido (desenho) | -
 2026-11-08 | 09h | mundo | EUA atacam e imobilizam navio cargueiro Huda no golfo de Omã por furar bloqueio naval ao Irã, 147 navios desviados desde julho, 5 imobilizados, US$ 25 bi em petróleo, força-tarefa de 20 pessoas contra rotas terrestres e mar Cáspio (desenho) | navio Huda imobilizado / força-tarefa rotas terrestres
+2026-11-08 | 10h | mundo | Nova Zelândia eleição do supermercado, coalizão de Luxon 67 de 131 cadeiras por 1, National e Labour ~30%, 14% votos especiais, resultado final 27/11, Hipkins (reservado) | -
