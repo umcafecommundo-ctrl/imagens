@@ -120,6 +120,10 @@ def _frame(h, SC, CAPS, g, total, cta_len):
         si, lf = n - 1, g - SC[-1][0]; cl = g - total
         c, cam, light = h.SCENES[si](lf)
         im = grade(camera(c, cam), light)
+        if getattr(h, 'CTA_CARD', None):  # cartão final próprio (ex.: futebol.py)
+            im = h.CTA_CARD(im, cl, h)
+            act = [ws for s, ws in CAPS if s == n and cl >= ws[0][1] - 2]
+            return draw_caption(im, act[-1], cl) if act else im
         a = Image.new('RGBA', im.size, (0, 0, 0, 0))
         pa = back(ramp(cl, 0, 8))
         if pa > .05:

@@ -11,7 +11,7 @@ import kit
 from futebol import *
 
 VOZ = 'pt-BR-AntonioNeural'; RATE = '+12%'
-ARROBA = '@anima.futebol'
+ARROBA = ''  # cartão final vem de futebol.py (CTA_CARD): pergunta + SIGA PARA MAIS, sem @
 SELO = 'COPA DO BRASIL  ·  SEMIFINAL'
 SELO_CORES = ((22, 92, 52), (255, 255, 255))
 
@@ -73,16 +73,16 @@ def s0(f):
 
 def s1(f):
     c = estadio('dusk').copy()
-    paste_c(c, gol(), 1080, 1640, 1.25)
+    gx, gy = put_gol(c)
     ab = wt(1, 'abriu') - 3; go = wt(1, 'golaco') - 4
     if f < go: num(c, 'BELO HORIZONTE', 640, 740, f, wt(1, 'Belo') - 3, 90, -3)
-    put_jog(c, 1000, 1880, 600, f, 9, cores=GRE, faixa=GRE_F, arms='shrug', expr='shock' if f >= go else 'nervous', skin=0)
+    put_goleiro(c, f, GRE, GRE_F, arms='shrug', expr='shock' if f >= go else 'nervous', skin=0)
     put_jog(c, 470, 1990, 860, f, 3, cores=CAM, faixa=CAM_F, arms='up' if f >= go + 8 else 'run', kick=pulse(f, go - 5, 5),
             expr='grin' if f >= go else 'stern', skin=3, hair='#111111')
     put_placa(c, 'ATLÉTICO-MG', CAM, 470, 1080, f, wt(1, 'Atletico') - 3, 58, -3)
     put_placa(c, 'RENAN LODI', CAM, 520, 1230, f, wt(1, 'Renan') - 3, 46, 3)
     if f < go - 5: bx, by = 620, 1990
-    else: t = ramp(f, go - 5, go + 3); bx, by = lerp(620, 1150, t), lerp(1990, 1590, t) - 120 * math.sin(t * math.pi)
+    else: t = ramp(f, go - 5, go + 3); bx, by = lerp(620, gx + 90, t), lerp(1990, gy, t) - 120 * math.sin(t * math.pi)
     put_bola(c, bx, by, 34, f)
     num(c, 'GOLAÇO!', 660, 760, f, go, 170, -5)
     num(c, '1 x 0', 640, 930, f, go + 6, 140, 4)
@@ -92,15 +92,15 @@ def s1(f):
 
 def s2(f):
     c = estadio('dusk').copy()
-    paste_c(c, gol(), 1080, 1640, 1.25)
+    gx, gy = put_gol(c)
     ca = wt(2, 'cabeca') - 4; va = wt(2, 'vaga') - 3
     pulo = pulse(f, ca - 8, 10)
-    put_jog(c, 1010, 1880, 600, f, 9, cores=CAM, faixa=CAM_F, arms='cheek' if f >= ca else 'hang', expr='pained' if f >= ca else 'nervous', skin=3, hair='#111111')
+    put_goleiro(c, f, CAM, CAM_F, arms='cheek' if f >= ca else 'hang', expr='pained' if f >= ca else 'nervous', skin=3, hair='#111111')
     put_jog(c, 560, 1990 - 160 * pulo, 860, f, 4, cores=GRE, faixa=GRE_F, arms='up' if f >= ca + 6 else 'run', expr='grin' if f >= ca else 'stern', skin=1)
     if f < va: put_placa(c, 'CARLOS VINÍCIUS', GRE, 560, 1170, f, wt(2, 'Carlos') - 3, 46, -3)
     if f < ca - 14: bx, by = lerp(-60, 560, ramp(f, 0, ca - 14)), 1300
     elif f < ca: bx, by = 560, lerp(1300, 1230 - 160 * pulo, ramp(f, ca - 14, ca))
-    else: t = ramp(f, ca, ca + 8); bx, by = lerp(560, 1150, t), lerp(1230, 1620, t)
+    else: t = ramp(f, ca, ca + 8); bx, by = lerp(560, gx + 90, t), lerp(1230, gy, t)
     if f < va: put_bola(c, bx, by, 34, f)
     num(c, '1 x 1', 640, 720, f, ca + 2, 150, -4)
     num(c, 'IDA: 2 x 0', 640, 880, f, wt(2, 'dois') - 3, 100, 3)

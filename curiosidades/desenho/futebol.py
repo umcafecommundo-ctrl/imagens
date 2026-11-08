@@ -288,3 +288,58 @@ def tabela(c, linhas, x0, y0, f, f0):
         paste_c(c, row, x0, y, s)
 
 
+
+
+# ------------------------------------------------------------------ gol no fundo (proporção certa)
+GOL_X, GOL_BASE, GOL_S = 1040, 1590, .74
+
+
+def put_gol(c, x=None, base=None, s=None):
+    """gol mais LONGE, atrás dos jogadores (pés dos jogadores em y≈1950-2030 ficam bem à frente).
+    Devolve (x, y) do meio do gol para mirar a bola."""
+    x = GOL_X if x is None else x; base = GOL_BASE if base is None else base; s = GOL_S if s is None else s
+    g = gol(); h = g.size[1] * s
+    paste_c(c, g, x, base - h / 2, s)
+    return x + 20, base - h * .45
+
+
+def put_goleiro(c, f, cores, faixa, gx=None, base=None, **kw):
+    """goleiro/zagueiro pequeno dentro do gol (longe), para dar profundidade."""
+    gx = GOL_X if gx is None else gx; base = GOL_BASE if base is None else base
+    put_jog(c, gx - 40, base + 10, 300, f, 21, cores=cores, faixa=faixa, **kw)
+
+
+# ------------------------------------------------------------------ cartão final (chamada) da página
+def cta_card(im, cl, h):
+    """escurece o fundo e mostra um cartão verde com a pergunta (CTA_TEXTO) e "SIGA PARA MAIS". Sem @."""
+    import numpy as np
+    from PIL import ImageFilter
+    k = clamp(cl / 8)
+    if k > 0: im = im.filter(ImageFilter.GaussianBlur(9 * k))
+    a = np.asarray(im).astype(np.float32) * (1 - .6 * k)
+    im = Image.fromarray(a.astype(np.uint8)).convert('RGBA')
+    pa = back(ramp(cl, 0, 9))
+    if pa > .05:
+        w, hh = 900, 560; cx, cy = OW / 2, 760
+        card = Image.new('RGBA', (w, hh), (0, 0, 0, 0)); d = ImageDraw.Draw(card)
+        d.rounded_rectangle([6, 6, w - 6, hh - 6], 56, fill=(22, 92, 52, 245), outline=INK + (255,), width=10)
+        d.rounded_rectangle([22, 22, w - 22, hh - 22], 44, outline=(255, 216, 74, 255), width=8)
+        b = bola(60, int(cl * 12) % 72).resize((150, 150), Image.LANCZOS)
+        card.alpha_composite(b, (w // 2 - 75, 40))
+        t = txt(getattr(h, 'CTA_TEXTO', 'COMENTA AQUI!'), 104, 0)
+        if t.size[0] > w - 60: t = t.resize((w - 60, int(t.size[1] * (w - 60) / t.size[0])), Image.LANCZOS)
+        card.alpha_composite(t, ((w - t.size[0]) // 2, 210))
+        s2 = back(ramp(cl, 8, 16))
+        if s2 > .05:
+            pill = Image.new('RGBA', (640, 120), (0, 0, 0, 0)); pd = ImageDraw.Draw(pill)
+            pd.rounded_rectangle([4, 4, 636, 116], 58, fill=(255, 216, 74, 255), outline=INK + (255,), width=7)
+            fo = ImageFont.truetype(FONTB, 60); tx = 'SIGA PARA MAIS'; tw = pd.textlength(tx, font=fo)
+            pd.text(((640 - tw) / 2, 24), tx, font=fo, fill=INK + (255,))
+            pill = pill.resize((max(1, int(640 * s2)), max(1, int(120 * s2))), Image.LANCZOS)
+            card.alpha_composite(pill, ((w - pill.size[0]) // 2, 400 + (120 - pill.size[1]) // 2))
+        card = card.resize((max(1, int(w * pa)), max(1, int(hh * pa))), Image.LANCZOS)
+        im.alpha_composite(card, (int(cx - card.size[0] / 2), int(cy - card.size[1] / 2)))
+    return im.convert('RGB')
+
+
+CTA_CARD = cta_card
