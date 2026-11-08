@@ -81,9 +81,10 @@ def s1(f):
             expr='grin' if f >= go else 'stern', skin=3, hair='#111111')
     put_placa(c, 'ATLÉTICO-MG', CAM, 470, 1080, f, wt(1, 'Atletico') - 3, 58, -3)
     put_placa(c, 'RENAN LODI', CAM, 520, 1230, f, wt(1, 'Renan') - 3, 46, 3)
-    if f < go - 5: bx, by = 620, 1990
-    else: t = ramp(f, go - 5, go + 3); bx, by = lerp(620, gx + 90, t), lerp(1990, gy, t) - 120 * math.sin(t * math.pi)
-    put_bola(c, bx, by, 34, f)
+    rb = raio_bola(860)  # bola proporcional ao jogador
+    if f < go - 5: bx, by, r = 640, 1990 - rb, rb
+    else: t = ramp(f, go - 5, go + 3); bx, by, r = lerp(640, gx + 90, t), lerp(1990 - rb, gy, t) - 120 * math.sin(t * math.pi), lerp(rb, raio_bola(300), t)
+    put_bola(c, bx, by, r, f)
     num(c, 'GOLAÇO!', 660, 760, f, go, 170, -5)
     num(c, '1 x 0', 640, 930, f, go + 6, 140, 4)
     k = kick(f, go)
@@ -98,10 +99,11 @@ def s2(f):
     put_goleiro(c, f, CAM, CAM_F, arms='cheek' if f >= ca else 'hang', expr='pained' if f >= ca else 'nervous', skin=3, hair='#111111')
     put_jog(c, 560, 1990 - 160 * pulo, 860, f, 4, cores=GRE, faixa=GRE_F, arms='up' if f >= ca + 6 else 'run', expr='grin' if f >= ca else 'stern', skin=1)
     if f < va: put_placa(c, 'CARLOS VINÍCIUS', GRE, 560, 1170, f, wt(2, 'Carlos') - 3, 46, -3)
-    if f < ca - 14: bx, by = lerp(-60, 560, ramp(f, 0, ca - 14)), 1300
-    elif f < ca: bx, by = 560, lerp(1300, 1230 - 160 * pulo, ramp(f, ca - 14, ca))
-    else: t = ramp(f, ca, ca + 8); bx, by = lerp(560, gx + 90, t), lerp(1230, gy, t)
-    if f < va: put_bola(c, bx, by, 34, f)
+    rb = raio_bola(860)
+    if f < ca - 14: bx, by, r = lerp(-60, 560, ramp(f, 0, ca - 14)), 1300, rb
+    elif f < ca: bx, by, r = 560, lerp(1300, 1170 - 160 * pulo, ramp(f, ca - 14, ca)), rb
+    else: t = ramp(f, ca, ca + 8); bx, by, r = lerp(560, gx + 90, t), lerp(1170, gy, t), lerp(rb, raio_bola(300), t)
+    if f < va: put_bola(c, bx, by, r, f)
     num(c, '1 x 1', 640, 720, f, ca + 2, 150, -4)
     num(c, 'IDA: 2 x 0', 640, 880, f, wt(2, 'dois') - 3, 100, 3)
     num(c, 'VAGA NA FINAL!', 640, 1040, f, va, 100, -3)
@@ -151,7 +153,7 @@ def s6(f):
     put_placa(c, 'VASCO', VAS, 640, 1120, f, wt(6, 'Vasco') - 3, 70)
     num(c, 'VENCER POR 2 = VAGA', 640, 720, f, wt(6, 'dois') - 3, 76, -3)
     num(c, 'POR 1 = PÊNALTIS', 640, 870, f, pe, 76, 3)
-    if f >= pe: put_bola(c, 1000, 1880, 46, 0)
+    if f >= pe: put_bola(c, 860, 2030 - raio_bola(940), raio_bola(940), 0)
     k = kick(f, pe, .7)
     return c, (640, 1420 + k * 10, lerp(1.06, 1.18, smooth(f / 110)), k), 'golden'
 

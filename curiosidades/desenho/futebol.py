@@ -170,20 +170,62 @@ def put_jog(c, x, feet, h, f, seed, flip=False, **kw):
 
 
 # ------------------------------------------------------------------ bola, gol, estádio
-@lru_cache(maxsize=8)
+@lru_cache(maxsize=80)
 def bola(r=60, rot=0):
-    p = Pen(2 * r + 20, 2 * r + 20); cx = cy = r + 10
-    p.shape(ell_pts(cx, cy, r, r, 40), (255, 255, 255), hexc('#cfcfcf'), 4, 8)
-    a0 = math.radians(rot)
-    p.poly([(cx + r * .35 * math.cos(a0 + k * 2 * math.pi / 5), cy + r * .35 * math.sin(a0 + k * 2 * math.pi / 5)) for k in range(5)], INK)
+    """bola de futebol clássica (gomos pretos de 5 lados + costuras dos hexágonos brancos), vista de frente.
+    rot (graus) gira o desenho. Imagem (2r+20)x(2r+20)."""
+    S = 4; R = r * S; W = 2 * R + 20 * S; cx = cy = W / 2
+    im = Image.new('RGBA', (W, W), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
+    pat = Image.new('RGBA', (W, W), (255, 255, 255, 255)); pd = ImageDraw.Draw(pat)
+    a0 = math.radians(rot - 90)
+    P = lambda ang, dist: (cx + dist * math.cos(ang), cy + dist * math.sin(ang))
+    pent = lambda c_, rr, ang: [(c_[0] + rr * math.cos(ang + k * 2 * math.pi / 5), c_[1] + rr * math.sin(ang + k * 2 * math.pi / 5)) for k in range(5)]
+    seam = (70, 70, 80, 255); lw = max(2, int(R * .035))
+    # pentágono central
+    cen = pent((cx, cy), R * .30, a0)
+    # costuras: de cada vértice central sai uma linha até o anel, que se divide em duas
     for k in range(5):
-        a = a0 + k * 2 * math.pi / 5
-        p.stroke([(cx + r * .35 * math.cos(a), cy + r * .35 * math.sin(a)), (cx + r * .92 * math.cos(a), cy + r * .92 * math.sin(a))], 3)
-    return p.img
+        v = cen[k]; ang = a0 + k * 2 * math.pi / 5
+        m = P(ang, R * .58)
+        pd.line([v, m], fill=seam, width=lw)
+        for s_ in (-1, 1):
+            e = P(ang + s_ * math.radians(24), R * .80); pd.line([m, e], fill=seam, width=lw)
+            pd.line([e, P(ang + s_ * math.radians(24), R * 1.2)], fill=seam, width=lw)
+    # 5 pentágonos pretos na borda (entre as costuras), aparecem achatados pela curva da bola
+    for k in range(5):
+        ang = a0 + (k + .5) * 2 * math.pi / 5
+        c_ = P(ang, R * .86)
+        pts = pent(c_, R * .25, ang)
+        pts = [(cx + (x - cx), cy + (y - cy)) for x, y in pts]
+        pd.polygon(pts, fill=(28, 24, 32, 255))
+    pd.polygon(cen, fill=(28, 24, 32, 255))
+    # recorta no círculo
+    m = Image.new('L', (W, W), 0); ImageDraw.Draw(m).ellipse([cx - R, cy - R, cx + R, cy + R], fill=255)
+    im.paste(pat, (0, 0), m)
+    # sombra de volume (luz de cima à esquerda) + brilho
+    sh = Image.new('L', (W, W), 0); sd = ImageDraw.Draw(sh)
+    sd.ellipse([cx - R * .75, cy - R * .75, cx + R * 1.35, cy + R * 1.35], fill=0)
+    ring = Image.new('L', (W, W), 0); ImageDraw.Draw(ring).ellipse([cx - R, cy - R, cx + R, cy + R], fill=90)
+    ImageDraw.Draw(ring).ellipse([cx - R * 1.15, cy - R * 1.15, cx + R * .8, cy + R * .8], fill=0)
+    from PIL import ImageFilter, ImageChops
+    ring = ImageChops.multiply(ring.filter(ImageFilter.GaussianBlur(R * .12)), m)
+    im.paste((40, 40, 70, 255), (0, 0), ring)
+    gl = Image.new('L', (W, W), 0); ImageDraw.Draw(gl).ellipse([cx - R * .62, cy - R * .7, cx - R * .25, cy - R * .38], fill=120)
+    im.paste((255, 255, 255, 255), (0, 0), ImageChops.multiply(gl.filter(ImageFilter.GaussianBlur(R * .06)), m))
+    d = ImageDraw.Draw(im); d.ellipse([cx - R, cy - R, cx + R, cy + R], outline=INK + (255,), width=max(3, int(R * .06)))
+    return im.resize((2 * r + 20, 2 * r + 20), Image.LANCZOS)
+
+
+def raio_bola(h_jogador):
+    """raio da bola em proporção REAL com o jogador de altura h (bola 22 cm, pessoa ~1,75 m -> diâmetro ≈ 12% da altura)."""
+    return .06 * h_jogador
 
 
 def put_bola(c, x, y, r=40, f=0):
-    im = bola(60, int(f * 25) % 72).resize((int(2 * r + 20 * r / 60),) * 2, Image.LANCZOS)
+    """bola centrada em (x, y) com raio r. Para ficar proporcional use r = raio_bola(altura do jogador perto dela);
+    no chão, y = pés do jogador - r. Quando ela vai para o gol no fundo, diminua r até ~raio_bola(300)."""
+    r = max(4, int(r))
+    im = bola(r, int(f * 25) % 72)
     c.alpha_composite(im, (int(x - im.size[0] / 2), int(y - im.size[1] / 2)))
 
 
