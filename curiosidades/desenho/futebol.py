@@ -45,6 +45,10 @@ TIMES = {
     'NOVORIZONTINO': (('#f5c518', '#111111', '#111111'), None),
     'JUVENTUDE': (('#1f7a4a', '#ffffff', '#ffffff'), 'v'),
     'CRICIÚMA': (('#f5c518', '#111111', '#ffffff'), 'v'),
+    'INTER MIAMI': (('#f7b5cd', '#111111', '#111111'), None),
+    'PSG': (('#0a2a5c', '#d4282c', '#ffffff'), 'v'),
+    'MANCHESTER CITY': (('#6cabdd', '#ffffff', '#ffffff'), None),
+    'BAYERN': (('#dc052d', '#ffffff', '#ffffff'), None),
     'GENÉRICO': (('#555a66', '#555a66', '#555a66'), None),
 }
 

@@ -5,4 +5,4 @@ AAAA-MM-DD | HHh | competição/tipo | tema com palavras-chave | fato novo, ou -
 2026-11-08 | 21h | COPA DO BRASIL | Palmeiras elimina Vasco nos pênaltis (Vasco 2x1 em São Januário, agregado 2x2, pênaltis 5x4, Carlos Miguel defende 2), final Palmeiras x Grêmio 06/12 Brasília (desenho) | finalista definido: Palmeiras
 2026-11-09 | 07h | LALIGA | Barcelona vira sobre o Atlético de Madrid 2x1 no Metropolitano, Fermín López 2 gols, passe de Lamine Yamal, Barça líder 3 à frente do Real (desenho) | resultado do jogo (prévia saiu 08/11 12h)
 2026-11-09 | 12h | SÉRIE B | Novorizontino sobe pela 1ª vez à Série A, virada 2x1 sobre o Fortaleza no Jorjão, expulsão aos 7 min, 70 pts líder, clube de 16 anos (desenho) | -
-2026-11-09 | 19h | FIFPRO | Messi na seleção do ano FIFPro pela 18ª vez (recorde), aos 39 anos, Inter Miami; Harry Kane Bola de Ouro fora; PSG 3 jogadores; nenhum brasileiro (reservado) | -
+2026-11-09 | 19h | FIFPRO | Messi na seleção do ano FIFPro pela 18ª vez (recorde), aos 39 anos, Inter Miami; Harry Kane Bola de Ouro fora; PSG 3 jogadores; nenhum brasileiro (desenho) | -
