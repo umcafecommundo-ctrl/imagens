@@ -42,6 +42,9 @@ TIMES = {
     'MANCHESTER UNITED': (('#da291c', '#ffffff', '#ffffff'), None),
     'ASTON VILLA': (('#7a1e3f', '#ffffff', '#ffffff'), None),
     'LIVERPOOL': (('#c8102e', '#c8102e', '#c8102e'), None),
+    'NOVORIZONTINO': (('#f5c518', '#111111', '#111111'), None),
+    'JUVENTUDE': (('#1f7a4a', '#ffffff', '#ffffff'), 'v'),
+    'CRICIÚMA': (('#f5c518', '#111111', '#ffffff'), 'v'),
     'GENÉRICO': (('#555a66', '#555a66', '#555a66'), None),
 }
 
