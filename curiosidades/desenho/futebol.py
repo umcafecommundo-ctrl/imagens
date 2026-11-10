@@ -49,6 +49,8 @@ TIMES = {
     'PSG': (('#0a2a5c', '#d4282c', '#ffffff'), 'v'),
     'MANCHESTER CITY': (('#6cabdd', '#ffffff', '#ffffff'), None),
     'BAYERN': (('#dc052d', '#ffffff', '#ffffff'), None),
+    'JAPÃO': (('#1d3f8f', '#ffffff', '#1d3f8f'), None),
+    'SINGAPURA': (('#d4282c', '#ffffff', '#ffffff'), None),
     'GENÉRICO': (('#555a66', '#555a66', '#555a66'), None),
 }
 
