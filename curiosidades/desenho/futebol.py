@@ -51,6 +51,9 @@ TIMES = {
     'BAYERN': (('#dc052d', '#ffffff', '#ffffff'), None),
     'JAPÃO': (('#1d3f8f', '#ffffff', '#1d3f8f'), None),
     'SINGAPURA': (('#d4282c', '#ffffff', '#ffffff'), None),
+    'REMO': (('#0d2a5c', '#ffffff', '#0d2a5c'), None),
+    'CHAPECOENSE': (('#1f7a4a', '#ffffff', '#ffffff'), None),
+    'MIRASSOL': (('#f5c518', '#1f7a4a', '#1f7a4a'), None),
     'GENÉRICO': (('#555a66', '#555a66', '#555a66'), None),
 }
 
