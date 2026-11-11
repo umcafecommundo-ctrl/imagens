@@ -54,6 +54,8 @@ TIMES = {
     'REMO': (('#0d2a5c', '#ffffff', '#0d2a5c'), None),
     'CHAPECOENSE': (('#1f7a4a', '#ffffff', '#ffffff'), None),
     'MIRASSOL': (('#f5c518', '#1f7a4a', '#1f7a4a'), None),
+    'BOCA JUNIORS': (('#0a3a8c', '#f5c518', '#0a3a8c'), 'h'),
+    'ESTUDIANTES': (('#d4282c', '#ffffff', '#ffffff'), 'v'),
     'GENÉRICO': (('#555a66', '#555a66', '#555a66'), None),
 }
 
