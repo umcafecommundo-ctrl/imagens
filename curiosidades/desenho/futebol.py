@@ -56,6 +56,7 @@ TIMES = {
     'MIRASSOL': (('#f5c518', '#1f7a4a', '#1f7a4a'), None),
     'BOCA JUNIORS': (('#0a3a8c', '#f5c518', '#0a3a8c'), 'h'),
     'ESTUDIANTES': (('#d4282c', '#ffffff', '#ffffff'), 'v'),
+    'VILA NOVA': (('#d4282c', '#ffffff', '#ffffff'), None),
     'GENÉRICO': (('#555a66', '#555a66', '#555a66'), None),
 }
 
