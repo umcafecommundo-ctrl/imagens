@@ -58,6 +58,9 @@ TIMES = {
     'ESTUDIANTES': (('#d4282c', '#ffffff', '#ffffff'), 'v'),
     'VILA NOVA': (('#d4282c', '#ffffff', '#ffffff'), None),
     'NOTTINGHAM FOREST': (('#dd0000', '#ffffff', '#ffffff'), None),
+    'INGLATERRA': (('#ffffff', '#1a2a5c', '#1a2a5c'), None),
+    'CROÁCIA': (('#d4282c', '#ffffff', '#ffffff'), 'v'),
+    'ESPANHA': (('#c8102e', '#1a2a5c', '#f5c518'), None),
     'GENÉRICO': (('#555a66', '#555a66', '#555a66'), None),
 }
 
