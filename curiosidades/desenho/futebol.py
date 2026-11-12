@@ -57,6 +57,7 @@ TIMES = {
     'BOCA JUNIORS': (('#0a3a8c', '#f5c518', '#0a3a8c'), 'h'),
     'ESTUDIANTES': (('#d4282c', '#ffffff', '#ffffff'), 'v'),
     'VILA NOVA': (('#d4282c', '#ffffff', '#ffffff'), None),
+    'NOTTINGHAM FOREST': (('#dd0000', '#ffffff', '#ffffff'), None),
     'GENÉRICO': (('#555a66', '#555a66', '#555a66'), None),
 }
 
