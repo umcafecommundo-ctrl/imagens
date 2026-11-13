@@ -61,6 +61,8 @@ TIMES = {
     'INGLATERRA': (('#ffffff', '#1a2a5c', '#1a2a5c'), None),
     'CROÁCIA': (('#d4282c', '#ffffff', '#ffffff'), 'v'),
     'ESPANHA': (('#c8102e', '#1a2a5c', '#f5c518'), None),
+    'ESTADOS UNIDOS': (('#ffffff', '#1a2a5c', '#c8102e'), None),
+    'TOTTENHAM': (('#ffffff', '#132257', '#132257'), None),
     'GENÉRICO': (('#555a66', '#555a66', '#555a66'), None),
 }
 
