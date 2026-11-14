@@ -17,7 +17,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, AQUI)
-import art, personagens as P, cenarios
+import art, personagens as P, cenarios, professor as PROF
 from art import Pen, INK, ell_pts, curve, hexc, mul, face, SKINS
 
 FPS = 30; OW, OH = 1080, 1920; BW, BH = 1242, 2208
@@ -79,7 +79,7 @@ def CEN(nome, luz='day'):
 # ------------------------------------------------------------ sprites com cache
 @lru_cache(maxsize=1024)
 def sprite(fn_name, key, h, aspect, flip):
-    fn = getattr(P, fn_name, None) or getattr(art, fn_name, None) or getattr(sys.modules.get('historia'), fn_name)
+    fn = getattr(P, fn_name, None) or getattr(art, fn_name, None) or getattr(PROF, fn_name, None) or getattr(sys.modules.get('historia'), fn_name)
     im = fn(**dict(key)).resize((max(1, int(h * aspect)), max(1, int(h))), Image.LANCZOS)
     return im.transpose(Image.FLIP_LEFT_RIGHT) if flip else im
 
@@ -117,6 +117,16 @@ def _bean(c, fn, x, feet, h, f, seed, cut=1.0, **kw):
     im = sprite(fn, tuple(sorted(kw.items())), int(h), .6, False)
     if cut < 1: im = im.crop((0, 0, im.size[0], int(im.size[1] * cut)))
     put(c, im, x, feet + h * .025 + bob - h * (1 - cut))
+
+
+def put_prof(c, x, feet, h, f, seed=1, flip=False, **kw):
+    """PROFESSOR BIGODE, personagem fixo de todos os posts (professor.py). kw: expr, arms('hang','point','up',
+    'wave','chin','shrug'), look. flip=True vira para a esquerda (o braço que aponta passa a apontar para a esquerda)."""
+    kw['blink'] = 1 if blinkAt(f, seed) > .6 else 0
+    kw['tilt'] = round(1.2 * math.sin((f + seed * 7) * .05) * 2) / 2 + kw.get('tilt', 0)
+    if h < 8: return
+    bob = .006 * math.sin((f + seed * 11) * .11) * h
+    put(c, sprite('professor', tuple(sorted(kw.items())), int(h), .6, flip), x, feet + h * .025 + bob)
 
 
 def put_sci(c, x, feet, h, f, seed, **kw):

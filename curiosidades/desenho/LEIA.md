@@ -33,6 +33,19 @@ Português falado, frases curtas, números por extenso nas LINES (na CAPTXT pode
 `FALA_TIKTOK` = pedido de comentário de 1 toque + "segue pra mais curiosidades!" (só no TikTok);
 `CTA_TEXTO` = a resposta de 1 toque em letras grandes ("SIM OU NÃO?"). O YouTube termina na virada (loop).
 
+## Personagem fixo: PROFESSOR BIGODE (OBRIGATÓRIO, decisão do Luis em 14/11/2026)
+Vale para a página CURIOSIDADES DA IA (posts em curiosidades/); NÃO vale para o Anima Futebol (futebol/) nem para o Um Café com o Mundo.
+Todo post do Curiosidades da IA tem o Professor Bigode (professor.py): senhor careca com tufos brancos, bigodão branco de guidão,
+gravata-borboleta vermelha, camisa branca e colete marrom. Ele é o apresentador/narrador da página.
+`put_prof(c, x, pés, altura, f, seed=1, flip=False, expr=..., arms=..., look=...)`
+expr: neutral, grin, shock, smug, pained, stern, proud, nervous; arms: hang, point, up, wave, chin, shrug.
+- Aparece SEMPRE na 1ª cena (o gancho: apresenta, aponta, se espanta) e na última cena (reage ao fim irônico).
+- Nas outras cenas, entra sempre que precisar de "uma pessoa" sem papel específico (quem testa, quem explica, quem se
+  surpreende) e pode visitar qualquer cenário (cozinha, espaço, Roma antiga, dentro do corpo...). Bichos, objetos e
+  personagens com papel próprio (astronauta, cientista da pesquisa, soldado, bispo...) continuam sendo desenhados à parte.
+- Nunca mude o visual dele (cores, bigode, gravata). Ele nunca fala com voz própria: a narração continua a mesma.
+- Rosto dele acima da legenda (y≈1600 da saída), como qualquer personagem.
+
 ## Cenas (`SCENES`): cada uma é `def sN(f): ... return canvas, (cx, cy, zoom, roll), luz`
 - `f` = quadro local da cena (30 fps). Palco 1242x2208; saída 1080x1920. zoom 1 = palco todo.
 - **Sincronia**: `wt(N, 'palavra')` = quadro em que a voz fala a palavra (sem acento tanto faz).
@@ -57,6 +70,7 @@ Antes de montar as cenas, escreva para você mesmo o cenário de cada cena.
 - **Nada parado por mais de 4 quadros** (piscar, respirar, zoom lento). Os personagens já respiram e piscam.
 
 ## Personagens e objetos prontos (kit.py / personagens.py / art.py)
+- `put_prof(...)` — PROFESSOR BIGODE, personagem fixo de todos os posts (veja acima)
 - `put_roo(c, x, pés, altura, flip, crow=0..1, sleep=0..1, expr, look, chief, ear)` — galo
 - `put_emu(c, x, pés, altura, flip, run, phase, peck, expr, look, helmet)` — emu / ave pernalta
 - `put_sci(c, x, pés, altura, f, seed, expr, arms, skin, hair, bun, glasses)` — cientista de jaleco
