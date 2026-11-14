@@ -1,5 +1,12 @@
-"""anima.futebol — MODELO TESTE do visual novo (futebol2.py), com a mesma história de 14/11/2026 12h:
-Japão 3x2 Brasil em Singapura. Fontes: ver futebol/2026-11-14-12h/historia.py. Não publicado."""
+"""EXEMPLO COMPLETO do VISUAL NOVO de futebol (futebol2.py, aprovado pelo Luis em 14/11/2026).
+História: Japão 3x2 Brasil em Singapura (14/11/2026). Fontes: CNN Brasil, Tribuna de Jundiaí, SBT News, Lance!, Metrópoles.
+Padrões deste exemplo (copie e reescreva para cada post):
+- estadio2(luz) no fundo; jogadores com put_atleta (helpers jp/br/vini abaixo); gol com put_gol2(estufa=...) + put_goleiro.
+- lance de gol: jogador corre (run), chuta (kick=pulse), bola_voo com rastro, rede estufa, gol_txt (estrela + GOL!), kick() na câmera.
+- linhas_vel SEMPRE antes de desenhar o jogador (ficam atrás dele e de quem vem atrás).
+- foco(...) = holofote no jogador citado; confete(...) nas comemorações.
+- OVERLAY: placar_tv (muda com os gols) + destaque (manchete do assunto em cada cena; nos gols entra DEPOIS do gol).
+"""
 from kit import *
 import kit
 from futebol import *
@@ -85,8 +92,8 @@ def s0(f):
     br(c, 330, 1700, 520, f, 11, arms='cheek', expr='pained', skin=2)
     br(c, 980, 1690, 500, f, 12, arms='cheek', expr='pained', skin=4, hs='cacheado', flip=True)
     x = lerp(1250, 620, easeOut(ramp(f, 0, 22)))
+    if f < 24: linhas_vel(c, x, 2050, 900, f, dir=1)          # linhas ANTES do jogador (ficam atrás dele)
     jp(c, x, 2050, 900, f, 6, arms='aviao', expr='grin', run=(f * .08) % 1 if f < 22 else -1, num_='8', flip=True)
-    if f < 24: linhas_vel(c, x, 2050, 900, f, dir=1)
     confete(c, 640, 900, f, tr, 90, 900)
     explosao(c, 640, 820, f, tr, 250)
     num(c, '3 x 2', 640, 820, f, tr + 2, 170, -3)
@@ -105,12 +112,12 @@ def s1(f):
     put_goleiro(c, f, GKB, None, gx=780 + (60 if f > k1 + 6 else 0) * (f < na) + (-60 if f > k2 + 6 else 0), arms='up', expr='shock', skin=1)
     if f < na - 4:
         x = lerp(-200, 330, easeOut(ramp(f, 0, ku)))
+        if f < k1 - 4: linhas_vel(c, x, 2030, 840, f)
         jp(c, x, 2030, 840, f, 4, arms='run' if f < k1 + 6 else 'punho', run=(f * .09) % 1 if f < k1 - 4 else None,
            kick=pulse(f, k1 - 4, 5) if f >= k1 - 4 else 0, expr='grin', num_='20')
         foco(c, x, 1650, 360, .9 * pulse(f, ku - 6, 40))
         chute_gol(c, f, k1, x, 840, gx, gy)
         if f >= k1 + 9: gol_txt(c, f, k1 + 9, 640, 860)
-        if f < k1 - 4: linhas_vel(c, x, 2030, 840, f)
     else:
         x = lerp(1450, 880, easeOut(ramp(f, na - 4, na + 2)))
         jp(c, x, 2030, 840, f, 8, arms='run' if f < k2 + 6 else 'aviao', run=(f * .09) % 1 if f < k2 - 4 else None,
@@ -162,10 +169,10 @@ def s4(f):
     gx, gy = put_gol2(c, x=700, estufa=pulse(f, kf + 9, 10))
     put_goleiro(c, f, GKB, None, gx=720 + 70 * clamp((f - kf) / 7), arms='up', expr='shock', skin=1)
     x = lerp(-150, 560, easeOut(ramp(f, 0, kf - 4)))
+    if f < kf - 4: linhas_vel(c, x, 2030, 880, f)
     br(c, x - 380 + 40 * math.sin(f * .2), 2000, 760, f, 31, run=(f * .1) % 1, arms='run', expr='pained', skin=2)
     jp(c, x, 2030, 880, f, 9, arms='run' if f < kf + 10 else 'punho', run=(f * .1) % 1 if f < kf - 4 else None,
        kick=pulse(f, kf - 4, 5) if f >= kf - 4 else 0, expr='grin', num_='14')
-    if f < kf - 4: linhas_vel(c, x, 2030, 880, f)
     foco(c, x, 1640, 380, .85 * pulse(f, sa, 26))
     chute_gol(c, f, kf, x, 880, gx, gy)
     if f >= kf + 9: gol_txt(c, f, kf + 9, 640, 860, 'GOL!', (230, 60, 70))

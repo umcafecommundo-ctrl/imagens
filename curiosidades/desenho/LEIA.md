@@ -100,3 +100,13 @@ Escreva a função no próprio historia.py com a `Pen` (veja `rooster` em person
 1. `stills` → abra `conferir_cenas.jpg`: cabeça/chapéu cortado, personagem escondido, câmera dentro de
    objeto, legenda cobrindo rosto, quadro vazio, texto espelhado, ação fora do quadro na palavra certa.
 2. `final` imprime "ok (sem quadro parado ou preto)" para os 2 vídeos; abra `conferir_video.jpg`.
+
+## Futebol: VISUAL NOVO (anima.futebol, aprovado pelo Luis em 14/11/2026)
+Os posts de futebol usam `futebol2.py` por cima de `futebol.py` (`from futebol import *; from futebol2 import *`).
+Exemplo completo: `exemplos/futebol2/historia.py` (copie e reescreva). Resumo:
+- Fundo `estadio2('dusk'|'day'|'golden')` (não use mais `estadio`); jogadores `put_atleta(...)` (não use mais `put_jog`),
+  com `run=fase` para correr, `kick=pulse(...)` para chutar, `hs` (cabelo), `num_` (número), `skin` 0-5.
+- Gol: `put_gol2(c, x, estufa=...)` + `put_goleiro`; bola com `raio_bola` e rastro (`bola_voo` do exemplo); `gol_txt` (estrela + GOL!).
+- Ênfase no assunto: `foco(...)` no jogador citado; `OVERLAY(im, si, lf)` com `placar_tv` (muda a cada gol) e
+  `destaque(...)` (manchete do assunto em cada cena; nos lances de gol entra DEPOIS do gol para não cobrir a bola).
+- `linhas_vel` sempre ANTES de desenhar o jogador; `confete` nas comemorações.
