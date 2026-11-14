@@ -138,6 +138,7 @@ def _frame(h, SC, CAPS, g, total, cta_len):
     c, cam, light = h.SCENES[si](lf)
     flash = (1 - lf / 6) if (si in getattr(h, 'FLASH', []) and lf < 6) else 0
     im = grade(camera(c, cam), light, flash)
+    if getattr(h, 'OVERLAY', None): im = h.OVERLAY(im, si, lf)   # placar/manchete em tela (futebol2.py)
     act = [ws for s, ws in CAPS if s == si and lf >= ws[0][1] - 2]
     return draw_caption(im, act[-1], lf) if act else im
 
