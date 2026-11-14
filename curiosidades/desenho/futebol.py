@@ -63,6 +63,12 @@ TIMES = {
     'ESPANHA': (('#c8102e', '#1a2a5c', '#f5c518'), None),
     'ESTADOS UNIDOS': (('#ffffff', '#1a2a5c', '#c8102e'), None),
     'TOTTENHAM': (('#ffffff', '#132257', '#132257'), None),
+    'BOTAFOGO-SP': (('#c8102e', '#111111', '#ffffff'), 'v'),
+    'ATLÉTICO-GO': (('#c8102e', '#111111', '#111111'), 'v'),
+    'AVAÍ': (('#1d5fbf', '#ffffff', '#ffffff'), 'h'),
+    'LONDRINA': (('#5fb4e8', '#ffffff', '#ffffff'), None),
+    'AMÉRICA-MG': (('#1f7a4a', '#111111', '#ffffff'), 'h'),
+    'PONTE PRETA': (('#ffffff', '#111111', '#111111'), 'h'),
     'GENÉRICO': (('#555a66', '#555a66', '#555a66'), None),
 }
 
