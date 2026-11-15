@@ -69,6 +69,9 @@ TIMES = {
     'LONDRINA': (('#5fb4e8', '#ffffff', '#ffffff'), None),
     'AMÉRICA-MG': (('#1f7a4a', '#111111', '#ffffff'), 'h'),
     'PONTE PRETA': (('#ffffff', '#111111', '#111111'), 'h'),
+    'DINAMARCA': (('#c8102e', '#ffffff', '#ffffff'), None),
+    'PAÍS DE GALES': (('#c8102e', '#1f7a4a', '#c8102e'), None),
+    'NORUEGA': (('#c8102e', '#1a2a5c', '#ffffff'), None),
     'GENÉRICO': (('#555a66', '#555a66', '#555a66'), None),
 }
 
