@@ -37,6 +37,7 @@ CAPTXT = [
 ]
 FALA_TIKTOK = "Você faria igual a Bia? Comenta sim ou não, e segue pra mais histórias!"
 CTA_TEXTO = "SIM OU NÃO?"
+MUSICA = False
 TWIST = 4
 FLASH = [6]
 CHECK = [(0, 'sumia', 4), (1, 'praca', 4), (2, 'padeiro', 4), (2, 'parar', 4), (3, 'relogio', 4), (4, 'preso', 4),
@@ -56,6 +57,11 @@ def loop_people(c, f, feet=1760, h=700, watches=0.0, frozen=False, ang_mul=1.0):
 
 
 def SFX(s):
+    # sons ambientes (sem música): tique-taque do relógio do começo ao fim
+    k, fim = 0, s.W(7, 'minuto') + 20
+    while k < fim:
+        s.thunk(k, 900 if (k // 15) % 2 else 700, .1); k += 15
+    s.patter(s.W(1, 'quando'), s.W(1, 'praca') + 15, 9, .1)
     s.whoosh(s.W(0, 'sumia') - 4, .5, .4)
     s.patter(s.W(1, 'sozinho'), s.W(1, 'praca'), 10, .14)
     for w in ('padeiro', 'professora', 'vizinho'): s.thunk(s.W(2, w) - 2, 240, .4)

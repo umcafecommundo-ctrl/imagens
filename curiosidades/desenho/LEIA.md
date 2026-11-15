@@ -33,6 +33,10 @@ Português falado, frases curtas, números por extenso nas LINES (na CAPTXT pode
 `FALA_TIKTOK` = pedido de comentário de 1 toque + "segue pra mais curiosidades!" (só no TikTok);
 `CTA_TEXTO` = a resposta de 1 toque em letras grandes ("SIM OU NÃO?"). O YouTube termina na virada (loop).
 
+## SEM MÚSICA DE FUNDO (OBRIGATÓRIO no Curiosidades da IA, decisão do Luis em 15/11/2026)
+Todo historia.py do Curiosidades da IA tem `MUSICA = False`: o vídeo fica só com a voz e os efeitos/sons ambientes do `SFX`
+(whoosh, thunk, ting, patter, splash...). Capriche nos sons ambientes (passos, vento, cidade, relógio) já que não há música.
+
 ## Personagem fixo: PROFESSOR BIGODE (OBRIGATÓRIO, decisão do Luis em 14/11/2026)
 Vale para a página CURIOSIDADES DA IA (posts em curiosidades/); NÃO vale para o Anima Futebol (futebol/) nem para o Um Café com o Mundo.
 Todo post do Curiosidades da IA tem o Professor Bigode (professor.py): senhor careca com tufos brancos, bigodão branco de guidão,

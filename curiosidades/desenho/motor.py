@@ -279,6 +279,7 @@ def build_audio(h, SC, total, cta_len, with_cta, pasta):
         blk = int(.4 * SR); r = np.array([rms(x[k:k + blk]) for k in range(0, len(x) - blk, blk)])
         r = r[r > np.abs(x).max() * 10 ** (-2)]; return np.sqrt(np.mean(r ** 2)) if len(r) else 1e-6
     vg = gated(voice)
+    if not getattr(h, 'MUSICA', True): music[:] = 0   # MUSICA = False na historia.py: só voz + efeitos/sons ambientes
     music *= .18 * vg / gated(music); sfx *= .25 * vg / gated(sfx)
     lim = .45 * np.abs(voice).max(); sfx = np.clip(sfx, -lim, lim)
     mix = voice + music + sfx; mix *= .5 / np.abs(mix).max()

@@ -25,6 +25,7 @@ CAPTXT = ["O galo não canta por causa do sol.",
 # fim só do TikTok (fala + texto grande na tela). O YouTube termina na virada (loop).
 FALA_TIKTOK = "Você sabia dessa? Comenta sim ou não, e segue pra mais curiosidades!"
 CTA_TEXTO = "SIM OU NÃO?"
+MUSICA = False     # Curiosidades da IA: SEM música de fundo, só voz e efeitos/sons ambientes (decisão do Luis em 15/11/2026)
 TWIST = 6          # cena da virada: a música para e entra o sting
 FLASH = [6]        # cenas que começam com flash branco (salto de tempo)
 CHECK = [(0, 'sol', 4), (2, 'cocorico', 6), (3, 'chefe', 8), (5, 'motosserra', 4), (5, 'fecha', 6), (6, 'quem', 10)]
