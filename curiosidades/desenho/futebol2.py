@@ -126,6 +126,13 @@ def atleta(expr='neutral', arms='hang', blink=0, look=0.0, tilt=0.0, run=-1.0, k
             a = math.pi * (1.05 + .9 * i / 10)
             p.dot(hc[0] + 88 * math.cos(a), hc[1] - 18 + 92 * math.sin(a), 32, hr, 4)
         p.shape(ell_pts(hc[0], hc[1] - 74, 80, 40), hr, None, 0)
+    elif hs in ('rabo', 'coque'):   # jogadoras: rabo de cavalo (atrás, à esquerda) ou coque no alto
+        if hs == 'rabo':
+            p.shape(ell_pts(hc[0] - 118, hc[1] + 10, 34, 78, 36, math.radians(-18)), hr, mul(hr, .6), 5, 6)
+            p.dot(hc[0] - 98, hc[1] - 50, 16, (230, 60, 80), 4)
+        else:
+            p.dot(hc[0], hc[1] - 112, 40, hr, 5)
+        p.shape([(x, min(y, hc[1] - 46 + abs(x - hc[0]) * .26)) for x, y in ell_pts(hc[0], hc[1] - 28, 96, 84, 48, 0, 0, 2.2)], hr, mul(hr, .6), 5, 8)
     elif hs == 'topete':
         p.shape([(hc[0] - 92, hc[1] - 20), (hc[0] - 80, hc[1] - 80), (hc[0] - 20, hc[1] - 130), (hc[0] + 60, hc[1] - 140),
                  (hc[0] + 96, hc[1] - 90), (hc[0] + 92, hc[1] - 30), (hc[0] + 60, hc[1] - 58), (hc[0] - 60, hc[1] - 58)], hr, mul(hr, .6), 5, 10)
