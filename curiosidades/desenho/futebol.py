@@ -74,6 +74,10 @@ TIMES = {
     'NORUEGA': (('#c8102e', '#1a2a5c', '#ffffff'), None),
     'RAVENNA': (('#f5c518', '#c8102e', '#c8102e'), 'v'),
     'FORLÌ': (('#ffffff', '#c8102e', '#c8102e'), 'h'),
+    'ÁUSTRIA': (('#ffffff', '#c8102e', '#111111'), None),
+    'MILAN': (('#c8102e', '#111111', '#ffffff'), 'v'),
+    'PEÑAROL': (('#f5c518', '#111111', '#111111'), 'v'),
+    'SUÉCIA': (('#f5c518', '#1d4fa8', '#1d4fa8'), None),
     'GENÉRICO': (('#555a66', '#555a66', '#555a66'), None),
 }
 
