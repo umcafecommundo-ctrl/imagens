@@ -72,6 +72,8 @@ TIMES = {
     'DINAMARCA': (('#c8102e', '#ffffff', '#ffffff'), None),
     'PAÍS DE GALES': (('#c8102e', '#1f7a4a', '#c8102e'), None),
     'NORUEGA': (('#c8102e', '#1a2a5c', '#ffffff'), None),
+    'RAVENNA': (('#f5c518', '#c8102e', '#c8102e'), 'v'),
+    'FORLÌ': (('#ffffff', '#c8102e', '#c8102e'), 'h'),
     'GENÉRICO': (('#555a66', '#555a66', '#555a66'), None),
 }
 
