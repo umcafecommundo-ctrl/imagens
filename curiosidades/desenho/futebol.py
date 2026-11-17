@@ -80,6 +80,7 @@ TIMES = {
     'SUÉCIA': (('#f5c518', '#1d4fa8', '#1d4fa8'), None),
     'ALEMANHA': (('#ffffff', '#111111', '#111111'), None),
     'HOLANDA': (('#f36c21', '#ffffff', '#f36c21'), None),
+    'CHINA': (('#d4282c', '#f5c518', '#d4282c'), None),
     'GENÉRICO': (('#555a66', '#555a66', '#555a66'), None),
 }
 
