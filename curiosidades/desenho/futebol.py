@@ -81,6 +81,8 @@ TIMES = {
     'ALEMANHA': (('#ffffff', '#111111', '#111111'), None),
     'HOLANDA': (('#f36c21', '#ffffff', '#f36c21'), None),
     'CHINA': (('#d4282c', '#f5c518', '#d4282c'), None),
+    'COSTA RICA': (('#d4282c', '#1d3f8f', '#1d3f8f'), None),
+    'URUGUAI': (('#5cb8ec', '#111111', '#111111'), None),
     'GENÉRICO': (('#555a66', '#555a66', '#555a66'), None),
 }
 
