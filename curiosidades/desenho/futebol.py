@@ -21,6 +21,7 @@ TIMES = {
     'CORINTHIANS': (('#ffffff', '#111111', '#111111'), None),
     'SÃO PAULO': (('#ffffff', '#c8102e', '#111111'), 'h'),
     'SANTOS': (('#ffffff', '#111111', '#ffffff'), None),
+    'CORITIBA': (('#ffffff', '#1a6b3c', '#111111'), 'h'),
     'VASCO': (('#111111', '#ffffff', '#111111'), 'h'),
     'FLUMINENSE': (FLU, 'v'),
     'BOTAFOGO': (('#111111', '#ffffff', '#111111'), 'v'),
