@@ -163,8 +163,8 @@ def OVERLAY(im, si, lf):
 
 
 def SFX(s):
-    s.torcida(s.cut(1), s.cut(4), 1.0)              # telão + estádio de dia + estádio dourado
-    s.torcida(s.cut(4), s.cut(5), .4)               # vestiário: torcida de longe
+    # s.torcida(s.cut(1), s.cut(4), 1.0)              # telão + estádio de dia + estádio dourado
+    # s.torcida(s.cut(4), s.cut(5), .4)               # vestiário: torcida de longe
     s.thunk(s.W(0, 'Flamengo') - 3, 150, .8)
     s.thunk(s.W(0, 'campeao') - 3, 120, .9)
     s.thunk(s.W(1, 'tres') - 3, 150, .8)
