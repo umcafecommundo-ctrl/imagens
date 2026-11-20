@@ -1,3 +1,48 @@
+# Formato MISTÉRIO — Curiosidades da IA (desde 21/11/2026, decisão do Luis em 20/11/2026)
+
+**Este é o formato atual da página Curiosidades da IA.** Os posts deixaram de ser curiosidades reais com o Professor Bigode
+e passaram a ser HISTÓRIAS DE MISTÉRIO INVENTADAS, em 1ª pessoa, em 2 partes, no estilo do vídeo de referência que o Luis
+mandou (cartões na tela, carimbos, placar digital, onomatopeias, legenda de 1 palavra, voz grave e calma, sem música).
+O PROFESSOR BIGODE SAIU DE VEZ: não use put_prof nos posts novos. O resto deste guia (motor, wt, câmera, SFX, conferência)
+continua valendo; as seções antigas sobre o Professor e as historinhas "explica" ficam só como histórico.
+
+Exemplo oficial completo: `exemplos/misterio/historia.py` (copie e reescreva). Kit do estilo: `sombrio.py`
+(`from kit import *` e depois `from sombrio import *`; chame `instala_legenda()` no topo).
+
+## Roteiro
+- 1ª pessoa, mundo com UMA regra estranha: "Na minha cidade...", "No meu prédio...", "Na minha escola...", "Na casa da
+  minha avó...". Estrutura: a regra estranha -> ninguém sabe a origem -> como a regra funciona (detalhe concreto: hora,
+  número, objeto) -> a exceção/o que deu errado -> o acontecimento de hoje -> gancho final.
+- Parte 1 (35 a 50 s): termina num gancho forte ("E a única pessoa na praça... era eu."). Parte 2 (35 a 50 s): começa com
+  1 frase que situa quem não viu ("Na parte um, o relógio da praça parou..."), resolve com uma virada e um fim que fecha a
+  história (pode deixar um arrepio, mas a história termina).
+- Clima de mistério/suspense leve: nada de sangue, morte mostrada, violência, suicídio, doença real, crime, política,
+  religião, pessoas reais com nome, marcas ou personagens conhecidos. Pode ser estranho e arrepiante, nunca chocante.
+- Frases curtas e faladas, números por extenso, 6 a 9 LINES por parte. Não use "Você vê".
+- `FALA_TIKTOK`: Parte 1 "Quer a parte dois? Comenta parte dois, e segue pra não perder!"; Parte 2 uma pergunta de 1 toque
+  ("Você entendeu o final? Comenta sim ou não, e segue pra mais histórias!"). `CTA_CARD = cta_card`; `CTA_TEXTO` curto.
+- Voz: `VOZ = 'pt-BR-AntonioNeural'; RATE = '+4%'; PITCH = '-6Hz'` (mais grave e calma). `MUSICA = False`.
+
+## Visual (sombrio.py)
+- Personagens: `put_menino(c, x, pés, altura, f, walk=0|1, flip, expr, look, pele, cabelo, penteado, roupa, calca, oculos,
+  barba, velho)`; expr: neutro, preocupado, choque, sorriso; penteado: curto, coque, longo, careca. O narrador ("eu") é
+  sempre o mesmo personagem dentro de uma história (mesmas cores nas 2 partes). Outros personagens no mesmo traço (olhos
+  enormes com olheiras). Bichos/objetos novos com a Pen, contorno escuro, cores lisas.
+- Andar com o cenário passando: `rua(f, scroll=f * 9, luz=..., neb=...)` + `put_menino(..., walk=1)`. Cenários prontos:
+  `rua` (rua com casas e postes), `put_torre` (torre de relógio), e todos os `CEN('nome')` do kit (quarto, sala, cozinha,
+  escola, praia, floresta, espaco...). Desenhe com a Pen o lugar que a história pedir (metrô, ginásio, farol, prédio).
+- CORES CONFORME O CONTEXTO (pedido do Luis): nada de deixar tudo cinza. Escolha a luz de cada cena pelo lugar e pelo
+  clima da frase: dia claro/escola/praia/casa -> `rua(luz='dia', neb=0)` e luz `'vivo'`; fim de tarde/lembrança ->
+  `luz='tarde'` e `'tarde'`; neblina/estranheza -> `luz='neblina'` e `'sombrio'`; noite -> `luz='noite'` e `'sombrio_noite'`;
+  neve/hospital/madrugada fria -> `'frio'`. Uma história pode começar colorida e ir escurecendo conforme o mistério cresce.
+- HUD (no `OVERLAY(im, si, lf)`, coordenadas da saída 1080x1920; converta para RGBA e termine com `grao(...)`):
+  `stamp` (título de carimbo; big=True para "A REGRA"), `card(titulo, sub, x, y, s, alvo)` (cartão com linha até o
+  objeto; use `to_out` do exemplo para achar o objeto na tela), `painel(rotulo, valor, ..., glitch)` (placar digital),
+  `burst('?!')` (onomatopeia), `interrog` (pontos de interrogação). 1 a 2 elementos de HUD por frase, nunca cobrindo rosto
+  nem a legenda (y≈1505), nunca um sobre o outro.
+- Na 1ª cena: carimbo `stamp(im, 'PARTE 1', ...)` ou 'PARTE 2' por ~1,5 s, e o carimbo do lugar ("NA MINHA CIDADE").
+- Legenda: 1 palavra por vez (automática com `instala_legenda()`).
+
 # Formato DESENHO — Curiosidades da IA (desde 05/11/2026)
 
 Desenho animado curto e narrado, feito 100% em código: personagens "feijão" com contorno ameixa

@@ -1,4 +1,4 @@
-"""EXEMPLO do estilo SOMBRIO (pedido do Luis em 20/11/2026, a partir de um vídeo de referência):
+"""EXEMPLO OFICIAL do formato MISTÉRIO (copie para $P/historia.py e reescreva). Estilo SOMBRIO (pedido do Luis em 20/11/2026, a partir de um vídeo de referência):
 mistério em 1ª pessoa ("Na minha cidade..."), cores frias e lavadas, neblina, cartões de informação (HUD),
 carimbos de título, placar digital, onomatopeias, legenda de 1 palavra, voz grave e mais calma, sem música.
 História inventada: o relógio da praça que anda pra trás a cada mentira."""
@@ -22,6 +22,7 @@ LINES = [
 ]
 FALA_TIKTOK = "Quer saber o que eu fiz? Comenta parte dois, e segue pra não perder!"
 CTA_TEXTO = "PARTE 2?"
+CTA_CARD = cta_card
 TWIST = 6
 FLASH = []
 CHECK = [(0, 'relogio', 4), (0, 'mente', 6), (1, 'nasceu', 6), (2, 'regra', 4), (2, 'badaladas', 6), (3, 'tranca', 4),

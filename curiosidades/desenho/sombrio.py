@@ -17,7 +17,10 @@ F_B = GF + 'Poppins-Bold.ttf'; F_R = GF + 'Poppins-Regular.ttf'
 # ------------------------------------------------------------------ cor (grade fria e lavada)
 kit.GRADES['sombrio'] = dict(gain=(.93, .99, .98), lift=(16, 20, 20), sat=.38, vig=.42)
 kit.GRADES['sombrio_noite'] = dict(gain=(.66, .74, .76), lift=(8, 11, 13), sat=.32, vig=.55)
-for _k in ('sombrio', 'sombrio_noite'):
+kit.GRADES['vivo'] = dict(gain=(1.02, 1.01, .99), lift=(4, 4, 4), sat=.92, vig=.22)      # dia claro, interiores, praia
+kit.GRADES['tarde'] = dict(gain=(1.06, .97, .86), lift=(8, 5, 2), sat=.8, vig=.3)        # fim de tarde, memória, calor
+kit.GRADES['frio'] = dict(gain=(.9, .97, 1.06), lift=(6, 9, 14), sat=.6, vig=.32)         # neve, hospital, madrugada
+for _k in ('sombrio', 'sombrio_noite', 'vivo', 'tarde', 'frio'):
     kit._VIG[_k] = (1 - kit.GRADES[_k]['vig'] * kit._Q * 2.2)[..., None].astype(np.float32)
 
 
@@ -53,7 +56,7 @@ def _grao(k):
     rnd = np.random.default_rng(k)
     n = rnd.integers(0, 255, (OH // 3, OW // 3), dtype=np.uint8)
     im = Image.fromarray(n, 'L').resize((OW, OH), Image.NEAREST)
-    a = Image.new('RGBA', (OW, OH), (128, 128, 128, 0)); a.putalpha(im.point(lambda v: int(abs(v - 128) / 128 * 22)))
+    a = Image.new('RGBA', (OW, OH), (128, 128, 128, 0)); a.putalpha(im.point(lambda v: int(abs(v - 128) / 128 * 9)))
     return a
 
 
@@ -147,15 +150,19 @@ def interrog(im, x, y, f, s):
 
 
 # ------------------------------------------------------------------ personagem: menino de olhos grandes
-PELE, PELED = hexc('#e6c8ad'), hexc('#c9a88c')
-JAQ, JAQD = hexc('#7b7863'), hexc('#5e5c4b')
-CALCA = hexc('#2d2f32'); CABELO = hexc('#26241f')
 
 
-def menino(phase=0.0, walk=0.0, expr='neutro', look=0.0, blink=0, tilt=0.0):
-    """menino de frente/3-4, 600x1000, pés em y≈975. walk 0..1 = intensidade da caminhada; phase = fase."""
+def menino(phase=0.0, walk=0.0, expr='neutro', look=0.0, blink=0, tilt=0.0, pele='#e6c8ad', cabelo='#26241f',
+           penteado='curto', roupa='#7b7863', calca='#2d2f32', oculos=False, barba=False, velho=False):
+    """pessoa de olhos grandes (estilo MISTÉRIO), 600x1000, pés em y≈975. walk 0..1 = caminhada; phase = fase.
+    penteado: curto, coque, longo, careca; velho=True põe rugas e cabelo ralo; expr: neutro, preocupado, choque, sorriso."""
+    PELE, PELED = hexc(pele), mul(hexc(pele), .87)
+    JAQ, JAQD = hexc(roupa), mul(hexc(roupa), .77)
+    CALCA, CABELO = hexc(calca), hexc(cabelo)
     p = Pen(600, 1000)
     sw = math.sin(phase) * walk
+    if penteado == 'longo':   # cabelo comprido fica atrás da cabeça
+        p.shape([(150, 250), (140, 590), (230, 560), (370, 560), (460, 590), (450, 250)], CABELO, None, 6, 0)
     # pernas
     for side, sg in ((-1, 1), (1, -1)):
         a = .42 * sw * sg
@@ -181,7 +188,15 @@ def menino(phase=0.0, walk=0.0, expr='neutro', look=0.0, blink=0, tilt=0.0):
     # cabelo
     hair = [(140, 300), (138, 220), (180, 160), (250, 135), (330, 133), (400, 150), (450, 205), (462, 290), (430, 250),
             (400, 225), (370, 245), (345, 215), (310, 240), (280, 212), (250, 240), (220, 215), (185, 250), (160, 270)]
-    p.shape(hair, CABELO, None, 6, 0)
+    if penteado == 'careca':
+        for side in (-1, 1): p.shape(ell_pts(300 + side * 150, 260, 30, 46, 16), CABELO, None, 5, 0)
+    else:
+        p.shape(hair, CABELO, None, 6, 0)
+    if penteado == 'coque': p.shape(ell_pts(300, 128, 62, 50, 24), CABELO, None, 6, 0)
+    if velho:
+        for side in (-1, 1): p.arc(300 + side * 112, 365, 22, 14, 200, 340, 4, PELED)
+    if barba:
+        p.shape([(170, 360), (190, 450), (250, 470), (350, 470), (410, 450), (430, 360), (380, 420), (220, 420)], CABELO, None, 5, 0)
     # olhos grandes com olheiras
     for ex in (238, 362):
         ey = 318
@@ -196,8 +211,13 @@ def menino(phase=0.0, walk=0.0, expr='neutro', look=0.0, blink=0, tilt=0.0):
         p.dot(lx + 9, ey - 9, 7, hexc('#ffffff'))
         if expr == 'preocupado':
             p.stroke([(ex - 40, ey - 70 + (8 if ex < 300 else -8) * 0), (ex + 40, ey - 70 - (10 if ex < 300 else -10))], 7)
+    if oculos:
+        for ex in (238, 362): p.arc(ex, 318, 60, 60, 0, 360, 7)
+        p.stroke([(298, 318), (302, 318)], 7)
     # boca
-    if expr == 'choque':
+    if expr == 'sorriso':
+        p.arc(300, 410, 34, 20, 20, 160, 7)
+    elif expr == 'choque':
         p.shape(ell_pts(300, 418, 24, 30, 20), hexc('#7a2e2e'), None, 5, 0)
     elif expr == 'preocupado':
         p.arc(300, 428, 26, 12, 200, 340, 7)
@@ -222,40 +242,61 @@ def put_menino(c, x, feet, h, f, walk=0.0, seed=2, flip=False, **kw):
 
 
 # ------------------------------------------------------------------ cenário: cidade cinza com neblina
-@lru_cache(maxsize=2)
-def ceu(noite=False):
+PALETAS = {   # céu topo, céu base, sol
+    'dia': ((118, 178, 226), (206, 230, 240), (255, 238, 170)),
+    'tarde': ((236, 156, 110), (250, 214, 160), (255, 230, 170)),
+    'neblina': ((160, 170, 168), (208, 212, 206), (226, 224, 210)),
+    'noite': ((52, 60, 64), (96, 104, 104), None),
+}
+
+
+def _luz(noite):
+    return 'noite' if noite is True else ('neblina' if noite is False else noite)
+
+
+@lru_cache(maxsize=8)
+def ceu(noite='neblina'):
+    noite = _luz(noite)
     a = np.zeros((H_, W_, 3), np.float32)
-    top, bot = (np.array([160, 170, 168]), np.array([208, 212, 206])) if not noite else (np.array([52, 60, 64]), np.array([96, 104, 104]))
+    t0, b0, sol = PALETAS[noite]
+    top, bot = np.array(t0), np.array(b0)
     t = np.linspace(0, 1, H_)[:, None, None]
     a[:] = top * (1 - t) + bot * t
     im = Image.fromarray(a.astype(np.uint8)).convert('RGBA')
     d = ImageDraw.Draw(im)
-    if not noite: d.ellipse((880, 220, 1080, 420), fill=(226, 224, 210, 255))
+    if sol: d.ellipse((880, 220, 1080, 420), fill=sol + (255,))
+    else: d.ellipse((900, 240, 1020, 360), fill=(230, 230, 214, 255))
     return im
 
 
-@lru_cache(maxsize=2)
-def casas_strip(noite=False):
+CASAS = {'dia': ['#f2c6a0', '#a8d0e6', '#f4e1a1', '#c9e2b3', '#e8b4b8'], 'tarde': ['#e9b48a', '#d8a0a0', '#f0cf8e', '#c8b08a'],
+         'neblina': ['#9aa3a1'], 'noite': ['#4c5557']}
+
+
+@lru_cache(maxsize=8)
+def casas_strip(noite='neblina'):
+    noite = _luz(noite); cores = CASAS[noite]; escuro = noite == 'noite'
     W = W_ * 3
     p = Pen(W, 700)
     rnd = random.Random(7)
     x = -40
     while x < W:
         w = rnd.randint(170, 260); hh = rnd.randint(150, 250); base = 560
-        col = hexc('#9aa3a1') if not noite else hexc('#4c5557')
+        col = hexc(rnd.choice(cores))
         p.shape([(x, base), (x, base - hh), (x + w / 2, base - hh - 110), (x + w, base - hh), (x + w, base)], col, mul(col, .85), 5, 10)
         for k in range(2):
             wx = x + 30 + k * (w - 90)
-            lit = (not noite and rnd.random() < .2) or (noite and rnd.random() < .45)
+            lit = (not escuro and rnd.random() < .2) or (escuro and rnd.random() < .45)
             p.poly([(wx, base - hh + 50), (wx + 50, base - hh + 50), (wx + 50, base - hh + 110), (wx, base - hh + 110)],
                    hexc('#f2e6b4') if lit else mul(col, .75))
         x += w + rnd.randint(-10, 30)
-    p.poly([(0, 560), (W, 560), (W, 700), (0, 700)], hexc('#7f8886') if not noite else hexc('#3b4345'))
+    p.poly([(0, 560), (W, 560), (W, 700), (0, 700)], hexc({'dia': '#9fbf8a', 'tarde': '#b9a37a', 'neblina': '#7f8886', 'noite': '#3b4345'}[noite]))
     return p.img.resize((W, 700), Image.LANCZOS)
 
 
-@lru_cache(maxsize=2)
-def postes_strip(noite=False):
+@lru_cache(maxsize=8)
+def postes_strip(noite='neblina'):
+    noite = _luz(noite) == 'noite'
     W = W_ * 3
     p = Pen(W, 1100)
     for x in range(120, W, 560):
@@ -265,10 +306,11 @@ def postes_strip(noite=False):
     return p.img.resize((W, 1100), Image.LANCZOS)
 
 
-@lru_cache(maxsize=2)
-def chao(noite=False):
+@lru_cache(maxsize=8)
+def chao(noite='neblina'):
+    noite = _luz(noite)
     im = Image.new('RGBA', (W_, H_), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
-    rua = (78, 84, 86) if not noite else (40, 44, 46)
+    rua = {'dia': (110, 116, 120), 'tarde': (112, 104, 100), 'neblina': (78, 84, 86), 'noite': (40, 44, 46)}[noite]
     d.rectangle((0, 1560, W_, H_), fill=rua + (255,))
     d.rectangle((0, 1520, W_, 1580), fill=tuple(int(v * 1.35) for v in rua) + (255,))
     d.line((0, 1520, W_, 1520), fill=(36, 30, 38, 255), width=6)
@@ -286,13 +328,16 @@ def neblina_img(dens=1.0):
     return im.filter(ImageFilter.GaussianBlur(18))
 
 
-def rua(f, scroll=0.0, noite=False, neb=1.0):
-    """cidade com rolagem lateral (scroll em px do chão)."""
+def rua(f, scroll=0.0, noite=False, neb=1.0, luz=None):
+    """cidade com rolagem lateral (scroll em px do chão). luz: 'dia', 'tarde', 'neblina' ou 'noite' (conforme a história);
+    neb = densidade da neblina (0 = sem neblina)."""
+    noite = luz or _luz(noite)
     c = ceu(noite).copy()
     cs = casas_strip(noite); off = int(scroll * .35) % W_
     c.alpha_composite(cs.crop((off, 0, off + W_, 700)), (0, 860))
-    nb = neblina_img(neb); o2 = int(f * 1.2 + scroll * .5) % W_
-    c.alpha_composite(nb.crop((o2, 0, o2 + W_, 420)), (0, 1180))
+    if neb > 0:
+        nb = neblina_img(round(neb, 1)); o2 = int(f * 1.2 + scroll * .5) % W_
+        c.alpha_composite(nb.crop((o2, 0, o2 + W_, 420)), (0, 1180))
     c.alpha_composite(chao(noite))
     ps = postes_strip(noite); o3 = int(scroll * .9) % (560 * 2)
     c.alpha_composite(ps.crop((o3, 0, o3 + W_, 1100)), (0, 440))
@@ -302,8 +347,9 @@ def rua(f, scroll=0.0, noite=False, neb=1.0):
 
 
 # ------------------------------------------------------------------ torre do relógio
-@lru_cache(maxsize=2)
+@lru_cache(maxsize=8)
 def torre_img(noite=False):
+    noite = _luz(noite) == 'noite'
     p = Pen(600, 1500)
     col = hexc('#8e9693') if not noite else hexc('#4a5254')
     p.shape([(140, 1500), (140, 380), (460, 380), (460, 1500)], col, mul(col, .82), 7, 18)
@@ -333,3 +379,18 @@ def put_torre(c, x, feet, h, hora, minuto, noite=False):
     im = torre_img(noite).resize((int(h * .4), int(h)), Image.LANCZOS)
     c.alpha_composite(im, (int(x - im.width / 2), int(feet - h)))
     mostrador(c, x, feet - h * .62, h * .095, hora, minuto)
+
+
+def cta_card(im, cl, h):
+    """cartão final do TikTok no estilo MISTÉRIO (use CTA_CARD = cta_card no historia.py)."""
+    im = im.convert('RGBA')
+    s_ = back(ramp(cl, 0, 8))
+    if s_ > .02:
+        c = Image.new('RGBA', (820, 330), (0, 0, 0, 0)); d = ImageDraw.Draw(c)
+        d.rounded_rectangle((6, 6, 814, 324), 30, fill=(30, 34, 37, 240), outline=(150, 158, 160, 255), width=5)
+        f1 = font(F_STAMP, 96); t = getattr(h, 'CTA_TEXTO', 'COMENTA!')
+        tw = d.textlength(t, font=f1); d.text((410 - tw / 2, 40), t, font=f1, fill=(214, 240, 168))
+        f2 = font(F_B, 40); a = getattr(h, 'ARROBA', '@curiosidadesda.iia')
+        tw = d.textlength(a, font=f2); d.text((410 - tw / 2, 220), a, font=f2, fill=(220, 224, 220))
+        kit.paste_c(im, c, OW / 2, 560, s_)
+    return im.convert('RGB')
