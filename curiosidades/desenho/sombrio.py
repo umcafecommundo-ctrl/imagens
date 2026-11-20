@@ -231,10 +231,10 @@ kit.menino = menino
 import art as _art; _art.menino = menino
 
 
-def put_menino(c, x, feet, h, f, walk=0.0, seed=2, flip=False, **kw):
+def put_menino(c, x, feet, h, f, walk=0.0, seed=2, flip=False, dorme=False, **kw):
     if h < 8: return
     ph = round(((f * .28) % (2 * math.pi)) / (2 * math.pi) * 12) / 12 * 2 * math.pi if walk else 0.0
-    kw['blink'] = 1 if blinkAt(f, seed) > .6 else 0
+    kw['blink'] = 1 if (dorme or blinkAt(f, seed) > .6) else 0
     kw['look'] = round(kw.get('look', 0) * 4) / 4
     im = kit.sprite('menino', tuple(sorted(dict(kw, phase=round(ph, 3), walk=walk).items())), int(h), .6, flip)
     bob = (abs(math.sin(f * .28)) * .018 * h * walk) + .005 * math.sin(f * .11) * h
@@ -394,3 +394,119 @@ def cta_card(im, cl, h):
         tw = d.textlength(a, font=f2); d.text((410 - tw / 2, 220), a, font=f2, fill=(220, 224, 220))
         kit.paste_c(im, c, OW / 2, 560, s_)
     return im.convert('RGB')
+
+
+# ------------------------------------------------------------------ praia e quarto no traço MISTÉRIO (cores pela luz)
+MAR = {'dia': ('#4aa3c9', '#2f7fa6'), 'tarde': ('#5d8fb0', '#3f6f8f'), 'neblina': ('#7f9a9e', '#62797d'),
+       'noite': ('#2c3d4a', '#1e2c36'), 'frio': ('#7fa9c4', '#5c86a3')}
+AREIA = {'dia': '#ecd6a4', 'tarde': '#e3c08c', 'neblina': '#b9b39e', 'noite': '#6b6658', 'frio': '#d9d4c4'}
+
+
+@lru_cache(maxsize=8)
+def praia_bg(luz='dia'):
+    """praia sem guarda-sol: céu pela luz, mar com 2 tons, areia, pedras; mar em y 980..1300, areia de 1300 para baixo."""
+    c = ceu('neblina' if luz == 'frio' else luz).copy()
+    p = Pen(W_, H_)
+    m1, m2 = MAR[luz]
+    p.poly([(0, 980), (W_, 980), (W_, 1320), (0, 1320)], hexc(m1))
+    p.poly([(0, 980), (W_, 980), (W_, 1060), (0, 1060)], hexc(m2))
+    sand = [(0, 1300)] + [(x, 1300 + 18 * math.sin(x / 90)) for x in range(0, W_ + 1, 40)] + [(W_, H_), (0, H_)]
+    p.shape(sand, hexc(AREIA[luz]), mul(hexc(AREIA[luz]), .88), 6, 14)
+    rnd = random.Random(5)
+    for i in range(5):
+        x, y = rnd.randint(40, 1200), rnd.randint(1700, 2150)
+        p.shape(ell_pts(x, y, rnd.randint(40, 80), rnd.randint(22, 40), 20), mul(hexc(AREIA[luz]), .7), None, 5, 0)
+    for i in range(40):
+        x, y = rnd.randint(0, W_), rnd.randint(1380, 2200)
+        p.dot(x, y, 4, mul(hexc(AREIA[luz]), .78))
+    c.alpha_composite(p.img.resize((W_, H_), Image.LANCZOS))
+    if luz == 'frio':
+        f = Image.new('RGBA', (W_, H_), (200, 215, 230, 60)); c.alpha_composite(f)
+    return c
+
+
+def espuma(c, f, luz='dia'):
+    """ondas chegando na areia (anima com f)."""
+    d = ImageDraw.Draw(c)
+    for k in range(3):
+        t = ((f * .012 + k / 3) % 1)
+        y = 1080 + t * 230
+        a = int(220 * (1 - t))
+        pts = [(x, y + 10 * math.sin(x / 70 + f * .05 + k)) for x in range(-20, W_ + 40, 30)]
+        d.line(pts, fill=(245, 250, 250, a), width=8)
+
+
+@lru_cache(maxsize=8)
+def quarto_bg(luz='dia'):
+    """quarto: parede pela luz, janela para o mar (céu pela luz), cama e escrivaninha. chão em y 1560."""
+    paredes = {'dia': '#e8dcc4', 'tarde': '#e2c7a6', 'neblina': '#b9bcb4', 'noite': '#4d5560', 'frio': '#c9d3d8'}
+    p = Pen(W_, H_)
+    w = hexc(paredes[luz])
+    p.poly([(0, 0), (W_, 0), (W_, H_), (0, H_)], w)
+    for x in range(0, W_, 120): p.stroke([(x, 0), (x, 1560)], 3, mul(w, .94))
+    p.poly([(0, 1560), (W_, 1560), (W_, H_), (0, H_)], mul(hexc('#a8835c'), .6 if luz == 'noite' else 1))
+    for y in range(1620, H_, 110): p.stroke([(0, y), (W_, y)], 3, mul(hexc('#a8835c'), .75))
+    p.stroke([(0, 1560), (W_, 1560)], 7)
+    # janela (moldura)
+    p.shape([(700, 360), (1140, 360), (1140, 900), (700, 900)], hexc('#f4f1ea'), hexc('#d6d1c6'), 7, 8)
+    base = p.img.resize((W_, H_), Image.LANCZOS)
+    # céu e mar pela janela
+    sky = ceu('neblina' if luz == 'frio' else luz).crop((300, 300, 300 + 400, 300 + 500)).resize((400, 500))
+    win = Image.new('RGBA', (400, 500)); win.alpha_composite(sky)
+    d = ImageDraw.Draw(win); m1, m2 = MAR[luz]
+    d.rectangle((0, 330, 400, 500), fill=hexc(m1) + (255,)); d.rectangle((0, 330, 400, 360), fill=hexc(m2) + (255,))
+    base.alpha_composite(win, (720, 380))
+    d = ImageDraw.Draw(base)
+    d.line((920, 380, 920, 880), fill=(244, 241, 234, 255), width=16); d.line((720, 630, 1120, 630), fill=(244, 241, 234, 255), width=16)
+    d.rectangle((720, 380, 1120, 880), outline=(36, 30, 32, 255), width=7)
+    # cama à esquerda e escrivaninha à direita
+    p2 = Pen(W_, H_)
+    p2.shape([(40, 1300), (520, 1300), (520, 1620), (40, 1620)], hexc('#6f8fb5') if luz != 'noite' else hexc('#3e5270'), None, 7, 12)
+    p2.shape([(40, 1180), (90, 1180), (90, 1660), (40, 1660)], hexc('#8a5a32'), None, 6, 0)
+    p2.shape([(110, 1250), (260, 1250), (260, 1310), (110, 1310)], hexc('#f4f1ea'), None, 6, 0)
+    p2.shape([(760, 1220), (1200, 1220), (1200, 1260), (760, 1260)], hexc('#9a6a40'), hexc('#6f4a2a'), 6, 6)
+    for x in (780, 1160): p2.shape([(x, 1260), (x + 26, 1260), (x + 26, 1560), (x, 1560)], hexc('#7a5230'), None, 5, 0)
+    base.alpha_composite(p2.img.resize((W_, H_), Image.LANCZOS))
+    return base
+
+
+@lru_cache(maxsize=8)
+def garrafa_img(h, rolha=True, bilhete=True):
+    p = Pen(200, 520)
+    p.shape([(70, 40), (130, 40), (132, 160), (175, 230), (178, 500), (22, 500), (25, 230), (68, 160)],
+            hexc('#bfe3d4'), hexc('#8fc2ad'), 6, 14)
+    if rolha: p.shape([(72, 10), (128, 10), (126, 60), (74, 60)], hexc('#b8865a'), None, 5, 0)
+    if bilhete: p.shape([(60, 260), (140, 250), (145, 420), (65, 430)], hexc('#f6efd9'), None, 4, 0)
+    p.stroke([(55, 250), (55, 470)], 8, hexc('#e8f6f0'))
+    return p.img.resize((max(4, int(h * 200 / 520)), max(4, h)), Image.LANCZOS)
+
+
+def put_garrafa(c, x, y, h, rot=0, **kw):
+    if h < 8: return
+    im = garrafa_img(int(h // 4 * 4), **kw)
+    if rot: im = im.rotate(rot, Image.BICUBIC, expand=True)
+    c.alpha_composite(im, (int(x - im.width / 2), int(y - im.height / 2)))
+
+
+F_MAO = GF + 'ofl/comicrelief/ComicRelief-Bold.ttf'
+
+
+@lru_cache(maxsize=32)
+def bilhete_img(texto, w=520):
+    """papel com texto escrito à mão ('|' quebra linha)."""
+    linhas = texto.split('|')
+    f = font(F_MAO, 46)
+    h = 120 + 64 * len(linhas)
+    im = Image.new('RGBA', (w + 20, h + 20), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
+    d.rectangle((14, 14, w + 14, h + 14), fill=(0, 0, 0, 70))
+    d.polygon([(4, 8), (w, 2), (w + 6, h), (8, h + 4)], fill=(246, 239, 217, 255), outline=(36, 30, 32, 255))
+    d.line([(4, 8), (w, 2), (w + 6, h), (8, h + 4), (4, 8)], fill=(36, 30, 32, 255), width=5)
+    for i, l in enumerate(linhas):
+        tw = d.textlength(l, font=f)
+        d.text(((w - tw) / 2, 60 + 64 * i), l, font=f, fill=(52, 58, 92))
+    return im
+
+
+def mao_dir(x, feet, h):
+    """posição da mão direita (braço caído) da pessoa de put_menino."""
+    return x + .13 * h, feet - .26 * h
