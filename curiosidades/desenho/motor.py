@@ -45,7 +45,7 @@ def narrar(pasta):
     linhas = list(h.LINES) + [getattr(h, 'FALA_TIKTOK', 'Você sabia dessa? Comenta aqui, e segue pra mais curiosidades!')]
 
     async def one(i, text):
-        c = edge_tts.Communicate(text, getattr(h, 'VOZ', VOZ), rate=getattr(h, 'RATE', RATE), proxy=proxy, boundary='WordBoundary')
+        c = edge_tts.Communicate(text, getattr(h, 'VOZ', VOZ), rate=getattr(h, 'RATE', RATE), pitch=getattr(h, 'PITCH', '+0Hz'), proxy=proxy, boundary='WordBoundary')
         words = []
         mp3 = os.path.join(pasta, 'voz', f'l{i}.mp3')
         with open(mp3, 'wb') as f:
