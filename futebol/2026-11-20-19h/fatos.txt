@@ -1,0 +1,13 @@
+# Fatos usados (RAIO-X EP. 1 — final da Sul-Americana 2026). Fontes: C=CNN Brasil 20/11, T=Terra 20/11, L=Lance! 20/11, M=Metrópoles 18/11, TP=Tribuna Popular 20/11 (Conmebol/Opta)
+Final da Sul-Americana: Atlético-MG x Boca Juniors, sábado 21/11/2026, 19h30 de Brasília | C, T, L, M, TP (o slot dizia 20h: corrigido para 19h30)
+Local: Estádio Metropolitano Roberto Meléndez, Barranquilla, Colômbia | C, T, L, TP
+Final em jogo único (campo neutro) | TP + C/T/L (jogo único em Barranquilla)
+Atlético-MG: 7 jogos sem vencer (5 derrotas, 2 empates) | C, T, L
+Boca Juniors: 2 títulos da Sul-Americana (2004 e 2005) | C, T, L, TP
+Atlético-MG nunca ganhou a Sul-Americana; vice em 2025 | C, T, TP
+Final de 2025 perdida para o Lanús nos pênaltis | TP + soccerway (final Lanús x Atlético-MG) e registro conhecido (0x0, pênaltis em Assunção)
+Alan Franco fora da final (suspenso, expulso na volta da semi contra o Montevideo City) | M, T
+Confronto direto: 8 jogos, Boca 3 vitórias, 4 empates, Atlético 1 vitória | T, TP
+Técnico do Atlético: Eduardo Domínguez | M, T, L
+Galo eliminou Bragantino, Santos e Montevideo City no mata-mata | C, T, L
+NÃO USADO (1 fonte só): prêmio US$ 10 milhões, Bernard 8 gols, técnico do Boca, árbitro, desfalques do Boca.
