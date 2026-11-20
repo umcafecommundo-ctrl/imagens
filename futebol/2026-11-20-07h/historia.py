@@ -197,7 +197,7 @@ def OVERLAY(im, si, lf):
     D = {0: ('INTER NO Z4', 'FALTAM 3 RODADAS', wt(0, 'rebaixamento') + 6),
          1: ('QUINTA, 19/11, 19H30', 'BRIGA CONTRA A QUEDA', wt(1, 'horario') + 4),
          2: ('VASCO 1 x 1 INTER', 'SÃO JANUÁRIO', wt(2, 'Inter') + 4),
-         3: ('VASCO 2 x 1 INTER', 'VIRADA NO 2º TEMPO', wt(3, 'um') + 4),
+         3: ('VASCO 2 x 1 INTER', 'COLIDIO NO 2º TEMPO', wt(3, 'um') + 4),
          4: ('VITÓRIA 2 x 0 BRAGANTINO', 'ESTREIA DE RAFAEL LACERDA', wt(4, 'Rene') + 8),
          5: ('VITÓRIA 2 x 1 BRAGANTINO', 'FIM DE 5 JOGOS SEM VENCER', wt(5, 'jogos') + 2),
          6: ('', '', 4), 7: ('', '', 4)}
