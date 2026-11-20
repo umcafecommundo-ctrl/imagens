@@ -108,7 +108,7 @@ Pasta `P=futebol/<AAAA-MM-DD>-<HHhMM>` (ex.: futebol/2026-11-21-18h50). Copie `f
 - Gol LONGE, atrás dos jogadores (put_gol2 + put_goleiro; mire a bola em (gx + 90, gy)); bola proporcional (r = raio_bola(altura);
   diminui até raio_bola(300) indo para o gol). Quem chuta fica na frente (pés y≈1950-2030, altura ~820-880).
 - CARTÃO FINAL pronto (CTA_CARD de futebol.py, pergunta CTA_TEXTO + "SIGA PARA MAIS"); ARROBA = ''. Não reescreva nem desative.
-- Voz pt-BR-AntonioNeural; SELO = '<COMPETIÇÃO>  ·  <FASE/RODADA>'; SELO_CORES = ((22, 92, 52), (255, 255, 255)).
+- SEM MÚSICA (MUSICA = False) e com som de estádio (veja item 6). Voz pt-BR-AntonioNeural; SELO = '<COMPETIÇÃO>  ·  <FASE/RODADA>'; SELO_CORES = ((22, 92, 52), (255, 255, 255)).
 
 **1) VÍDEO CURTO: história de 20 a 30 s** (o motor imprime a duração em `narrar`; passou de 30 s, corte frases e narre de novo).
    LINES = 4 a 6 frases, 1 por cena, cada frase com NO MÁXIMO ~14 palavras. Números por extenso nas LINES, algarismos na CAPTXT.
@@ -137,6 +137,16 @@ Pasta `P=futebol/<AAAA-MM-DD>-<HHhMM>` (ex.: futebol/2026-11-21-18h50). Copie `f
 **6) VOZ E RITMO**: RATE '+15%'; frases curtas; ponha o número no FIM da frase depois de vírgula ou "...", para dar uma pausa antes
    dele ("E o placar final... dois a um."). Um som de impacto (`s.thunk`) em CADA número, gol e virada de cena, e `s.ting` na resposta
    da pergunta. Corte seco entre cenas (o whoosh é automático).
+
+**SEM MÚSICA DE FUNDO, SOM DE ESTÁDIO (pedido do Luis em 20/11/2026)**: todo historia.py tem `MUSICA = False`. O clima vem dos
+   sons ambientes do motor, chamados em `SFX(s)`:
+   - `s.torcida(quadro_ini, quadro_fim)` — murmúrio de torcida de fundo (fica bem abaixo da voz; nível em `AMBIENTE_NIVEL`, padrão .11).
+     Use em TODAS as cenas de estádio/telão (ex.: `s.torcida(0, s.cut(3))`); nas cenas de prancheta, coletiva, vestiário e estúdio,
+     deixe sem torcida (o contraste ajuda) ou só uma torcida bem baixa (g=.4) vinda "de longe".
+   - gol: `s.chute(s.W(cena, 'palavra') - 3)` no chute, `s.rede(...)` quando a bola entra e `s.rugido(...)` logo depois (a torcida explode);
+   - `s.apito(quadro)` no início do lance/jogo e `s.apito(quadro, longo=True)` no fim do jogo/resultado;
+   - continue com `s.thunk` nos números e `s.ting` na resposta da pergunta. Nada de música, nem trecho de música real.
+   Exemplo de SFX completo: `futebol/2026-11-20-07h/historia.py` (versão com som de estádio).
 
 Depois: `python3 curiosidades/desenho/motor.py narrar $P` (erro de certificado: `SSL_CERT_FILE=~/.ccr/ca-bundle.crt` antes do
 comando; NoAudioReceived: espere 5 s e tente até 3 vezes) -> confira a duração (20-30 s) -> `motor.py stills $P` e abra

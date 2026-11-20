@@ -14,6 +14,7 @@ VOZ = 'pt-BR-AntonioNeural'; RATE = '+12%'
 ARROBA = ''
 SELO = 'BRASILEIRÃO  ·  35ª RODADA'
 SELO_CORES = ((22, 92, 52), (255, 255, 255))
+MUSICA = False
 
 LINES = [
     "O Internacional perdeu e terminou a rodada dentro da zona de rebaixamento.",
@@ -207,6 +208,12 @@ def OVERLAY(im, si, lf):
 
 
 def SFX(s):
+    s.torcida(0, s.cut(6), 1.0)                     # estádio do começo até a tabela
+    s.torcida(s.cut(7), s.cut(7) + 200, 1.0)
+    s.chute(s.W(2, 'Mendes') - 3); s.rede(s.W(2, 'Mendes') + 6); s.rugido(s.W(2, 'Mendes') + 7, 2.2, .7)
+    s.chute(s.W(3, 'Colidio') - 3); s.rede(s.W(3, 'Colidio') + 6); s.rugido(s.W(3, 'Colidio') + 7)
+    s.chute(s.W(4, 'Britez') - 3); s.rede(s.W(4, 'Britez') + 6); s.rugido(s.W(4, 'Britez') + 7, 2.2, .7)
+    s.apito(s.W(5, 'venceu') - 4, longo=True)
     s.thunk(s.W(0, 'perdeu') - 3, 150, .9)
     s.thunk(s.W(0, 'rebaixamento') - 3, 110, .9)
     s.thunk(s.W(1, 'noite') - 3, 160, .6)

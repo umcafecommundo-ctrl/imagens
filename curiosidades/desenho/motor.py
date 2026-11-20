@@ -193,7 +193,7 @@ def build_audio(h, SC, total, cta_len, with_cta, pasta):
     N = int((total + (cta_len if with_cta else 0)) / FPS * SR) + 1
     rng = np.random.default_rng(1)
     fr = lambda f: int(f / FPS * SR)
-    music = np.zeros(N); sfx = np.zeros(N); voice = np.zeros(N)
+    music = np.zeros(N); sfx = np.zeros(N); voice = np.zeros(N); amb = np.zeros(N)
 
     def add(buf, sig, start):
         s = max(0, start); e = min(len(buf), start + len(sig))
@@ -261,6 +261,51 @@ def build_audio(h, SC, total, cta_len, with_cta, pasta):
         def splash(at, g=.5):
             n = int(.6 * SR); add(sfx, lp(rng.standard_normal(n), 3) * env(n, .005, .18) * g, fr(at))
 
+        # ---- sons de estádio (anima.futebol, 20/11/2026): torcida de fundo, rugido, apito, chute, rede
+        @staticmethod
+        def _ma(x, k):
+            c = np.cumsum(np.concatenate([[0.0], x])); y = (c[k:] - c[:-k]) / k
+            return np.concatenate([y, np.zeros(len(x) - len(y))])
+        @staticmethod
+        def _povo(n, brilho=1.0):
+            x = rng.standard_normal(n)
+            band = S._ma(x, max(4, int(22 / brilho))) - S._ma(x, 380)     # ~130 Hz a ~1,5 kHz (murmúrio abafado de multidão)
+            tt = np.arange(n) / SR
+            mod = 1 + .25 * np.sin(2 * np.pi * .23 * tt + 1) + .15 * np.sin(2 * np.pi * .61 * tt)
+            ch = S._ma(np.abs(rng.standard_normal(n)) ** 3, int(.12 * SR)); ch = ch / (ch.max() + 1e-9)   # gritos soltos
+            return band * mod * (1 + 1.2 * ch)
+        @staticmethod
+        def torcida(a, b_, g=1.0):
+            """murmúrio contínuo de torcida (fundo) entre os quadros a e b_ (vai para a trilha ambiente)."""
+            n = fr(b_) - fr(a)
+            if n <= 0: return
+            tt = np.arange(n) / SR; fade = np.minimum(1, np.minimum(tt / .4, (n / SR - tt) / .4))
+            add(amb, S._povo(n) * fade * g, fr(a))
+        @staticmethod
+        def rugido(at, dur=2.6, g=.9):
+            """a torcida explode (gol, título, defesa): sobe rápido e cai devagar."""
+            n = int(dur * SR); tt = np.arange(n) / SR
+            e = np.minimum(1, tt / .18) * np.exp(-np.maximum(0, tt - .5) / .9)
+            add(sfx, S._povo(n, 1.6) * e * g * 2.2, fr(at) - int(.05 * SR))
+        @staticmethod
+        def apito(at, longo=False, g=.35):
+            """apito do árbitro (curto) ou o apito final (longo=True: 2 curtos + 1 longo)."""
+            parts = [(0, .18), (.28, .18), (.56, .9)] if longo else [(0, .32)]
+            for t0, d in parts:
+                n = int(d * SR); tt = np.arange(n) / SR
+                w = np.sin(2 * np.pi * (2850 + 60 * np.sin(2 * np.pi * 34 * tt)) * tt) * (.7 + .3 * (np.sin(2 * np.pi * 34 * tt) > 0))
+                add(sfx, w * np.minimum(1, np.minimum(tt / .01, (d - tt) / .04)) * g, fr(at) + int(t0 * SR))
+        @staticmethod
+        def chute(at, g=.8):
+            """chute na bola: pancada grave + estalo do couro."""
+            n = int(.16 * SR); tt = np.arange(n) / SR
+            add(sfx, (np.sin(2 * np.pi * (95 * np.exp(-tt * 14)) * tt) * env(n, .001, .05) + lp(rng.standard_normal(n), 2) * env(n, .0005, .008) * .9) * g, fr(at))
+        @staticmethod
+        def rede(at, g=.5):
+            """bola estufando a rede (chiado curto)."""
+            n = int(.45 * SR); x = rng.standard_normal(n); x = S._ma(x, 8) - S._ma(x, 120)
+            add(sfx, x * env(n, .01, .12) * g * 2.5, fr(at))
+
     for si in range(1, len(SC)): S.whoosh(SC[si][0], .5, .45)
     if hasattr(h, 'SFX'): h.SFX(S)
     n = int(2.2 * SR); tt = np.arange(n) / SR  # sting na virada
@@ -281,8 +326,9 @@ def build_audio(h, SC, total, cta_len, with_cta, pasta):
     vg = gated(voice)
     if not getattr(h, 'MUSICA', True): music[:] = 0   # MUSICA = False na historia.py: só voz + efeitos/sons ambientes
     music *= .18 * vg / gated(music); sfx *= .25 * vg / gated(sfx)
+    if np.abs(amb).max() > 0: amb *= getattr(h, 'AMBIENTE_NIVEL', .11) * vg / gated(amb)   # torcida de fundo bem abaixo da voz
     lim = .45 * np.abs(voice).max(); sfx = np.clip(sfx, -lim, lim)
-    mix = voice + music + sfx; mix *= .5 / np.abs(mix).max()
+    mix = voice + music + sfx + amb; mix *= .5 / np.abs(mix).max()
     raw = os.path.join(pasta, 'scenes', 'mix_raw.wav')
     with wave.open(raw, 'wb') as w:
         w.setnchannels(1); w.setsampwidth(2); w.setframerate(SR); w.writeframes((mix * 32767).astype(np.int16).tobytes())
