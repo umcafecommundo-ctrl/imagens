@@ -42,6 +42,12 @@ Exemplo oficial completo: `exemplos/misterio/historia.py` (copie e reescreva). K
   nem a legenda (y≈1505), nunca um sobre o outro.
 - Na 1ª cena: carimbo `stamp(im, 'PARTE 1', ...)` ou 'PARTE 2' por ~1,5 s, e o carimbo do lugar ("NA MINHA CIDADE").
 - Legenda: 1 palavra por vez (automática com `instala_legenda()`).
+- CLOSE NO ROSTO (pedido do Luis em 20/11/2026, OBRIGATÓRIO): toda parte tem PELO MENOS 2 closes no rosto do narrador
+  (ou de quem reage): um no momento de susto/descoberta e um na última cena (o gancho final). Use
+  `c = put_close(c, f, expr=..., look=..., escurece=0..1, shake=0..1, suor=0|1, **CORES_DO_PERSONAGEM)` depois de desenhar
+  a cena (ele borra o cenário e põe o rosto grande no centro) e câmera `(621, 1104, ~1.05-1.3, 0)`. expr do close: neutro,
+  preocupado, choque, medo, sorriso, desconfiado. `look=0` = olhando pra câmera (bom no fim). Entre no close de repente na
+  palavra forte (com kick) ou com zoom rápido; o HUD no close fica no alto (y≈230-300), nunca em cima do rosto.
 
 # Formato DESENHO — Curiosidades da IA (desde 05/11/2026)
 

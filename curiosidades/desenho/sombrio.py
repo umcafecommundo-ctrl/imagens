@@ -510,3 +510,116 @@ def bilhete_img(texto, w=520):
 def mao_dir(x, feet, h):
     """posição da mão direita (braço caído) da pessoa de put_menino."""
     return x + .13 * h, feet - .26 * h
+
+
+# ------------------------------------------------------------------ CLOSE no rosto (pedido do Luis em 20/11/2026)
+def rosto(expr='neutro', look=0.0, blink=0, pele='#e6c8ad', cabelo='#26241f', penteado='curto', roupa='#7b7863',
+          oculos=False, barba=False, velho=False, suor=0, tremor=0, calca=None):
+    """rosto em close (1000x1700): cabeça grande + ombros até embaixo. expr: neutro, preocupado, choque, sorriso, medo, desconfiado."""
+    K = 2.6
+    def T(x, y): return (500 + (x - 300) * K, 560 + (y - 300) * K)
+    def TP(pts): return [T(x, y) for x, y in pts]
+    PELE, PELED = hexc(pele), mul(hexc(pele), .87)
+    JAQ, JAQD = hexc(roupa), mul(hexc(roupa), .77)
+    CAB = hexc(cabelo)
+    p = Pen(1000, 1700)
+    if penteado == 'longo':
+        p.shape(TP([(150, 250), (130, 640), (230, 600), (370, 600), (470, 640), (450, 250)]), CAB, None, 8, 0)
+    # ombros e pescoço
+    p.shape([(40, 1675), (90, 1120), (300, 1000), (700, 1000), (910, 1120), (960, 1675)], JAQ, JAQD, 9, 12)
+    p.poly([(36, 1660), (964, 1660), (964, 1700), (36, 1700)], JAQ)
+    p.shape([(400, 900), (600, 900), (590, 1040), (410, 1040)], PELED, None, 8, 0)
+    p.shape([(360, 1000), (640, 1000), (600, 1070), (400, 1070)], JAQD, None, 8, 0)
+    # cabeça
+    p.shape([T(x, y) for x, y in ell_pts(300, 300, 165, 158, 60)], PELE, PELED, 9, 22)
+    for side in (-1, 1): p.shape([T(x, y) for x, y in ell_pts(300 + side * 162, 325, 26, 34, 20)], PELE, PELED, 7, 6)
+    hair = [(140, 300), (138, 220), (180, 160), (250, 135), (330, 133), (400, 150), (450, 205), (462, 290), (430, 250),
+            (400, 225), (370, 245), (345, 215), (310, 240), (280, 212), (250, 240), (220, 215), (185, 250), (160, 270)]
+    if penteado == 'careca':
+        for side in (-1, 1): p.shape([T(x, y) for x, y in ell_pts(300 + side * 150, 260, 30, 46, 16)], CAB, None, 7, 0)
+    else:
+        p.shape(TP(hair), CAB, None, 8, 0)
+    if penteado == 'coque': p.shape([T(x, y) for x, y in ell_pts(300, 128, 62, 50, 24)], CAB, None, 8, 0)
+    if barba:
+        p.shape(TP([(170, 360), (190, 450), (250, 470), (350, 470), (410, 450), (430, 360), (380, 420), (220, 420)]), CAB, None, 7, 0)
+    # bochechas
+    if expr in ('sorriso', 'medo'):
+        for ex in (215, 385): p.dot(*T(ex, 385), 34, hexc('#f0a3a0'))
+    # olhos
+    for i, ex in enumerate((238, 362)):
+        ey = 318
+        cx, cy = T(ex, ey)
+        p.arc(*T(ex, ey + 42), 46 * K, 18 * K, 20, 160, 14, hexc('#8b7d84'))
+        if blink:
+            p.stroke([T(ex - 44, ey), T(ex + 44, ey)], 12)
+        else:
+            r = (56 if expr in ('choque', 'medo') else 50) * K
+            if expr == 'desconfiado': r = 46 * K
+            p.dot(cx, cy, r, hexc('#f4f4f0'), 10)
+            lx = cx + look * 30 + (math.sin(tremor * 7 + i) * 6 if tremor else 0)
+            iris = 33 * K * (.8 if expr in ('choque', 'medo') else 1)
+            p.dot(lx, cy + 4, iris, hexc('#93a2a3'), 6)
+            p.dot(lx, cy + 4, iris * .82, hexc('#7f9091'))
+            pup = (8 if expr in ('choque', 'medo') else 17) * K
+            p.dot(lx, cy + 4, pup, hexc('#111214'))
+            p.dot(lx + 24, cy - 26, 20, hexc('#ffffff')); p.dot(lx - 20, cy + 22, 9, hexc('#ffffff'))
+            if expr == 'desconfiado':
+                p.poly([(cx - r - 10, cy - r - 10), (cx + r + 10, cy - r - 10), (cx + r + 10, cy - r * .25), (cx - r - 10, cy - r * .25)], PELE)
+                p.stroke([(cx - r, cy - r * .25), (cx + r, cy - r * .25)], 10)
+        # sobrancelhas
+        sg = -1 if i == 0 else 1
+        bx, by = T(ex, 266)
+        if expr in ('preocupado', 'medo'):
+            p.stroke([(bx - 70, by + sg * -14 + 10), (bx + 70, by - sg * -14 + 10)], 14, CAB)
+            p.stroke([(bx - 70 * sg, by + 20), (bx + 70 * sg, by - 16)], 14, CAB) if False else None
+        elif expr == 'choque':
+            p.arc(bx, by - 10, 70, 26, 200, 340, 14, CAB)
+        elif expr in ('desconfiado',):
+            p.stroke([(bx - 70, by + (20 if i == 0 else -6)), (bx + 70, by + (-6 if i == 0 else 20))], 14, CAB)
+        else:
+            p.arc(bx, by, 66, 16, 200, 340, 12, CAB)
+    if oculos:
+        for ex in (238, 362): p.arc(*T(ex, 318), 60 * K, 60 * K, 0, 360, 12)
+    # boca
+    mx, my = T(300, 420)
+    if expr == 'sorriso':
+        p.shape([(mx - 80, my - 10), (mx + 80, my - 10), (mx + 50, my + 50), (mx - 50, my + 50)], hexc('#7a2e2e'), None, 8, 0)
+        p.poly([(mx - 70, my - 6), (mx + 70, my - 6), (mx + 60, my + 12), (mx - 60, my + 12)], hexc('#ffffff'))
+    elif expr in ('choque', 'medo'):
+        p.shape([T(x, y) for x, y in ell_pts(300, 425, 22, 30 if expr == 'choque' else 18, 24)], hexc('#7a2e2e'), None, 8, 0)
+    elif expr == 'preocupado':
+        p.arc(mx, my + 14, 50, 20, 200, 340, 11)
+    elif expr == 'desconfiado':
+        p.stroke([(mx - 40, my + 6), (mx + 50, my - 6)], 11)
+    else:
+        p.stroke([(mx - 40, my), (mx + 40, my)], 11)
+    if suor:
+        sx, sy = T(440, 210)
+        p.shape([(sx, sy - 40), (sx + 24, sy + 10), (sx, sy + 34), (sx - 24, sy + 10)], hexc('#bfe3f5'), None, 6, 0)
+    return p.img.resize((1000, 1700), Image.LANCZOS)
+
+
+kit.rosto = rosto
+_art.rosto = rosto
+
+
+@lru_cache(maxsize=16)
+def _fundo_borrado(key, im_bytes_id):
+    return None
+
+
+def put_close(c, f, expr='neutro', look=0.0, seed=2, s=1.0, fundo_blur=14, escurece=0.0, shake=0.0, **kw):
+    """CLOSE no rosto: borra o cenário (c) e desenha o rosto grande no centro, com leve respiração e tremida.
+    s = escala (1 = rosto ocupa ~80% da largura). escurece 0..1 escurece o fundo (suspense). Mantenha as cores do personagem (**kw)."""
+    if s <= .02: return c
+    bg = c.filter(ImageFilter.GaussianBlur(fundo_blur)) if fundo_blur else c.copy()
+    if escurece > 0:
+        bg.alpha_composite(Image.new('RGBA', bg.size, (10, 12, 14, int(150 * escurece))))
+    kw['blink'] = 1 if blinkAt(f, seed) > .6 and expr not in ('choque', 'medo') else 0
+    q = dict(kw); q['look'] = round(look * 4) / 4
+    q['tremor'] = round(f / 3) if shake > 0 else 0
+    im = kit.sprite('rosto', tuple(sorted(dict(q, expr=expr).items())), int(1700 * s), 1000 / 1700, False)
+    bob = 6 * math.sin(f * .11)
+    sx = shake * 8 * math.sin(f * 2.3)
+    bg.alpha_composite(im, (int(621 - im.width / 2 + sx), int(1040 - 560 * s + bob)))
+    return bg

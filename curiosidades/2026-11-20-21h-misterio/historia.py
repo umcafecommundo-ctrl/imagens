@@ -147,7 +147,11 @@ def s6(f):
     le = wt(6, 'letra') - 3
     mesa_coisas(c)
     menina(c, 400, f, expr='choque' if f >= le else 'preocupado', look=.75)
-    cam = (700, 1200 + kick(f, le, .8) * 12, 1.12 * (1 + .0008 * f), 0); CAM[6] = cam
+    if f >= le:   # CLOSE no rosto
+        c = put_close(c, f, expr='medo', look=0, suor=1, shake=.4, **EU)
+        cam = (621, 1104 + kick(f, le, .8) * 12, lerp(1.25, 1.05, easeOut(ramp(f, le, le + 10))) * (1 + .0008 * f), 0); CAM[6] = cam
+        return c, cam, 'frio'
+    cam = (700, 1200, 1.12 * (1 + .0008 * f), 0); CAM[6] = cam
     return c, cam, 'frio'
 
 
@@ -167,6 +171,11 @@ def s8(f):
     mesa_coisas(c)
     put_garrafa(c, 960, 1130, 190)
     menina(c, 450, f, expr='sorriso' if f >= no else 'neutro', look=0 if f >= no else .75)
+    se = wt(8, 'seu') - 3
+    if f >= se:   # CLOSE final olhando pra câmera
+        c = put_close(c, f, expr='sorriso', look=0, escurece=.45, **EU)
+        cam = (621, 1104, lerp(1.3, 1.08, easeOut(ramp(f, se, se + 12))) * (1 + .0012 * (f - se)), 0); CAM[8] = cam
+        return c, cam, 'sombrio_noite'
     t = smooth(ramp(f, 0, 110))
     cam = (lerp(700, 480, t), lerp(1200, 1020, t), lerp(1.08, 1.6, t), 0); CAM[8] = cam
     return c, cam, 'sombrio_noite'
@@ -205,8 +214,9 @@ def OVERLAY(im, si, lf):
         card(im, 'Escrivaninha', 'rolhas, papel e garrafa vazia', 600, 420, ramp(f, es, es + 10))
     elif si == 6:
         rs = wt(6, 'rascunho') - 3; le = wt(6, 'letra') - 3
-        kit.paste_c(im, bilhete_img('NÃO VEM À PRAIA|AMANHÃ.', 560).rotate(4, Image.BICUBIC, expand=True), 560, 400, back(ramp(f, rs, rs + 10)))
-        burst(im, 'MINHA LETRA!', 800, 780, back(ramp(f, le, le + 8)), 48, rot=6)
+        cl = f >= le
+        kit.paste_c(im, bilhete_img('NÃO VEM À PRAIA|AMANHÃ.', 560).rotate(4, Image.BICUBIC, expand=True), 400 if cl else 560, 230 if cl else 400, (.7 if cl else back(ramp(f, rs, rs + 10))))
+        burst(im, 'MINHA LETRA!', 830, 300, back(ramp(f, le, le + 8)), 48, rot=6)
     elif si == 7:
         e = wt(7, 'era') - 3
         stamp(im, 'ERA EU', 540, 330, back(ramp(f, e, e + 8)), 110, big=True, rot=-3)
@@ -214,5 +224,5 @@ def OVERLAY(im, si, lf):
         card(im, 'Sonâmbula', 'toda noite, sem lembrar', 540, 560, ramp(f, dd, dd + 10))
     elif si == 8:
         sn = wt(8, 'seu') - 6
-        kit.paste_c(im, bilhete_img('PARA:|VOCÊ', 400).rotate(-4, Image.BICUBIC, expand=True), 760, 380, back(ramp(f, sn, sn + 10)))
+        kit.paste_c(im, bilhete_img('PARA:|VOCÊ', 400).rotate(-4, Image.BICUBIC, expand=True), 800, 230, .8 * back(ramp(f, sn, sn + 10)))
     return grao(im.convert('RGB'), lf)
