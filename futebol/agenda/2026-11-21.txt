@@ -1,0 +1,5 @@
+# inicio | post | tipo | série | jogo ou assunto | tiktok
+09:10 | 10:00 | PREVIA | RAIO-X | Palmeiras x Flamengo 16h30 no Nubank Parque: decisão do título do Brasileirão | sim
+12:10 | 13:00 | NOTICIA | QUEM CAI? | Briga contra o rebaixamento antes da 36ª rodada (ou a notícia mais forte do momento) | não
+18:20 | 18:50 | POS-JOGO | CONTA DO TÍTULO | Resultado de Palmeiras x Flamengo e a conta do título | sim
+21:55 | 22:20 | POS-JOGO | FIM DE JOGO | Final da Sul-Americana: Atlético-MG x Boca Juniors (20h; pode ter prorrogação/pênaltis) | não
