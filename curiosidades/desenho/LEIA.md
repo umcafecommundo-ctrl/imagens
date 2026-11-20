@@ -41,6 +41,8 @@ Exemplo oficial completo: `exemplos/misterio/historia.py` (copie e reescreva). K
   `burst('?!')` (onomatopeia), `interrog` (pontos de interrogação). 1 a 2 elementos de HUD por frase, nunca cobrindo rosto
   nem a legenda (y≈1505), nunca um sobre o outro.
 - Na 1ª cena: carimbo `stamp(im, 'PARTE 1', ...)` ou 'PARTE 2' por ~1,5 s, e o carimbo do lugar ("NA MINHA CIDADE").
+- O VÍDEO SÓ ACABA (pedido do Luis em 20/11/2026): sem pedido de comentar/seguir/se inscrever dentro do vídeo; em todas as
+  redes (inclusive TikTok) publique o `video_youtube.mp4`, que termina na última frase. O `video_tiktok.mp4` não é usado.
 - Legenda: 1 palavra por vez (automática com `instala_legenda()`).
 - CLOSE NO ROSTO (pedido do Luis em 20/11/2026, OBRIGATÓRIO): toda parte tem PELO MENOS 2 closes no rosto do narrador
   (ou de quem reage): um no momento de susto/descoberta e um na última cena (o gancho final). Use
