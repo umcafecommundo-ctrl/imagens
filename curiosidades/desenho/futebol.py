@@ -84,6 +84,8 @@ TIMES = {
     'CHINA': (('#d4282c', '#f5c518', '#d4282c'), None),
     'COSTA RICA': (('#d4282c', '#1d3f8f', '#1d3f8f'), None),
     'URUGUAI': (('#5cb8ec', '#111111', '#111111'), None),
+    'AL-NASSR': (('#f5d000', '#1d3f8f', '#1d3f8f'), None),
+    'AL-AHLI': (('#1f7a4a', '#ffffff', '#ffffff'), None),
     'GENÉRICO': (('#555a66', '#555a66', '#555a66'), None),
 }
 
