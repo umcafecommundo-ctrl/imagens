@@ -1,0 +1,11 @@
+# data | hora | série | rede | views | % que ficou | tempo médio / duração | comentários
+# (Metricool não devolve retenção nem duração dos Reels/Shorts deste perfil; "% que ficou" do Instagram = 100 - taxa de pulo nos 3 primeiros segundos)
+2026-11-19 | 07h | (antes das séries) Fla 2x1 Athletico e Cruzeiro 2x1 Palmeiras | instagram | 1170 | 71% passou dos 3 s | 20,3 s / 49 s | 0
+2026-11-19 | 07h | (antes das séries) Fla 2x1 Athletico e Cruzeiro 2x1 Palmeiras | youtube | 1570 | - | 18 s / 49 s | 1
+2026-11-19 | 12h | (antes das séries) Corinthians 4x0 Botafogo | instagram | 1274 | 69% passou dos 3 s | 15,8 s / 49 s | 1
+2026-11-19 | 12h | (antes das séries) Corinthians 4x0 Botafogo | youtube | 1209 | - | 13 s / 49 s | 2
+2026-11-19 | 19h | (antes das séries) Vasco x Inter / Corinthians no Z4? | instagram | 1195 | 62% passou dos 3 s | 14,7 s / 45 s | 0
+2026-11-19 | 19h | (antes das séries) Vasco x Inter / Corinthians no Z4? | youtube | 1036 | - | 14 s / 45 s | 1
+2026-11-19 | 21h | (antes das séries) Coritiba 0x1 Santos | instagram | 1164 | 62% passou dos 3 s | 13,1 s / 43 s | 1
+2026-11-19 | 21h | (antes das séries) Coritiba 0x1 Santos | youtube | 999 | - | 11 s / 43 s | 0
+# leitura 19/11: tempo médio de 11-20 s em vídeos de 43-49 s (~30-40%): vídeo longo demais; o melhor foi o da conta do título (Flamengo pode ser campeão?), pergunta de título segura mais. Confirma a regra de 20-30 s e pergunta polêmica no 1º quadro.

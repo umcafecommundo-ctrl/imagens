@@ -1,0 +1,5 @@
+# inicio | post | tipo | série | jogo ou assunto | tiktok
+07:40 | 08:30 | POS-JOGO | FIM DE JOGO | Resultado de sábado à noite ainda não postado: Chapecoense x Cruzeiro (sáb 21h, 36ª rodada; Cruzeiro 3º); se já tiver saído, a repercussão com FATO NOVO de Palmeiras x Flamengo ou da final da Sul-Americana | não
+13:10 | 14:00 | PREVIA | RAIO-X | Fluminense x Mirassol hoje 18h30 (36ª rodada, jogo principal do domingo): o que está em jogo na briga por vaga na Libertadores, desfalques e como cada time joga, na prancheta | sim
+17:50 | 18:20 | POS-JOGO | QUEM CAI? | Resultado de Athletico-PR x Remo (16h): a situação do Remo (19º) contra o rebaixamento e o Athletico na briga por vaga; se o Remo já estiver rebaixado e não houver fato novo de Z4, use FIM DE JOGO | não
+20:20 | 20:50 | POS-JOGO | FIM DE JOGO | Resultado de Fluminense x Mirassol (18h30) e a briga por vaga na Libertadores (se o título foi decidido no sábado, a série vira CONTA DA VAGA, ep. 1) | sim
