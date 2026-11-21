@@ -1,4 +1,4 @@
-# ROTINA do Anima Futebol (versão 20/11/2026 — mudanças pedidas pelo Luis)
+# ROTINA do Anima Futebol (versão 21/11/2026 — mudanças pedidas pelo Luis)
 
 Página "Anima Futebol": @anima.futebol no Instagram e no TikTok, canal "Anima Futebol" no YouTube. Tudo em português do Brasil.
 Publicação AUTOMÁTICA pelo Metricool (brandId/blogId "7958170", timezone "America/Sao_Paulo", autoPublish true), sem aprovação
@@ -7,6 +7,24 @@ manual. Como sai sem revisão, a checagem dos fatos e do vídeo é responsabilid
 Há dois modos:
 - **PLANEJAR** (tarefa diária ~17:41): monta a agenda do DIA SEGUINTE e cria as tarefas de cada post.
 - **POST** (tarefas de uma vez só, criadas pelo planejador): faz o desenho e agenda 1 post.
+
+---------------------------------------------------------------------------------------------------
+## MUDANÇAS DE 21/11/2026 (pedido do Luis, a partir do vídeo "O Jeito Certo de Postar Shorts Feitos com IA")
+Valem acima de qualquer regra antiga que diga o contrário:
+1. **PRIMEIRO QUADRO = CAPA NO FEED**: o vídeo já abre (quadro 0, sem fade) com um ROSTO EM CLOSE enchendo a tela, já reagindo,
+   e a pergunta polêmica GRANDE escrita em cima. Detalhes no item 2) do Desenho.
+2. **FIM COM COMENTÁRIO DE UMA PALAVRA**: nada de "segue"/"se inscreve" falado no vídeo. O fim pede um comentário de UMA palavra
+   (`CTA_PALAVRA`, ex.: SIM ou NÃO, o nome do time, um número). O cartão final mostra "COMENTA <CTA_PALAVRA>".
+3. **O MESMO vídeo nas 3 redes**: `video_tiktok.mp4` (que termina no cartão do comentário) vai para Instagram, TikTok e YouTube.
+4. **CAPA DE VERDADE** (`capa.jpg`, sempre no mesmo padrão), enviada como `videoThumbnailUrl` no Instagram e no YouTube.
+5. **Título do YouTube**: até 50 caracteres, a ideia nas primeiras palavras, 1 palavra em MAIÚSCULA, SEM hashtag.
+   Descrição curta, sem hashtags; sem tags.
+6. **Rótulo de IA no YouTube = false** (desenho animado não é conteúdo realista; a regra do YouTube é para cena/pessoa realista).
+   Instagram (isAiGenerated) e TikTok (isAigc) continuam true.
+7. **Teste do "substituível"**: se o vídeo pudesse sair em qualquer outra página sem ninguém notar, ele não serve. Todo vídeo tem a
+   cara do Anima: o boneco/torcedor da página, a série com episódio e um ângulo próprio (a conta, a prancheta, a pergunta).
+8. **48 h depois**: o planejador confere os números dos posts de 2 dias antes (veja MODO PLANEJAR, passo 1b). Nunca apague post
+   que travou (quando um vídeo estoura, ele puxa os antigos).
 
 ---------------------------------------------------------------------------------------------------
 ## Regras gerais (valem nos dois modos)
@@ -49,6 +67,13 @@ No vídeo: a 1ª cena mostra a marca da série grande (ex.: `QUEM CAI? · EP. 4`
 
 1. Data de amanhã em America/Sao_Paulo (D). Repositório (veja "Repositório" abaixo). Leia `futebol/temas.txt`, `futebol/series.txt`
    e as agendas recentes em `futebol/agenda/`.
+1b. **48 h DEPOIS (decisão do Luis em 21/11/2026)**: com o Metricool (getAnalyticsAvailableMetrics e getAnalyticsDataByMetrics,
+   brand "7958170"), pegue os posts de D-3 (2 dias antes de hoje) no YouTube e no Instagram: views, quantos continuaram assistindo
+   (% que ficou / retenção), tempo médio assistido e comentários. Acrescente 1 linha por post em `futebol/metricas.txt`
+   (`data | hora | série | rede | views | % que ficou | tempo médio / duração | comentários`; crie o arquivo se não existir).
+   Meta: 75% que ficou e tempo médio perto da duração do vídeo. Use isso na pauta de D: dê preferência às séries e tipos com melhor
+   retenção; se um post ficou abaixo de 60%, anote em 1 linha o provável motivo (1ª cena, pergunta fraca, vídeo longo).
+   Se a métrica não existir no Metricool, registre o que tiver (views, comentários) e siga. Commit junto com a agenda.
 2. Pesquise (WebSearch/WebFetch, 2 fontes) os JOGOS de D com horário de Brasília: Brasileirão, Copa do Brasil, Série B/playoffs,
    Libertadores, Sul-Americana, Seleção, e os grandes da Europa com brasileiro. Escolha o **JOGO PRINCIPAL** e até 2 outros jogos grandes.
 3. Monte até 4 slots para D (regras em "Quantidade e horários"). Para cada slot defina:
@@ -107,17 +132,29 @@ Pasta `P=futebol/<AAAA-MM-DD>-<HHhMM>` (ex.: futebol/2026-11-21-18h50). Copie `f
   TIMES de futebol.py — se faltar um time, acrescente só as cores). Jogador citado = boneco genérico + placa do nome.
 - Gol LONGE, atrás dos jogadores (put_gol2 + put_goleiro; mire a bola em (gx + 90, gy)); bola proporcional (r = raio_bola(altura);
   diminui até raio_bola(300) indo para o gol). Quem chuta fica na frente (pés y≈1950-2030, altura ~820-880).
-- CARTÃO FINAL pronto (CTA_CARD de futebol.py, pergunta CTA_TEXTO + "SIGA PARA MAIS"); ARROBA = ''. Não reescreva nem desative.
+- CARTÃO FINAL pronto (CTA_CARD de futebol.py: pergunta CTA_TEXTO + pílula "COMENTA <CTA_PALAVRA>"); ARROBA = ''. Não reescreva
+  nem desative. Todo historia.py define `CTA_PALAVRA` (1 palavra ou "SIM ou NÃO"; ex.: 'SIM ou NÃO', 'PALMEIRAS', 'DEZ').
 - SEM MÚSICA (MUSICA = False) e SEM torcida de fundo, só efeitos pontuais (veja item 6). Voz pt-BR-AntonioNeural; SELO = '<COMPETIÇÃO>  ·  <FASE/RODADA>'; SELO_CORES = ((22, 92, 52), (255, 255, 255)).
 
 **1) VÍDEO CURTO: história de 20 a 30 s** (o motor imprime a duração em `narrar`; passou de 30 s, corte frases e narre de novo).
    LINES = 4 a 6 frases, 1 por cena, cada frase com NO MÁXIMO ~14 palavras. Números por extenso nas LINES, algarismos na CAPTXT.
    Estrutura: PERGUNTA POLÊMICA -> o fato principal -> 1 ou 2 detalhes que escalam -> o que muda / a conta -> fim curto.
 
+**2) PRIMEIRO QUADRO = CAPA (decisão do Luis em 21/11/2026, OBRIGATÓRIO)**: a cena 0 começa JÁ no quadro 0 com um CLOSE no rosto
+   de um torcedor genérico com a camisa nas cores do time do assunto, já reagindo:
+   `from sombrio import put_close` e `c = put_close(c, f, expr='choque', s=.9, roupa=<cor principal do time>, pele=..., cabelo=...)`
+   (expr: 'choque', 'sorriso', 'preocupado' ou 'medo', conforme a pergunta; o fundo é o cenário da cena, borrado). Por cima, a
+   pergunta polêmica GRANDE em até 2 linhas (txt/destaque >= 110, y entre 700 e 1000, sem cobrir os olhos) e a marca da série.
+   Nada de fade-in nem tela vazia: quem rola o feed vê o rosto + a pergunta no primeiro quadro. Depois de ~1,2 s corta para a ação.
+   Esse primeiro quadro também vira a capa (`capa.jpg`, veja **CAPA** depois do render), então mantenha sempre o mesmo padrão (rosto no centro,
+   pergunta em cima em branco com contorno, série no topo).
+
 **3) PERGUNTA POLÊMICA NO COMEÇO**: a 1ª frase é a pergunta que divide a torcida e que o vídeo responde
    (ex.: "O Inter vai cair? Olha a conta.", "Foi pênalti no Gabigol?", "O Flamengo já pode comemorar?"). Na 1ª cena ela aparece
-   GRANDE na tela junto com a marca da série. CTA_TEXTO e FALA_TIKTOK repetem a mesma pergunta no fim
-   (FALA_TIKTOK = "<pergunta de 1 toque>? Comenta aqui, e segue o Anima Futebol pra mais!"; CTA_TEXTO até ~14 letras).
+   GRANDE na tela junto com a marca da série (e o close do item 2). CTA_TEXTO e FALA_TIKTOK repetem a pergunta no fim,
+   pedindo comentário de UMA palavra e SEM "segue"/"se inscreve" (decisão do Luis em 21/11/2026):
+   FALA_TIKTOK = "<pergunta de 1 toque>? Comenta <CTA_PALAVRA>." (ex.: "Foi pênalti? Comenta sim ou não.");
+   CTA_TEXTO até ~14 letras; CTA_PALAVRA a mesma palavra em maiúsculas. Nada de "segue"/"se inscreve" em nenhuma fala.
 
 **4) MENOS TEXTO NA TELA, TUDO MAIOR**:
    - Em cada momento, além do SELO e da legenda, no MÁXIMO 1 elemento de texto (um número, OU uma placa, OU a manchete).
@@ -153,7 +190,9 @@ comando; NoAudioReceived: espere 5 s e tente até 3 vezes) -> confira a duraçã
 jogador fora do quadro, gol grande ou jogador "voando" na frente da trave, bola fora de proporção, legenda cobrindo rosto, cena vazia,
 cenário repetido em mais de 2 cenas, erro de português (até 4 rodadas; `motor.py quadro $P <cena> <quadro>` para 1 quadro grande).
 `motor.py render $P` (timeout 600000 ms) e `motor.py final $P`: os dois vídeos "ok (sem quadro parado ou preto)"; abra
-`$P/conferir_video.jpg`. video_tiktok.mp4 vai para Instagram e TikTok; video_youtube.mp4 para o YouTube.
+`$P/conferir_video.jpg`. **video_tiktok.mp4 vai para as 3 redes (Instagram, TikTok e YouTube)**; o video_youtube.mp4 não é usado.
+**CAPA** (21/11/2026): `python3 curiosidades/desenho/motor.py quadro $P 0 3` e `cp $P/quadro.jpg $P/capa.jpg`; abra a capa com Read
+e confira rosto + pergunta legíveis (se não, ajuste a cena 0 e renderize de novo). A capa.jpg vai no commit.
 
 **7) CONFERÊNCIA FINAL DE FATOS** (antes de publicar): releia LINES, CAPTXT, os textos que aparecem na tela (placas, num, telão,
 destaque) e as 3 legendas, frase por frase, contra `$P/fatos.txt`. Qualquer palavra de lance, placar, minuto, autor de gol,
@@ -164,7 +203,7 @@ fetch + rebase; em `futebol/temas.txt` troque "(reservado)" da sua linha por "(d
 `git add futebol curiosidades/desenho/futebol.py` (sem voz/, scenes/, __pycache__); commit (user.name "umcafecommundo",
 user.email "umcafecommundo@users.noreply.github.com"); fetch + rebase + `git push origin HEAD:main` (até 3 vezes).
 Links fixos: `https://raw.githubusercontent.com/umcafecommundo-ctrl/imagens/<git rev-parse HEAD>/<P>/video_tiktok.mp4` e
-`.../video_youtube.mp4` (confira 200 com `curl -s -o /dev/null -w "%{http_code}"`). Push falhou: espelho
+`.../capa.jpg` (confira 200 com `curl -s -o /dev/null -w "%{http_code}"`). Push falhou: espelho
 `https://cdn.jsdelivr.net/gh/umcafecommundo-ctrl/imagens@main/...`; último recurso: SendUserFile (proactive) + SendUserMessage +
 PushNotification.
 
@@ -176,10 +215,10 @@ PushNotification.
 - TikTok (só se o slot tem tiktok sim): tiktokData.title (até ~90 caracteres) = a pergunta + emoji; legenda: a pergunta; linha em
   branco; "<SÉRIE> · Ep. <N>" + 1 linha que aumenta a curiosidade + "Assiste até o fim 👀"; linha em branco; pergunta de 1 toque +
   "Comenta 👇"; linha em branco; "Segue @anima.futebol pra não perder o próximo episódio ⚽"; linha em branco; 4 a 5 hashtags.
-- YouTube Short: youtubeData.title (até ~70 caracteres, máx. 100, sem "<" ou ">") = "<frase de busca> | <SÉRIE> Ep. <N> <emoji> #shorts";
-  text = 1ª linha com a pergunta e palavras-chave; linha em branco; 1 a 2 frases do que o vídeo conta; linha em branco; pergunta +
-  "Comenta 👇" e "Se inscreve pra acompanhar a série ⚽"; linha em branco; #shorts #futebol + 1 a 2 do tema (máx. 4 hashtags);
-  youtubeData.tags = 5 a 8 palavras-chave com acentos (times, competição, a pergunta como as pessoas buscam).
+- YouTube Short (decisão do Luis em 21/11/2026): youtubeData.title ATÉ 50 CARACTERES, sem "<" ou ">", SEM hashtag e sem o nome
+  da série: começa pela ideia (quem + o que), 1 palavra em MAIÚSCULA, no máximo 1 emoji (ex.: "Flamengo CAMPEÃO? A conta final ⚽").
+  text = 2 linhas curtas: "<SÉRIE> · Ep. <N>" e "Comenta <CTA_PALAVRA> 👇". Sem hashtags, sem "se inscreve". youtubeData.tags = [].
+- Nas legendas do Instagram e do TikTok, o pedido de comentário também é de 1 palavra: "Comenta <CTA_PALAVRA> 👇".
 
 ### 7. Agendar (Metricool createScheduledPost)
 Horário = o `post` do slot; se já passou ou faltam menos de 5 min, use 5 minutos a partir de agora (é o normal no PÓS-JOGO).
@@ -187,12 +226,15 @@ Todos com blogId "7958170", date "<AAAA-MM-DD>T<HH:MM>:00-03:00", publicationDat
 "timezone":"America/Sao_Paulo"} (mesmo horário), autoPublish true, draft false, descendants [], firstCommentText "",
 hasNotReadNotes false, mediaAltText [], shortener false, smartLinkData {"ids":[]}:
 a) Instagram: media [video_tiktok.mp4], providers [{"network":"instagram"}], instagramData {"type":"REEL","collaborators":[],
-   "showReelOnFeed":true,"isAiGenerated":true}, videoCoverMilliseconds 1500, text = legenda do Instagram. Sem audioConfiguration.
+   "showReelOnFeed":true,"isAiGenerated":true}, videoThumbnailUrl = link raw da capa.jpg, text = legenda do Instagram.
+   Sem audioConfiguration. Se der erro por causa da capa, mande de novo com videoCoverMilliseconds 100 no lugar.
 b) TikTok — SÓ se o slot tem tiktok sim: media [video_tiktok.mp4], providers [{"network":"tiktok"}], tiktokData {"title":"<título>",
    "privacyOption":"PUBLIC_TO_EVERYONE","disableComment":false,"disableDuet":false,"disableStitch":false,
    "commercialContentThirdParty":false,"commercialContentOwnBrand":false,"autoAddMusic":false,"isAigc":true}, text = legenda do TikTok.
-c) YouTube: media [video_youtube.mp4], providers [{"network":"youtube"}], text = descrição, youtubeData {"title":"...","type":"short",
-   "privacy":"public","tags":[...],"category":"SPORTS","madeForKids":false,"isAiGeneratedContent":true}.
+c) YouTube: media [video_tiktok.mp4], providers [{"network":"youtube"}], text = descrição, videoThumbnailUrl = link raw da capa.jpg,
+   youtubeData {"title":"...","type":"short","privacy":"public","tags":[],"category":"SPORTS","madeForKids":false,
+   "isAiGeneratedContent":false}. Se voltar VIDEO_THUMBNAIL_NOT_APPLICABLE (canal sem capa de Shorts liberada), mande de novo SEM
+   videoThumbnailUrl e diga isso na linha final.
 Confira em cada resposta que media voltou com 1 .mp4. No máximo 2 tentativas por rede; se uma falhar, mantenha as outras e avise
 com PushNotification.
 
@@ -202,7 +244,7 @@ anteriores) e avise com PushNotification. Voz não funcionou: PushNotification (
 speech.platform.bing.com segue nos domínios permitidos do Claude") e não publique sem voz.
 
 ### 9. Fim
-1 linha: horário, redes agendadas, série/episódio, competição, tema e duração do vídeo.
+1 linha: horário, redes agendadas, série/episódio, competição, tema, duração do vídeo e se a capa entrou no YouTube.
 
 ---------------------------------------------------------------------------------------------------
 ## Repositório

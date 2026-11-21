@@ -401,7 +401,8 @@ def put_goleiro(c, f, cores, faixa, gx=None, base=None, **kw):
 
 # ------------------------------------------------------------------ cartão final (chamada) da página
 def cta_card(im, cl, h):
-    """escurece o fundo e mostra um cartão verde com a pergunta (CTA_TEXTO) e "SIGA PARA MAIS". Sem @."""
+    """escurece o fundo e mostra um cartão verde com a pergunta (CTA_TEXTO) e a pílula "COMENTA <CTA_PALAVRA>"
+    (pedido de comentário de UMA palavra, decisão do Luis em 21/11/2026; substitui o antigo "SIGA PARA MAIS"). Sem @."""
     import numpy as np
     from PIL import ImageFilter
     k = clamp(cl / 8)
@@ -423,8 +424,11 @@ def cta_card(im, cl, h):
         if s2 > .05:
             pill = Image.new('RGBA', (640, 120), (0, 0, 0, 0)); pd = ImageDraw.Draw(pill)
             pd.rounded_rectangle([4, 4, 636, 116], 58, fill=(255, 216, 74, 255), outline=INK + (255,), width=7)
-            fo = ImageFont.truetype(FONTB, 60); tx = 'SIGA PARA MAIS'; tw = pd.textlength(tx, font=fo)
-            pd.text(((640 - tw) / 2, 24), tx, font=fo, fill=INK + (255,))
+            tx = ('COMENTA ' + str(getattr(h, 'CTA_PALAVRA', 'AQUI'))).upper(); fs = 60
+            fo = ImageFont.truetype(FONTB, fs)
+            while pd.textlength(tx, font=fo) > 580 and fs > 34: fs -= 2; fo = ImageFont.truetype(FONTB, fs)
+            tw = pd.textlength(tx, font=fo)
+            pd.text(((640 - tw) / 2, 60 - fs * .6), tx, font=fo, fill=INK + (255,))
             pill = pill.resize((max(1, int(640 * s2)), max(1, int(120 * s2))), Image.LANCZOS)
             card.alpha_composite(pill, ((w - pill.size[0]) // 2, 400 + (120 - pill.size[1]) // 2))
         card = card.resize((max(1, int(w * pa)), max(1, int(hh * pa))), Image.LANCZOS)

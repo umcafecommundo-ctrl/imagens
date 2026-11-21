@@ -19,8 +19,13 @@ Exemplo oficial completo: `exemplos/misterio/historia.py` (copie e reescreva). K
 - Clima de mistério/suspense leve: nada de sangue, morte mostrada, violência, suicídio, doença real, crime, política,
   religião, pessoas reais com nome, marcas ou personagens conhecidos. Pode ser estranho e arrepiante, nunca chocante.
 - Frases curtas e faladas, números por extenso, 6 a 9 LINES por parte. Não use "Você vê".
-- `FALA_TIKTOK`: Parte 1 "Quer a parte dois? Comenta parte dois, e segue pra não perder!"; Parte 2 uma pergunta de 1 toque
-  ("Você entendeu o final? Comenta sim ou não, e segue pra mais histórias!"). `CTA_CARD = cta_card`; `CTA_TEXTO` curto.
+- `FALA_TIKTOK` (decisão do Luis em 21/11/2026): só o pedido de comentário de UMA palavra, sem "segue"/"se inscreve":
+  Parte 1 "Comenta QUERO pra parte dois." ; Parte 2 uma pergunta de 1 toque + "Comenta sim ou não." (ex.: "Você abriria a
+  porta? Comenta sim ou não."). `CTA_CARD = cta_card`; `CTA_TEXTO` = "COMENTA QUERO" (Parte 1) ou "SIM OU NÃO?" (Parte 2);
+  `ARROBA = ''` (o cartão não mostra o @). O `video_tiktok.mp4` (com esse cartão curto) vai para as 3 redes.
+- PRIMEIRO QUADRO = CAPA NO FEED (21/11/2026): a cena 0 abre JÁ no quadro 0 com `put_close` do narrador reagindo
+  (expr 'choque', 'medo' ou 'preocupado'), o carimbo 'PARTE 1'/'PARTE 2' e o gancho da história em até 2 linhas GRANDE em cima
+  (sem cobrir os olhos). Nada de fade-in ou tela vazia. Esse quadro vira a `capa.jpg` (`motor.py quadro $P 0 3`).
 - Voz: `VOZ = 'pt-BR-AntonioNeural'; RATE = '+4%'; PITCH = '-6Hz'` (mais grave e calma). `MUSICA = False`.
 
 ## Visual (sombrio.py)
