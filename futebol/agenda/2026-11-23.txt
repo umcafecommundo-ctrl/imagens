@@ -1,0 +1,5 @@
+# inicio | post | tipo | série | jogo ou assunto | tiktok
+07:40 | 08:30 | POS-JOGO | FIM DE JOGO | Resultado de domingo à noite (36ª) ainda não postado; se não houver, BASTIDORES com a notícia mais forte do futebol brasileiro da manhã (com FATO NOVO; nada repetido de temas.txt) | não
+14:10 | 15:00 | PREVIA | RAIO-X | Internacional x Vitória hoje 19h30 no Beira-Rio (36ª, jogo principal da segunda): confronto direto contra a queda, Inter 17º com 38 no Z4 x Vitória 14º com 41, desfalques e como cada time joga, na prancheta; Grêmio (18º, 38) joga 21h contra o Santos no Morumbis | sim
+21:20 | 21:50 | POS-JOGO | QUEM CAI? | Resultado de Internacional x Vitória (19h30) e a conta do Z4 com 2 rodadas para o fim | sim
+22:50 | 23:20 | POS-JOGO | QUEM CAI? | Resultado de Santos x Grêmio (21h, Morumbis) e o Z4 depois da 36ª (se o Inter x Vitória já cobriu a conta, destaque o Grêmio e o Corinthians x Grêmio da 37ª) | não

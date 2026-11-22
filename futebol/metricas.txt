@@ -9,3 +9,9 @@
 2026-11-19 | 21h | (antes das séries) Coritiba 0x1 Santos | instagram | 1164 | 62% passou dos 3 s | 13,1 s / 43 s | 1
 2026-11-19 | 21h | (antes das séries) Coritiba 0x1 Santos | youtube | 999 | - | 11 s / 43 s | 0
 # leitura 19/11: tempo médio de 11-20 s em vídeos de 43-49 s (~30-40%): vídeo longo demais; o melhor foi o da conta do título (Flamengo pode ser campeão?), pergunta de título segura mais. Confirma a regra de 20-30 s e pergunta polêmica no 1º quadro.
+2026-11-20 | 07h | (antes das séries) Vasco 2x1 Inter / Inter no Z4 | instagram | 1341 | 69% passou dos 3 s | 23,5 s / 50 s | 2
+2026-11-20 | 12h | CONTA DO TÍTULO ep.1 | instagram | 1271 | 61% passou dos 3 s | 14,1 s / 33 s | 3
+2026-11-20 | 16h50 | FIM DE JOGO ep.1 (Cristiano 986) | instagram | 1271 | 65% passou dos 3 s | 14,2 s / 34 s | 0
+2026-11-20 | 19h | RAIO-X ep.1 (final Sul-Americana) | instagram | 1189 | 63% passou dos 3 s | 12,2 s / 33 s | 0
+2026-11-20 | todos | YouTube | Metricool sem dados dos Shorts de 20/11 (só aparece o de 19/11 21h, sem números) | - | - | - | -
+# leitura 20/11: tempo médio ~40% nos de 33 s e 47% no de 50 s; 35-39% pulam nos 3 primeiros s (abaixo da meta de 75%). Provável motivo: 1º quadro ainda sem rosto/pergunta (regra de 21/11 entrou depois) e vídeos acima de 30 s. Z4/rebaixamento (Inter no Z4) segurou mais: prioridade para QUEM CAI? em 23/11.
