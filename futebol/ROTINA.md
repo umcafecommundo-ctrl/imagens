@@ -5,8 +5,9 @@ Publicação AUTOMÁTICA pelo Metricool (brandId/blogId "7958170", timezone "Ame
 manual. Como sai sem revisão, a checagem dos fatos e do vídeo é responsabilidade de quem roda: **na dúvida sobre um fato, não use**.
 
 Há dois modos:
-- **PLANEJAR** (tarefa diária ~17:41): monta a agenda do DIA SEGUINTE e cria as tarefas de cada post.
-- **POST** (tarefas de uma vez só, criadas pelo planejador): faz o desenho e agenda 1 post.
+- **PLANEJAR** (tarefa diária ~17:41): monta a agenda do DIA SEGUINTE (não cria tarefas).
+- **POST**: faz o desenho e agenda 1 post (chamado pelo EXECUTOR, que roda de hora em hora e lê a agenda).
+- **EXECUTOR** (tarefa fixa de hora em hora, HH:05, 07h-23h): pega o slot da agenda daquela hora e roda o MODO POST.
 
 ---------------------------------------------------------------------------------------------------
 ## MUDANÇAS DE 21/11/2026 (pedido do Luis, a partir do vídeo "O Jeito Certo de Postar Shorts Feitos com IA")
@@ -84,16 +85,12 @@ No vídeo: a 1ª cena mostra a marca da série grande (ex.: `QUEM CAI? · EP. 4`
    - tipo (PREVIA, POS-JOGO, NOTICIA), série, jogo/assunto, `tiktok: sim/não` (só 2 no dia, do jogo principal).
 4. Escreva `futebol/agenda/D.txt` (uma linha por slot: `inicio | post | tipo | série | jogo ou assunto | tiktok sim/não`),
    commit "futebol: agenda D" e push (fetch+rebase+push até 3 vezes).
-5. Para CADA slot, crie uma tarefa de uma vez só com `create_trigger` (ferramenta do servidor Claude Code Remote; carregue com
-   ToolSearch "create_trigger"): name "anima.futebol POST D <post> <tipo>", `run_once_at` = "<D>T<inicio>:00[America/Sao_Paulo]",
-   initiation "human_schedule", notifications {"push": true}, prompt =
-   "Anima Futebol — MODO POST. Dados do slot: data <D>; post <HH:MM>; tipo <tipo>; série <série>; assunto <jogo/assunto>; tiktok <sim/não>.
-   Clone o repositório umcafecommundo-ctrl/imagens (git clone --depth 1 https://github.com/umcafecommundo-ctrl/imagens /home/claude/imagens;
-   se a ferramenta add_repo existir, chame antes com owner umcafecommundo-ctrl, repo imagens, access push), leia INTEIRO futebol/ROTINA.md
-   e siga o MODO POST com estes dados. Publicação automática pelo Metricool (blogId 7958170) pedida pelo Luis."
-   Confira na resposta que cada tarefa foi criada com o horário certo. Não crie tarefa repetida: liste antes com `list_triggers`
-   (as de nome "anima.futebol POST D ..." que já existirem ficam).
-6. Se não conseguir criar as tarefas, avise o Luis com PushNotification (o que falhou e a agenda de D).
+5. **NÃO crie tarefas** (decisão do Luis em 22/11/2026): uma tarefa agendada não pode mais criar outras tarefas sem aprovação,
+   e por isso os posts de 21 e 22/11 não saíram. A partir de 24/11 quem publica é o **EXECUTOR** (tarefa fixa de hora em hora,
+   HH:05, das 07h às 23h, veja MODO EXECUTOR): ele lê `futebol/agenda/D.txt` e faz o post de cada slot. Por isso o arquivo da
+   agenda é o que vale: confira o formato (`inicio | post | tipo | série | jogo ou assunto | tiktok sim/não`, horários HH:MM) e
+   garanta que o push deu certo. Se o push falhar 3 vezes, avise o Luis com PushNotification (o que falhou e a agenda de D).
+6. Pelo menos 1h30 entre dois posts continua valendo (o executor faz 1 slot por rodada).
 7. Termine com 1 linha por slot (horário do post, tipo, série, assunto, TikTok sim/não).
 
 ---------------------------------------------------------------------------------------------------
@@ -245,6 +242,21 @@ speech.platform.bing.com segue nos domínios permitidos do Claude") e não publi
 
 ### 9. Fim
 1 linha: horário, redes agendadas, série/episódio, competição, tema, duração do vídeo e se a capa entrou no YouTube.
+
+---------------------------------------------------------------------------------------------------
+## MODO EXECUTOR (tarefa fixa de hora em hora, HH:05, 07h-23h; decisão do Luis em 22/11/2026)
+
+1. Pegue data/hora em America/Sao_Paulo (hoje = D, agora = T). Antes de 2026-11-24: termine sem fazer nada (os slots de 22 e
+   23/11 têm tarefas próprias).
+2. Repositório (veja "Repositório"). Leia `futebol/agenda/D.txt`. Sem arquivo ou sem slot: termine em silêncio.
+3. Escolha os slots com `inicio` entre T - 20 min e T + 60 min. Para cada um, veja se já foi feito: existe em `futebol/temas.txt`
+   uma linha que começa com "D | <post em HHhMM>" (ex.: "2026-11-24 | 21h50"; post 21:00 = "21h") ou getScheduledPosts do
+   Metricool (brand 7958170, hoje) já tem post no horário do slot. Já feito: pule. Nenhum pendente: termine em silêncio, sem notificação.
+4. Se o `inicio` ainda não chegou, espere com `sleep` (blocos de até 9 min) até o inicio. Depois siga o **MODO POST** com os dados
+   desse slot (data D; post; tipo; série; assunto; tiktok). Um slot por rodada; se houver 2 pendentes, faça o de inicio mais cedo
+   e avise o Luis do outro.
+5. Slot com `inicio` que passou há mais de 20 min e não foi feito (rodada perdida): faça-o agora mesmo se ainda fizer sentido
+   (pós-jogo do dia, prévia antes do jogo começar); se não fizer mais sentido, pule e avise com PushNotification.
 
 ---------------------------------------------------------------------------------------------------
 ## Repositório
