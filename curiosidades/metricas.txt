@@ -1,0 +1,24 @@
+# data | hora | história e parte | rede | views | % que ficou | tempo médio / duração | comentários
+# (% que ficou = tempo médio ÷ duração do vídeo; no Instagram, entre parênteses, quem passou dos 3 s = 100 − taxa de pulo)
+# Meta: 75% e tempo médio perto da duração. Abaixo de 60%: motivo provável em 1 linha.
+2026-11-19 | 21h (saiu 20/11 00h) | [LUGARES] Svalbard, o sol da meia-noite (curiosidade) | instagram | 140 | 37% (53% passou dos 3 s) | 8,2 s / 22,2 s | 0
+  -> abaixo de 60%: primeiro quadro sem close nem gancho escrito; quase metade pulou nos 3 s.
+2026-11-20 | 07h (saiu 10h) | [ANIMAIS] tubarões mais velhos que as árvores (curiosidade) | instagram | 224 | 49% (72% passou dos 3 s) | 11,9 s / 24,1 s | 0
+2026-11-20 | 07h (saiu 13h) | [ANIMAIS] tubarões mais velhos que as árvores (curiosidade) | tiktok | 343 | sem dado | sem dado / 29 s | 0
+  -> abaixo de 60%: boa abertura, mas perde gente no meio (explicação longa depois do gancho).
+2026-11-20 | 09h (saiu 12h) | [FICÇÃO] Os achados e perdidos de amanhã, parte 1 | instagram | 125 | 30% (53% passou dos 3 s) | 18,6 s / 61,1 s | 0
+2026-11-20 | 09h (saiu 12h) | [FICÇÃO] Os achados e perdidos de amanhã, parte 1 | tiktok | 408 | sem dado | sem dado / 65 s | 0
+  -> abaixo de 60%: parte longa demais (61 s) e primeiro quadro fraco.
+2026-11-20 | 12h (saiu 15h) | [FICÇÃO] Os achados e perdidos de amanhã, parte 2 | instagram | 1343 | 42% (64% passou dos 3 s) | 23,1 s / 55,5 s | 0
+2026-11-20 | 12h (saiu 15h) | [FICÇÃO] Os achados e perdidos de amanhã, parte 2 | tiktok | 418 | sem dado | sem dado / 61 s | 0
+  -> abaixo de 60%: parte longa (55 s); mesmo assim foi o post mais visto do dia no Instagram (pergunta "o que tinha no envelope?" no gancho).
+2026-11-20 | 19h (saiu 17h) | [MISTÉRIO] A praia das garrafas, parte 1 | instagram | 4 | 34% (25% passou dos 3 s) | 12,0 s / 35,5 s | 0
+2026-11-20 | 19h (saiu 17h) | [MISTÉRIO] A praia das garrafas, parte 1 | tiktok | 418 | sem dado | sem dado / 35 s | 0
+  -> abaixo de 60%: Instagram quase não distribuiu (4 views, 75% pulou); primeiro quadro sem rosto/gancho (antes da regra de 21/11).
+2026-11-20 | 21h | [MISTÉRIO] A praia das garrafas, parte 2 | instagram | 614 | 40% (69% passou dos 3 s) | 16,1 s / 40,5 s | 0
+2026-11-20 | 21h | [MISTÉRIO] A praia das garrafas, parte 2 | tiktok | 423 | sem dado | sem dado / 40 s | 0
+  -> abaixo de 60%: o meio da história (vigília à noite) é lento; comentários zerados em todas as redes.
+2026-11-20 | todas | YouTube | youtube | sem dado | sem dado | sem dado | sem dado
+  -> o Metricool ainda não devolve views/tempo médio dos Shorts de 20/11 (linha vazia); conferir de novo nos próximos dias.
+# Leitura de 22/11: nenhum post de 20/11 chegou a 60%. TikTok fica estável em ~400 views por post. Partes de 55-65 s seguram
+# menos (30-42%); manter as partes entre 35 e 50 s e o primeiro quadro com close + gancho escrito (regra de 21/11).
