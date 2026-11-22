@@ -86,7 +86,7 @@ No vídeo: a 1ª cena mostra a marca da série grande (ex.: `QUEM CAI? · EP. 4`
 4. Escreva `futebol/agenda/D.txt` (uma linha por slot: `inicio | post | tipo | série | jogo ou assunto | tiktok sim/não`),
    commit "futebol: agenda D" e push (fetch+rebase+push até 3 vezes).
 5. **NÃO crie tarefas** (decisão do Luis em 22/11/2026): uma tarefa agendada não pode mais criar outras tarefas sem aprovação,
-   e por isso os posts de 21 e 22/11 não saíram. A partir de 24/11 quem publica é o **EXECUTOR** (tarefa fixa de hora em hora,
+   e por isso os posts de 22/11 não saíram. A partir de 24/11 quem publica é o **EXECUTOR** (tarefa fixa de hora em hora,
    HH:05, das 07h às 23h, veja MODO EXECUTOR): ele lê `futebol/agenda/D.txt` e faz o post de cada slot. Por isso o arquivo da
    agenda é o que vale: confira o formato (`inicio | post | tipo | série | jogo ou assunto | tiktok sim/não`, horários HH:MM) e
    garanta que o push deu certo. Se o push falhar 3 vezes, avise o Luis com PushNotification (o que falhou e a agenda de D).
