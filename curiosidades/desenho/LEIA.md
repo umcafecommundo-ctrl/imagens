@@ -1,3 +1,24 @@
+# VÍDEO LONGO horizontal — Curiosidades da IA (pedido do Luis em 22/11/2026)
+
+A cada 2 dias, 1 vídeo NORMAL do YouTube (não Short): horizontal 16:9 (1920x1080), ~2 minutos (110 a 130 s), só no YouTube,
+com uma história de mistério INÉDITA e COMPLETA (sem partes), nas mesmas regras do formato MISTÉRIO (1ª pessoa, uma regra estranha,
+cores conforme o contexto, closes no rosto, cartões/carimbos/placar, legenda de 1 palavra, voz Antonio '+4%'/'-6Hz', SEM música,
+nada de "segue"/"se inscreve", fim com pergunta de sim ou não).
+- Rode o motor SEMPRE com `MOTOR_H=1` (palco 2208x1242, saída 1920x1080; legenda em y≈930 da saída):
+  `MOTOR_H=1 python3 curiosidades/desenho/motor.py narrar|stills|quadro|render|final $P`.
+- Kit: `from longo import *` (depois de kit e sombrio): `close_h` (close no rosto; na capa use x=1560 para o texto ficar à
+  esquerda), `gancho_h` (texto grande da capa, alinhado à esquerda), `biblioteca_bg`, `quarto_h(luz, chuva)`, `rua_h`, `livro`
+  (livro aberto com letra à mão), `put_livro`, `aquario_img`, `mochila_img`, `mapa_img`. Desenhe cenários novos no palco
+  horizontal (chão em y≈1080, personagens com h≈700-760 e pés em y≈1180). Exemplo completo: `curiosidades/2026-11-22-longo/historia.py`.
+- O arquivo de 2 min sai com ~135 MB (o GitHub recusa acima de 100 MB): antes do commit, recomprima os 2 vídeos com
+  `ffmpeg -i v.mp4 -c:v libx264 -preset medium -crf 24 -pix_fmt yuv420p -c:a copy -movflags +faststart v2.mp4` (~33 MB).
+- CAPA = quadro 0: close à direita + carimbo 'HISTÓRIA COMPLETA' + gancho em até 3 linhas à esquerda (vira a capa.jpg / miniatura).
+- Pelo menos 3 closes (capa, descoberta, fim). 15 a 22 LINES (1 cena cada). O render de 2 min leva ~25 min: rode em segundo plano.
+- Publique o `video_tiktok.mp4` (história + cartão SIM OU NÃO) só no YouTube, `type: "video"` (não "short"), categoria
+  FILM_ANIMATION, madeForKids false, isAiGeneratedContent false, sem tags, título até 60 caracteres com 1 palavra em MAIÚSCULA e sem
+  hashtag, descrição curta sem hashtags, videoThumbnailUrl = capa.jpg. Pasta: `curiosidades/AAAA-MM-DD-longo`. Registre no temas.txt
+  com o tipo `misterio-longo`.
+
 # Formato MISTÉRIO — Curiosidades da IA (desde 21/11/2026, decisão do Luis em 20/11/2026)
 
 **Este é o formato atual da página Curiosidades da IA.** Os posts deixaram de ser curiosidades reais com o Professor Bigode

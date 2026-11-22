@@ -21,6 +21,8 @@ import art, personagens as P, cenarios, professor as PROF
 from art import Pen, INK, ell_pts, curve, hexc, mul, face, SKINS
 
 FPS = 30; OW, OH = 1080, 1920; BW, BH = 1242, 2208
+if os.environ.get('MOTOR_H') == '1':   # vídeo LONGO horizontal 16:9 (YouTube normal): palco 2208x1242, saída 1920x1080
+    OW, OH = 1920, 1080; BW, BH = 2208, 1242
 
 # ------------------------------------------------------------ timing (preenchido pelo motor)
 class _T:
@@ -214,7 +216,8 @@ _VIG = {k: (1 - g['vig'] * _Q * 2.2)[..., None].astype(np.float32) for k, g in G
 def camera(c, cam):
     cx, cy, z, roll = cam
     W, H = c.size; pad = 1 + abs(roll) * .065
-    vw = min(BW / z, W / pad, H / pad * 9 / 16); vh = vw * 16 / 9
+    A = OH / OW
+    vw = min(BW / z, W / pad, H / pad / A); vh = vw * A
     vw2, vh2 = vw * pad, vh * pad
     cx = clamp(cx, vw2 / 2, W - vw2 / 2); cy = clamp(cy, vh2 / 2, H - vh2 / 2)
     im = c.crop((int(cx - vw2 / 2), int(cy - vh2 / 2), int(cx + vw2 / 2), int(cy + vh2 / 2))).convert('RGB')

@@ -8,7 +8,7 @@ import kit
 from kit import OW, OH, back, ramp, clamp, lerp, smooth, easeOut, blinkAt
 from art import Pen, hexc, mul, ell_pts, INK
 
-W_, H_ = 1242, 2208
+W_, H_ = kit.BW, kit.BH   # 1242x2208 (vertical) ou 2208x1242 (MOTOR_H=1, horizontal)
 GF = '/usr/share/fonts/truetype/google-fonts/'
 F_CAP = GF + 'ofl/archivoblack/ArchivoBlack-Regular.ttf'
 F_STAMP = GF + 'ofl/anton/Anton-Regular.ttf'
@@ -30,7 +30,8 @@ def font(path, size):
 
 
 # ------------------------------------------------------------------ legenda: 1 palavra por vez
-def cap1(im, ws, lf, y0=1505):
+def cap1(im, ws, lf, y0=None):
+    if y0 is None: y0 = 1505 if OH > OW else 930
     if not ws or lf < ws[0][1] - 2: return im
     cur = [w for w, t in ws if lf >= t - 1]
     if not cur: return im

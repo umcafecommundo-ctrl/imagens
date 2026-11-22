@@ -173,7 +173,7 @@ def stills(pasta):
         gs.append(SC[si][0] + wt(si, word) + off)
     gs.append(total + cta - 5); gs = sorted(set(gs))
     ims = [frame(h, SC, CAPS, g, total, cta) for g in gs]
-    W, H_ = 270, 480; cols = 6; rows = (len(ims) + cols - 1) // cols
+    W, H_ = (270, 480) if OH > OW else (480, 270); cols = 6 if OH > OW else 4; rows = (len(ims) + cols - 1) // cols
     s = Image.new('RGB', (W * cols, H_ * rows), 'white')
     for i, im in enumerate(ims): s.paste(im.resize((W, H_)), ((i % cols) * W, (i // cols) * H_))
     s.save(os.path.join(pasta, 'conferir_cenas.jpg'), quality=85)
@@ -358,7 +358,7 @@ def final(pasta):
         qa = subprocess.run(['ffmpeg', '-hide_banner', '-i', out, '-vf', 'freezedetect=n=0.0005:d=0.4,blackdetect', '-an', '-f', 'null', '-'], capture_output=True, text=True).stderr
         prob = re.findall(r'(freeze_start: [\d.]+|black_start:[\d.]+)', qa)
         print(f'{name}: {dur:.1f}s', 'AVISO quadro parado/preto em ' + ', '.join(prob) if prob else 'ok (sem quadro parado ou preto)')
-    subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', os.path.join(pasta, 'video_tiktok.mp4'), '-vf', 'fps=1,scale=180:320,tile=8x6', '-frames:v', '1',
+    subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', os.path.join(pasta, 'video_tiktok.mp4'), '-vf', 'fps=1,scale=180:320,tile=8x6' if OH > OW else 'fps=1/2,scale=320:180,tile=6x10', '-frames:v', '1',
                     os.path.join(pasta, 'conferir_video.jpg')], check=True)
     shutil.rmtree(sd, ignore_errors=True)
     # voz/ fica (está no .gitignore) para poder renderizar de novo sem narrar outra vez
