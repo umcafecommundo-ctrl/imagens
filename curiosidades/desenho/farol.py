@@ -175,18 +175,19 @@ F_MAO_F = GF + 'ofl/comicrelief/ComicRelief-Bold.ttf'
 
 
 def caderno(c, x, y, s=1.0, linhas=(), t=1.0):
+    """caderno aberto; até 4 linhas (2 por página), texto à mão grande."""
     if s <= .05: return
-    W, H = 700, 480
+    W, H = 900, 520
     im = Image.new('RGBA', (W + 20, H + 20), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
     d.rectangle((10, 10, W + 10, H + 10), fill=(36, 30, 32, 255))
     d.rectangle((18, 18, W / 2 + 6, H + 2), fill=(246, 238, 214, 255)); d.rectangle((W / 2 + 14, 18, W + 2, H + 2), fill=(246, 238, 214, 255))
-    for k in range(10):
-        yy = 70 + k * 40; d.line((30, yy, W / 2, yy), fill=(200, 190, 170, 255), width=2); d.line((W / 2 + 20, yy, W - 10, yy), fill=(200, 190, 170, 255), width=2)
-    fnt = font(F_MAO_F, 30)
+    for k in range(8):
+        yy = 80 + k * 55; d.line((30, yy, W / 2, yy), fill=(210, 200, 180, 255), width=2); d.line((W / 2 + 20, yy, W - 10, yy), fill=(210, 200, 180, 255), width=2)
+    fnt = font(F_MAO_F, 44)
     tot = sum(len(l) for l in linhas); n = int(round(tot * clamp(t)))
     for i, l in enumerate(linhas):
         vis = l[:max(0, n)]; n -= len(l)
-        col = 0 if i < 5 else 1; row = i % 5
-        d.text((40 + col * (W / 2), 34 + row * 80), vis, font=fnt, fill=(60, 44, 36, 255))
+        col = 0 if i < 2 else 1; row = i % 2
+        d.text((36 + col * (W / 2 + 8), 150 + row * 130), vis, font=fnt, fill=(52, 58, 92, 255))
     im = im.resize((int((W + 20) * s), int((H + 20) * s)), Image.LANCZOS)
     c.alpha_composite(im, (int(x - im.width / 2), int(y - im.height / 2)))
