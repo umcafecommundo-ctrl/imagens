@@ -20,8 +20,9 @@ Valem acima de qualquer regra antiga que diga o contrário:
 4. **CAPA DE VERDADE** (`capa.jpg`, sempre no mesmo padrão), enviada como `videoThumbnailUrl` no Instagram e no YouTube.
 5. **Título do YouTube**: até 50 caracteres, a ideia nas primeiras palavras, 1 palavra em MAIÚSCULA, SEM hashtag.
    Descrição curta, sem hashtags; sem tags.
-6. **Rótulo de IA no YouTube = false** (desenho animado não é conteúdo realista; a regra do YouTube é para cena/pessoa realista).
-   Instagram (isAiGenerated) e TikTok (isAigc) continuam true.
+6. **SEM rótulo de IA em nenhuma rede** (decisão do Luis em 22/11/2026): YouTube isAiGeneratedContent false, Instagram
+   isAiGenerated false e TikTok isAigc false. Desenho animado não é conteúdo realista; as regras das 3 redes valem para
+   cena/pessoa realista. Nunca desenhe jogador ou lance com cara de foto/vídeo real.
 7. **Teste do "substituível"**: se o vídeo pudesse sair em qualquer outra página sem ninguém notar, ele não serve. Todo vídeo tem a
    cara do Anima: o boneco/torcedor da página, a série com episódio e um ângulo próprio (a conta, a prancheta, a pergunta).
 8. **48 h depois**: o planejador confere os números dos posts de 2 dias antes (veja MODO PLANEJAR, passo 1b). Nunca apague post
@@ -223,11 +224,11 @@ Todos com blogId "7958170", date "<AAAA-MM-DD>T<HH:MM>:00-03:00", publicationDat
 "timezone":"America/Sao_Paulo"} (mesmo horário), autoPublish true, draft false, descendants [], firstCommentText "",
 hasNotReadNotes false, mediaAltText [], shortener false, smartLinkData {"ids":[]}:
 a) Instagram: media [video_tiktok.mp4], providers [{"network":"instagram"}], instagramData {"type":"REEL","collaborators":[],
-   "showReelOnFeed":true,"isAiGenerated":true}, videoThumbnailUrl = link raw da capa.jpg, text = legenda do Instagram.
+   "showReelOnFeed":true,"isAiGenerated":false}, videoThumbnailUrl = link raw da capa.jpg, text = legenda do Instagram.
    Sem audioConfiguration. Se der erro por causa da capa, mande de novo com videoCoverMilliseconds 100 no lugar.
 b) TikTok — SÓ se o slot tem tiktok sim: media [video_tiktok.mp4], providers [{"network":"tiktok"}], tiktokData {"title":"<título>",
    "privacyOption":"PUBLIC_TO_EVERYONE","disableComment":false,"disableDuet":false,"disableStitch":false,
-   "commercialContentThirdParty":false,"commercialContentOwnBrand":false,"autoAddMusic":false,"isAigc":true}, text = legenda do TikTok.
+   "commercialContentThirdParty":false,"commercialContentOwnBrand":false,"autoAddMusic":false,"isAigc":false}, text = legenda do TikTok.
 c) YouTube: media [video_tiktok.mp4], providers [{"network":"youtube"}], text = descrição, videoThumbnailUrl = link raw da capa.jpg,
    youtubeData {"title":"...","type":"short","privacy":"public","tags":[],"category":"SPORTS","madeForKids":false,
    "isAiGeneratedContent":false}. Se voltar VIDEO_THUMBNAIL_NOT_APPLICABLE (canal sem capa de Shorts liberada), mande de novo SEM
