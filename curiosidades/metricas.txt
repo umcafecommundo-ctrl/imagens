@@ -22,3 +22,15 @@
   -> o Metricool ainda não devolve views/tempo médio dos Shorts de 20/11 (linha vazia); conferir de novo nos próximos dias.
 # Leitura de 22/11: nenhum post de 20/11 chegou a 60%. TikTok fica estável em ~400 views por post. Partes de 55-65 s seguram
 # menos (30-42%); manter as partes entre 35 e 50 s e o primeiro quadro com close + gancho escrito (regra de 21/11).
+2026-11-21 | 07h (saiu 07h) | [MISTÉRIO] A lousa que responde, parte 1 | instagram | 2058 | sem dado (70% passou dos 3 s; tempo médio = 52% do vídeo) | 21,2 s / 41 s | 1
+2026-11-21 | 07h | [MISTÉRIO] A lousa que responde, parte 1 | tiktok | 417 | sem dado | sem dado / 41 s | 0
+2026-11-21 | 12h | [MISTÉRIO] A lousa que responde, parte 2 | instagram | 1414 | sem dado (72% passou dos 3 s; tempo médio = 42% do vídeo) | 17,6 s / 42 s | 0
+2026-11-21 | 12h | [MISTÉRIO] A lousa que responde, parte 2 | tiktok | 394 | sem dado | sem dado / 42 s | 1
+2026-11-21 | 19h | [MISTÉRIO] O espantalho que aponta, parte 1 | instagram | 1508 | sem dado (64% passou dos 3 s; tempo médio = 45% do vídeo) | 17,0 s / 38 s | 0
+2026-11-21 | 19h | [MISTÉRIO] O espantalho que aponta, parte 1 | tiktok | 483 | sem dado | sem dado / 38 s | 0
+2026-11-21 | 21h | [MISTÉRIO] O espantalho que aponta, parte 2 | instagram | 1883 | sem dado (63% passou dos 3 s; tempo médio = 44% do vídeo) | 19,2 s / 44 s | 0
+2026-11-21 | 21h | [MISTÉRIO] O espantalho que aponta, parte 2 | tiktok | 270 | sem dado | sem dado / 44 s | 0
+2026-11-21 | todas | YouTube | youtube | sem dado | sem dado | sem dado | sem dado
+  -> abaixo de 60% (tempo médio/duração 42-52%): o primeiro quadro com close (21/11) melhorou a passagem dos 3 s no Instagram (63-72% contra 25-69% em 20/11) e as views (1,4-2,1 mil por post), mas metade da história ainda se perde no meio; provável motivo: a explicação da regra (cenas 2 a 4) é lenta. Comentários quase zerados mesmo com o pedido de 1 palavra.
+# Leitura de 23/11: a Parte 1 da manhã (07h) foi o post mais visto; Parte 2 às 21h do Instagram (espantalho) passou a Parte 1.
+# Na pauta: chegar mais rápido no acontecimento de hoje (regra + exceção em até 3 frases) e manter as partes perto de 40 s.
