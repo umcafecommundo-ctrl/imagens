@@ -128,3 +128,40 @@ def guarda_chuva(c, x, y, s=1.0, cor='#5a7fb8'):
     p.stroke([(60, 90), (60, 20)], 8); p.arc(40, 24, 20, 18, 180, 360, 8)
     im = p.img.resize((max(4, int(120 * s)), max(4, int(520 * s))), Image.LANCZOS)
     c.alpha_composite(im, (int(x - im.width / 2), int(y - im.height)))
+
+
+@lru_cache(maxsize=8)
+def quintal_bg(luz='dia'):
+    """quintal da narradora: céu pela luz, muro de tijolo ao fundo (topo y≈1150), parede azul da casa à esquerda,
+    grama a partir de y≈1500, cantinho de terra à direita (x≈980, y≈1600) onde fica o vaso."""
+    c = ceu(CEU_R[luz]).copy()
+    if luz == 'frio': c.alpha_composite(Image.new('RGBA', c.size, (190, 210, 235, 70)))
+    esc = .6 if luz == 'noite' else (.85 if luz in ('neblina', 'frio') else 1.0)
+    p = Pen(W_, H_)
+    tij = mul(hexc('#c47a5a'), esc)
+    p.shape([(-20, 1500), (-20, 1150), (W_ + 20, 1150), (W_ + 20, 1500)], tij, mul(tij, .86), 7, 0)
+    for k, y in enumerate(range(1150, 1500, 50)):
+        p.stroke([(0, y), (W_, y)], 3, mul(tij, .78))
+        for x in range(-60 + (k % 2) * 60, W_, 120): p.stroke([(x, y), (x, y + 50)], 3, mul(tij, .78))
+    # varal atrás do muro
+    for x in (560, 1180): p.stroke([(x, 1150), (x, 880)], 12, mul(hexc('#6a6a6a'), esc))
+    p.arc(870, 870, 310, 50, 0, 180, 5, mul(hexc('#3a3a3a'), esc))
+    # parede da casa azul à esquerda
+    az = mul(hexc('#7fb3d5'), esc)
+    p.shape([(-20, 1560), (-20, 500), (330, 500), (330, 1560)], az, mul(az, .84), 7, 0)
+    p.shape([(140, 1180), (260, 1180), (260, 1560), (140, 1560)], mul(hexc('#6a4a32'), esc), None, 6, 0)
+    p.shape([(90, 760), (250, 760), (250, 920), (90, 920)], hexc('#f2e2a0') if luz == 'noite' else mul(hexc('#cfe0e6'), esc), None, 6, 0)
+    # grama
+    gr = {'dia': '#8cc46a', 'tarde': '#a8b46a', 'neblina': '#7f9a78', 'noite': '#3e5a3e', 'frio': '#9ab89a'}[luz]
+    p.poly([(0, 1500), (W_, 1500), (W_, H_), (0, H_)], hexc(gr))
+    p.stroke([(0, 1500), (W_, 1500)], 6)
+    rnd = random.Random(4)
+    for i in range(60):
+        x, y = rnd.randint(0, W_), rnd.randint(1540, 2200)
+        p.stroke([(x, y), (x - 8, y - 26)], 4, mul(hexc(gr), .8)); p.stroke([(x, y), (x + 8, y - 24)], 4, mul(hexc(gr), .8))
+    # cantinho de terra
+    p.shape(ell_pts(980, 1610, 170, 50, 30), mul(hexc('#8a6a4a'), esc), None, 6, 0)
+    c.alpha_composite(p.img.resize((W_, H_), Image.LANCZOS))
+    if luz == 'neblina':
+        nb = neblina_img(1.0); c.alpha_composite(nb.crop((0, 0, W_, 420)), (0, 1250))
+    return c
