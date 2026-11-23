@@ -1,0 +1,5 @@
+# inicio | post | tipo | série | jogo ou assunto | tiktok
+07:40 | 08:30 | NOTICIA | BASTIDORES | Notícia mais forte do futebol brasileiro da manhã com FATO NOVO (repercussão da 36ª: Inter x Vitória e Santos x Grêmio de segunda à noite só se trouxer fato novo, ex.: técnico demitido/mantido; ou a semana da final da Libertadores Palmeiras x Estudiantes sábado 28/11 em Montevidéu); nada repetido de temas.txt | não
+12:40 | 13:30 | PREVIA | RAIO-X | Chapecoense x Palmeiras hoje 18h (37ª, jogo principal da terça, Arena Condá a confirmar): Palmeiras vai poupar a 4 dias da final da Libertadores contra o Estudiantes (sáb 28/11, Montevidéu)? Time provável, quem descansa e o que vale na tabela, na prancheta | sim
+18:50 | 19:15 | POS-JOGO | FIM DE JOGO | Resultado de Real Madrid x PSV (Champions, fase de liga, 17h de Brasília) com foco nos brasileiros do Real; se o jogo grande da Champions foi outro (Man City x Napoli ou Arsenal x Dortmund), use o de maior repercussão com brasileiro | não
+19:50 | 20:45 | POS-JOGO | FIM DE JOGO | Resultado de Chapecoense x Palmeiras (18h, 37ª): como o Palmeiras chega à final da Libertadores de sábado contra o Estudiantes | sim
