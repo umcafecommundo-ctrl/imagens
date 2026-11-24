@@ -34,3 +34,14 @@
   -> abaixo de 60% (tempo médio/duração 42-52%): o primeiro quadro com close (21/11) melhorou a passagem dos 3 s no Instagram (63-72% contra 25-69% em 20/11) e as views (1,4-2,1 mil por post), mas metade da história ainda se perde no meio; provável motivo: a explicação da regra (cenas 2 a 4) é lenta. Comentários quase zerados mesmo com o pedido de 1 palavra.
 # Leitura de 23/11: a Parte 1 da manhã (07h) foi o post mais visto; Parte 2 às 21h do Instagram (espantalho) passou a Parte 1.
 # Na pauta: chegar mais rápido no acontecimento de hoje (regra + exceção em até 3 frases) e manter as partes perto de 40 s.
+2026-11-22 | 07h | [MISTÉRIO] O cavalo treze, parte 1 | instagram | 1640 | sem dado (66,8% passou dos 3 s; tempo médio = 46% do vídeo) | 18,1 s / 39 s | 0
+2026-11-22 | 07h | [MISTÉRIO] O cavalo treze, parte 1 | tiktok | 239 | sem dado | sem dado / 39 s | 0
+2026-11-22 | 12h | [MISTÉRIO] O cavalo treze, parte 2 | instagram | 1415 | sem dado (66,7% passou dos 3 s; tempo médio = 42% do vídeo) | 22,6 s / 54 s | 0
+2026-11-22 | 12h | [MISTÉRIO] O cavalo treze, parte 2 | tiktok | 348 | sem dado | sem dado / 54 s | 0
+2026-11-22 | 19h | [MISTÉRIO] O farol sem faroleiro, parte 1 | instagram | 300 | sem dado (59,1% passou dos 3 s; tempo médio = 38% do vídeo) | 16,1 s / 42 s | 0
+2026-11-22 | 19h | [MISTÉRIO] O farol sem faroleiro, parte 1 | tiktok | 284 | sem dado | sem dado / 42 s | 0
+2026-11-22 | 21h | [MISTÉRIO] O farol sem faroleiro, parte 2 | instagram | 448 | sem dado (57,6% passou dos 3 s; tempo médio = 25% do vídeo) | 13,7 s / 55 s | 0
+2026-11-22 | 21h | [MISTÉRIO] O farol sem faroleiro, parte 2 | tiktok | 299 | sem dado | sem dado / 55 s | 0
+2026-11-22 | todas | YouTube | youtube | sem dado (métricas de vídeo do YouTube descontinuadas no Metricool) | sem dado | sem dado | sem dado
+  -> todos abaixo de 60%: as Partes 2 de 54-55 s seguram menos (25-42%); o farol (noite, cores escuras, ilha) teve 300-450 views no Instagram contra 1,4-1,6 mil do carrossel (parque colorido, de dia). Prováveis motivos: parte longa e capa/primeiras cenas escuras. Comentários seguem zerados.
+# Leitura de 24/11: manter as partes perto de 40 s (as de hoje têm 40-43 s) e começar de dia/colorido; noite só no meio da história.
