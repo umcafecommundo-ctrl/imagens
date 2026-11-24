@@ -57,11 +57,11 @@ def objeto_img(nome, s=200):
 
 
 @lru_cache(maxsize=64)
-def estatua_img(h, obj=None, so=0):
+def estatua_img(h, obj=None, so=0, olho=False):
     """menina de pedra (largura 1.0*h, pés em y = .975h), braço direito estendido com a palma para cima; so = escala do objeto (0..4)."""
     w = int(h * 1.0); hh = int(h)
     im = Image.new('RGBA', (w, hh + 4), (0, 0, 0, 0))
-    m = kit.sprite('menino', tuple(sorted(dict(PEDRA, expr='neutro', look=0.0, blink=1, phase=0.0, walk=0.0).items())), hh, .6, False)
+    m = kit.sprite('menino', tuple(sorted(dict(PEDRA, expr='neutro', look=0.0, blink=0 if olho else 1, phase=0.0, walk=0.0).items())), hh, .6, False)
     im.alpha_composite(m, (int(w * .3 - m.width / 2), 0))
     p = Pen(400, 400); sc = 400 / h
     cx = w * .3
@@ -78,9 +78,9 @@ def estatua_img(h, obj=None, so=0):
     return im
 
 
-def put_estatua(c, x, pes, h, f, obj=None, s_obj=1.0):
+def put_estatua(c, x, pes, h, f, obj=None, s_obj=1.0, olho=False):
     """x = centro do corpo; pedra: não pisca nem respira."""
     if h < 8: return
     so = int(round(max(0, min(1, s_obj)) * 4)) if obj else 0
-    im = estatua_img(int(h // 4 * 4), obj if so else None, so)
+    im = estatua_img(int(h // 4 * 4), obj if so else None, so, olho)
     c.alpha_composite(im, (int(x - im.width * .3), int(pes - .975 * h)))
