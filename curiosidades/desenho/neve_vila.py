@@ -119,3 +119,68 @@ def pegadas(c, pts, r=26):
     d = ImageDraw.Draw(c)
     for x, y in pts:
         d.ellipse((x - r, y - r * .45, x + r, y + r * .45), fill=(200, 210, 224, 255), outline=(150, 160, 178, 255), width=3)
+
+
+# ------------------------------------------------------------------ parte 2: casinha do morro
+@lru_cache(maxsize=4)
+def interior_bg(luz='tarde'):
+    """sala da casinha: cenário 'sala' com lareira acesa no lugar da TV."""
+    base = cenarios.cenario('sala', 'golden').convert('RGBA').copy()
+    p = Pen(W_, H_)
+    p.shape([(680, 480), (1180, 480), (1180, 900), (680, 900)], hexc('#d9b44a'), hexc('#b08a2a'), 6, 0)
+    p.poly([(710, 510), (1150, 510), (1150, 870), (710, 870)], hexc('#cfe6f7'))
+    p.poly([(710, 780), (1150, 780), (1150, 870), (710, 870)], hexc('#f6f8fb'))
+    for cx, cy, r in ((930, 770, 70), (930, 660, 50), (930, 580, 36)): p.shape(ell_pts(cx, cy, r, r, 32), hexc('#ffffff'), None, 4, 0)
+    p.shape([(890, 618), (970, 618), (972, 636), (888, 636)], hexc('#d8423a'), None, 3, 0)
+    p.shape([(660, 1560), (660, 1000), (1180, 1000), (1180, 1560)], hexc('#b8574a'), hexc('#8f4038'), 6, 0)
+    p.shape([(620, 960), (1220, 960), (1220, 1010), (620, 1010)], hexc('#8a5a38'), None, 5, 0)
+    p.shape([(760, 1560), (760, 1200), (1080, 1200), (1080, 1560)], hexc('#2a1e1a'), None, 5, 0)
+    p.shape([(800, 1540), (860, 1330), (920, 1450), (980, 1300), (1040, 1540)], hexc('#f2a03a'), hexc('#e8642a'), 4, 0)
+    base.alpha_composite(p.img.resize((W_, H_), Image.LANCZOS))
+    if luz == 'tarde': base.alpha_composite(Image.new('RGBA', base.size, (255, 170, 110, 30)))
+    return base
+
+
+@lru_cache(maxsize=4)
+def parede_janela(luz='tarde'):
+    """parede de madeira da casinha com uma janela (buraco transparente em 260..980 x 520..1240)."""
+    p = Pen(W_, H_)
+    p.shape([(0, 0), (W_, 0), (W_, H_), (0, H_)], hexc('#b07a52'), None, 0, 0)
+    for y in range(80, H_, 140): p.stroke([(0, y), (W_, y)], 4, hexc('#8a5a38'))
+    p.shape([(220, 480), (1020, 480), (1020, 1280), (220, 1280)], hexc('#f4f1ea'), hexc('#d6d1c6'), 7, 0)
+    p.shape([(180, 1280), (1060, 1280), (1060, 1340), (180, 1340)], hexc('#f6f8fb'), hexc('#d6dde6'), 6, 0)
+    im = p.img.resize((W_, H_), Image.LANCZOS)
+    d = ImageDraw.Draw(im)
+    d.rectangle((260, 520, 980, 1240), fill=(0, 0, 0, 0))
+    d.line((620, 520, 620, 1240), fill=(244, 241, 234, 255), width=18); d.line((260, 880, 980, 880), fill=(244, 241, 234, 255), width=18)
+    d.rectangle((260, 520, 980, 1240), outline=(36, 30, 32, 255), width=7)
+    t = TINT.get(luz)
+    if t: im.alpha_composite(Image.new('RGBA', im.size, t[0] + (int(t[1] * .5),)), (0, 0))
+    return im
+
+
+def fumaca(c, x, y, f, s=1.0):
+    g = Image.new('RGBA', c.size, (0, 0, 0, 0)); d = ImageDraw.Draw(g)
+    for i in range(5):
+        k = ((f * .02 + i / 5) % 1)
+        r = (20 + 50 * k) * s
+        cx, cy = x + 40 * math.sin(k * 6 + i) * s, y - 260 * k * s
+        d.ellipse((cx - r, cy - r, cx + r, cy + r), fill=(235, 238, 242, int(200 * (1 - k))))
+    c.alpha_composite(g)
+
+
+def cesto_la(c, x, base, s=1.0):
+    p = Pen(400, 300)
+    for cx, cy, col in ((120, 120, '#d8423a'), (210, 100, '#3a7bd5'), (290, 125, '#f4d35e'), (170, 160, '#5a9a6a'), (250, 165, '#d8423a')):
+        p.shape(ell_pts(cx, cy, 55, 55, 32), hexc(col), mul(hexc(col), .8), 5, 0)
+    p.shape([(40, 150), (360, 150), (330, 290), (70, 290)], hexc('#b8865a'), hexc('#8a5a38'), 6, 0)
+    im = p.img.resize((int(400 * s), int(300 * s)), Image.LANCZOS)
+    c.alpha_composite(im, (int(x - im.width / 2), int(base - im.height)))
+
+
+def trico(c, x, y, s=1.0):
+    p = Pen(360, 200)
+    p.shape([(20, 60), (340, 40), (345, 120), (25, 140)], hexc('#d8423a'), hexc('#a83028'), 5, 0)
+    p.stroke([(60, 20), (160, 180)], 7, hexc('#c9c2b0')); p.stroke([(300, 10), (200, 180)], 7, hexc('#c9c2b0'))
+    im = p.img.resize((int(360 * s), int(200 * s)), Image.LANCZOS)
+    c.alpha_composite(im, (int(x - im.width / 2), int(y - im.height / 2)))
