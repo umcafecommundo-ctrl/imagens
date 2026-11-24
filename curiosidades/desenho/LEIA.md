@@ -1,3 +1,29 @@
+# MUDANÇAS DE 24/11/2026 — pedido do Luis ("cara de sono" e vídeos que não entregam). VALEM ACIMA DE TUDO ABAIXO.
+Diagnóstico: os vídeos travam em 300-500 views no TikTok (o público sai cedo). Parte 2 abrindo com "PARTE 2"/"Na parte um..."
+faz quem chega pelo feed pular; personagem com cara de sono; cenas paradas (caderno, manivela, escada); voz lenta.
+- ROSTO ACORDADO (sombrio.py já corrigido): sem olheiras, íris azul viva, sobrancelhas altas, neutro com leve sorriso de canto.
+  Nunca desenhe olheiras, pálpebra caída ou olhar parado. Expressões: neutro, curioso, preocupado, desconfiado, choque, medo,
+  sorriso. Use PELO MENOS 3 expressões diferentes por vídeo e passe por uma intermediária antes do susto (neutro -> curioso ->
+  choque), nunca de neutro direto para choque. Mude o `look` (para onde o olho mira) durante a frase: -1, 0, 1.
+- NADA PARADO MAIS DE 2 s: a cada 2 s algo muda (corte, zoom rápido de 8-12% numa palavra forte, troca de expressão, HUD entrando).
+  Câmera sempre em movimento (zoom multiplicado por (1 + .0012 * f) ou panorâmica lenta). Ação repetida em loop (subir escada,
+  girar manivela, andar no mesmo lugar) no máximo 1,5 s e corta. Texto escrito/caderno/placar sendo preenchido: no máximo 1 vez
+  por vídeo, no máximo 2 s, com zoom e tremida, e já aparece quase todo escrito.
+- NADA DE FUNDO VAZIO: personagem nunca fica sozinho num fundo liso; toda cena tem cenário que combina com a frase e o personagem
+  ocupa a tela (sem metade de cima vazia). Duas cenas seguidas iguais (mesmo fundo, mesmo enquadramento) são proibidas: mude o
+  cenário ou o enquadramento (close, plano médio, plano aberto).
+- FIM CURTO: a fala final é SÓ o pedido de comentário (a pergunta fica escrita no cartão). O cartão final dura no máximo ~2 s
+  (o motor já segura só 1 s depois da última frase).
+- PARTE 2 COMEÇA NA AÇÃO: o primeiro quadro NÃO mostra "PARTE 2" e a primeira frase NÃO é "Na parte um...". Abra com o momento mais
+  forte desta parte (ex.: "Quando eu cheguei no topo do farol, a luz acendeu sozinha."). O contexto vem em meia frase DEPOIS,
+  dentro da 2ª ou 3ª frase ("...a mesma chave que apareceu na minha porta"). O selo pequeno 'PARTE 2' só entra depois de 1,5 s,
+  pequeno no canto de cima, por 1,5 s. A capa da Parte 2 = close + gancho novo (sem a palavra PARTE).
+- PARTE 1 também abre direto no gancho; o carimbo 'PARTE 1' é pequeno no canto (não é o texto principal da capa).
+- COMENTÁRIO: "Comenta QUERO" teve 0 comentários. Agora as 2 partes terminam com uma pergunta de sim ou não:
+  FALA_TIKTOK = "Comenta sim ou não." ; CTA_TEXTO = a pergunta curta (até ~16 letras, ex.: "VOCÊ ABRIRIA?").
+  Parte 1: pergunta sobre o que o narrador deve fazer ("Eu subo no farol?"); Parte 2: pergunta sobre o desfecho.
+- VOZ: RATE = '+12%' (antes '+4%'), PITCH = '-4Hz'. Frases curtas; pausa ("...") antes da revelação.
+
 # VÍDEO LONGO horizontal — Curiosidades da IA (pedido do Luis em 22/11/2026)
 
 A cada 2 dias, 1 vídeo NORMAL do YouTube (não Short): horizontal 16:9 (1920x1080), ~2 minutos (110 a 130 s), só no YouTube,
@@ -53,7 +79,7 @@ Exemplo oficial completo: `exemplos/misterio/historia.py` (copie e reescreva). K
 - Personagens: `put_menino(c, x, pés, altura, f, walk=0|1, flip, expr, look, pele, cabelo, penteado, roupa, calca, oculos,
   barba, velho)`; expr: neutro, preocupado, choque, sorriso; penteado: curto, coque, longo, careca. O narrador ("eu") é
   sempre o mesmo personagem dentro de uma história (mesmas cores nas 2 partes). Outros personagens no mesmo traço (olhos
-  enormes com olheiras). Bichos/objetos novos com a Pen, contorno escuro, cores lisas.
+  enormes, SEM olheiras desde 24/11/2026). Bichos/objetos novos com a Pen, contorno escuro, cores lisas.
 - Andar com o cenário passando: `rua(f, scroll=f * 9, luz=..., neb=...)` + `put_menino(..., walk=1)`. Cenários prontos:
   `rua` (rua com casas e postes), `put_torre` (torre de relógio), e todos os `CEN('nome')` do kit (quarto, sala, cozinha,
   escola, praia, floresta, espaco...). Desenhe com a Pen o lugar que a história pedir (metrô, ginásio, farol, prédio).

@@ -124,6 +124,27 @@ e) RESERVA: fetch+rebase, releia `futebol/temas.txt` (outro post pode ter reserv
 Pasta `P=futebol/<AAAA-MM-DD>-<HHhMM>` (ex.: futebol/2026-11-21-18h50). Copie `futebol/2026-11-20-07h/historia.py` e REESCREVA tudo
 (`from kit import *; import kit; from futebol import *; from futebol2 import *; from futebol3 import *`). Fontes no comentário do topo.
 
+**MUDANÇAS DE 24/11/2026 (pedido do Luis: vídeos travando em 300-500 views e "cara de sono"; valem acima das regras abaixo):**
+- ROSTO ACORDADO (sombrio.py já corrigido): sem olheiras, íris azul viva, sobrancelhas altas, neutro com leve sorriso de canto.
+  Nunca desenhe olheiras, pálpebra caída ou olhar parado. Expressões: neutro, curioso, preocupado, desconfiado, choque, medo,
+  sorriso. Use PELO MENOS 3 expressões diferentes por vídeo e passe por uma intermediária antes do susto (neutro -> curioso ->
+  choque), nunca de neutro direto para choque. Mude o `look` (para onde o olho mira) durante a frase: -1, 0, 1.
+- NADA PARADO MAIS DE 2 s: a cada 2 s algo muda (corte, zoom rápido de 8-12% numa palavra forte, troca de expressão, HUD entrando).
+  Câmera sempre em movimento (zoom multiplicado por (1 + .0012 * f) ou panorâmica lenta). Ação repetida em loop (subir escada,
+  girar manivela, andar no mesmo lugar) no máximo 1,5 s e corta. Texto escrito/caderno/placar sendo preenchido: no máximo 1 vez
+  por vídeo, no máximo 2 s, com zoom e tremida, e já aparece quase todo escrito.
+- NADA DE FUNDO VAZIO: personagem nunca fica sozinho num fundo liso; toda cena tem cenário que combina com a frase e o personagem
+  ocupa a tela (sem metade de cima vazia). Duas cenas seguidas iguais (mesmo fundo, mesmo enquadramento) são proibidas: mude o
+  cenário ou o enquadramento (close, plano médio, plano aberto).
+- FIM CURTO: a fala final é SÓ o pedido de comentário (a pergunta fica escrita no cartão). O cartão final dura no máximo ~2 s
+  (o motor já segura só 1 s depois da última frase).
+- SEGUNDO 1 FORTE: depois do close da capa (~1,2 s), corte para uma cena CHEIA (lance no estádio, telão, prancheta, vestiário),
+  nunca para um jogador parado num fundo azul vazio. Jogador sempre num cenário, com ação (comemora, lamenta, aponta, corre).
+- "mostra jogador -> sobe número" no máximo 1 vez por vídeo; a 2ª conta vai para o telão ou para a prancheta.
+- Placar/número aparece JÁ preenchido com batida (s.thunk), nunca uma caixa vazia esperando o número.
+- FALA_TIKTOK = "Comenta <CTA_PALAVRA>." (só isso; a pergunta fica no CTA_TEXTO do cartão). Ex.: "Comenta sim ou não."
+- VOZ: RATE = '+18%' (antes '+15%'), frases de no máximo ~12 palavras; "..." antes do número decisivo.
+
 **Identidade visual (obrigatória, não muda):**
 - Desenho animado narrado 100% em código; NUNCA escudos, logos de clubes/ligas/patrocinadores, taças reais nem rosto de jogador real.
   Times por PLAQUINHAS com o nome nas cores do clube (put_placa) e jogadores genéricos com camisa nas cores (put_atleta; cores em
@@ -169,7 +190,7 @@ Pasta `P=futebol/<AAAA-MM-DD>-<HHhMM>` (ex.: futebol/2026-11-21-18h50). Copie `f
    - clima do elenco, tristeza/alegria pós-jogo, pressão: `vestiario(cores, faixa)`;
    - datas: `calendario(dia, mes)`; títulos/finais: `trofeu()`. Câmera sempre em movimento.
 
-**6) VOZ E RITMO**: RATE '+15%'; frases curtas; ponha o número no FIM da frase depois de vírgula ou "...", para dar uma pausa antes
+**6) VOZ E RITMO**: RATE '+18%' (24/11/2026); frases curtas; ponha o número no FIM da frase depois de vírgula ou "...", para dar uma pausa antes
    dele ("E o placar final... dois a um."). Um som de impacto (`s.thunk`) em CADA número, gol e virada de cena, e `s.ting` na resposta
    da pergunta. Corte seco entre cenas (o whoosh é automático).
 

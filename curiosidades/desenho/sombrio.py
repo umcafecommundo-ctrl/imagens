@@ -153,10 +153,13 @@ def interrog(im, x, y, f, s):
 # ------------------------------------------------------------------ personagem: menino de olhos grandes
 
 
+IRIS, IRIS_D = hexc('#4f8fb8'), hexc('#3c7aa3')   # íris azul viva (antes cinza apagado)
+
+
 def menino(phase=0.0, walk=0.0, expr='neutro', look=0.0, blink=0, tilt=0.0, pele='#e6c8ad', cabelo='#26241f',
            penteado='curto', roupa='#7b7863', calca='#2d2f32', oculos=False, barba=False, velho=False):
     """pessoa de olhos grandes (estilo MISTÉRIO), 600x1000, pés em y≈975. walk 0..1 = caminhada; phase = fase.
-    penteado: curto, coque, longo, careca; velho=True põe rugas e cabelo ralo; expr: neutro, preocupado, choque, sorriso."""
+    penteado: curto, coque, longo, careca; velho=True põe rugas e cabelo ralo; expr: neutro, curioso, preocupado, desconfiado, choque, medo, sorriso."""
     PELE, PELED = hexc(pele), mul(hexc(pele), .87)
     JAQ, JAQD = hexc(roupa), mul(hexc(roupa), .77)
     CALCA, CABELO = hexc(calca), hexc(cabelo)
@@ -198,32 +201,45 @@ def menino(phase=0.0, walk=0.0, expr='neutro', look=0.0, blink=0, tilt=0.0, pele
         for side in (-1, 1): p.arc(300 + side * 112, 365, 22, 14, 200, 340, 4, PELED)
     if barba:
         p.shape([(170, 360), (190, 450), (250, 470), (350, 470), (410, 450), (430, 360), (380, 420), (220, 420)], CABELO, None, 5, 0)
-    # olhos grandes com olheiras
-    for ex in (238, 362):
+    # olhos grandes e ACORDADOS (24/11/2026: sem olheiras, íris viva, sobrancelha que mostra a emoção)
+    for i, ex in enumerate((238, 362)):
         ey = 318
-        p.arc(ex, ey + 42, 46, 18, 20, 160, 9, hexc('#8b7d84'))
+        sg = -1 if i == 0 else 1
         if blink:
-            p.stroke([(ex - 44, ey), (ex + 44, ey)], 8); continue
-        r = 56 if expr == 'choque' else 50
-        p.dot(ex, ey, r, hexc('#f4f4f0'), 7)
-        lx = ex + look * 12
-        p.dot(lx, ey + 2, 33, hexc('#93a2a3'), 4)
-        p.dot(lx, ey + 2, 17 if expr != 'choque' else 12, hexc('#111214'))
-        p.dot(lx + 9, ey - 9, 7, hexc('#ffffff'))
-        if expr == 'preocupado':
-            p.stroke([(ex - 40, ey - 70 + (8 if ex < 300 else -8) * 0), (ex + 40, ey - 70 - (10 if ex < 300 else -10))], 7)
+            p.arc(ex, ey - 4, 40, 14, 20, 160, 8)
+        else:
+            r = 56 if expr in ('choque', 'medo') else 50
+            p.dot(ex, ey, r, hexc('#fbfbf7'), 7)
+            lx = ex + look * 12
+            p.dot(lx, ey + 2, 34 if expr not in ('choque', 'medo') else 26, IRIS, 4)
+            p.dot(lx, ey + 2, 19 if expr not in ('choque', 'medo') else 10, hexc('#111214'))
+            p.dot(lx + 10, ey - 10, 9, hexc('#ffffff')); p.dot(lx - 8, ey + 10, 4, hexc('#ffffff'))
+        # sobrancelhas sempre visíveis
+        by = 264
+        if expr in ('preocupado', 'medo'):
+            p.stroke([(ex - 40 * sg, by - 4), (ex + 40 * sg, by + 14)], 9, CABELO)
+        elif expr == 'choque':
+            p.arc(ex, by - 14, 42, 16, 200, 340, 9, CABELO)
+        elif expr == 'curioso':
+            p.arc(ex, by - (16 if i == 1 else 0), 40, 12, 200, 340, 9, CABELO)
+        elif expr == 'desconfiado':
+            p.stroke([(ex - 40 * sg, by + 14), (ex + 40 * sg, by)], 9, CABELO)
+        else:
+            p.arc(ex, by - 6, 40, 12, 200, 340, 8, CABELO)
     if oculos:
         for ex in (238, 362): p.arc(ex, 318, 60, 60, 0, 360, 7)
         p.stroke([(298, 318), (302, 318)], 7)
     # boca
     if expr == 'sorriso':
         p.arc(300, 410, 34, 20, 20, 160, 7)
-    elif expr == 'choque':
-        p.shape(ell_pts(300, 418, 24, 30, 20), hexc('#7a2e2e'), None, 5, 0)
+    elif expr in ('choque', 'medo'):
+        p.shape(ell_pts(300, 418, 24, 30 if expr == 'choque' else 20, 20), hexc('#7a2e2e'), None, 5, 0)
+    elif expr == 'curioso':
+        p.shape(ell_pts(306, 420, 14, 14, 16), hexc('#7a2e2e'), None, 5, 0)
     elif expr == 'preocupado':
         p.arc(300, 428, 26, 12, 200, 340, 7)
-    else:
-        p.stroke([(282, 420), (318, 420)], 7)
+    else:   # neutro: leve sorriso de canto (antes era uma linha reta, parecia sono)
+        p.arc(302, 408, 24, 12, 30, 150, 7)
     im = p.img.resize((600, 1000), Image.LANCZOS)
     return im.rotate(tilt, Image.BICUBIC, center=(300, 975)) if tilt else im
 
@@ -516,7 +532,8 @@ def mao_dir(x, feet, h):
 # ------------------------------------------------------------------ CLOSE no rosto (pedido do Luis em 20/11/2026)
 def rosto(expr='neutro', look=0.0, blink=0, pele='#e6c8ad', cabelo='#26241f', penteado='curto', roupa='#7b7863',
           oculos=False, barba=False, velho=False, suor=0, tremor=0, calca=None):
-    """rosto em close (1000x1700): cabeça grande + ombros até embaixo. expr: neutro, preocupado, choque, sorriso, medo, desconfiado."""
+    """rosto em close (1000x1700): cabeça grande + ombros até embaixo. expr: neutro, curioso, preocupado, choque, sorriso, medo, desconfiado.
+    24/11/2026 (pedido do Luis, "cara de sono"): sem olheiras, íris viva, sobrancelhas altas, piscada em arco."""
     K = 2.6
     def T(x, y): return (500 + (x - 300) * K, 560 + (y - 300) * K)
     def TP(pts): return [T(x, y) for x, y in pts]
@@ -550,17 +567,16 @@ def rosto(expr='neutro', look=0.0, blink=0, pele='#e6c8ad', cabelo='#26241f', pe
     for i, ex in enumerate((238, 362)):
         ey = 318
         cx, cy = T(ex, ey)
-        p.arc(*T(ex, ey + 42), 46 * K, 18 * K, 20, 160, 14, hexc('#8b7d84'))
         if blink:
-            p.stroke([T(ex - 44, ey), T(ex + 44, ey)], 12)
+            p.arc(cx, cy - 10, 40 * K, 14 * K, 20, 160, 12)
         else:
             r = (56 if expr in ('choque', 'medo') else 50) * K
             if expr == 'desconfiado': r = 46 * K
             p.dot(cx, cy, r, hexc('#f4f4f0'), 10)
             lx = cx + look * 30 + (math.sin(tremor * 7 + i) * 6 if tremor else 0)
             iris = 33 * K * (.8 if expr in ('choque', 'medo') else 1)
-            p.dot(lx, cy + 4, iris, hexc('#93a2a3'), 6)
-            p.dot(lx, cy + 4, iris * .82, hexc('#7f9091'))
+            p.dot(lx, cy + 4, iris, IRIS, 6)
+            p.dot(lx, cy + 4, iris * .82, IRIS_D)
             pup = (8 if expr in ('choque', 'medo') else 17) * K
             p.dot(lx, cy + 4, pup, hexc('#111214'))
             p.dot(lx + 24, cy - 26, 20, hexc('#ffffff')); p.dot(lx - 20, cy + 22, 9, hexc('#ffffff'))
@@ -577,8 +593,10 @@ def rosto(expr='neutro', look=0.0, blink=0, pele='#e6c8ad', cabelo='#26241f', pe
             p.arc(bx, by - 10, 70, 26, 200, 340, 14, CAB)
         elif expr in ('desconfiado',):
             p.stroke([(bx - 70, by + (20 if i == 0 else -6)), (bx + 70, by + (-6 if i == 0 else 20))], 14, CAB)
-        else:
-            p.arc(bx, by, 66, 16, 200, 340, 12, CAB)
+        elif expr == 'curioso':
+            p.arc(bx, by - (34 if i == 1 else 6), 70, 22, 200, 340, 14, CAB)
+        else:   # neutro/sorriso: sobrancelha alta e arqueada (olhar atento, não sonolento)
+            p.arc(bx, by - 18, 68, 22, 200, 340, 13, CAB)
     if oculos:
         for ex in (238, 362): p.arc(*T(ex, 318), 60 * K, 60 * K, 0, 360, 12)
     # boca
@@ -592,8 +610,10 @@ def rosto(expr='neutro', look=0.0, blink=0, pele='#e6c8ad', cabelo='#26241f', pe
         p.arc(mx, my + 14, 50, 20, 200, 340, 11)
     elif expr == 'desconfiado':
         p.stroke([(mx - 40, my + 6), (mx + 50, my - 6)], 11)
-    else:
-        p.stroke([(mx - 40, my), (mx + 40, my)], 11)
+    elif expr == 'curioso':
+        p.shape([T(x, y) for x, y in ell_pts(306, 425, 14, 14, 20)], hexc('#7a2e2e'), None, 8, 0)
+    else:   # neutro: leve sorriso de canto
+        p.arc(mx + 6, my - 16, 52, 24, 30, 150, 11)
     if suor:
         sx, sy = T(440, 210)
         p.shape([(sx, sy - 40), (sx + 24, sy + 10), (sx, sy + 34), (sx - 24, sy + 10)], hexc('#bfe3f5'), None, 6, 0)

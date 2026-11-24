@@ -22,7 +22,7 @@ from kit import *
 from PIL import ImageDraw, ImageFont
 
 VOZ = 'pt-BR-AntonioNeural'; RATE = '+15%'
-LEAD, TAIL, END_HOLD = .15, .35, 1.6
+LEAD, TAIL, END_HOLD = .15, .35, 1.0   # 24/11/2026: fim mais curto (antes 1.6 s parado)
 ARROBA = '@curiosidadesda.iia'
 
 
@@ -76,7 +76,7 @@ def timing(h):
         k = round((LEAD + w['t'] + w['d'] + (END_HOLD if i == n - 1 else TAIL)) * FPS)
         SC.append((st, st + k)); st += k
     w = F[n]['words'][-1]
-    cta = round((LEAD + w['t'] + w['d'] + .7) * FPS)
+    cta = round((LEAD + w['t'] + w['d'] + .5) * FPS)
     return SC, st, cta
 
 
