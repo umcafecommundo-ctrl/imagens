@@ -45,3 +45,17 @@
 2026-11-22 | todas | YouTube | youtube | sem dado (métricas de vídeo do YouTube descontinuadas no Metricool) | sem dado | sem dado | sem dado
   -> todos abaixo de 60%: as Partes 2 de 54-55 s seguram menos (25-42%); o farol (noite, cores escuras, ilha) teve 300-450 views no Instagram contra 1,4-1,6 mil do carrossel (parque colorido, de dia). Prováveis motivos: parte longa e capa/primeiras cenas escuras. Comentários seguem zerados.
 # Leitura de 24/11: manter as partes perto de 40 s (as de hoje têm 40-43 s) e começar de dia/colorido; noite só no meio da história.
+2026-11-23 | 07h | [MISTÉRIO] A nuvem da casa 27, parte 1 | instagram | 1789 | sem dado (74,3% passou dos 3 s; tempo médio = 54% do vídeo) | 24,7 s / 46 s | 0
+2026-11-23 | 07h | [MISTÉRIO] A nuvem da casa 27, parte 1 | tiktok | 424 | sem dado | sem dado / 48 s | 0
+2026-11-23 | 12h | [MISTÉRIO] A nuvem da casa 27, parte 2 | instagram | 1209 | sem dado (68,2% passou dos 3 s; tempo médio = 46% do vídeo) | 20,8 s / 45 s | 0
+2026-11-23 | 12h | [MISTÉRIO] A nuvem da casa 27, parte 2 | tiktok | 757 | sem dado | sem dado / 49 s | 0
+2026-11-23 | 19h | [MISTÉRIO] As batidas das três, parte 1 | instagram | 289 | sem dado (63,4% passou dos 3 s; tempo médio = 40% do vídeo) | 16,7 s / 42 s | 0
+2026-11-23 | 19h | [MISTÉRIO] As batidas das três, parte 1 | tiktok | 189 | sem dado | sem dado / 44 s | 0
+2026-11-23 | 21h | [MISTÉRIO] As batidas das três, parte 2 | instagram | 410 | sem dado (59,6% passou dos 3 s; tempo médio = 33% do vídeo) | 15,6 s / 47 s | 1
+2026-11-23 | 21h | [MISTÉRIO] As batidas das três, parte 2 | tiktok | 314 | sem dado | sem dado / 52 s | 0
+2026-11-23 | todas | YouTube | youtube | sem dado (métricas de vídeo do YouTube descontinuadas no Metricool) | sem dado | sem dado | sem dado
+  -> todos abaixo de 60%. A nuvem (rua de dia, colorida, 07h/12h) foi a melhor do dia: 1,8 mil e 1,2 mil no Instagram, 757 no TikTok
+     (melhor Parte 2 no TikTok até agora). A estação espacial (noite, corredor escuro, 19h/21h) caiu para 190-410 views: de novo
+     as histórias de noite/escuras e as das 19h/21h rendem bem menos. Provável motivo: capa e começo escuros + horário da noite.
+# Leitura de 25/11: as histórias de dia e coloridas (rua, parque, nuvem) seguram mais; manter capa clara/quente mesmo em história de
+# noite (luz 'tarde' na capa) e começar de dia. Comentários seguem quase zerados.
