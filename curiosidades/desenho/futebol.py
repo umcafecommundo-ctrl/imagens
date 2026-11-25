@@ -87,6 +87,7 @@ TIMES = {
     'AL-NASSR': (('#f5d000', '#1d3f8f', '#1d3f8f'), None),
     'AL-AHLI': (('#1f7a4a', '#ffffff', '#ffffff'), None),
     'PSV': (('#d4282c', '#ffffff', '#111111'), 'v'),
+    'ROMA': (('#8e1f2f', '#f0b323', '#8e1f2f'), None),
     'GENÉRICO': (('#555a66', '#555a66', '#555a66'), None),
 }
 
