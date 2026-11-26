@@ -88,6 +88,7 @@ TIMES = {
     'AL-AHLI': (('#1f7a4a', '#ffffff', '#ffffff'), None),
     'PSV': (('#d4282c', '#ffffff', '#111111'), 'v'),
     'ROMA': (('#8e1f2f', '#f0b323', '#8e1f2f'), None),
+    'OLYMPIACOS': (('#c8102e', '#ffffff', '#ffffff'), 'v'),
     'GENÉRICO': (('#555a66', '#555a66', '#555a66'), None),
 }
 
