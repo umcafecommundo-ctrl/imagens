@@ -59,3 +59,17 @@
      as histórias de noite/escuras e as das 19h/21h rendem bem menos. Provável motivo: capa e começo escuros + horário da noite.
 # Leitura de 25/11: as histórias de dia e coloridas (rua, parque, nuvem) seguram mais; manter capa clara/quente mesmo em história de
 # noite (luz 'tarde' na capa) e começar de dia. Comentários seguem quase zerados.
+2026-11-24 | 07h | [MISTÉRIO] A estátua de mão aberta, parte 1 | instagram | 1604 | 75,1% passou dos 3 s (tempo médio = 67% do vídeo) | 26,9 s / 40 s | 0
+2026-11-24 | 07h | [MISTÉRIO] A estátua de mão aberta, parte 1 | tiktok | 388 | sem dado | sem dado / 42 s | 0
+2026-11-24 | 12h | [MISTÉRIO] A estátua de mão aberta, parte 2 | instagram | 270 | 52,7% passou dos 3 s (tempo médio = 27% do vídeo) | 11,2 s / 41 s | 0
+2026-11-24 | 12h | [MISTÉRIO] A estátua de mão aberta, parte 2 | tiktok | 336 | sem dado | sem dado / 45 s | 0
+2026-11-24 | 19h | [MISTÉRIO] O boneco de neve que anda, parte 1 | instagram | 1379 | 69,1% passou dos 3 s (tempo médio = 85% do vídeo) | 36,6 s / 43 s | 0
+2026-11-24 | 19h | [MISTÉRIO] O boneco de neve que anda, parte 1 | tiktok | 391 | sem dado | sem dado / 45 s | 0
+2026-11-24 | 21h | [MISTÉRIO] O boneco de neve que anda, parte 2 | instagram | 423 | 56,1% passou dos 3 s (tempo médio = 29% do vídeo) | 12,7 s / 43 s | 0
+2026-11-24 | 21h | [MISTÉRIO] O boneco de neve que anda, parte 2 | tiktok | 361 | sem dado | sem dado / 46 s | 0
+2026-11-24 | todas | YouTube | youtube | sem dado (métricas de vídeo do YouTube descontinuadas no Metricool) | sem dado | sem dado | sem dado
+  -> As Partes 1 de 24/11 (primeiro dia com as mudanças de 24/11: rosto acordado, voz +12%, nada parado) foram as melhores até agora no
+     Instagram: 75% e 69% passaram dos 3 s e o tempo médio subiu para 67-85% do vídeo; o boneco de neve (19h) quebrou a regra de que
+     a noite rende menos (1,4 mil views). As Partes 2 ficaram abaixo de 60% (53-56%, tempo médio ~28%) e com 270-420 views:
+     provável motivo: quem chega pelo feed não viu a parte 1 e sai cedo; a Parte 2 precisa de um gancho próprio que funcione sozinho.
+     TikTok segue travado em 340-390 views; comentários seguem zerados.
