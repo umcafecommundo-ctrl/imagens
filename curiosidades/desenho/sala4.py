@@ -116,12 +116,12 @@ def lousa_bg(linhas=(), luz='dia', forca=0, estrela=False):
     return im
 
 
-def put_risquinhos(c, n, x0=380, y0=1450, s=1.0):
+def put_risquinhos(c, n, x0=330, y0=1450, s=1.0, gap=150, w=110):
     """risquinhos da forca (palavra) na lousa grande, no palco."""
     d = ImageDraw.Draw(c)
     for k in range(n):
-        x = x0 + k * 70
-        d.line((x, y0, x + 50, y0), fill=(238, 242, 232, int(255 * s)), width=7)
+        x = x0 + k * gap
+        d.line((x, y0, x + w, y0), fill=(238, 242, 232, int(255 * s)), width=8)
 
 
 @lru_cache(maxsize=4)
@@ -130,3 +130,55 @@ def papel_img(w=220):
     p.shape([(20, 40), (240, 20), (235, 170), (25, 185)], (252, 250, 240), hexc('#dcd6c4'), 5, 8)
     p.stroke([(60, 80), (190, 70)], 5, hexc('#7a8aa8')); p.stroke([(60, 115), (170, 108)], 5, hexc('#7a8aa8'))
     return p.img.resize((w, int(w * 200 / 260)), Image.LANCZOS)
+
+
+def put_letras(c, letras, x0=330, y0=1450, s=1.0, size=130, gap=150, w=110):
+    """letras de giz em cima dos risquinhos (letras = 'A_A_' com '_' = vazio)."""
+    fnt = font(F_MAO, size); d = ImageDraw.Draw(c)
+    for k, ch in enumerate(letras):
+        if ch == '_': continue
+        x = x0 + k * gap + w / 2
+        tw = d.textlength(ch, font=fnt)
+        d.text((x - tw / 2, y0 - size * 1.15), ch, font=fnt, fill=(238, 242, 232, int(255 * s)))
+
+
+def put_giz(c, x, y, rot=0):
+    g = Image.new('RGBA', (130, 40), (0, 0, 0, 0)); d = ImageDraw.Draw(g)
+    d.rounded_rectangle((4, 6, 126, 34), 10, fill=(250, 250, 244), outline=(60, 50, 60), width=4)
+    g = g.rotate(rot, expand=True, resample=Image.BICUBIC)
+    c.alpha_composite(g, (int(x - g.width / 2), int(y - g.height / 2)))
+
+
+@lru_cache(maxsize=4)
+def caixa_img(w=360):
+    p = Pen(400, 300)
+    p.shape([(30, 110), (370, 110), (350, 290), (50, 290)], hexc('#b98a55'), hexc('#97693c'), 6, 10)
+    p.shape([(20, 70), (380, 70), (370, 120), (30, 120)], hexc('#cf9e66'), None, 6, 0)
+    p.stroke([(150, 180), (250, 180)], 6, hexc('#7a5530'))
+    return p.img.resize((w, int(w * 300 / 400)), Image.LANCZOS)
+
+
+@lru_cache(maxsize=4)
+def caderno_bg(luz='tarde'):
+    """caderno velho aberto em close (mesa de madeira), páginas com jogos da forca e o nome CAIO a lápis."""
+    W, H = W_, H_
+    p = Pen(W, H)
+    mesa = {'tarde': '#9a6a42', 'dia': '#b07a4a'}[luz]
+    p.poly([(0, 0), (W, 0), (W, H), (0, H)], hexc(mesa))
+    for y in range(80, H, 160): p.stroke([(0, y), (W, y + 30)], 4, mul(hexc(mesa), .85))
+    pag = hexc('#efe2bf')
+    p.shape([(80, 560), (610, 600), (610, 1720), (100, 1690)], pag, mul(pag, .9), 6, 10)
+    p.shape([(632, 600), (1160, 560), (1140, 1690), (632, 1720)], pag, mul(pag, .9), 6, 10)
+    for y in range(700, 1680, 62):
+        p.stroke([(120, y), (590, y + 10)], 2, hexc('#a9bcd4')); p.stroke([(650, y + 10), (1120, y)], 2, hexc('#a9bcd4'))
+    im = Image.new('RGBA', (W, H), (0, 0, 0, 255))
+    im.alpha_composite(p.img.resize((W, H), Image.LANCZOS))
+    d = ImageDraw.Draw(im); lap = (70, 70, 80); fnt = font(F_MAO, 70)
+    for (ox, oy) in ((170, 680), (720, 680), (170, 1180), (720, 1180)):
+        for seg in [((ox, oy + 230), (ox + 150, oy + 230)), ((ox + 40, oy + 230), (ox + 40, oy)), ((ox + 40, oy), (ox + 120, oy)),
+                    ((ox + 120, oy), (ox + 120, oy + 30))]:
+            d.line(seg, fill=lap, width=5)
+        d.ellipse((ox + 100, oy + 30, ox + 140, oy + 70), outline=lap, width=5)
+        d.text((ox + 200, oy + 60), 'CAIO', font=fnt, fill=(60, 60, 150))
+        for k in range(4): d.line((ox + 200 + k * 60, oy + 200, ox + 240 + k * 60, oy + 200), fill=lap, width=5)
+    return im
