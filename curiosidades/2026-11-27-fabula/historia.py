@@ -128,13 +128,13 @@ def rua_borrada(luz):
 def s1(f):
     c = rua_borrada('dia').copy()
     m, a, ca = wt(1, 'mae') - 3, wt(1, 'amigo') - 3, wt(1, 'cachorro') - 3
-    xs = V((760, 1104, 1450), (560, 1104, 1650)); by = V((1000, 960, 1000), (1060, 980, 1060)); w = V(300, 260)
+    xs = V((760, 1104, 1450), (560, 1104, 1650)); by = V((1000, 960, 1000), (1180, 1130, 1180)); w = V(300, 260)
     if f < m:
         put_pote(c, 1104, by[1] + 10 * math.sin(f * .2), w * back(ramp(f, 2, 12)), .45, '?')
     for i, (k, nm, nv) in enumerate(((m, 'MÃE', .8), (a, 'AMIGO', .6), (ca, 'CACHORRO', .9))):
         if f >= k:
             put_pote(c, xs[i], by[i] + 8 * math.sin(f * .12 + i), w * back(ramp(f, k, k + 9)), nv, nm)
-    pessoa(c, 1104, V(1980, 1880), V(860, 760), f, LIPE, expr='curioso' if f < ca else 'sorriso', look=lerp(-.75, .75, smooth(ramp(f, m, ca))))
+    pessoa(c, 1104, V(1980, 1870), V(860, 640), f, LIPE, expr='curioso' if f < ca else 'sorriso', look=lerp(-.75, .75, smooth(ramp(f, m, ca))))
     if f >= ca - 4:
         x = lerp(2300, 1560, easeOut(ramp(f, ca - 4, ca + 18)))
         put_cachorro(c, x, V(2000, 1900), 300, f, andando=f < ca + 18, flip=True)
@@ -387,7 +387,7 @@ def s17(f):
         x = lerp(2350, 1950, easeOut(ramp(f, ch - 6, ch + 16)))
         pessoa(c, x, 1760, KID, f, LIPE, seed=2, walk=1 if f < ch + 16 else 0, flip=True, expr='curioso' if f < ch + 12 else 'sorriso', look=-.75)
     t = smooth(ramp(f, ch - 6, ch + 20))
-    return c, cam(lerp(V(1350, 1104), V(1600, 1300), t), V(1200, 1130), lerp(1.35, 1.2, t) * (1 + .0006 * f), lerp(1.05, 1.0, t)), 'vivo'
+    return c, cam(lerp(V(1350, 1104), V(1600, 1300), t), V(1200, 1130), lerp(1.35, 1.2, t) * (1 + .0006 * f), lerp(1.1, 1.04, t) * (1 + .0006 * f)), 'vivo'
 
 
 def s18(f):
