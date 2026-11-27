@@ -209,7 +209,7 @@ def build_audio(h, SC, total, cta_len, with_cta, pasta):
         return (np.sign(np.sin(2 * np.pi * freq * t)) * .35 + np.sin(2 * np.pi * freq * t) * .65) * env(n, .003, .12 * bright)
 
     twist = SC[getattr(h, 'TWIST', len(SC) - 1)][0]
-    stop = twist / FPS; beat = 60 / 120
+    stop = (0 if hasattr(h, 'TRILHA') else twist / FPS); beat = 60 / 120   # TRILHA(SC, N, SR) na historia.py = trilha própria (fábula)
     notes = dict(C=261.63, D=293.66, E=329.63, F=349.23, G=392.0, A=440.0, B=493.88)
     mel = 'E G A G E C D E G E D C D G E C'.split(); bass = [130.81, 98.0, 110.0, 98.0]
     b, i = 0.0, 0
@@ -226,7 +226,8 @@ def build_audio(h, SC, total, cta_len, with_cta, pasta):
         b += beat; i += 1
     e = int(stop * SR); fs = int(.02 * SR); music[max(0, e - fs):e] *= np.linspace(1, 0, min(fs, e)); music[e:] = 0
     dn = N - fr(twist); td = np.arange(dn) / SR
-    add(music, (np.sin(2 * np.pi * 55 * td) + .5 * np.sin(2 * np.pi * 82.4 * td)) * np.minimum(1, td / .6) * np.clip((dn / SR - td) / .4, 0, 1) * .25, fr(twist))
+    if hasattr(h, 'TRILHA'): music[:] = h.TRILHA(SC, N, SR)[:N]
+    else: add(music, (np.sin(2 * np.pi * 55 * td) + .5 * np.sin(2 * np.pi * 82.4 * td)) * np.minimum(1, td / .6) * np.clip((dn / SR - td) / .4, 0, 1) * .25, fr(twist))
 
     class S:  # efeitos para historia.SFX(s)
         W = staticmethod(lambda si, w, nth=0: SC[si][0] + wt(si, w, nth))
@@ -308,9 +309,9 @@ def build_audio(h, SC, total, cta_len, with_cta, pasta):
 
     for si in range(1, len(SC)): S.whoosh(SC[si][0], .5, .45)
     if hasattr(h, 'SFX'): h.SFX(S)
-    n = int(2.2 * SR); tt = np.arange(n) / SR  # sting na virada
+    n = int(2.2 * SR); tt = np.arange(n) / SR  # sting na virada (STING = False na historia.py desliga)
     stab = sum(np.sign(np.sin(2 * np.pi * f * tt)) for f in (110, 130.8, 164.8)) / 3
-    add(sfx, np.sin(2 * np.pi * 41 * tt) * env(n, .002, .9) * .9 + lp(rng.standard_normal(n), 5) * env(n, .001, .08) * .6 + lp(stab, 6) * env(n, .01, .35) * .35, fr(twist))
+    if getattr(h, 'STING', True): add(sfx, np.sin(2 * np.pi * 41 * tt) * env(n, .002, .9) * .9 + lp(rng.standard_normal(n), 5) * env(n, .001, .08) * .6 + lp(stab, 6) * env(n, .01, .35) * .35, fr(twist))
     if with_cta: S.ting(total + 2, .3)
 
     nL = len(h.LINES)
@@ -325,7 +326,7 @@ def build_audio(h, SC, total, cta_len, with_cta, pasta):
         r = r[r > np.abs(x).max() * 10 ** (-2)]; return np.sqrt(np.mean(r ** 2)) if len(r) else 1e-6
     vg = gated(voice)
     if not getattr(h, 'MUSICA', True): music[:] = 0   # MUSICA = False na historia.py: só voz + efeitos/sons ambientes
-    music *= .18 * vg / gated(music); sfx *= .25 * vg / gated(sfx)
+    music *= getattr(h, 'MUSICA_NIVEL', .18) * vg / gated(music); sfx *= .25 * vg / gated(sfx)
     if np.abs(amb).max() > 0: amb *= getattr(h, 'AMBIENTE_NIVEL', .11) * vg / gated(amb)   # torcida de fundo bem abaixo da voz
     lim = .45 * np.abs(voice).max(); sfx = np.clip(sfx, -lim, lim)
     mix = voice + music + sfx + amb; mix *= .5 / np.abs(mix).max()

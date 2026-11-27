@@ -1,3 +1,32 @@
+# Formato FÁBULA — Curiosidades da IA (desde 27/11/2026, decisão do Luis em 26/11/2026). VALE ACIMA DE TUDO ABAIXO.
+1 vídeo por dia às 11h (TikTok + Reels + YouTube Short com o vertical; YouTube vídeo normal com a versão horizontal).
+Fábulas emocionantes em desenho 2D (traço grosso, cores chapadas e vivas), 3ª pessoa, 120 a 175 s, primeira frase "Nesta cidade, ...".
+Exemplo completo: `curiosidades/2026-11-27-fabula/historia.py` (O pote de tempo). Kit: `fabula.py`
+(`from kit import *; import kit; from sombrio import *; from fabula import *` e `instala_legenda_fab(CHAVES)` no topo).
+
+## Personagem fixo LIPE (NUNCA mude)
+Menino de uns 8 anos: pele clara-pêssego #f3c9a2, cabelo castanho curto #5b3a1e (penteado 'curto'), camiseta AMARELA #f4b63f,
+calça AZUL #3e6fb8, olhos grandes de íris azul. De pijama: LIPE_PIJAMA (azul-claro #8ec3e8/#6fa8d6), mesmo rosto e cabelo.
+Família fixa: PAI (barba e cabelo castanho-escuros, camisa azul #4d79b3, calça cinza), MAE (cabelo comprido ruivo-escuro, blusa
+coral #e06a55), VO (cabelo branco de coque, óculos, blusa lilás). Tudo em `fabula.py` (LIPE, LIPE_PIJAMA, PAI, MAE, VO, GENTE).
+Alturas: Lipe h=700 (KID), adultos h=1000 (ADU). Sentados: pés = assento + .28*h e cubra as pernas com `sofa_frente()`/`mesa_frente()`/`mesa_trab()`.
+
+## Palco quadrado (a mesma historia.py serve para vertical e horizontal)
+- Palco 2208x2208, chão dos interiores em y=1560 (pés ~1640-1820). Cada cena devolve `cam(cx, cy, zv, zh, roll)` (zv = zoom no
+  vertical, zh = zoom no horizontal; zh=1 mostra a largura toda). `V(v, h)` escolhe valores por versão.
+- Horizontal: copie a historia.py, o falas.json e a pasta voz/ para `<pasta>-h` e rode o motor com `MOTOR_H=1` (não precisa narrar).
+- Cenários: `rua_fab(f, scroll, luz)`, `sala_fab`, `jantar_fab`, `quarto_fab`, `escritorio_fab`, `quintal_fab` (luz 'dia'|'tarde'|'noite').
+  Objetos: `put_pote`/`pote_cintura`/`graos` (pote de areia), `put_cachorro`, `bola`, `celular`, `notebook`, `relogio`, `brilho`.
+- Close: `c = close_fab(c, f, cx, cy, expr=..., s=.95, dx=..., lagrima=0..1, **LIPE)` e `cam_close(f, 1.15, 1.0, f0)`.
+  Pelo menos 3 closes (capa, virada emocional, final).
+- Luz da grade: 'vivo' (dia), 'tarde' (lembrança/emoção/pôr do sol), 'noite_fab' (noite azulada ainda colorida).
+- HUD (saída): `capa_txt` (quadro 0, até 3 linhas, *palavra* = amarelo), `selo_txt` (no máx. 1 por frase), `moral_txt` (moral no fim),
+  `cta_card` (cartão "MANDA PRO SEU PAI"). Legenda: 1 palavra grande, palavras de CHAVES em amarelo.
+- Áudio: VOZ Antonio RATE '+2%' PITCH '-2Hz'; MUSICA = True, MUSICA_NIVEL = .14, STING = False e
+  `def TRILHA(SC, N, SR): return trilha(SC, N, SR, [(0,'misteriosa'), (cena_conflito,'triste'), (cena_virada,'inspiradora')])`
+  (trilha gerada em código, sem música de terceiros).
+- FALA_TIKTOK = chamada curta de compartilhar ("Manda pro seu pai."), CTA_TEXTO em maiúsculas, ARROBA = ''. Nada de "segue"/"se inscreve".
+
 # MUDANÇAS DE 24/11/2026 — pedido do Luis ("cara de sono" e vídeos que não entregam). VALEM ACIMA DE TUDO ABAIXO.
 Diagnóstico: os vídeos travam em 300-500 views no TikTok (o público sai cedo). Parte 2 abrindo com "PARTE 2"/"Na parte um..."
 faz quem chega pelo feed pular; personagem com cara de sono; cenas paradas (caderno, manivela, escada); voz lenta.
