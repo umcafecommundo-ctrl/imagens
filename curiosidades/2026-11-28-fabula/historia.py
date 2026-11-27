@@ -296,7 +296,7 @@ def s0(f):
     pessoa(c, 520 + g * 2, 1760, ADU, f, GENTE[1], walk=1, seed=3, expr='sorriso', look=.75)
     pessoa(c, 380 + g * 2, 1780, 620, f, GENTE[3], walk=1, seed=5, expr='sorriso', look=.75)
     t = smooth(ramp(g, 0, 140))
-    return c, cam(lerp(V(800, 1104), V(1300, 1104), smooth(ramp(f, en - 10, en + 10))), V(1250, 1180), lerp(1.15, 1.25, t), lerp(1.0, 1.08, t)), 'vivo'
+    return c, cam(lerp(V(800, 1104), V(1300, 1104), smooth(ramp(f, en - 10, en + 10))), V(1250, 1180), lerp(1.15, 1.25, t), lerp(1.0, 1.08, t) * (1 + .0006 * f)), 'vivo'
 
 
 def s1(f):
@@ -307,7 +307,7 @@ def s1(f):
     for i, (x, cr_) in enumerate(((760, GENTE[3]), (1450, GENTE[4]), (900, GENTE[0]))):
         pessoa(c, x + 30 * math.sin(f * .1 + i), 1790 + 10 * i, 600 if i < 2 else ADU, f, cr_, seed=3 + i, walk=.5, expr='sorriso', look=.5 - i * .5)
     t = smooth(ramp(f, 0, 160))
-    return c, cam(1104, V(1200, 1150), lerp(1.05, 1.15, t), lerp(1.0, 1.06, t)), 'vivo'
+    return c, cam(1104, V(1200, 1150), lerp(1.05, 1.15, t), lerp(1.0, 1.06, t) * (1 + .0006 * f)), 'vivo'
 
 
 def s2(f):
@@ -327,7 +327,7 @@ def s3(f):
     put_casa(c, 1400, 1640, 1.0, f)
     pessoa(c, 830, 1760, ADU, f, VOC, seed=6, expr='sorriso', look=.75)
     t = smooth(ramp(f, 0, 150))
-    return c, cam(lerp(V(1050, 1104), V(1150, 1104), t), V(1200, 1150), lerp(1.12, 1.2, t), lerp(1.0, 1.08, t)), 'vivo'
+    return c, cam(lerp(V(1050, 1104), V(1150, 1104), t), V(1200, 1150), lerp(1.12, 1.2, t), lerp(1.0, 1.08, t) * (1 + .0006 * f)), 'vivo'
 
 
 def s4(f):
@@ -395,7 +395,7 @@ def s7(f):
     c = rua_casas(f, 'tarde', scroll=min(f, su) * 6)
     pessoa(c, 1104, 1780, KID, f, LIPE, walk=1 if f < su - 10 else 0, seed=2, expr='choque' if f >= su else 'neutro', look=.75)
     t = easeOut(ramp(f, su, su + 10))
-    return c, cam(1104, lerp(V(1350, 1250), V(1250, 1200), t), lerp(1.25, 1.7, t) * (1 + .0006 * f), lerp(1.05, 1.4, t)), 'tarde'
+    return c, cam(1104, lerp(V(1350, 1250), V(1250, 1200), t), lerp(1.25, 1.7, t) * (1 + .0006 * f), lerp(1.05, 1.4, t) * (1 + .0008 * f)), 'tarde'
 
 
 def s8(f):
@@ -404,7 +404,7 @@ def s8(f):
     put_casa(c, 1300, 1700, .34, f, fumaca=.25)
     pessoa(c, 1000, 1780, KID, f, LIPE, seed=2, expr='choque', look=.75)
     t = smooth(ramp(f, ca - 10, ca + 20))
-    return c, cam(lerp(1104, 1180, t), lerp(V(1350, 1250), V(1450, 1420), t), lerp(1.25, 1.9, t), lerp(1.05, 1.6, t)), 'tarde'
+    return c, cam(lerp(1104, 1180, t), lerp(V(1350, 1250), V(1450, 1420), t), lerp(1.25, 1.9, t), lerp(1.05, 1.6, t) * (1 + .0006 * f)), 'tarde'
 
 
 def salinha(f, teto_y=760, luz='tarde', aceso=True):
@@ -427,7 +427,7 @@ def s9(f):
     c = salinha(f, 760)
     vo_sentada(c, f, 820, expr='neutro', look=-.25)
     trico(c, 1400, 1350 + .28 * 820 - .3 * 820, f)
-    return c, cam(1300, V(1200, 1150), lerp(1.5, 1.3, easeOut(ramp(g, 0, 14))) * (1 + .0008 * g), lerp(1.15, 1.05, easeOut(ramp(g, 0, 14)))), 'tarde'
+    return c, cam(1300, V(1200, 1250), lerp(1.5, 1.3, easeOut(ramp(g, 0, 14))) * (1 + .0008 * g), lerp(1.15, 1.05, easeOut(ramp(g, 0, 14)))), 'tarde'
 
 
 def s10(f):
@@ -454,7 +454,7 @@ def s12(f):
     elif f < co: cx, cy, z = 950, 600, 2.2
     else: cx, cy, z = 900, 1300, 1.4
     t = easeOut(ramp(f, ab, ab + 10))
-    return c, cam(V(cx, max(cx, 960)), V(cy, max(cy, 900)), zf(lerp(1.3, z, t), f), zf(lerp(1.05, z * .8, t), f)), 'tarde'
+    return c, cam(V(cx, max(cx, 960)), V(cy, max(cy, 1000)), zf(lerp(1.3, z, t), f), zf(lerp(1.05, z * .8, t), f)), 'tarde'
 
 
 def s13(f):
@@ -474,7 +474,7 @@ def s14(f):
     x = lerp(300, 820, smooth(ramp(f, 0, 50)))
     lipe_chao(c, x, f, expr='sorriso', look=.75)
     t = smooth(ramp(f, 0, 120))
-    return c, cam(lerp(900, 1104, t), V(1250, 1180), lerp(1.3, 1.2, t) * (1 + .0006 * f), lerp(1.05, 1.0, t) * (1 + .0006 * f)), 'tarde'
+    return c, cam(lerp(900, 1104, t), V(1250, 1330), lerp(1.3, 1.2, t) * (1 + .0006 * f), lerp(1.05, 1.0, t) * (1 + .0006 * f)), 'tarde'
 
 
 def s15(f):
@@ -485,7 +485,7 @@ def s15(f):
     vo_sentada(c, f, lerp(820, 1000, smooth(k)), expr='sorriso', look=-.5)
     lipe_chao(c, 820, f, expr='sorriso', look=.75)
     kk = sum(kick(f, wt(15, w) - 2, .6) for w in ('riu', 'estalava', 'subia', 'crescia'))
-    return c, cam(1104, V(1200, 1130) + kk * 10, lerp(1.25, 1.05, smooth(k)) * (1 + .0005 * f), lerp(1.05, 1.0, smooth(k)) * (1 + .0006 * f)), 'vivo'
+    return c, cam(1104, V(1200, 1330) + kk * 10, lerp(1.25, 1.05, smooth(k)) * (1 + .0005 * f), lerp(1.05, 1.0, smooth(k)) * (1 + .0006 * f)), 'vivo'
 
 
 def s16(f):
@@ -500,7 +500,7 @@ def s16(f):
     bolo(c, hx - 130, hy + 20, .8, f)
     lipe_chao(c, 760, f, expr='sorriso', look=.75)
     t = smooth(ramp(f, pe - 10, pe + 20))
-    return c, cam(1104, lerp(V(1250, 1180), V(1200, 1150), t), zf(1.2, f), zf(1.0, f, .0007)), 'vivo'
+    return c, cam(1104, lerp(V(1250, 1330), V(1200, 1300), t), zf(1.2, f), zf(1.0, f, .0007)), 'vivo'
 
 
 def s17(f):
@@ -522,7 +522,7 @@ def s18(f):
     for i, (x, cr_, h) in enumerate(((640, PAI, ADU), (1600, MAE, ADU), (850, LIPE, KID))):
         pessoa(c, x, 1790, h, f, cr_, seed=5 + i, expr='sorriso', look=.5 if x < 1104 else -.5)
     t = smooth(ramp(f, 0, 150))
-    return c, cam(1104, lerp(V(1500, 1300), V(1000, 1000), t), lerp(1.2, 1.05, t), lerp(1.0, 1.0, t) * (1 + .0006 * f)), 'vivo'
+    return c, cam(1104, lerp(V(1500, 1300), V(1000, 1000), t), lerp(1.2, 1.05, t), lerp(1.0, 1.04, t) * (1 + .0006 * f)), 'vivo'
 
 
 def s19(f):
