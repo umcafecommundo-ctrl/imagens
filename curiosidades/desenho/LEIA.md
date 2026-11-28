@@ -25,6 +25,11 @@ Alturas: Lipe h=700 (KID), adultos h=1000 (ADU). Sentados: pés = assento + .28*
 - Áudio: VOZ Antonio RATE '+2%' PITCH '-2Hz'; MUSICA = True, MUSICA_NIVEL = .14, STING = False e
   `def TRILHA(SC, N, SR): return trilha(SC, N, SR, [(0,'misteriosa'), (cena_conflito,'triste'), (cena_virada,'inspiradora')])`
   (trilha gerada em código, sem música de terceiros).
+- VOZ ELEVENLABS (pedido do Luis em 28/11/2026, vale a partir de 30/11): a narração sai da ElevenLabs (conector ElevenLabs), voz
+  Welliton `VtMklhKDP2Y2mBvBbLwL`, modelo `eleven_multilingual_v2`, 1 take. Passo a passo em `eleven.py` (gera o texto todo numa
+  chamada, transcreve com eleven_scribe_v1 para ter o tempo de cada palavra, e `python3 curiosidades/desenho/eleven.py $P <mp3> <words.json>`
+  monta voz/l{i}.wav + falas.json no lugar de `motor.py narrar`). Se faltar crédito (plano Starter, 40 mil/mês, ~1.700 por vídeo) ou
+  a ElevenLabs falhar 2 vezes, volte para `motor.py narrar` (voz Antonio) — decisão do Luis.
 - FALA_TIKTOK = chamada curta de compartilhar ("Manda pro seu pai."), CTA_TEXTO em maiúsculas, ARROBA = ''. Nada de "segue"/"se inscreve".
 
 # MUDANÇAS DE 24/11/2026 — pedido do Luis ("cara de sono" e vídeos que não entregam). VALEM ACIMA DE TUDO ABAIXO.
