@@ -54,7 +54,7 @@ def main(pasta, mp3, words_json):
     wj = os.path.join(pasta, 'voz', 'words.json'); baixa(words_json, wj)
     W = json.load(open(wj))
     if isinstance(W, dict): W = W.get('words', W)
-    W = [w for w in W if w.get('type', 'word') == 'word']
+    W = [w for w in W if w.get('type', 'word') == 'word' and not w['text'].strip().startswith('[')]   # tira marcas de emoção do eleven_v3
     wav = os.path.join(pasta, 'voz', 'full.wav')
     subprocess.run(['ffmpeg', '-y', '-loglevel', 'error', '-i', full, '-ar', '48000', '-ac', '1', wav], check=True)
     total = float(subprocess.check_output(['ffprobe', '-v', 'error', '-show_entries', 'format=duration', '-of', 'csv=p=0', wav]))

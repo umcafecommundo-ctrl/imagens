@@ -1,829 +1,708 @@
-"""Formato FÁBULA: "A loja dos esquecidos" (29/11/2026, 11h). Roteiro do doc nº 2 ("5 Fábulas Emocionantes — Roteiros", do Luis).
-Tema: avós e as pessoas que a gente deixa de visitar. Moral: "Ninguém esquece de quem ama de uma vez. Esquece aos pouquinhos. Visite enquanto dá."
-CTA: "Manda pra sua vó." LIPE e família com o visual fixo de fabula.py. A vó = VO (cabelo branco de coque, óculos, lilás).
-Cenas/cores: s0 CAPA close Lipe + rua com a loja (vivo) | s1 ursinho/bicicleta/caderno esquecidos (vivo) | s2 ursinho some do quarto e aparece
-na vitrine da loja (vivo) | s3 carrinho sumiu da prateleira -> Lipe vai atrás (vivo) | s4 prateleira empoeirada (vivo) | s5 CLOSE Lipe com o carrinho |
-s6 vendedor no balcão (vivo) | s7 porta do fundo com luz amarela (vivo) | s8 Lipe empurra a porta e entra (vivo) | s9 sala das poltronas (tarde,
-música triste) | s10 avós esperando (tarde) | s11 a vó tricota o cachecol azul (tarde) | s12 CLOSE vó com o cachecol | s13 lembrança: domingo,
-bolo de fubá, história antes de dormir (tarde / noite_fab) | s14 Lipe diante da vó (tarde) | s15 CLOSE Lipe com lágrima | s16 CLOSE vó (virada) |
-s17 os dois saem de mãos dadas, cachecol no pescoço (vivo, música inspiradora) | s18 a placa vira LEMBRADOS + CLOSE final (vivo) | s19 MORAL (tarde)."""
+"""Formato FÁBULA: "As palavras que pesam" (29/11/2026, 11h). Roteiro do doc nº 3 ("5 Fábulas Emocionantes — Roteiros", do Luis).
+Tema: o peso das palavras e a gentileza (mãe). Moral: "Todo mundo carrega uma mochila que você não vê. Uma palavra sua pode deixar ela mais leve."
+CTA: "Manda pra sua mãe." Voz ElevenLabs Marcio (eleven_v3) — pedido do Luis em 28/11/2026 — montada com curiosidades/desenho/eleven.py.
+Animação mais viva (pedido do Luis em 28/11/2026): gestos (pessoa(..., gesto=)), boca que mexe na fala (boca_fala), sombra no chão, balanço.
+Cenas: s0 CAPA close + rua com mochilas | s1 palavras duras -> pedras (balão + mochila) | s2 escola: leve x curvada | s3 recreio, TUM |
+s4 devagar / sala de aula / sem rir | s5 mãe leve na cozinha | s6 noite, luz da cozinha (triste) | s7 mãe e a mochila gigante |
+s8 pedras do chefe e das contas | s9 escondia no armário | s10 Lipe chega perto | s11 CLOSE Lipe fala | s12 pedra vira poeira dourada |
+s13 CLOSE segredo (virada) | s14 abraço (inspiradora) | s15 CLOSE mãe fala | s16 pedra do Lipe some | s17 elogios na escola |
+s18 pátio dourado | s19 volta pra casa leve | s20 MORAL."""
 from kit import *
 import kit
 from sombrio import *
 from fabula import *
-from fabula import _piso, _escuro, _base
+from fabula import _piso, _escuro, _base, _nuvem
 
-CHAVES = ['loja', 'amar', 'esquecidos', 'ursinho', 'bicicleta', 'caderno', 'carrinho', 'sumiu', 'poeira', 'esqueci', 'brincar',
-          'devagarinho', 'porta', 'amarela', 'poltronas', 'avos', 'esperando', 'cachecol', 'azul', 'tres', 'aniversarios', 'domingos',
-          'bolo', 'historias', 'tempo', 'vo', 'vir', 'mao', 'lembrados', 'pouquinhos', 'visite']
+CHAVES = ['palavra', 'dura', 'pedra', 'mochila', 'leve', 'curvada', 'sozinho', 'tum', 'devagar', 'rir', 'sorrindo', 'bem', 'luz', 'gigante',
+          'chefe', 'contas', 'escondia', 'forte', 'poeira', 'dourada', 'segredo', 'boas', 'tiram', 'corajoso', 'sumiu', 'elogiou', 'arrastando',
+          'carrega', 'mais', 'esforcava']
 instala_legenda_fab(CHAVES)
 MUSICA = True
 MUSICA_NIVEL = .14
 STING = False
-VOZ = 'pt-BR-AntonioNeural'; RATE = '+2%'; PITCH = '-2Hz'
+VOZ = 'pt-BR-AntonioNeural'; RATE = '+2%'; PITCH = '-2Hz'   # só se precisar voltar para a voz reserva
 
 LINES = [
-    "Nesta cidade, tudo o que você para de amar vai parar numa loja.",
-    "O ursinho largado no canto. A bicicleta que ficou pequena. O caderno de desenhos que ninguém mais abriu.",
-    "Quando ninguém lembra de uma coisa, ela some de casa... e aparece lá, na Loja dos Esquecidos.",
-    "Um dia, o carrinho vermelho do Lipe sumiu do quarto. E ele foi atrás.",
-    "Achou o carrinho numa prateleira cheia de poeira. Do lado, o ursinho dele. E a camisa do time que ele jurava que era a favorita.",
-    "Eu não esqueci de vocês... só parei de brincar.",
-    "O vendedor, um velhinho de óculos, sorriu: é assim que todo mundo esquece, menino. Devagarinho.",
-    "No fundo da loja, tinha uma porta entreaberta, com uma luz amarela. O vendedor disse que ali ficava o que as pessoas mais esqueciam.",
-    "O Lipe empurrou a porta, bem devagar... e entrou.",
-    "Era uma sala cheia de poltronas. Em cada uma, tinha alguém sentado, olhando pra porta.",
-    "Não eram objetos. Eram avós e avôs. Todos esperando alguém.",
-    "Perto da janela, uma senhora tricotava um cachecol azul. Ela levantou os olhos.",
-    "Lipe? Eu fiz esse cachecol pro seu aniversário. Faz três aniversários.",
-    "O Lipe lembrou dos domingos na casa da vó. Do bolo de fubá. Das histórias antes de dormir.",
-    "E percebeu que fazia muito tempo que ele não ia lá.",
-    "Vó... eu não esqueci de você.",
-    "Eu sei, meu amor. Você só parou de vir.",
-    "O Lipe segurou a mão da vó, e os dois saíram juntos pela porta da loja. Com o cachecol azul no pescoço dele.",
-    "Quando eles atravessaram a porta, a placa da loja mudou. Agora estava escrito: Lembrados.",
-    "Ninguém esquece de quem ama de uma vez. Esquece aos pouquinhos. Visite enquanto dá.",
+    "Nesta cidade, toda palavra dura que você ouve vira uma pedra na sua mochila.",
+    "Você é burro. Pedra. Ninguém quer jogar com você. Pedra. Para de chorar. Pedra.",
+    "Tem criança que chega na escola leve, pulando. E tem criança que chega curvada, arrastando a mochila. E ninguém consegue tirar as pedras sozinho.",
+    "Um dia, no recreio, um menino maior riu do Lipe na frente de todo mundo. Tum. Uma pedra caiu dentro da mochila dele.",
+    "Depois disso, o Lipe começou a andar mais devagar. Parou de levantar a mão na aula. Parou de rir alto.",
+    "Em casa, a mãe parecia sempre leve. Sempre sorrindo. Sempre dizendo que estava tudo bem.",
+    "Mas uma noite, o Lipe acordou com sede, e viu a luz da cozinha acesa.",
+    "A mãe estava sentada sozinha. E no chão, do lado dela, tinha uma mochila gigante. Maior que a mesa.",
+    "Era cheia de pedras. Do chefe. Das contas. De gente que nunca percebeu o quanto ela se esforçava.",
+    "Ela só escondia a mochila antes de ele acordar.",
+    "O Lipe chegou perto, bem devagar. Ficou um tempo em silêncio. E depois falou baixinho:",
+    "Mãe... você é a pessoa mais forte que eu conheço.",
+    "Uma pedra saiu flutuando da mochila da mãe. E virou poeira dourada.",
+    "Foi aí que o Lipe descobriu o segredo da cidade. Palavras duras colocam pedras. Mas palavras boas tiram.",
+    "A mãe, com os olhos cheios d'água, abraçou o filho e disse no ouvido dele:",
+    "E você é o menino mais corajoso que eu conheço.",
+    "E uma pedra sumiu da mochila do Lipe também.",
+    "No dia seguinte, o Lipe elogiou o colega quieto. Elogiou a professora. E elogiou até o menino que riu dele.",
+    "E, uma por uma, as pedras da escola foram virando poeira dourada.",
+    "Naquele dia, ninguém chegou em casa arrastando a mochila.",
+    "Todo mundo carrega uma mochila que você não vê. Uma palavra sua pode deixar ela mais leve.",
 ]
-FALA_TIKTOK = "Manda pra sua vó."
-CTA_TEXTO = "MANDA PRA SUA VÓ"
+FALA_TIKTOK = "Manda pra sua mãe."
+CTA_TEXTO = "MANDA PRA SUA MÃE"
 CTA_CARD = cta_card
 ARROBA = ''
-TWIST = 16
-FLASH = [9]
+TWIST = 13
+FLASH = []
 CAPA = 36
-CHECK = [(0, 'loja', 8), (1, 'ursinho', 6), (1, 'bicicleta', 6), (1, 'caderno', 6), (2, 'some', 12), (2, 'aparece', 8), (2, 'esquecidos', 6),
-         (3, 'sumiu', 6), (3, 'foi', 6), (4, 'carrinho', 6), (4, 'ursinho', 6), (4, 'camisa', 6), (5, 'brincar', 2), (6, 'sorriu', 4),
-         (6, 'devagarinho', 4), (7, 'luz', 4), (7, 'vendedor', 6), (8, 'entrou', 4), (9, 'poltronas', 6), (9, 'porta', 4), (10, 'avos', 4),
-         (11, 'cachecol', 4), (11, 'levantou', 6), (12, 'tres', 6), (13, 'bolo', 6), (13, 'historias', 6), (14, 'tempo', 4), (16, 'vir', 2),
-         (17, 'mao', 4), (17, 'cachecol', 6), (18, 'placa', 4), (18, 'mudou', 8), (18, 'lembrados', 14), (19, 'pouquinhos', 6), (19, 'visite', 8)]
-VOC = dict(VO)
-VEND = dict(pele='#e4b48c', cabelo='#e0ddd6', penteado='curto', roupa='#3f7a5a', calca='#4a4036', velho=True, oculos=True)
-VELHOS = [dict(pele='#c98d62', cabelo='#dcdad4', penteado='careca', roupa='#5aa36f', calca='#3a3a48', velho=True),
-          dict(pele='#f0d0b0', cabelo='#e6e3dc', penteado='coque', roupa='#d65a8a', calca='#3b4f7a', velho=True, oculos=True),
-          dict(pele='#8a5a3c', cabelo='#d0ccc4', penteado='curto', roupa='#e08a3a', calca='#2f3540', velho=True, barba=True)]
+CHECK = [(0, 'pedra', 6), (0, 'mochila', 10), (1, 'burro', 4), (1, 'pedra', 6), (1, 'ninguem', 6), (1, 'pedra', 8), (1, 'chorar', 2),
+         (2, 'leve', 6), (2, 'curvada', 8), (2, 'sozinho', 4), (3, 'riu', 6), (3, 'tum', 6), (3, 'dele', 4), (4, 'devagar', 4), (4, 'aula', 4),
+         (4, 'alto', 6), (5, 'sorrindo', 4), (5, 'bem', 4), (6, 'acordou', 4), (6, 'acesa', 6), (7, 'sozinha', 4), (7, 'gigante', 8),
+         (8, 'chefe', 6), (8, 'contas', 6), (8, 'esforcava', 4), (9, 'escondia', 6), (10, 'perto', 4), (10, 'baixinho', 4), (11, 'forte', 2),
+         (12, 'flutuando', 8), (12, 'dourada', 6), (13, 'segredo', 4), (13, 'tiram', 6), (14, 'abracou', 6), (15, 'corajoso', 2),
+         (16, 'sumiu', 10), (17, 'colega', 8), (17, 'professora', 8), (17, 'riu', 8), (18, 'dourada', 6), (19, 'arrastando', 6),
+         (20, 'veja', 0) if False else (20, 've', 4), (20, 'leve', 6)]
+
+KIDB = dict(pele='#d9a47a', cabelo='#2a2a2a', penteado='curto', roupa='#5a5f6b', calca='#2f3540')            # o menino maior
+KID1 = dict(pele='#f0d0b0', cabelo='#c8902e', penteado='longo', roupa='#d65a8a', calca='#3b4f7a')             # menina leve
+KID2 = dict(pele='#8a5a3c', cabelo='#141010', penteado='curto', roupa='#3aa0b0', calca='#5a3a30')             # criança curvada / colega quieto
+KID3 = dict(pele='#e4b48c', cabelo='#3a2a20', penteado='curto', roupa='#e08a3a', calca='#4a4036')
+PROFA = dict(pele='#c98d62', cabelo='#1e1a18', penteado='coque', roupa='#5aa36f', calca='#3a3a48', oculos=True)
+MAE_PIJ = dict(MAE, roupa='#c9a0d8', calca='#8a6aa0')
+VERM, AZUL_M, VERDE_M = '#e0473a', '#4d79b3', '#5aa36f'
 
 
 def TRILHA(SC, N, SR):
-    return trilha(SC, N, SR, [(0, 'misteriosa'), (9, 'triste'), (17, 'inspiradora')])
+    return trilha(SC, N, SR, [(0, 'misteriosa'), (6, 'triste'), (14, 'inspiradora')])
 
 
 def SFX(s):
-    s.ting(s.W(0, 'loja'), .2)
-    for w in ('ursinho', 'bicicleta', 'caderno'): s.thunk(s.W(1, w) - 2, 220, .3)
-    s.trill(s.W(2, 'some'), .5, .06); s.ting(s.W(2, 'aparece'), .25)
-    s.thunk(s.W(3, 'sumiu') - 2, 120, .5); s.patter(s.W(3, 'foi'), s.W(3, 'atras') + 30, 7, .08)
-    s.ting(s.W(4, 'achou'), .2); s.ting(s.W(4, 'ursinho'), .12); s.ting(s.W(4, 'camisa'), .12)
-    s.ting(s.W(7, 'luz'), .2)
-    s.thunk(s.W(8, 'empurrou'), 80, .4); s.whoosh(s.W(8, 'entrou'), .7, .35)
-    s.patter(s.cut(9) + 10, s.cut(10) - 10, 1.2, .05)
-    s.ting(s.W(11, 'levantou'), .18)
-    s.thunk(s.W(12, 'tres') - 2, 160, .35)
-    s.ting(s.W(13, 'bolo'), .18)
-    s.ting(s.W(16, 'vir'), .15)
-    s.patter(s.W(17, 'sairam'), s.W(17, 'cachecol'), 5, .06)
-    s.whoosh(s.W(18, 'mudou') - 4, .5, .4); s.ting(s.W(18, 'lembrados'), .3)
-    s.ting(s.W(19, 'visite'), .22)
+    s.thunk(s.W(0, 'pedra') + 6, 120, .5)
+    for k in range(3): s.thunk(s.W(1, 'pedra', k) + 4, 110, .55)
+    s.patter(s.W(2, 'leve'), s.W(2, 'pulando') + 20, 5, .07)
+    s.thunk(s.W(3, 'tum') - 1, 90, .7)
+    s.patter(s.W(4, 'andar'), s.W(4, 'devagar') + 20, 3, .05)
+    s.ting(s.W(6, 'luz'), .18)
+    s.thunk(s.W(7, 'gigante') - 2, 80, .4)
+    for w in ('chefe', 'contas'): s.thunk(s.W(8, w) - 2, 140, .35)
+    s.thunk(s.W(9, 'escondia') + 10, 160, .3)
+    s.trill(s.W(12, 'flutuando'), .6, .06); s.ting(s.W(12, 'poeira'), .3)
+    s.ting(s.W(13, 'boas'), .2)
+    s.trill(s.W(16, 'sumiu'), .5, .05); s.ting(s.W(16, 'sumiu') + 12, .25)
+    for w in ('colega', 'professora'): s.ting(s.W(17, w) + 8, .18)
+    s.ting(s.W(17, 'riu') + 8, .22)
+    s.ting(s.W(18, 'dourada'), .25)
+    s.patter(s.cut(19), s.cut(19) + 60, 7, .06)
+    s.ting(s.W(20, 'leve'), .25)
 
 
-# ---------------------------------------------------------------- objetos esquecidos
-def _poeira(im, n=60, seed=1):
-    d = ImageDraw.Draw(im); rnd = random.Random(seed); a = im.split()[3]
-    for _ in range(n):
-        x, y = rnd.randint(0, im.width - 1), rnd.randint(0, im.height - 1)
-        if a.getpixel((x, y)) > 200:
-            r = rnd.randint(3, 7); d.ellipse((x - r, y - r, x + r, y + r), fill=(205, 200, 190, 170))
-    return im
+# ---------------------------------------------------------------- pedras e mochilas
+@lru_cache(maxsize=16)
+def pedra_img(w=120, seed=0, rotulo=''):
+    rnd = random.Random(seed)
+    p = Pen(400, 340)
+    pts = [(200 + 170 * math.cos(a) * rnd.uniform(.85, 1.05), 180 + 140 * math.sin(a) * rnd.uniform(.8, 1.05)) for a in [k * math.pi / 8 for k in range(16)]]
+    p.shape(pts, hexc('#9b9ca6'), hexc('#7a7b86'), 8, 18)
+    p.shape(ell_pts(150, 120, 50, 26, 16, -.4), hexc('#c3c4cc'), None, 0, 0)
+    for _ in range(4):
+        x, y = rnd.randint(140, 280), rnd.randint(150, 260); p.dot(x, y, 8, hexc('#868792'))
+    im = p.img.resize((400, 340), Image.LANCZOS)
+    if rotulo:
+        d = ImageDraw.Draw(im); fs = 66
+        while d.textlength(rotulo, font=font(F_STAMP, fs)) > 300: fs -= 4
+        fnt = font(F_STAMP, fs); tw = d.textlength(rotulo, font=fnt)
+        d.text((200 - tw / 2, 180 - fs * .62), rotulo, font=fnt, fill=(255, 246, 226), stroke_width=6, stroke_fill=(36, 24, 34))
+    return im.resize((w, int(w * 340 / 400)), Image.LANCZOS)
 
 
-@lru_cache(maxsize=8)
-def ursinho_img(w=300, po=True):
-    p = Pen(600, 680)
-    M, MD, C = hexc('#b07a48'), hexc('#8a5a32'), hexc('#e8c79a')
-    for x in (190, 410): p.shape(ell_pts(x, 600, 95, 70, 30), M, MD, 7, 8)
-    for x in (190, 410): p.dot(x, 612, 40, C)
-    p.shape(ell_pts(300, 470, 170, 170, 40), M, MD, 7, 16)
-    p.shape(ell_pts(300, 500, 95, 100, 30), C, None, 5, 0)
-    for x in (135, 465): p.shape(ell_pts(x, 450, 60, 95, 24), M, MD, 6, 8)
-    for x in (165, 435): p.dot(x, 110, 62, M, 7)
-    for x in (165, 435): p.dot(x, 110, 32, C)
-    p.shape(ell_pts(300, 220, 165, 150, 40), M, MD, 7, 14)
-    p.shape(ell_pts(300, 275, 72, 55, 24), C, None, 5, 0)
-    p.dot(300, 252, 22, INK); p.arc(300, 292, 26, 14, 20, 160, 6)
-    for x in (235, 365): p.dot(x, 195, 20, INK)
-    for x in (241, 371): p.dot(x, 188, 6, (255, 255, 255))
-    p.shape([(380, 410), (445, 410), (445, 475), (380, 475)], hexc('#5aa3a0'), None, 5, 0)
-    im = p.img.resize((600, 680), Image.LANCZOS)
-    if po: im = _poeira(im, 70, 3)
-    return im.resize((w, int(w * 680 / 600)), Image.LANCZOS)
-
-
-@lru_cache(maxsize=8)
-def carrinho_img(w=300, po=False):
-    p = Pen(700, 400)
-    R, RD = hexc('#e0473a'), hexc('#b8302a')
-    p.shape([(40, 300), (55, 205), (190, 190), (255, 95), (470, 95), (545, 190), (655, 210), (668, 300)], R, RD, 8, 14)
-    p.shape([(280, 120), (360, 120), (360, 190), (225, 190)], hexc('#bfe3f5'), None, 6, 0)
-    p.shape([(385, 120), (455, 120), (515, 190), (385, 190)], hexc('#bfe3f5'), None, 6, 0)
-    p.dot(640, 245, 18, hexc('#ffe27a'), 5)
-    for x in (180, 520):
-        p.dot(x, 305, 72, hexc('#2e2a30'), 7); p.dot(x, 305, 30, hexc('#c8c8cc'), 5)
-    p.shape([(300, 230), (420, 230), (420, 270), (300, 270)], hexc('#fbf7ee'), None, 4, 0)
-    im = p.img.resize((700, 400), Image.LANCZOS)
-    if po: im = _poeira(im, 50, 5)
-    return im.resize((w, int(w * 400 / 700)), Image.LANCZOS)
-
-
-@lru_cache(maxsize=4)
-def bicicleta_img(w=420):
-    p = Pen(800, 540)
-    T, TD = hexc('#3aa0b0'), hexc('#2a7a88')
-    for cx in (170, 630):
-        p.arc(cx, 390, 130, 130, 0, 360, 24, hexc('#2e2a30'))
-        for k in range(6):
-            a = k * math.pi / 3
-            p.stroke([(cx, 390), (cx + 118 * math.cos(a), 390 + 118 * math.sin(a))], 4, hexc('#a0a0a8'))
-        p.dot(cx, 390, 16, hexc('#c8c8cc'), 5)
-    for pts in ([(170, 390), (370, 400), (320, 210)], [(320, 210), (560, 205), (370, 400)], [(560, 205), (630, 390)], [(170, 390), (320, 210)]):
-        p.line(pts, T, 22, 6)
-    p.shape(ell_pts(300, 190, 70, 24, 20), hexc('#2e2a30'), None, 5, 0)
-    p.line([(560, 205), (545, 130), (620, 120)], hexc('#5a5a62'), 16, 5)
-    p.dot(370, 400, 30, hexc('#5a5a62'), 5)
-    im = p.img.resize((800, 540), Image.LANCZOS)
-    return im.resize((w, int(w * 540 / 800)), Image.LANCZOS)
-
-
-@lru_cache(maxsize=4)
-def caderno_img(w=240):
-    p = Pen(420, 520)
-    p.shape([(60, 30), (390, 30), (390, 490), (60, 490)], hexc('#f2a65a'), hexc('#d98a3a'), 8, 12)
-    for y in range(60, 480, 46): p.arc(60, y, 26, 14, 90, 270, 7)
-    p.shape(ell_pts(225, 200, 70, 70, 30), hexc('#ffe27a'), None, 6, 0)
-    for k in range(8):
-        a = k * math.pi / 4
-        p.stroke([(225 + 90 * math.cos(a), 200 + 90 * math.sin(a)), (225 + 120 * math.cos(a), 200 + 120 * math.sin(a))], 8, hexc('#ffe27a'))
-    p.shape([(130, 430), (180, 340), (230, 430)], hexc('#5aa36f'), None, 5, 0)
-    p.shape([(220, 430), (290, 320), (350, 430)], hexc('#4d79b3'), None, 5, 0)
-    im = _poeira(p.img.resize((420, 520), Image.LANCZOS), 50, 7)
-    return im.resize((w, int(w * 520 / 420)), Image.LANCZOS)
-
-
-@lru_cache(maxsize=4)
-def camisa_img(w=300):
-    p = Pen(500, 470)
-    G, GD = hexc('#2f9a5a'), hexc('#237a46')
-    body = [(105, 60), (195, 22), (250, 52), (305, 22), (395, 60), (485, 170), (405, 215), (395, 445), (105, 445), (95, 215), (15, 170)]
-    p.shape(body, G, GD, 8, 14)
-    for x in (165, 335): p.poly([(x - 18, 70), (x + 18, 70), (x + 18, 440), (x - 18, 440)], hexc('#f4f1ea'))
-    p.stroke(body + [body[0]], 8)
-    p.shape([(205, 30), (295, 30), (250, 80)], hexc('#f4f1ea'), None, 5, 0)
-    im = p.img.resize((500, 470), Image.LANCZOS)
-    d = ImageDraw.Draw(im); fnt = font(F_CAP, 150); tw = d.textlength('10', font=fnt)
-    d.text((250 - tw / 2, 170), '10', font=fnt, fill=(255, 246, 226), stroke_width=8, stroke_fill=(36, 24, 34))
-    im = _poeira(im, 60, 9)
-    return im.resize((w, int(w * 470 / 500)), Image.LANCZOS)
-
-
-@lru_cache(maxsize=4)
-def pipa_img(w=240):
-    p = Pen(420, 620)
-    p.shape([(210, 20), (400, 230), (210, 440), (20, 230)], hexc('#e0473a'), hexc('#b8302a'), 8, 10)
-    p.poly([(210, 20), (400, 230), (210, 230)], hexc('#ffe27a'), 6); p.poly([(20, 230), (210, 440), (210, 230)], hexc('#ffe27a'), 6)
-    p.stroke([(210, 20), (210, 440)], 6); p.stroke([(20, 230), (400, 230)], 6)
-    p.stroke([(210, 440), (180, 500), (230, 550), (200, 610)], 5)
-    for y, x in ((500, 180), (555, 230)): p.shape([(x - 20, y - 14), (x + 20, y + 14), (x + 20, y - 14), (x - 20, y + 14)], hexc('#4d79b3'), None, 4, 0)
-    im = p.img.resize((420, 620), Image.LANCZOS)
-    return im.resize((w, int(w * 620 / 420)), Image.LANCZOS)
-
-
-AZUL_C, AZUL_CL = '#3e6fb8', '#7fa8e0'
-
-
-@lru_cache(maxsize=4)
-def cachecol_img(w=520):
-    p = Pen(800, 260)
-    pts = [(40, 80)] + [(x, 70 + 18 * math.sin(x / 90)) for x in range(80, 761, 40)] + [(760, 190)] + \
-          [(x, 190 + 18 * math.sin(x / 90)) for x in range(720, 40, -40)]
-    p.shape(pts, hexc(AZUL_C), mul(hexc(AZUL_C), .82), 8, 10)
-    for x in range(120, 720, 120): p.poly([(x, 78 + 18 * math.sin(x / 90)), (x + 50, 78 + 18 * math.sin((x + 50) / 90)), (x + 50, 182 + 18 * math.sin((x + 50) / 90)), (x, 182 + 18 * math.sin(x / 90))], hexc(AZUL_CL))
-    for k in range(5):
-        p.stroke([(40, 90 + k * 22), (10, 92 + k * 22)], 7, hexc(AZUL_C)); p.stroke([(760, 100 + k * 20), (792, 102 + k * 20)], 7, hexc(AZUL_C))
-    im = p.img.resize((800, 260), Image.LANCZOS)
-    return im.resize((w, int(w * 260 / 800)), Image.LANCZOS)
-
-
-def put_img(c, im, x, base, s=1.0, alpha=1.0, rot=0):
-    """cola a imagem com o fundo em y=base, centro x; s = escala (pula com back), alpha 0..1."""
-    if s <= .02 or alpha <= .02: return
-    if s != 1: im = im.resize((max(2, int(im.width * s)), max(2, int(im.height * s))), Image.BILINEAR)
+def put_pedra(c, x, y, w, seed=0, rot=0, rotulo='', alpha=1.0):
+    im = pedra_img(int(w // 4 * 4), seed, rotulo)
     if rot: im = im.rotate(rot, Image.BICUBIC, expand=True)
     if alpha < 1:
         a = im.split()[3].point(lambda v: int(v * alpha)); im = im.copy(); im.putalpha(a)
-    c.alpha_composite(im, (int(x - im.width / 2), int(base - im.height)))
+    c.alpha_composite(im, (int(x - im.width / 2), int(y - im.height / 2)))
 
 
-def faiscas(c, x, y, f, r=120, n=5, s=1.0):
-    for k in range(n):
-        a = k * 2 * math.pi / n + f * .05
-        ph = (f * .06 + k / n) % 1
-        brilho(c, x + r * math.cos(a) * (.6 + .4 * ph), y + r * math.sin(a) * (.6 + .4 * ph), 30 * s * math.sin(ph * math.pi))
+def _SX(x, h, sx, flip=False): return x + (-1 if flip else 1) * (sx - 300) * h / 1000
+def _SY(feet, h, sy): return feet + .025 * h - h + sy * h / 1000
 
 
-def particulas(c, f, x0, y0, x1, y1, n=26, cor=(255, 240, 200), seed=4):
-    """poeira flutuando no ar (na luz)."""
-    d = ImageDraw.Draw(c); rnd = random.Random(seed)
-    for k in range(n):
-        bx, by = rnd.uniform(x0, x1), rnd.uniform(y0, y1); sp = rnd.uniform(.4, 1.2)
-        x = bx + 30 * math.sin(f * .03 * sp + k); y = y0 + (by - y0 - f * sp * 1.5) % (y1 - y0)
-        r = rnd.choice((4, 5, 7)); d.ellipse((x - r, y - r, x + r, y + r), fill=cor + (150,))
+def mochila_costas(c, x, feet, h, carga=.1, cor=VERM, f=0, seed=1):
+    """mochila nas costas (desenhe ANTES da pessoa); carga 0..1 deixa maior e com pedras saindo por cima."""
+    bw = h * .27 * (1 + .45 * carga); bh = h * .30 * (1 + .5 * carga)
+    top = _SY(feet, h, 470) - h * (.06 + .26 * carga); x0 = x - bw / 2
+    d = ImageDraw.Draw(c); col = hexc(cor); dk = mul(col, .78)
+    if carga > .25:   # pedras saindo por cima
+        n = int(2 + 5 * carga)
+        for k in range(n):
+            put_pedra(c, x0 + bw * (k + .5) / n, top + 10 - 18 * math.sin(k * 1.7), int(h * .12), seed + k, rot=k * 23)
+    d.rounded_rectangle((x0, top, x0 + bw, top + bh), int(bw * .18), fill=col + (255,), outline=INK + (255,), width=max(4, int(h * .008)))
+    d.rounded_rectangle((x0 - bw * .06, top + bh * .5, x0 + bw * 1.06, top + bh * .9), int(bw * .1), fill=dk + (255,), outline=INK + (255,), width=max(3, int(h * .006)))
 
 
-# ---------------------------------------------------------------- a loja (fachada)
-@lru_cache(maxsize=2)
-def fachada_img():
-    W, H = 1100, 1000
-    p = Pen(W, H)
-    p.shape([(40, 150), (1060, 150), (1060, 1000), (40, 1000)], hexc('#9a86b8'), hexc('#7c689e'), 8, 18)
-    for y in range(230, 1000, 90): p.stroke([(48, y), (1052, y)], 4, hexc('#86729f'))
-    p.shape([(10, 140), (1090, 140), (1090, 180), (10, 180)], hexc('#6a4428'), None, 7, 0)
-    for k in range(9):   # toldo listrado
-        x0 = 30 + k * 116
-        col = hexc('#e06a55') if k % 2 == 0 else hexc('#fbf7ee')
-        p.shape([(x0, 340), (x0 + 116, 340), (x0 + 116, 410), (x0 + 58, 450), (x0, 410)], col, None, 6, 0)
-    p.shape([(90, 470), (580, 470), (580, 880), (90, 880)], hexc('#6a4428'), None, 8, 0)    # vitrine (moldura)
-    p.poly([(110, 490), (560, 490), (560, 860), (110, 860)], hexc('#f6e6b8'))
-    p.shape([(80, 880), (590, 880), (590, 920), (80, 920)], hexc('#8a5a32'), None, 6, 0)
-    p.shape([(690, 520), (960, 520), (960, 1000), (690, 1000)], hexc('#6a4428'), hexc('#553420'), 8, 0)   # porta
-    p.shape([(730, 560), (920, 560), (920, 760), (730, 760)], hexc('#f6e6b8'), None, 6, 0)
-    p.dot(910, 820, 14, hexc('#f4d48a'), 4)
-    p.shape([(620, 980), (1030, 980), (1030, 1000), (620, 1000)], hexc('#8a8378'), None, 5, 0)
-    im = p.img.resize((W, H), Image.LANCZOS)
-    d = ImageDraw.Draw(im)   # teia de aranha num canto da vitrine
-    for k in range(4): d.line((110, 490, 110 + 120 * math.cos(k * .45), 490 + 120 * math.sin(k * .45)), fill=(250, 250, 250, 200), width=3)
-    for r in (40, 80, 115): d.arc((110 - r, 490 - r, 110 + r, 490 + r), 0, 90, fill=(250, 250, 250, 200), width=3)
+def alcas(c, x, feet, h, cor=VERM, flip=False):
+    """alças da mochila por cima da roupa (desenhe DEPOIS da pessoa)."""
+    d = ImageDraw.Draw(c); dk = mul(hexc(cor), .7); w = max(5, int(h * .028))
+    for sx0, sx1 in ((250, 238), (350, 362)):
+        d.line([(_SX(x, h, sx0), _SY(feet, h, 470)), (_SX(x, h, sx1), _SY(feet, h, 650))], fill=dk + (255,), width=w)
+
+
+@lru_cache(maxsize=8)
+def mochila_chao_img(w=600, cor=VERM, pedras=4, rot_seed=0):
+    """mochila em pé no chão, aberta em cima com pedras aparecendo. Imagem w x 1.15w."""
+    H = int(w * 1.15); im = Image.new('RGBA', (w + 40, H + 40), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
+    col = hexc(cor); dk = mul(col, .78); ow = max(5, w // 70)
+    d.ellipse((30, H - 10, w + 10, H + 30), fill=(30, 20, 30, 70))
+    top = int(H * .16)
+    if pedras:
+        for k in range(pedras):
+            pw = int(w * .28); pi = pedra_img(pw // 4 * 4, rot_seed + k)
+            im.alpha_composite(pi, (int(40 + (w - 60) * (k + .5) / pedras - pw / 2), int(top - pw * .35 - 10 * (k % 2))))
+    d.rounded_rectangle((20, top, w + 20, H), int(w * .2), fill=col + (255,), outline=INK + (255,), width=ow)
+    d.ellipse((50, top - w * .08, w - 10, top + w * .1), fill=(60, 30, 30, 255), outline=INK + (255,), width=ow)
+    d.rounded_rectangle((20 + w * .18, H * .55, w + 20 - w * .18, H * .9), int(w * .08), fill=dk + (255,), outline=INK + (255,), width=ow)
+    d.line((20 + w * .3, H * .63, w + 20 - w * .3, H * .63), fill=(240, 220, 120, 255), width=ow)
+    for sx in (.28, .72):
+        d.arc((20 + w * sx - w * .12, top - w * .22, 20 + w * sx + w * .12, top + w * .06), 180, 360, fill=mul(col, .6) + (255,), width=ow * 2)
     return im
 
 
-@lru_cache(maxsize=4)
-def placa_img(texto):
-    novo = texto == 'LEMBRADOS'
-    W, H = 900, 200
-    im = Image.new('RGBA', (W, H), (0, 0, 0, 0)); d = ImageDraw.Draw(im)
-    fundo = (255, 214, 64) if novo else (214, 196, 160)
-    d.rounded_rectangle((8, 8, W - 8, H - 8), 26, fill=fundo + (255,), outline=(36, 24, 34, 255), width=10)
-    f1 = font(F_STAMP, 52); t1 = 'LOJA DOS'
-    d.text((W / 2 - d.textlength(t1, font=f1) / 2, 16), t1, font=f1, fill=(90, 60, 50) if not novo else (190, 60, 40))
-    fs = 104
-    while d.textlength(texto, font=font(F_STAMP, fs)) > W - 80: fs -= 4
-    f2 = font(F_STAMP, fs)
-    d.text((W / 2 - d.textlength(texto, font=f2) / 2, 66), texto, font=f2, fill=(110, 80, 70) if not novo else (200, 50, 40))
-    if not novo:
-        for x in (120, 520, 760): d.line((x, 30, x + 30, 170), fill=(170, 150, 120, 255), width=4)   # rachado/desbotado
+def mochila_chao(c, x, base, w, cor=VERM, pedras=4, seed=0):
+    im = mochila_chao_img(int(w // 8 * 8), cor, pedras, seed)
+    c.alpha_composite(im, (int(x - im.width / 2), int(base - im.height + 30)))
+    return x, base - im.height + 30 + int(w * 1.15 * .16)   # boca da mochila
+
+
+def cai_pedra(c, bx, by, f, f0, w=140, seed=0, alto=700):
+    """pedra caindo dentro de (bx, by) a partir do quadro f0 (some ao entrar)."""
+    t = ramp(f, f0, f0 + 9)
+    if 0 < t < 1:
+        put_pedra(c, bx, by - alto * (1 - t * t), w, seed, rot=t * 40)
+    if f0 + 9 <= f < f0 + 20:
+        put_dust(c, bx, by - w * .2, w * .45, f - f0 - 9)
+
+
+def poeira_dourada(c, x, y, f, f0, r=260, n=26, seed=3):
+    """pedra virando poeira dourada a partir de f0 (brilhos subindo e espalhando)."""
+    age = f - f0
+    if age < 0 or age > 70: return
+    rnd = random.Random(seed); d = ImageDraw.Draw(c)
+    for k in range(n):
+        a = rnd.uniform(0, 2 * math.pi); sp = rnd.uniform(.4, 1.0)
+        rr = r * sp * easeOut(age / 40)
+        px, py = x + rr * math.cos(a), y + rr * math.sin(a) - age * 3 * sp
+        al = clamp(1 - age / 70)
+        s_ = rnd.choice((8, 11, 14))
+        d.ellipse((px - s_, py - s_, px + s_, py + s_), fill=(255, 214, 90, int(255 * al)))
+        if k % 4 == 0: brilho(c, px, py, 26 * al * sp)
+
+
+def pedra_flutua(c, x, y, f, f0, f1, w=170, seed=5, sobe=420):
+    """pedra sai de (x, y) subindo entre f0 e f1 e vira poeira dourada em f1."""
+    if f < f0: return
+    if f < f1:
+        t = smooth(ramp(f, f0, f1)); put_pedra(c, x + 30 * math.sin(f * .2), y - sobe * t, w, seed, rot=12 * math.sin(f * .15))
+        brilho(c, x + 80, y - sobe * t - 40, 22 * math.sin(f * .3) ** 2)
+    else:
+        poeira_dourada(c, x, y - sobe, f, f1, seed=seed)
+
+
+# ---------------------------------------------------------------- cenários novos
+@lru_cache(maxsize=2)
+def escola_img():
+    W, H = 1900, 1000; p = Pen(W, H)
+    p.shape([(60, 260), (W - 60, 260), (W - 60, H), (60, H)], hexc('#f2c6a0'), hexc('#d9a882'), 8, 18)
+    p.shape([(20, 270), (W / 2, 40), (W - 20, 270)], hexc('#c0453a'), hexc('#9a3328'), 8, 14)
+    for r in range(2):
+        for k in range(6):
+            x = 160 + k * 280 - (0 if k < 3 else -40); y = 360 + r * 260
+            if 760 < x < 1100: continue
+            p.shape([(x, y), (x + 170, y), (x + 170, y + 160), (x, y + 160)], hexc('#fbf7ee'), None, 7, 0)
+            p.poly([(x + 14, y + 14), (x + 156, y + 14), (x + 156, y + 146), (x + 14, y + 146)], hexc('#bfe3f5'))
+    p.shape([(800, 620), (1100, 620), (1100, H), (800, H)], hexc('#5aa36f'), hexc('#3f8a52'), 8, 0)
+    p.stroke([(950, 620), (950, H)], 7)
+    p.shape([(700, 520), (1200, 520), (1200, 600), (700, 600)], hexc('#4d79b3'), None, 7, 0)
+    im = p.img.resize((W, H), Image.LANCZOS); d = ImageDraw.Draw(im)
+    fnt = font(F_STAMP, 64); t = 'ESCOLA'; tw = d.textlength(t, font=fnt)
+    d.text((950 - tw / 2, 524), t, font=fnt, fill=(255, 246, 226))
     return im
 
 
-def put_loja(c, x, base, f, placa='ESQUECIDOS', urso=1.0, vira=1.0, luz='dia'):
-    """loja com a base (calçada) em y=base, centro x. urso 0..1 = ursinho aparecendo na vitrine; vira = escala vertical da placa (0..1)."""
-    im = fachada_img(); x0, y0 = int(x - 550), int(base - 1000)
-    c.alpha_composite(im, (x0, y0))
-    put_img(c, bicicleta_img(300), x0 + 230, y0 + 860)
-    put_img(c, pipa_img(130), x0 + 470, y0 + 700, rot=10)
-    if urso > .02:
-        put_img(c, ursinho_img(170), x0 + 470, y0 + 860, back(urso) if urso < 1 else 1)
-        if urso < 1: faiscas(c, x0 + 470, y0 + 780, f, 110, 6, 1.3)
-    d = ImageDraw.Draw(c)   # reflexo no vidro
-    d.line((x0 + 140, y0 + 840, x0 + 260, y0 + 520), fill=(255, 255, 255, 150), width=14)
-    d.line((x0 + 190, y0 + 840, x0 + 300, y0 + 540), fill=(255, 255, 255, 110), width=8)
-    pl = placa_img(placa)
-    if vira < .999: pl = pl.resize((pl.width, max(2, int(pl.height * max(.02, vira)))), Image.BILINEAR)
-    pl = pl.rotate(-3 if placa == 'ESQUECIDOS' else 0, Image.BICUBIC, expand=True)
-    c.alpha_composite(pl, (int(x - pl.width / 2), int(y0 + 140 - pl.height / 2 + 30)))
-    if placa == 'LEMBRADOS':
-        for k in range(5): brilho(c, x - 460 + k * 230, y0 + 60 + 30 * math.sin(f * .1 + k), 22 + 10 * math.sin(f * .2 + k))
-
-
-PORTA_X = 1104 - 550 + 825   # centro da porta da loja na rua (x)
-
-
-def rua_loja(f, luz='dia', scroll=0, placa='ESQUECIDOS', urso=1.0, vira=1.0):
-    c = rua_fab(f, scroll=scroll, luz=luz)
-    put_loja(c, 1104, 1460, f, placa, urso, vira, luz)
-    return c
-
-
-# ---------------------------------------------------------------- a loja (dentro)
 @lru_cache(maxsize=2)
-def loja_bg(carrinho=True):
-    c = Image.new('RGBA', (SW, SH), (0, 0, 0, 255))
+def escola_bg(luz='dia'):
+    c = rua_base(luz).copy()
     p = Pen(SW, SH)
-    p.poly([(0, 0), (SW, 0), (SW, FY), (0, FY)], hexc('#6f9c8f'))
-    for x in range(0, SW, 130): p.stroke([(x, 0), (x, FY)], 6, hexc('#62897d'))
-    p.shape([(0, FY - 60), (SW, FY - 60), (SW, FY), (0, FY)], hexc('#55786e'), None, 5, 0)
-    _piso(p, '#9a7450')
-    p.shape([(60, 360), (1010, 360), (1010, FY), (60, FY)], hexc('#7a5230'), hexc('#5e3e22'), 8, 14)   # estante
-    p.poly([(100, 400), (970, 400), (970, FY - 10), (100, FY - 10)], hexc('#4e3420'))
-    for y in (640, 980, 1320): p.shape([(80, y), (990, y), (990, y + 34), (80, y + 34)], hexc('#9a6a40'), hexc('#7a5230'), 6, 6)
-    p.shape([(1110, 800), (1490, 800), (1490, FY), (1110, FY)], hexc('#6a4428'), None, 8, 0)   # batente da porta do fundo
-    p.poly([(1140, 830), (1460, 830), (1460, FY), (1140, FY)], hexc('#2a1e18'))
-    p.shape([(1560, 560), (2190, 560), (2190, 600), (1560, 600)], hexc('#9a6a40'), None, 6, 0)   # prateleira alta
-    p.stroke([(1300, 0), (1300, 300)], 8)
-    p.shape([(1200, 300), (1400, 300), (1350, 380), (1250, 380)], hexc('#ffd56a'), None, 7, 0)
-    for x, cor in ((1640, '#e06a55'), (1760, '#f4b63f'), (2080, '#5aa36f')):   # potes e caixas na prateleira alta
-        p.shape([(x - 45, 430), (x + 45, 430), (x + 45, 560), (x - 45, 560)], hexc(cor), mul(hexc(cor), .8), 6, 6)
+    if luz == 'dia': _nuvem(p, 300, 300, .8)
     c.alpha_composite(p.img.resize((SW, SH), Image.LANCZOS))
-    relogio(c, 3, 40, 1940, 480, 70)
-    # objetos esquecidos
-    put_img(c, caderno_img(200), 240, 640); put_img(c, pipa_img(190), 560, 640, rot=-8); put_img(c, ursinho_img(170), 840, 640)
-    put_img(c, camisa_img(280), 560, 980); bola(c, 250, 925, 52, .6); put_img(c, carrinho_img(200, True), 840, 980)
-    put_img(c, ursinho_img(230), 330, 1320)
-    if carrinho: put_img(c, carrinho_img(270, True), 660, 1320)
-    put_img(c, caderno_img(170), 880, 1320)
-    put_img(c, bicicleta_img(380), 1700, FY + 60)
-    g = Image.new('RGBA', (SW, SH), (0, 0, 0, 0)); d = ImageDraw.Draw(g)   # poeira nas prateleiras + teias
-    for y in (640, 980, 1320): d.rectangle((100, y - 300, 970, y), fill=(200, 196, 186, 40))
-    for cx, cy, a0 in ((100, 400, 0), (970, 400, 90)):
-        for k in range(4):
-            a = math.radians(a0) + k * .45
-            d.line((cx, cy, cx + 160 * math.cos(a), cy + 160 * math.sin(a)), fill=(240, 240, 240, 170), width=3)
-        for r in (50, 100, 150): d.arc((cx - r, cy - r, cx + r, cy + r), a0, a0 + 90, fill=(240, 240, 240, 170), width=3)
-    c.alpha_composite(g)
+    e = escola_img(); c.alpha_composite(e, (int(1104 - e.width / 2), 1460 - e.height))
+    if luz == 'tarde': c.alpha_composite(Image.new('RGBA', c.size, (255, 140, 60, 26)))
     return c
-
-
-@lru_cache(maxsize=1)
-def balcao_frente():
-    p = Pen(SW, SH)
-    p.shape([(1560, 1230), (2220, 1230), (2220, 1290), (1560, 1290)], hexc('#9a6a40'), None, 7, 0)
-    p.shape([(1580, 1285), (2220, 1285), (2220, FY + 40), (1580, FY + 40)], hexc('#b07a48'), hexc('#8a5a32'), 7, 16)
-    for x in range(1640, 2200, 140): p.shape([(x, 1330), (x + 100, 1330), (x + 100, FY - 10), (x, FY - 10)], hexc('#a06c3c'), None, 5, 0)
-    p.shape([(2060, 1150), (2190, 1150), (2190, 1232), (2060, 1232)], hexc('#5a5a62'), None, 6, 0)   # caixa registradora
-    p.shape([(2080, 1110), (2170, 1110), (2170, 1150), (2080, 1150)], hexc('#7a7a84'), None, 5, 0)
-    p.dot(1680, 1215, 22, hexc('#f4d48a'), 5)   # sininho
-    return p.img.resize((SW, SH), Image.LANCZOS)
-
-
-def porta_fundo(c, f, abre=.12, luz_forte=0.0):
-    """porta do fundo entreaberta com luz amarela; abre 0..1."""
-    x0, x1, y0, y1 = 1140, 1460, 830, FY
-    gap = lerp(30, x1 - x0, clamp(abre))
-    pul = .85 + .15 * math.sin(f * .12)
-    g = Image.new('RGBA', (SW, SH), (0, 0, 0, 0)); d = ImageDraw.Draw(g)
-    d.polygon([(x0, y1), (x0 + gap, y1), (x0 + gap + 300 + 700 * abre, SH), (x0 - 200 - 500 * abre, SH)], fill=(255, 220, 120, int(90 * pul)))
-    d.ellipse((x0 - 200, y0 - 150, x0 + gap + 200, y1 + 150), fill=(255, 220, 120, int(70 * pul + 80 * luz_forte)))
-    c.alpha_composite(g.filter(ImageFilter.GaussianBlur(40)))
-    d = ImageDraw.Draw(c)
-    d.rectangle((x0, y0, x0 + gap, y1), fill=(255, 226, 140, 255))
-    if gap < x1 - x0 - 10:
-        d.polygon([(x0 + gap, y0 - 10), (x1, y0), (x1, y1), (x0 + gap, y1 + 10)], fill=(138, 90, 50, 255), outline=INK + (255,))
-        d.line([(x0 + gap, y0 - 10), (x1, y0), (x1, y1), (x0 + gap, y1 + 10), (x0 + gap, y0 - 10)], fill=INK + (255,), width=7)
-        d.ellipse((x0 + gap + 30, 1180, x0 + gap + 58, 1208), fill=(244, 212, 138, 255), outline=INK + (255,), width=4)
-    particulas(c, f, x0 - 150, y0, x0 + gap + 250, y1, 18, seed=7)
-
-
-def loja(f, carrinho=True, abre=.12, luz_forte=0.0):
-    c = loja_bg(carrinho).copy()
-    porta_fundo(c, f, abre, luz_forte)
-    particulas(c, f, 120, 420, 960, 1500, 22, (235, 230, 215), 3)
-    return c
-
-
-# ---------------------------------------------------------------- a sala das poltronas
-XS = (430, 880, 1330, 1780)
-POLT = ('#5aa36f', '#c96b4a', '#4d79b3', '#d4a03a')
-ASSENTO = 1350; HS = 900; FEET_S = ASSENTO + .28 * HS
 
 
 @lru_cache(maxsize=2)
-def sala_esp_bg(luz='tarde'):
-    c = Image.new('RGBA', (SW, SH), (0, 0, 0, 255))
-    p = _base('#efd9b0', '#e6cc9c')
-    p.shape([(100, 440), (640, 440), (640, 1000), (100, 1000)], hexc('#fbf7ee'), hexc('#ddd6c6'), 7, 8)
-    _piso(p, '#b98a58')
-    p.shape(ell_pts(1104, 1900, 980, 190, 60), hexc('#9b6bb5'), hexc('#7a4f94'), 7, 14)
-    from fabula import _quadro
-    _quadro(p, 1480, 480, 260, 200, '#8fd6a0'); _quadro(p, 1840, 560, 200, 160, '#f2a65a')
-    for x, col in zip(XS, POLT):
-        p.shape([(x - 200, 1030), (x + 200, 1030), (x + 220, 1360), (x - 220, 1360)], hexc(col), mul(hexc(col), .8), 8, 18)
+def patio_bg(luz='dia'):
+    c = ceu_fab(luz).copy(); p = Pen(SW, SH)
+    if luz == 'dia': _nuvem(p, 1600, 260, .8)
+    p.shape([(-20, 520), (SW + 20, 520), (SW + 20, 1380), (-20, 1380)], hexc('#e9b48a'), hexc('#d19a70'), 8, 16)   # muro da escola
+    for y in range(600, 1380, 90):
+        off = 0 if (y // 90) % 2 else 70
+        for x in range(-70 + off, SW, 140): p.stroke([(x, y), (x + 120, y)], 4, hexc('#d19a70'))
+    for x in (300, 1000, 1700):
+        p.shape([(x, 640), (x + 260, 640), (x + 260, 860), (x, 860)], hexc('#fbf7ee'), None, 7, 0)
+        p.poly([(x + 16, 656), (x + 244, 656), (x + 244, 844), (x + 16, 844)], hexc('#bfe3f5'))
+    p.poly([(0, 1380), (SW, 1380), (SW, SH), (0, SH)], hexc('#d8cfc0'))
+    p.stroke([(0, 1380), (SW, 1380)], 8)
+    p.stroke([(200, 2100), (700, 1500), (1500, 1500), (2000, 2100)], 9, hexc('#fbf7ee'))
+    p.arc(1104, 1760, 260, 90, 0, 360, 9, hexc('#fbf7ee'))
+    p.shape([(1900, 1380), (1990, 1380), (1990, 900), (1900, 900)], hexc('#8a5a32'), hexc('#6a4428'), 8, 8)   # árvore
+    for dx, dy, r in ((-130, -40, 190), (120, -70, 200), (0, -230, 210)):
+        p.dot(1945 + dx, 880 + dy, r + 8, INK)
+    for dx, dy, r in ((-130, -40, 190), (120, -70, 200), (0, -230, 210)):
+        p.dot(1945 + dx, 880 + dy, r, hexc('#5aa36f'))
     c.alpha_composite(p.img.resize((SW, SH), Image.LANCZOS))
-    sky = ceu_fab('tarde' if luz == 'tarde' else 'dia').crop((130, 250, 610, 780)); c.alpha_composite(sky, (130, 470))
-    q = Pen(SW, SH)
-    q.stroke([(370, 470), (370, 970)], 14, hexc('#fbf7ee')); q.stroke([(130, 720), (610, 720)], 14, hexc('#fbf7ee'))
-    q.stroke([(130, 470), (610, 470), (610, 970), (130, 970), (130, 470)], 7)
-    q.shape([(80, 1000), (660, 1000), (660, 1040), (80, 1040)], hexc('#fbf7ee'), None, 6, 0)
-    c.alpha_composite(q.img.resize((SW, SH), Image.LANCZOS))
     return _escuro(c, luz)
 
 
 @lru_cache(maxsize=1)
-def poltronas_frente():
+def banco_frente():
     p = Pen(SW, SH)
-    for x, col in zip(XS, POLT):
-        cc = hexc(col)
-        p.shape([(x - 215, 1340), (x + 215, 1340), (x + 215, 1585), (x - 215, 1585)], mul(cc, 1.08), cc, 8, 16)
-        for x0 in (x - 265, x + 175):
-            p.shape([(x0, 1200), (x0 + 90, 1200), (x0 + 90, 1585), (x0, 1585)], cc, mul(cc, .8), 8, 12)
-        for xx in (x - 230, x + 230): p.shape([(xx - 16, 1585), (xx + 16, 1585), (xx + 10, 1630), (xx - 10, 1630)], hexc('#6a4428'), None, 5, 0)
-    return p.img.resize((SW, SH), Image.LANCZOS)
-
-
-def sala_esp(f, vo_expr='neutro', vo_look=0.0, exprs=('neutro', 'preocupado', 'neutro'), looks=(0, 0, 0), trico_=True, luz='tarde'):
-    c = sala_esp_bg(luz).copy()
-    relogio(c, 17, int(f / 10) % 60, 1104, 470, 90)
-    pessoa(c, XS[0], FEET_S, HS, f, VOC, seed=6, expr=vo_expr, look=vo_look)
-    for i, (x, cr_) in enumerate(zip(XS[1:], VELHOS)):
-        pessoa(c, x, FEET_S, HS, f, cr_, seed=8 + i, expr=exprs[i], look=looks[i])
-    c.alpha_composite(poltronas_frente())
-    if trico_: trico_azul(c, XS[0], FEET_S - .3 * HS, f)
-    return c
-
-
-def trico_azul(c, x, y, f):
-    """agulhas + cachecol azul comprido nas mãos da vó."""
-    d = ImageDraw.Draw(c); a = math.sin(f * .4) * 12
-    d.line((x - 80, y - 60 + a, x + 20, y + 30), fill=(200, 200, 205, 255), width=10)
-    d.line((x + 80, y - 60 - a, x - 20, y + 30), fill=(200, 200, 205, 255), width=10)
-    im = cachecol_img(360).rotate(-80, Image.BICUBIC, expand=True)
-    c.alpha_composite(im, (int(x - im.width / 2 + 30), int(y)))
-
-
-def cachecol_corpo(c, x, feet, h, flip=False):
-    """cachecol azul no pescoço de quem está em (x, feet, h) (personagem de put_menino)."""
-    k = h / 1000; sg = -1 if flip else 1
-    X = lambda sx: x + sg * (sx - 300) * k
-    Y = lambda sy: feet + .025 * h - h + sy * k
-    d = ImageDraw.Draw(c)
-    band = [(X(232), Y(440)), (X(368), Y(440)), (X(378), Y(512)), (X(222), Y(512))]
-    tail = [(X(318), Y(490)), (X(374), Y(490)), (X(384), Y(668)), (X(328), Y(668))]
-    for pts in (tail, band):
-        d.polygon(pts, fill=hexc(AZUL_C) + (255,)); d.line(pts + [pts[0]], fill=INK + (255,), width=max(4, int(8 * k)))
-    for sy in (540, 600):
-        d.line((X(322), Y(sy), X(378), Y(sy)), fill=hexc(AZUL_CL) + (255,), width=max(4, int(14 * k)))
-
-
-def cachecol_close(bg, f, s, dx=0):
-    """cachecol azul no pescoço do close_fab (mesma posição do rosto)."""
-    BW_, BH_ = kit.BW, kit.BH
-    hh = int((1300 if HOR else 1700) * s); k = hh / 1700; w = int(hh * 1000 / 1700)
-    px, py = BW_ / 2 + dx - w / 2, BH_ - hh * .95 + 6 * math.sin(f * .11)
-    P_ = lambda pts: [(px + x * k, py + y * k) for x, y in pts]
-    d = ImageDraw.Draw(bg)
-    tail = P_([(555, 1060), (665, 1060), (690, 1500), (580, 1500)])
-    band = P_([(320, 950), (680, 950), (705, 1110), (295, 1110)])
-    for pts in (tail, band):
-        d.polygon(pts, fill=hexc(AZUL_C) + (255,)); d.line(pts + [pts[0]], fill=INK + (255,), width=int(12 * k) + 2)
-    for y in (1180, 1300):
-        a, b = P_([(570, y), (680, y)]); d.line((a, b), fill=hexc(AZUL_CL) + (255,), width=int(26 * k))
-    for x in range(360, 680, 90):
-        a, b = P_([(x, 975), (x + 40, 1090)]); d.line((a, b), fill=hexc(AZUL_CL) + (255,), width=int(20 * k))
-
-
-# ---------------------------------------------------------------- lembrança: a casa da vó (de 28/11)
-@lru_cache(maxsize=1)
-def _base_vo():
-    p = Pen(SW, SH)
-    p.poly([(0, 0), (SW, 0), (SW, FY), (0, FY)], hexc('#f7e3c8'))
-    for y in range(80, FY - 60, 150):
-        for x in range(60 + (y // 150 % 2) * 75, SW, 150):
-            for k in range(5): p.dot(x + 12 * math.cos(k * 1.256), y + 12 * math.sin(k * 1.256), 9, hexc('#f2b8b0'))
-            p.dot(x, y, 6, hexc('#f4b63f'))
-    p.shape([(0, FY - 60), (SW, FY - 60), (SW, FY), (0, FY)], hexc('#d9b48a'), None, 5, 0)
-    p.shape([(270, 680), (790, 680), (790, 1170), (270, 1170)], hexc('#fbf7ee'), hexc('#ddd6c6'), 7, 8)
-    p.shape([(1260, 560), (1520, 560), (1520, 860), (1260, 860)], hexc('#8a5a32'), None, 7, 0)
-    p.poly([(1285, 585), (1495, 585), (1495, 835), (1285, 835)], hexc('#f4e1a1'))
-    p.dot(1390, 680, 50, hexc('#e8bd96'), 5); p.shape([(1320, 835), (1460, 835), (1440, 760), (1340, 760)], hexc('#9b6bb5'), None, 5, 0)
-    _piso(p, '#b98a58')
-    p.shape(ell_pts(1104, 1920, 760, 170, 60), hexc('#e06a55'), hexc('#b8432a'), 7, 14)
-    p.shape([(1120, 1050), (1680, 1050), (1700, 1360), (1100, 1360)], hexc('#5aa36f'), hexc('#3f8a52'), 8, 18)
+    p.shape([(1380, 1560), (1980, 1560), (1980, 1610), (1380, 1610)], hexc('#b07a48'), None, 7, 0)
+    for x in (1420, 1940): p.shape([(x - 16, 1610), (x + 16, 1610), (x + 16, 1720), (x - 16, 1720)], hexc('#6a4428'), None, 5, 0)
     return p.img.resize((SW, SH), Image.LANCZOS)
 
 
 @lru_cache(maxsize=2)
-def salinha_fab(luz='tarde'):
+def sala_aula_bg(luz='dia'):
     c = Image.new('RGBA', (SW, SH), (0, 0, 0, 255))
-    c.alpha_composite(_base_vo())
-    sky = ceu_fab('tarde' if luz == 'tarde' else 'dia').crop((300, 300, 760, 750)); c.alpha_composite(sky, (300, 700))
-    q = Pen(SW, SH)
-    q.stroke([(530, 700), (530, 1150)], 14, hexc('#fbf7ee')); q.stroke([(300, 925), (760, 925)], 14, hexc('#fbf7ee'))
-    q.stroke([(300, 700), (760, 700), (760, 1150), (300, 1150), (300, 700)], 7)
-    q.shape([(270, 1150), (790, 1150), (790, 1190), (270, 1190)], hexc('#fbf7ee'), None, 6, 0)
-    c.alpha_composite(q.img.resize((SW, SH), Image.LANCZOS))
+    p = _base('#d6e8d0', '#cbdfc4')
+    _piso(p, '#c99a62')
+    p.shape([(560, 380), (1660, 380), (1660, 1000), (560, 1000)], hexc('#8a5a32'), None, 8, 0)
+    p.poly([(590, 410), (1630, 410), (1630, 970), (590, 970)], hexc('#2f6a4a'))
+    p.shape([(560, 1000), (1660, 1000), (1660, 1030), (560, 1030)], hexc('#9a6a40'), None, 6, 0)
+    p.shape([(100, 450), (440, 450), (440, 900), (100, 900)], hexc('#fbf7ee'), hexc('#ddd6c6'), 7, 8)
+    c.alpha_composite(p.img.resize((SW, SH), Image.LANCZOS))
+    sky = ceu_fab(luz).crop((120, 250, 420, 680)); c.alpha_composite(sky, (120, 470))
+    d = ImageDraw.Draw(c); fnt = font(F_MAO, 96)
+    d.text((680, 470), '2 + 2 = 4', font=fnt, fill=(240, 240, 230))
+    d.text((680, 640), 'A B C', font=fnt, fill=(240, 240, 230))
+    for k in range(5):
+        a = k * 1.256; d.line((1450, 600, 1450 + 80 * math.cos(a), 600 + 80 * math.sin(a)), fill=(240, 220, 120), width=8)
+    d.ellipse((1410, 560, 1490, 640), outline=(240, 220, 120), width=8)
+    relogio(c, 10, 10, 1900, 520, 90)
     return _escuro(c, luz)
 
 
+CARTEIRAS = (420, 900, 1380, 1860)
+
+
 @lru_cache(maxsize=1)
-def poltrona_frente():
+def carteiras_frente():
     p = Pen(SW, SH)
-    p.shape([(1090, 1340), (1710, 1340), (1710, 1580), (1090, 1580)], hexc('#6ab57e'), hexc('#4a9a60'), 8, 16)
-    for x0 in (1030, 1650):
-        p.shape([(x0, 1200), (x0 + 120, 1200), (x0 + 120, 1580), (x0, 1580)], hexc('#5aa36f'), hexc('#3f8a52'), 8, 12)
-    for x in (1120, 1680): p.shape([(x - 18, 1580), (x + 18, 1580), (x + 12, 1630), (x - 12, 1630)], hexc('#6a4428'), None, 5, 0)
+    for x in CARTEIRAS:
+        p.shape([(x - 200, 1390), (x + 200, 1390), (x + 200, 1430), (x - 200, 1430)], hexc('#d9a05b'), None, 7, 0)
+        p.shape([(x - 180, 1428), (x + 180, 1428), (x + 180, 1640), (x - 180, 1640)], hexc('#b07a48'), hexc('#8a5a32'), 7, 10)
     return p.img.resize((SW, SH), Image.LANCZOS)
 
 
-def bolo(c, x, y, s=1.0, f=0):
+def sentado_carteira(c, x, f, cores, h=640, **kw):
+    pessoa(c, x, 1390 + .3 * h, h, f, cores, sombra=False, **kw)
+
+
+def avental(c, x, feet, h):
     d = ImageDraw.Draw(c)
-    d.ellipse((x - 200 * s, y - 40 * s, x + 200 * s, y + 20 * s), fill=(250, 250, 246, 255), outline=INK + (255,), width=6)
-    d.rectangle((x - 150 * s, y - 150 * s, x + 150 * s, y - 20 * s), fill=(236, 186, 80, 255))
-    d.ellipse((x - 150 * s, y - 60 * s, x + 150 * s, y + 10 * s), fill=(236, 186, 80, 255), outline=INK + (255,), width=6)
-    d.line((x - 150 * s, y - 150 * s, x - 150 * s, y - 25 * s), fill=INK + (255,), width=6); d.line((x + 150 * s, y - 150 * s, x + 150 * s, y - 25 * s), fill=INK + (255,), width=6)
-    d.ellipse((x - 150 * s, y - 190 * s, x + 150 * s, y - 110 * s), fill=(246, 206, 110, 255), outline=INK + (255,), width=6)
-    d.ellipse((x - 36 * s, y - 166 * s, x + 36 * s, y - 134 * s), fill=(160, 110, 50, 255), outline=INK + (255,), width=5)
+    pts = [(_SX(x, h, 240), _SY(feet, h, 540)), (_SX(x, h, 360), _SY(feet, h, 540)), (_SX(x, h, 390), _SY(feet, h, 760)), (_SX(x, h, 210), _SY(feet, h, 760))]
+    d.polygon(pts, fill=(250, 246, 232, 255)); d.line(pts + [pts[0]], fill=INK + (255,), width=max(4, int(h * .007)))
+    d.line([(_SX(x, h, 245), _SY(feet, h, 545)), (_SX(x, h, 270), _SY(feet, h, 470))], fill=(250, 246, 232, 255), width=max(4, int(h * .012)))
+    d.line([(_SX(x, h, 355), _SY(feet, h, 545)), (_SX(x, h, 330), _SY(feet, h, 470))], fill=(250, 246, 232, 255), width=max(4, int(h * .012)))
     for k in range(3):
-        a = (f * .03 + k / 3) % 1
-        d.arc((x - 60 * s + k * 50 * s, y - 330 * s - a * 120 * s, x - 20 * s + k * 50 * s, y - 230 * s - a * 120 * s), 90, 270, fill=(255, 255, 255, int(220 * (1 - a))), width=6)
+        cx = _SX(x, h, 260 + k * 40); cy = _SY(feet, h, 680); r = h * .012
+        d.ellipse((cx - r, cy - r, cx + r, cy + r), fill=(224, 106, 85, 255))
 
 
-def lipe_chao(c, x, f, expr='sorriso', look=.75, y=1820, flip=False):
-    pessoa(c, x, y + .3 * KID, KID, f, LIPE, seed=2, expr=expr, look=look, flip=flip)
+def porta_quarto(c, luz_on=1.0):
+    """porta do quarto do Lipe entreaberta com a luz da cozinha passando por baixo e pela fresta."""
     d = ImageDraw.Draw(c)
-    d.ellipse((x - 300, y - 30, x + 300, y + 140), fill=(224, 106, 85, 255), outline=INK + (255,), width=8)
+    d.rectangle((800, 880, 1030, 1560), fill=(138, 90, 50, 255), outline=INK + (255,), width=8)
+    if luz_on > 0:
+        g = Image.new('RGBA', c.size, (0, 0, 0, 0)); gd = ImageDraw.Draw(g)
+        gd.polygon([(1000, 1560), (1030, 1560), (1300, 2200), (900, 2200)], fill=(255, 220, 120, int(110 * luz_on)))
+        gd.rectangle((995, 880, 1030, 1560), fill=(255, 226, 140, int(255 * luz_on)))
+        c.alpha_composite(g.filter(ImageFilter.GaussianBlur(6)))
+    d.ellipse((960, 1200, 985, 1225), fill=(244, 212, 138, 255), outline=INK + (255,), width=4)
 
 
-def livro(c, x, y, s=1.0):
-    d = ImageDraw.Draw(c)
-    for sg in (-1, 1):
-        pts = [(x, y), (x + sg * 130 * s, y - 20 * s), (x + sg * 130 * s, y + 120 * s), (x, y + 140 * s)]
-        d.polygon(pts, fill=(250, 246, 232, 255)); d.line(pts + [pts[0]], fill=INK + (255,), width=6)
-        for k in range(4): d.line((x + sg * 20 * s, y + (15 + k * 28) * s, x + sg * 110 * s, y + (-2 + k * 28) * s), fill=(120, 120, 150, 255), width=4)
-    d.polygon([(x - 140 * s, y + 120 * s), (x, y + 150 * s), (x + 140 * s, y + 120 * s), (x + 140 * s, y + 135 * s), (x, y + 165 * s), (x - 140 * s, y + 135 * s)], fill=(77, 121, 179, 255))
+def balao(im, t, x, y, s=1.0, size=58):
+    """balão de fala (coordenadas da saída) com a frase dura."""
+    if s <= .02: return
+    fnt = font(F_CAP, size); dd = ImageDraw.Draw(Image.new('L', (1, 1)))
+    maxw = V(860, 1300); ws_ = t.split(); linhas = [t]
+    if dd.textlength(t, font=fnt) > maxw:
+        meio = len(ws_) // 2 + 1; linhas = [' '.join(ws_[:meio]), ' '.join(ws_[meio:])]
+    tw = max(dd.textlength(l, font=fnt) for l in linhas)
+    w, h = int(tw + 90), int(size * (1.0 + 1.15 * len(linhas)))
+    b = Image.new('RGBA', (w + 20, h + 70), (0, 0, 0, 0)); d = ImageDraw.Draw(b)
+    d.polygon([(w * .3, h - 6), (w * .45, h - 6), (w * .25, h + 55)], fill=(255, 255, 255, 255), outline=(36, 24, 34, 255))
+    d.rounded_rectangle((6, 6, w, h), 40, fill=(255, 255, 255, 255), outline=(36, 24, 34, 255), width=8)
+    d.polygon([(w * .3 + 4, h - 10), (w * .45 - 4, h - 10), (w * .26, h + 44)], fill=(255, 255, 255, 255))
+    for i, l in enumerate(linhas):
+        d.text((48, h / 2 - size * .62 * len(linhas) + i * size * 1.2 + (size * .55 if len(linhas) > 1 else 0) - (size * .5 if len(linhas) > 1 else 0)), l, font=fnt, fill=(200, 50, 40))
+    paste_c(im, b, x, y, back(s) if s < 1 else 1)
+
+
+# ---------------------------------------------------------------- ajudantes de cena
+def lipe_mochila(c, x, feet, f, carga=.1, h=KID, cores=LIPE, **kw):
+    mochila_costas(c, x, feet, h, carga, VERM, f)
+    pessoa(c, x, feet, h, f, cores, seed=2, **kw)
+    alcas(c, x, feet, h, VERM)
+
+
+def kid_mochila(c, x, feet, f, cores, cor=AZUL_M, carga=.1, h=640, seed=4, **kw):
+    mochila_costas(c, x, feet, h, carga, cor, f, seed)
+    pessoa(c, x, feet, h, f, cores, seed=seed, **kw)
+    alcas(c, x, feet, h, cor)
+
+
+def mae_sentada(c, x, f, cores=MAE_PIJ, expr='preocupado', look=0.0, **kw):
+    pessoa(c, x, 1300 + .28 * ADU, ADU, f, cores, seed=3, expr=expr, look=look, sombra=False, **kw)
 
 
 # ---------------------------------------------------------------- cenas
 def s0(f):
     if f < CAPA:
-        c = loja(0)
-        c = close_fab(c, f, 1104, 1200, expr='choque', look=0, s=V(.9, .95), dx=V(0, 480), **LIPE)
-        if HOR: put_img(c, ursinho_img(330), 480, 1180)
-        else: put_img(c, ursinho_img(300), 220, 2190, rot=6)
+        c = patio_bg('dia').copy()
+        c = close_fab(c, f, 1104, 1200, expr='preocupado', look=0, s=V(.9, .95), dx=V(0, 480), lagrima=.35, **LIPE)
+        if HOR:
+            for k in range(3): put_pedra(c, 300 + k * 230, 1050 - 40 * (k % 2), 170, k, rot=k * 30)
+        else:
+            for k in range(3): put_pedra(c, 160 + k * 120, 2120 - 50 * (k % 2), 150, k, rot=k * 30)
         return c, cam_close(f, 1.04, 1.0), 'vivo'
     g = f - CAPA
-    lo = wt(0, 'loja') - 4
-    c = rua_loja(f)
-    t = smooth(ramp(g, 0, lo - CAPA + 20))
-    bx = lerp(150, PORTA_X - 60, t)
-    if t < .98:
-        bola(c, bx, 1720 - 60 * abs(math.sin(g * .25)) * (1 - t), 50, g * .3)
-        put_img(c, pipa_img(170), lerp(200, PORTA_X, t), lerp(900, 1500, t), lerp(1, .6, t), rot=20 * math.sin(g * .1))
-    pessoa(c, 320 + g * 1.5, 1770, ADU, f, GENTE[1], walk=1, seed=3, expr='neutro', look=.75)
-    k = smooth(ramp(f, lo - 10, lo + 16))
-    return c, cam(lerp(V(650, 1104), V(1104, 1104), k), lerp(V(1350, 1250), V(1150, 1100), k), lerp(1.3, 1.1, k) * (1 + .0006 * f), lerp(1.15, 1.0, k) * (1 + .0006 * f)), 'vivo'
+    pe = wt(0, 'pedra') - 2; mo = wt(0, 'mochila') - 3
+    c = rua_fab(f, scroll=g * 9, luz='dia')
+    kid_mochila(c, 650, 1790, f, KID1, VERDE_M, .05, walk=1, expr='sorriso', look=.75, seed=5)
+    lipe_mochila(c, 1104, 1780, f, .1 + .1 * (f >= pe + 9), walk=1, expr='neutro', look=.75)
+    cai_pedra(c, 1104, _SY(1780, KID, 455), f, pe, 110, 1)
+    k = easeOut(ramp(f, mo, mo + 14))
+    return c, cam(lerp(V(950, 1104), 1104, k), lerp(V(1350, 1250), V(1350, 1300), k), lerp(1.2, 2.0, k) * (1 + .0006 * f), lerp(1.05, 1.6, k) * (1 + .0006 * f)), 'vivo'
+
+
+INSULTOS = [('voce', 'burro', 'VOCÊ É BURRO.'), ('ninguem', 'voce', 'NINGUÉM QUER JOGAR COM VOCÊ.'), ('para', 'chorar', 'PARA DE CHORAR.')]
+
+
+def _seg1(f):
+    """qual pedaço da frase 1: (k, 'fala'|'pedra', quadro do começo)."""
+    marcos = []
+    for k, (a, b, _) in enumerate(INSULTOS):
+        marcos.append((wt(1, a, 1 if (k == 1 and a == 'voce') else 0) - 3, k, 'fala'))
+        marcos.append((wt(1, 'pedra', k) - 3, k, 'pedra'))
+    marcos.sort(); cur = (0, 0, 'fala')
+    for m in marcos:
+        if f >= m[0]: cur = m
+    return cur[1], cur[2], cur[0]
 
 
 def s1(f):
-    bi, ca = wt(1, 'bicicleta') - 3, wt(1, 'caderno') - 3
-    if f < bi:
-        c = quarto_fab('dia').copy()
-        put_img(c, ursinho_img(340), 480, 1760, rot=12)
-        d = ImageDraw.Draw(c)
-        for k in range(4): d.line((100, FY - 40, 100 + 260 * math.cos(-k * .4), FY - 40 + 260 * math.sin(-k * .4)), fill=(250, 250, 250, 200), width=4)
-        return c, cam(560, V(1500, 1350), zf(1.7, f, .002), zf(1.35, f, .002), -2), 'vivo'
-    if f < ca:
-        g = f - bi
-        c = quintal_fab('dia').copy()
-        put_img(c, bicicleta_img(360), 1200, 1640, rot=4)
-        pessoa(c, 820, 1780, KID, f, LIPE, seed=2, expr='curioso', look=.75)
-        return c, cam(1050, V(1350, 1250), zf(1.35, g, .002), zf(1.1, g, .002)), 'vivo'
-    g = f - ca
-    c = sala_fab('dia').copy()
-    c.alpha_composite(sofa_frente())
-    put_img(c, caderno_img(260), 1000, 1360, rot=-75)
-    particulas(c, f, 800, 1000, 1300, 1400, 14, (235, 230, 215), 5)
-    return c, cam(1000, V(1300, 1250), zf(1.6, g, .002), zf(1.3, g, .002), 2), 'vivo'
+    k, tipo, f0 = _seg1(f)
+    g = f - f0
+    if tipo == 'fala':
+        c = patio_bg('dia').copy()
+        quem = [KIDB, KID3, GENTE[3]][k]; h = [820, 700, ADU][k]
+        a, b, _ = INSULTOS[k]
+        x = 1000
+        pessoa(c, x, 1800, h, f, quem, seed=7 + k, expr='desconfiado' if k < 2 else 'preocupado', look=.75,
+               boca=boca_fala(1, f, a, b), gesto='aponta' if k < 2 else 'ombros')
+        kid_mochila(c, 1560, 1820, f, LIPE, VERM, .1 + .12 * k, expr='preocupado', look=-.75, seed=2)
+        return c, cam(lerp(1150, 1250, ramp(g, 0, 40)), V(1350, 1300), (1.45 + .3 * k) * (1 + .002 * g), (1.15 + .15 * k) * (1 + .002 * g), [-2, 2, -2][k]), 'vivo'
+    c = patio_bg('dia').copy()
+    bx, by = mochila_chao(c, 1104, 1800, 620, VERM, k + 1, 3)
+    cai_pedra(c, bx, by, f, f0 + 2, 200, 10 + k, 800)
+    kk = kick(f, f0 + 11, 1.0)
+    return c, cam(1104, V(1350, 1300) + kk * 14, (2.1 + .1 * k) * (1 + .002 * g), (1.6 + .1 * k) * (1 + .002 * g), kk * 2), 'vivo'
 
 
 def s2(f):
-    so, ap = wt(2, 'some') - 3, wt(2, 'aparece') - 4
-    if f < ap:
-        c = quarto_fab('dia').copy()
-        al = 1 - ramp(f, so, so + 24)
-        put_img(c, ursinho_img(340), 700, 1760, alpha=al, rot=12)
-        if f >= so: faiscas(c, 700, 1600, f, 160 * (1 + ramp(f, so, so + 24)), 7, 1.5)
-        pessoa(c, 1130, 1790, KID, f, LIPE, seed=2, expr='preocupado' if f >= so else 'neutro', look=-.5, walk=0)
-        return c, cam(880, V(1450, 1300), zf(1.45, f, .0015), zf(1.15, f, .0015)), 'vivo'
-    g = f - ap; es = wt(2, 'esquecidos') - 4
-    c = rua_loja(f, urso=ramp(g, 0, 12) if g < 12 else 1.0)
-    k = smooth(ramp(f, es - 8, es + 12))
-    return c, cam(lerp(1104 - 550 + 400, 1104, k), lerp(1210, 1000, k), lerp(V(2.0, 1.7), V(1.25, 1.05), k) * (1 + .0015 * g), lerp(1.7, 1.05, k) * (1 + .0015 * g)), 'vivo'
+    cu, so = wt(2, 'curvada') - 3, wt(2, 'sozinho') - 3; ni = wt(2, 'ninguem') - 3
+    c = escola_bg('dia').copy()
+    if f < cu:
+        x = lerp(200, 1300, ramp(f, 0, cu))
+        hop = abs(math.sin(f * .25)) * 60
+        kid_mochila(c, x, 1790 - hop, f, KID1, VERDE_M, .02, walk=1, expr='sorriso', look=.75, seed=5)
+        return c, cam(lerp(V(600, 1104), V(1200, 1104), ramp(f, 0, cu)), V(1300, 1150), 1.3 * (1 + .0008 * f), 1.05 * (1 + .0008 * f)), 'vivo'
+    g = f - cu
+    x = lerp(300, 900, ramp(g, 0, 160))
+    kid_mochila(c, x, 1800, f, KID2, AZUL_M, .9, walk=1, expr='preocupado', look=.5, seed=6, tilt=6)
+    if f >= ni:
+        k = easeOut(ramp(f, ni, ni + 14))
+        return c, cam(x, lerp(V(1350, 1300), 1250, k), lerp(1.35, 2.4, k) * (1 + .001 * g), lerp(1.1, 1.9, k) * (1 + .001 * g)), 'vivo'
+    return c, cam(x + 150, V(1350, 1300), 1.35 * (1 + .001 * g), 1.1 * (1 + .001 * g)), 'vivo'
 
 
 def s3(f):
-    su, fo = wt(3, 'sumiu') - 3, wt(3, 'foi') - 3
-    if f < fo:
-        c = quarto_fab('dia').copy()
-        d = ImageDraw.Draw(c)
-        d.rounded_rectangle((1250, 860, 1520, 980), 20, outline=(200, 190, 170, 255), width=8)   # marca de poeira onde estava o carrinho
-        for x in range(1270, 1510, 30): d.line((x, 975, x + 14, 975), fill=(210, 200, 185, 255), width=6)
-        put_img(c, pipa_img(140), 1100, 980); bola(c, 1640, 935, 44, .4)
-        pessoa(c, 960, 1780, KID, f, LIPE, seed=2, expr='choque' if f >= su else 'curioso', look=.75)
-        t = easeOut(ramp(f, su, su + 10))
-        return c, cam(lerp(1104, 1200, t), lerp(V(1300, 1250), V(1150, 1100), t), lerp(1.2, 1.55, t) * (1 + .0008 * f), lerp(1.0, 1.25, t) * (1 + .0008 * f)), 'vivo'
-    g = f - fo
-    c = rua_fab(f, scroll=g * 14, luz='dia')
-    pessoa(c, 1104, 1780, KID, f, LIPE, walk=1, seed=2, expr='desconfiado', look=.75)
-    return c, cam(1104, V(1350, 1250), zf(1.3, g, .002), zf(1.08, g, .002)), 'vivo'
+    ri, tu = wt(3, 'riu') - 3, wt(3, 'tum') - 2
+    c = patio_bg('dia').copy()
+    rindo = ri <= f < tu + 30
+    bo = (.4 + .6 * abs(math.sin(f * .5))) if rindo else 0
+    for i, (xx, cr_) in enumerate(((420, KID1), (1820, KID3))):
+        kid_mochila(c, xx, 1760, f, cr_, [VERDE_M, AZUL_M][i], .05, expr='sorriso', look=[.5, -.5][i], seed=10 + i, boca=bo * .7)
+    pessoa(c, 820, 1800, 840, f, KIDB, seed=7, expr='sorriso' if rindo else 'neutro', look=.75, boca=bo, gesto='aponta' if f >= ri else None)
+    carga = .1 + .25 * (f >= tu + 9)
+    lipe_mochila(c, 1380, 1810, f, carga, expr='preocupado' if f >= ri else 'neutro', look=-.75)
+    cai_pedra(c, 1380, _SY(1810, KID, 455), f, tu, 120, 2, 900)
+    kk = kick(f, tu + 9, 1.2)
+    if f >= tu:
+        z = lerp(1.3, 1.9, easeOut(ramp(f, tu, tu + 10)))
+        return c, cam(1380, V(1300, 1250) + kk * 12, z * (1 + .001 * (f - tu)), z * .8 * (1 + .001 * (f - tu)), kk * 3), 'vivo'
+    return c, cam(lerp(V(820, 1104), V(1100, 1104), ramp(f, 0, ri + 20)), V(1300, 1200), zf(1.25, f), zf(1.02, f)), 'vivo'
 
 
 def s4(f):
-    ur, cm = wt(4, 'ursinho') - 3, wt(4, 'camisa') - 3; ac = wt(4, 'achou') - 3
-    c = loja(f)
-    pessoa(c, 1120, 1790, KID, f, LIPE, seed=2, expr='curioso' if f < ur else 'sorriso', look=-.75)
-    if f >= ac: faiscas(c, 660, 1230, f, 150, 5, 1.2 * ramp(f, ac, ac + 6))
-    if f < ur: cx, cy, z = 760, 1250, 1.65
-    elif f < cm: cx, cy, z = 520, 1200, 1.75
-    else: cx, cy, z = 620, 950, 1.75
-    k = easeOut(ramp(f, ur, ur + 10)) if f < cm else easeOut(ramp(f, cm, cm + 10))
-    pz = 1 + .0012 * f
-    return c, cam(cx, cy, z * pz, z * .78 * pz), 'vivo'
+    au, ri = wt(4, 'levantar') - 3, wt(4, 'rir') - 3
+    if f < au:
+        c = rua_fab(f, scroll=f * 4, luz='dia')
+        lipe_mochila(c, 1104, 1780, f, .4, walk=.6, expr='preocupado', look=.25, tilt=4)
+        return c, cam(1104, V(1350, 1250), zf(1.4, f), zf(1.15, f)), 'vivo'
+    if f < ri:
+        g = f - au
+        c = sala_aula_bg('dia').copy()
+        for i, (x, cr_) in enumerate(zip(CARTEIRAS, (KID1, LIPE, KID3, KID2))):
+            if cr_ is LIPE:
+                mochila_costas(c, x, 1390 + .3 * 640, 640, .45, VERM, f)
+                sentado_carteira(c, x, f, cr_, expr='preocupado', look=0)
+            else:
+                sentado_carteira(c, x, f, cr_, expr='sorriso', look=.25, braco_d=round((2.9 + .1 * math.sin(f * .4 + i)) * 10) / 10)
+        c.alpha_composite(carteiras_frente())
+        return c, cam(lerp(1200, 900, smooth(ramp(g, 0, 60))), V(1150, 1150), (1.3 + .4 * smooth(ramp(g, 0, 60))) * (1 + .001 * g), 1.05 * (1 + .001 * g)), 'vivo'
+    g = f - ri
+    c = patio_bg('dia').copy()
+    for i, (x, cr_) in enumerate(((420, KID1), (760, KID3), (1100, KID2))):
+        pessoa(c, x, 1760 - abs(math.sin(f * .3 + i)) * 40, 640, f, cr_, seed=10 + i, expr='sorriso', boca=.5 + .5 * abs(math.sin(f * .45 + i)), gesto='comemora')
+    mochila_costas(c, 1680, 1560 + .28 * KID, KID, .45, VERM, f)
+    pessoa(c, 1680, 1560 + .28 * KID, KID, f, LIPE, seed=2, expr='preocupado', look=-.75, sombra=False)
+    c.alpha_composite(banco_frente())
+    return c, cam(lerp(1300, 1600, smooth(ramp(g, 0, 60))), V(1300, 1250), zf(1.4, g, .0015), zf(1.1, g, .0015)), 'vivo'
 
 
 def s5(f):
-    c = loja(f, carrinho=False)
-    pessoa(c, 760, 1790, KID, f, LIPE, seed=2, expr='preocupado', look=-.5)
-    c = close_fab(c, f, 700, 1150, expr='preocupado', look=V(-.5, -.25), s=V(.95, .95), dx=V(0, 380), **LIPE)
-    bx = kit.BW / 2 + V(0, 380); by = kit.BH - V(60, 30)
-    put_img(c, carrinho_img(V(560, 460)), bx, by + 4 * math.sin(f * .2))
-    return c, cam_close(f, 1.15, 1.0), 'vivo'
-
-
-def lipe_com_carrinho(c, x, feet, f, **kw):
-    pessoa(c, x, feet, KID, f, LIPE, seed=2, **kw)
-    hx, hy = mao_dir(x, feet, KID)
-    put_img(c, carrinho_img(170), hx, hy + 40)
+    so, be = wt(5, 'sorrindo') - 3, wt(5, 'bem') - 3
+    c = jantar_fab('dia').copy()
+    pessoa(c, 1000, 1780, ADU, f, MAE, seed=3, expr='sorriso', look=.75, gesto='acena' if f >= so else ('ombros' if f >= be else None))
+    avental(c, 1000, 1780, ADU)
+    lipe_mochila(c, 1560, 1800, f, .45, expr='neutro', look=-.75)
+    k = smooth(ramp(f, be - 10, be + 20))
+    return c, cam(lerp(1150, 1050, k), lerp(V(1250, 1200), V(1100, 1050), k), lerp(1.25, 1.7, k) * (1 + .0008 * f), lerp(1.02, 1.35, k) * (1 + .0008 * f)), 'vivo'
 
 
 def s6(f):
-    so = wt(6, 'sorriu') - 3; dv = wt(6, 'devagarinho') - 3
-    c = loja(f, carrinho=False)
-    pessoa(c, 1900, 1650, ADU, f, VEND, seed=9, expr='sorriso' if f >= so else 'neutro', look=-.75)
-    c.alpha_composite(balcao_frente())
-    lipe_com_carrinho(c, 1330, 1800, f, expr='curioso', look=.75)
-    k = easeOut(ramp(f, dv, dv + 14))
-    return c, cam(lerp(1650, 1800, k), lerp(V(1250, 1150), V(1150, 1100), k), lerp(1.3, 1.75, k) * (1 + .0008 * f), lerp(1.08, 1.4, k) * (1 + .0008 * f)), 'vivo'
+    lu = wt(6, 'luz') - 3; ac = wt(6, 'acordou') - 3
+    c = quarto_fab('noite').copy()
+    porta_quarto(c, ramp(f, lu - 6, lu + 6))
+    pessoa(c, 1860, 1290 + .28 * KID, KID, f, LIPE_PIJAMA, seed=2, expr='curioso' if f >= ac else 'neutro', look=-.75 if f >= lu else 0, sombra=False, blink=0)
+    d = ImageDraw.Draw(c); cob = [(1600, 1390), (2110, 1370), (2110, 1575), (1600, 1575)]
+    d.polygon(cob, fill=(120, 170, 220, 255)); d.line(cob + [cob[0]], fill=INK + (255,), width=8)
+    if f < lu:
+        return c, cam(1800, V(1200, 1150), zf(1.6, f), zf(1.3, f)), 'noite_fab'
+    k = smooth(ramp(f, lu, lu + 24))
+    return c, cam(lerp(1800, 960, k), V(1250, 1200), lerp(1.6, 1.5, k) * (1 + .001 * f), lerp(1.3, 1.2, k)), 'noite_fab'
+
+
+def cozinha_noite(f, pedras=6, mochila=True, flut=None, mae_expr='preocupado', mae_look=0.0, **kw):
+    c = jantar_fab('noite').copy()
+    mae_sentada(c, 1104, f, MAE, expr=mae_expr, look=mae_look, **kw)
+    c.alpha_composite(mesa_frente())
+    boca_ = None
+    if mochila: boca_ = mochila_chao(c, 1750, 1840, 760, '#7a5ab0', pedras, 20)
+    return c, boca_
 
 
 def s7(f):
-    ve = wt(7, 'vendedor') - 3
-    c = loja(f, carrinho=False)
-    pessoa(c, 1900, 1650, ADU, f, VEND, seed=9, expr='sorriso' if f >= ve else 'neutro', look=-.75 if f >= ve else -1)
-    c.alpha_composite(balcao_frente())
-    lipe_com_carrinho(c, 900, 1800, f, expr='curioso', look=.75)
-    if f < ve:
-        return c, cam(1250, V(1250, 1200), zf(1.25, f, .0025), zf(1.05, f, .002)), 'vivo'
-    g = f - ve
-    return c, cam(1550, V(1200, 1150), zf(1.45, g, .0015), zf(1.15, g, .0012)), 'vivo'
+    gi = wt(7, 'gigante') - 3
+    c, _ = cozinha_noite(f)
+    if f < gi:
+        return c, cam(1104, V(1050, 1000), lerp(2.2, 1.9, smooth(ramp(f, 0, gi))), lerp(1.7, 1.5, smooth(ramp(f, 0, gi)))), 'noite_fab'
+    k = smooth(ramp(f, gi, gi + 24))
+    return c, cam(lerp(1104, 1450, k), lerp(V(1050, 1000), V(1300, 1200), k), lerp(1.9, 1.05, k) * (1 + .0006 * f), lerp(1.5, 1.0, k) * (1 + .0006 * f)), 'noite_fab'
 
 
 def s8(f):
-    em, en = wt(8, 'empurrou') - 3, wt(8, 'entrou') - 3
-    ab = lerp(.12, 1.0, smooth(ramp(f, em, en)))
-    c = loja(f, carrinho=False, abre=ab, luz_forte=ramp(f, en, en + 12))
-    x = lerp(980, 1300, smooth(ramp(f, en - 4, en + 16)))
-    lipe_com_carrinho(c, x, 1800, f, expr='curioso', look=.75, walk=1 if f >= en - 4 else 0)
-    if f >= en:
-        c.alpha_composite(Image.new('RGBA', c.size, (255, 236, 180, int(230 * ramp(f, en + 4, en + 18)))))
-    return c, cam(1300, V(1250, 1200), zf(1.5, f, .002), zf(1.2, f, .002)), 'vivo'
+    ch, co, es = wt(8, 'chefe') - 3, wt(8, 'contas') - 3, wt(8, 'gente') - 3
+    c = jantar_fab('noite').copy()
+    mae_sentada(c, 1104, f, MAE, expr='preocupado', look=.75)
+    c.alpha_composite(mesa_frente())
+    bx, by = mochila_chao(c, 1750, 1840, 760, '#7a5ab0', 0, 20)
+    for i, (w0, rot) in enumerate(((ch, 'CHEFE'), (co, 'CONTAS'), (es, '?'))):
+        s_ = back(ramp(f, w0, w0 + 8)) if f >= w0 else 0
+        if s_ > .05:
+            put_pedra(c, bx - 230 + i * 230, by - 70 - 60 * (i % 2) - 40 * (1 - s_), int(250 * max(.3, s_)), 30 + i, rot=(-12, 6, 14)[i], rotulo=rot)
+    for k in range(4): put_pedra(c, bx - 260 + k * 170, by + 10, 170, 40 + k, rot=k * 20)
+    t = smooth(ramp(f, 0, 40))
+    return c, cam(lerp(1500, 1700, t), lerp(V(1200, 1150), V(1150, 1100), t), lerp(1.4, 1.9, t) * (1 + .001 * f), lerp(1.2, 1.5, t) * (1 + .001 * f)), 'noite_fab'
 
 
 def s9(f):
-    po = wt(9, 'porta') - 3
-    c = sala_esp(f, vo_expr='neutro', looks=(0, 0, 0), exprs=('neutro', 'preocupado', 'neutro'))
-    t = smooth(ramp(f, 0, 120))
-    return c, cam(lerp(V(880, 1104), V(1104, 1104), t), V(1250, 1200), lerp(1.7, V(1.2, 1.0), t) * (1 + .0006 * f), lerp(1.3, 1.0, t) * (1 + .0006 * f)), 'tarde'
+    es = wt(9, 'escondia') - 3
+    c = jantar_fab('tarde').copy()
+    d = ImageDraw.Draw(c)
+    d.rectangle((150, 710, 550, 1550), fill=(40, 26, 20, 255))   # armário aberto
+    entra = smooth(ramp(f, es, es + 40))
+    x = lerp(900, 380, entra)
+    mochila_chao(c, x, 1600, int(lerp(600, 420, entra)), '#7a5ab0', 5, 20)
+    porta_w = lerp(0, 380, ramp(f, es + 30, es + 48))
+    if porta_w > 4: d.rectangle((550 - porta_w, 700, 550, 1560), fill=(138, 90, 50, 255), outline=INK + (255,), width=8)
+    pessoa(c, lerp(1250, 800, entra), 1780, ADU, f, MAE, seed=3, expr='preocupado', look=-.75, gesto='segura', walk=1 if 0 < entra < 1 else 0)
+    avental(c, lerp(1250, 800, entra), 1780, ADU)
+    return c, cam(lerp(1000, 700, entra), V(1250, 1200), zf(1.35, f), zf(1.1, f)), 'tarde'
 
 
 def s10(f):
-    c = sala_esp(f, vo_expr='preocupado', vo_look=0, exprs=('preocupado', 'neutro', 'preocupado'), looks=(.25, 0, -.25))
-    t = smooth(ramp(f, 0, 150))
-    return c, cam(lerp(1780, 880, t), V(1150, 1150), zf(1.75, f, .0008), zf(1.45, f, .0008)), 'tarde'
+    pe = wt(10, 'perto') - 3; si = wt(10, 'silencio') - 3
+    c, _ = cozinha_noite(f, mae_expr='choque' if pe + 10 <= f < si else 'neutro', mae_look=-.75)
+    x = lerp(150, 620, smooth(ramp(f, 0, pe + 20)))
+    pessoa(c, x, 1800, KID, f, LIPE_PIJAMA, seed=2, walk=.5 if f < pe + 20 else 0, expr='preocupado', look=.75)
+    k = smooth(ramp(f, si - 10, si + 30))
+    return c, cam(lerp(V(820, 1000), 900, k), V(1250, 1150), lerp(1.25, 1.7, k) * (1 + .0008 * f), lerp(1.05, 1.4, k) * (1 + .0008 * f)), 'noite_fab'
 
 
 def s11(f):
-    le = wt(11, 'levantou') - 3; ca = wt(11, 'cachecol') - 3
-    c = sala_esp(f, vo_expr='curioso' if f >= le else 'neutro', vo_look=0 if f >= le else .25)
-    k = easeOut(ramp(f, ca, ca + 14))
-    kk = kick(f, le + 2, .5)
-    return c, cam(lerp(600, 480, k), lerp(V(1200, 1150), V(1180, 1150), k) + kk * 10, lerp(1.45, 2.0, k) * (1 + .0008 * f), lerp(1.2, 1.6, k) * (1 + .0008 * f)), 'tarde'
+    c, _ = cozinha_noite(f, mae_look=-.75)
+    pessoa(c, 620, 1800, KID, f, LIPE_PIJAMA, seed=2, expr='preocupado', look=.75)
+    fo = wt(11, 'forte') - 3
+    c = close_fab(c, f, 700, 1300, expr='sorriso' if f >= fo else 'preocupado', look=V(.5, .5), s=V(.95, .95), dx=V(0, -350),
+                  boca=boca_fala(11, f), **LIPE_PIJAMA)
+    return c, cam_close(f, 1.12, 1.0), 'noite_fab'
 
 
 def s12(f):
-    c = sala_esp(f, vo_expr='sorriso', vo_look=0, trico_=False)
-    c = close_fab(c, f, 600, 1150, expr='sorriso', look=V(0, .25), s=V(.95, .95), dx=V(0, -380), **VOC)
-    bx = kit.BW / 2 + V(0, -380); by = kit.BH - V(40, 10)
-    put_img(c, cachecol_img(V(820, 700)), bx, by + 4 * math.sin(f * .15), rot=4)
-    return c, cam_close(f, 1.12, 1.0), 'tarde'
+    fl, po = wt(12, 'flutuando') - 6, wt(12, 'poeira') - 3
+    c, bm = cozinha_noite(f, pedras=5, mae_expr='choque' if f >= fl else 'neutro', mae_look=.75 if f >= fl else -.75)
+    pessoa(c, 620, 1800, KID, f, LIPE_PIJAMA, seed=2, expr='curioso' if f >= fl else 'preocupado', look=.75)
+    pedra_flutua(c, bm[0], bm[1], f, fl, po, 200, 50, 520)
+    k = smooth(ramp(f, fl, po))
+    return c, cam(lerp(1200, 1500, k), lerp(V(1250, 1150), V(1050, 1000), k), lerp(1.2, 1.5, k) * (1 + .0008 * f), lerp(1.02, 1.2, k) * (1 + .0008 * f)), 'noite_fab'
 
 
 def s13(f):
-    bo, hi = wt(13, 'bolo') - 3, wt(13, 'historias') - 3
-    if f < hi:
-        c = salinha_fab('tarde').copy()
-        pessoa(c, 1400, 1350 + .28 * 1000, 1000, f, VOC, seed=6, expr='sorriso', look=-.5)
-        c.alpha_composite(poltrona_frente())
-        if f >= bo: bolo(c, 1240, 1520, .8 * (back(ramp(f, bo, bo + 10)) if f < bo + 10 else 1), f)
-        lipe_chao(c, 760, f, expr='sorriso', look=.75)
-        t = smooth(ramp(f, 0, hi))
-        return c, cam(lerp(V(1000, 1104), V(1150, 1104), t), V(1300, 1300), zf(1.2, f, .0012), zf(1.0, f, .0008)), 'tarde'
-    g = f - hi
-    c = quarto_fab('noite').copy()
-    pessoa(c, 1860, 1290 + .28 * KID, KID, f, LIPE_PIJAMA, seed=2, expr='sorriso', look=-.75)
-    d = ImageDraw.Draw(c)
-    cob = [(1600, 1390), (2110, 1370), (2110, 1575), (1600, 1575)]
-    d.polygon(cob, fill=(244, 212, 138, 255)); d.line(cob + [cob[0]], fill=INK + (255,), width=8)
-    for x in range(1660, 2100, 110): d.ellipse((x - 18, 1460, x + 18, 1496), fill=(224, 106, 85, 255))
-    vf = 1360 + .28 * 950
-    pessoa(c, 1330, vf, 950, f, VOC, seed=6, expr='sorriso', look=.75)
-    d.rectangle((1170, 1350, 1500, 1600), fill=(154, 106, 64, 255), outline=INK + (255,), width=7)
-    hx, hy = mao_dir(1330, vf, 950); livro(c, hx - 40, hy - 70, .9)
-    return c, cam(1600, V(1250, 1200), zf(1.35, g, .0015), zf(1.15, g, .0012)), 'noite_fab'
-
-
-def s14(f):
-    te = wt(14, 'tempo') - 3
-    c = sala_esp(f, vo_expr='neutro', vo_look=.5, exprs=('neutro', 'neutro', 'neutro'), looks=(-.5, -.75, -.75), trico_=False)
-    put_img(c, cachecol_img(420), XS[0], FEET_S - .32 * HS + 60, rot=-6)
-    pessoa(c, 900, 1840, KID, f, LIPE, seed=2, expr='preocupado', look=-.75)
-    k = smooth(ramp(f, te - 10, te + 30))
-    return c, cam(lerp(V(700, 1104), V(680, 900), k), V(1250, 1250), lerp(1.4, 1.7, k) * (1 + .0006 * f), lerp(1.1, 1.35, k) * (1 + .0006 * f)), 'tarde'
-
-
-def s15(f):
-    c = sala_esp(f, trico_=False)
-    pessoa(c, 900, 1840, KID, f, LIPE, seed=2, expr='preocupado', look=-.75)
-    c = close_fab(c, f, 800, 1250, expr='preocupado', look=V(-.25, -.5), s=V(.95, .95), dx=V(0, 380), lagrima=(f / 45) % 1, **LIPE)
+    se, bo = wt(13, 'segredo') - 3, wt(13, 'boas') - 3
+    c, _ = cozinha_noite(f, pedras=4)
+    pessoa(c, 620, 1800, KID, f, LIPE_PIJAMA, seed=2, expr='curioso', look=.75)
+    for k in range(3): poeira_dourada(c, 700 + k * 300, 1000 + 80 * k, (f + k * 23) % 70, 0, 200, 14, 60 + k)
+    c = close_fab(c, f, 800, 1250, expr='sorriso' if f >= bo else 'curioso', look=V(.25, .5), s=V(.95, .95), dx=V(0, 380), **LIPE_PIJAMA)
+    d_ = c
+    for k in range(6):   # brilhos em volta do rosto
+        ph = (f * .04 + k / 6) % 1
+        brilho(d_, kit.BW / 2 + V(0, 380) + 420 * math.cos(k + f * .02), kit.BH * .45 + 300 * math.sin(k * 2.1 + f * .02), 40 * math.sin(ph * math.pi))
     return c, cam_close(f, 1.15, 1.0), 'tarde'
 
 
+def s14(f):
+    ab = wt(14, 'abracou') - 3
+    c = jantar_fab('noite').copy()
+    if f < ab:
+        mae_sentada(c, 1104, f, MAE, expr='sorriso', look=-.75)
+        c.alpha_composite(mesa_frente())
+        pessoa(c, 700, 1800, KID, f, LIPE_PIJAMA, seed=2, expr='sorriso', look=.75)
+        return c, cam(950, V(1150, 1100), zf(1.6, f), zf(1.3, f)), 'tarde'
+    g = f - ab
+    pessoa(c, 1180, 1820, KID, f, LIPE_PIJAMA, seed=2, expr='sorriso', look=-.25, gesto='abraco')
+    pessoa(c, 960, 1800, ADU, f, MAE, seed=3, expr='sorriso', look=.5, braco_e=1.6, braco_d=.5)
+    for k in range(2): poeira_dourada(c, 1000 + k * 300, 900, (f + k * 31) % 70, 0, 260, 18, 70 + k)
+    return c, cam(1080, V(1150, 1100), lerp(1.4, 1.75, smooth(ramp(g, 0, 60))) * (1 + .001 * g), lerp(1.15, 1.4, smooth(ramp(g, 0, 60)))), 'tarde'
+
+
+def s15(f):
+    c = jantar_fab('noite').copy()
+    pessoa(c, 960, 1800, ADU, f, MAE, seed=3, expr='sorriso', look=.5)
+    c = close_fab(c, f, 960, 1150, expr='sorriso', look=V(0, -.25), s=V(.95, .95), dx=V(0, -380), lagrima=(f / 50) % 1, boca=boca_fala(15, f), **MAE)
+    return c, cam_close(f, 1.1, 1.0), 'tarde'
+
+
 def s16(f):
-    c = sala_esp(f, vo_expr='sorriso', trico_=False)
-    c = close_fab(c, f, 600, 1150, expr='sorriso', look=V(.25, .5), s=V(.95, .95), dx=V(0, -380), **VOC)
-    bx = kit.BW / 2 + V(0, -380); by = kit.BH - V(40, 10)
-    put_img(c, cachecol_img(V(820, 700)), bx, by, rot=4)
-    return c, cam_close(f, 1.06, 1.0), 'tarde'
-
-
-def dupla(c, x, f, walk=0, flip=False, expr='sorriso', look_l=.75, look_v=.75):
-    """vó (à esquerda) e Lipe (à direita) de mãos dadas, Lipe com o cachecol."""
-    pessoa(c, x, 1720, ADU, f, VOC, seed=6, walk=walk, flip=flip, expr=expr, look=look_v)
-    lx = x + 280
-    pessoa(c, lx, 1740, KID, f, LIPE, seed=2, walk=walk, flip=flip, expr=expr, look=look_l)
-    cachecol_corpo(c, lx, 1740, KID, flip)
-    d = ImageDraw.Draw(c)
-    hy = 1740 - .27 * KID
-    d.ellipse((x + 140 - 30, hy - 30, x + 140 + 30, hy + 30), fill=hexc(LIPE['pele']) + (255,), outline=INK + (255,), width=6)
+    su = wt(16, 'sumiu') - 8
+    c = quarto_fab('dia').copy()
+    carga = .35 if f < su + 30 else .12
+    mochila_costas(c, 1104, 1780, KID, carga, VERM, f)
+    pessoa(c, 1104, 1780, KID, f, LIPE, seed=2, expr='sorriso' if f >= su + 20 else 'curioso', look=0, gesto='comemora' if f >= su + 30 else None)
+    alcas(c, 1104, 1780, KID, VERM)
+    top = _SY(1780, KID, 455) - KID * .22 * .35
+    pedra_flutua(c, 1104, top, f, su, su + 30, 120, 77, 360)
+    return c, cam(1104, V(1250, 1200), lerp(1.5, 1.3, smooth(ramp(f, su, su + 40))) * (1 + .001 * f), 1.15 * (1 + .001 * f)), 'vivo'
 
 
 def s17(f):
-    ca = wt(17, 'cachecol') - 3
-    c = rua_loja(f)
-    x = lerp(PORTA_X - 200, 450, smooth(ramp(f, 0, ca)))
-    dupla(c, x, f, walk=1 if f < ca else 0, flip=True, look_l=-.75, look_v=-.75)
-    if f < ca:
-        return c, cam(lerp(1200, 800, smooth(ramp(f, 0, ca))), V(1300, 1200), zf(1.25, f, .0008), zf(1.05, f, .0008)), 'vivo'
-    g = f - ca
-    lx = x + 280
-    return c, cam(lx, 1740 - .55 * KID, lerp(1.6, 2.6, easeOut(ramp(g, 0, 14))) * (1 + .001 * g), lerp(1.3, 2.0, easeOut(ramp(g, 0, 14))) * (1 + .001 * g)), 'vivo'
+    co, pr, ri = wt(17, 'colega') - 3, wt(17, 'professora') - 3, wt(17, 'menino') - 3
+    if f < pr:
+        c = patio_bg('dia').copy()
+        kid_mochila(c, 900, 1790, f, KID2, AZUL_M, .5 if f < co + 14 else .2, expr='sorriso' if f >= co + 10 else 'preocupado', look=.75, seed=6)
+        lipe_mochila(c, 1380, 1800, f, .12, expr='sorriso', look=-.75, gesto='ombros' if f >= co else None, boca=(.5 if (f // 4) % 2 and co <= f < co + 24 else 0))
+        poeira_dourada(c, 900, _SY(1790, 640, 400), f, co + 14, 200, 18, 81)
+        return c, cam(1140, V(1300, 1250), zf(1.55, f, .0015), zf(1.25, f, .0015)), 'vivo'
+    if f < ri:
+        g = f - pr
+        c = sala_aula_bg('dia').copy()
+        pessoa(c, 1200, 1760, ADU, f, PROFA, seed=12, expr='sorriso' if g > 12 else 'neutro', look=-.75, gesto='maos_peito' if g > 12 else None)
+        lipe_mochila(c, 800, 1800, f, .12, expr='sorriso', look=.75, boca=(.5 if (f // 4) % 2 and g < 24 else 0))
+        poeira_dourada(c, 1200, 1250, f, pr + 14, 220, 18, 82)
+        return c, cam(1000, V(1250, 1150), zf(1.4, g, .0015), zf(1.15, g, .0015)), 'vivo'
+    g = f - ri
+    c = patio_bg('dia').copy()
+    pessoa(c, 1250, 1800, 840, f, KIDB, seed=7, expr='choque' if g < 18 else 'sorriso', look=-.75)
+    lipe_mochila(c, 820, 1810, f, .12, expr='sorriso', look=.75, gesto='acena', boca=(.5 if (f // 4) % 2 and g < 24 else 0))
+    poeira_dourada(c, 1250, 1300, f, ri + 18, 240, 20, 83)
+    return c, cam(1050, V(1250, 1200), lerp(1.3, 1.6, smooth(ramp(g, 0, 30))) * (1 + .001 * g), lerp(1.05, 1.3, smooth(ramp(g, 0, 30)))), 'vivo'
 
 
 def s18(f):
-    mu, le = wt(18, 'mudou') - 3, wt(18, 'lembrados') - 3; pl = wt(18, 'placa') - 3
-    t = ramp(f, mu, mu + 14)
-    placa = 'ESQUECIDOS' if t < .5 else 'LEMBRADOS'
-    c = rua_loja(f, placa=placa, vira=abs(math.cos(math.pi * t)))
-    if t > 0 and t < 1: faiscas(c, 1104, 640, f, 380, 8, 2.0)
-    dupla(c, 760, f, look_l=.5, look_v=.5)
-    if f >= le + 14:
-        c = close_fab(c, f, 1040, 1250, expr='sorriso', look=0, s=V(.95, .95), dx=V(0, 300), **LIPE)
-        cachecol_close(c, f, V(.95, .95), V(0, 300))
-        return c, cam_close(f, 1.15, 1.0, le + 14), 'vivo'
-    k = smooth(ramp(f, pl - 6, pl + 14))
-    return c, cam(1104, lerp(V(1300, 1200), V(900, 900), k), lerp(1.15, 1.4, k) * (1 + .0008 * f), lerp(1.0, 1.2, k) * (1 + .0008 * f)), 'vivo'
+    c = patio_bg('dia').copy()
+    pos = ((350, KID1, VERDE_M), (700, KIDB, '#e08a3a'), (1050, LIPE, VERM), (1400, KID2, AZUL_M), (1750, KID3, '#d65a8a'))
+    for i, (x, cr_, cor) in enumerate(pos):
+        h = 840 if cr_ is KIDB else (KID if cr_ is LIPE else 640)
+        y = 1780 - abs(math.sin(f * .22 + i)) * 50
+        mochila_costas(c, x, y, h, .03, cor, f, 90 + i)
+        pessoa(c, x, y, h, f, cr_, seed=20 + i, expr='sorriso', look=.5 - .25 * i, gesto='comemora' if i % 2 == 0 else 'acena')
+        alcas(c, x, y, h, cor)
+        poeira_dourada(c, x, y - h * .7, (f + i * 13) % 70, 0, 200, 12, 100 + i)
+    t = smooth(ramp(f, 0, 150))
+    return c, cam(lerp(V(700, 1104), V(1500, 1104), t), V(1250, 1200), lerp(1.3, 1.15, t), lerp(1.05, 1.0, t) * (1 + .0006 * f)), 'vivo'
 
 
 def s19(f):
-    c = rua_loja(f, 'tarde', placa='LEMBRADOS')
-    dupla(c, 760, f, look_l=-.5, look_v=.5)
-    return c, cam(1104, V(1200, 1150), zf(1.12, f, .0006), zf(1.0, f, .0006)), 'tarde'
+    c = rua_fab(f, scroll=f * 12, luz='tarde')
+    kid_mochila(c, 600, 1790 - abs(math.sin(f * .25)) * 50, f, KID1, VERDE_M, .02, walk=1, expr='sorriso', look=.75, seed=5)
+    lipe_mochila(c, 1104, 1780 - abs(math.sin(f * .25 + 1)) * 60, f, .03, walk=1, expr='sorriso', look=.75)
+    kid_mochila(c, 1600, 1790 - abs(math.sin(f * .25 + 2)) * 50, f, KID2, AZUL_M, .02, walk=1, expr='sorriso', look=.75, seed=6)
+    return c, cam(1104, V(1300, 1250), zf(1.25, f), zf(1.02, f)), 'tarde'
 
 
-SCENES = [s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16, s17, s18, s19]
+def s20(f):
+    c = jantar_fab('tarde').copy()
+    pessoa(c, 1180, 1820, KID, f, LIPE, seed=2, expr='sorriso', look=-.25, gesto='abraco')
+    pessoa(c, 960, 1800, ADU, f, MAE, seed=3, expr='sorriso', look=.5, braco_e=1.6, braco_d=.5)
+    avental(c, 960, 1800, ADU)
+    mochila_chao(c, 1650, 1800, 300, VERM, 0, 1)
+    return c, cam(1104, V(1250, 1150), zf(1.25, f, .0006), zf(1.0, f, .0006)), 'tarde'
+
+
+SCENES = [s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12, s13, s14, s15, s16, s17, s18, s19, s20]
 
 
 def OVERLAY(im, si, lf):
     im = im.convert('RGBA'); f = lf
     if si == 0 and f < CAPA:
-        if HOR: capa_txt(im, ['NESTA CIDADE, O QUE', 'VOCÊ PARA DE *AMAR*', 'VAI PRA UMA *LOJA*'], size=104, y=200)
-        else: capa_txt(im, ['NESTA CIDADE, O QUE', 'VOCÊ PARA DE *AMAR*', 'VAI PRA UMA *LOJA*'], size=96)
+        if HOR: capa_txt(im, ['NESTA CIDADE, TODA', '*PALAVRA* *DURA* VIRA', 'UMA *PEDRA*'], size=104, y=200)
+        else: capa_txt(im, ['NESTA CIDADE, TODA', '*PALAVRA* *DURA* VIRA', 'UMA *PEDRA* NA MOCHILA'], size=92)
+    elif si == 1:
+        k, tipo, f0 = _seg1(f)
+        if tipo == 'fala': balao(im, INSULTOS[k][2], V(560, 980), V(420, 200), ramp(f, f0, f0 + 6), V(54, 56))
+        else: selo_txt(im, 'PEDRA!', V(540, 960), V(330, 140), ramp(f, f0 + 10, f0 + 16), V(84, 80))
     elif si == 3:
-        su = wt(3, 'sumiu') - 3
-        if f < wt(3, 'foi') - 3: selo_txt(im, 'SUMIU!', V(540, 960), V(330, 140), ramp(f, su, su + 8), V(80, 76))
-    elif si == 12:
-        tr = wt(12, 'tres') - 3
-        selo_txt(im, '3 ANIVERSÁRIOS', V(540, 1400), V(330, 160), ramp(f, tr, tr + 8), V(72, 68), cor=(77, 121, 179))
+        tu = wt(3, 'tum') - 2
+        if f >= tu + 9: selo_txt(im, 'TUM!', V(540, 960), V(330, 140), ramp(f, tu + 9, tu + 15), V(96, 90))
+    elif si == 6:
+        selo_txt(im, '3:00', V(540, 960), V(300, 130), ramp(f, 0, 8), V(64, 60), cor=(77, 121, 179))
     elif si == 13:
-        selo_txt(im, 'LEMBRANÇA', V(540, 960), V(300, 130), ramp(f, 0, 8), V(64, 60), cor=(214, 150, 40))
-    elif si == 19:
-        e2, vi = wt(19, 'esquece', 1) - 3, wt(19, 'visite') - 3
-        if HOR:
-            moral_txt(im, ['NINGUÉM ESQUECE DE QUEM AMA DE UMA VEZ.'] + (['ESQUECE AOS *POUQUINHOS*.'] if f >= e2 else []) + (['*VISITE* ENQUANTO DÁ.'] if f >= vi else []), ramp(f, 0, 8))
-        else:
-            moral_txt(im, ['NINGUÉM ESQUECE', 'DE QUEM AMA', 'DE UMA VEZ.'] + (['ESQUECE AOS', '*POUQUINHOS*.'] if f >= e2 else []) + (['*VISITE*', 'ENQUANTO DÁ.'] if f >= vi else []), ramp(f, 0, 8))
+        ti = wt(13, 'tiram') - 3
+        if f >= wt(13, 'palavras') - 3:
+            selo_txt(im, 'PALAVRA BOA TIRA PEDRA' if f >= ti else 'PALAVRA DURA = PEDRA', V(540, 960), V(300, 140), ramp(f, wt(13, 'palavras') - 3, wt(13, 'palavras') + 5), V(64, 64), cor=(214, 150, 40) if f >= ti else (224, 88, 58))
+    elif si == 17:
+        if f < 60: selo_txt(im, 'NO DIA SEGUINTE', V(540, 960), V(300, 130), ramp(f, 0, 8), V(64, 60), cor=(90, 160, 80))
+    elif si == 20:
+        um = wt(20, 'uma') - 3
+        if HOR: moral_txt(im, ['TODO MUNDO CARREGA UMA MOCHILA', 'QUE VOCÊ NÃO VÊ.'] + (['UMA PALAVRA SUA PODE', 'DEIXAR ELA *MAIS LEVE*.'] if f >= um else []), ramp(f, 0, 8))
+        else: moral_txt(im, ['TODO MUNDO', 'CARREGA UMA', 'MOCHILA QUE', 'VOCÊ NÃO VÊ.'] + (['UMA PALAVRA', 'SUA DEIXA ELA', '*MAIS LEVE*.'] if f >= um else []), ramp(f, 0, 8))
     return im.convert('RGB')

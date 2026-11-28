@@ -157,7 +157,7 @@ IRIS, IRIS_D = hexc('#4f8fb8'), hexc('#3c7aa3')   # íris azul viva (antes cinza
 
 
 def menino(phase=0.0, walk=0.0, expr='neutro', look=0.0, blink=0, tilt=0.0, pele='#e6c8ad', cabelo='#26241f',
-           penteado='curto', roupa='#7b7863', calca='#2d2f32', oculos=False, barba=False, velho=False):
+           penteado='curto', roupa='#7b7863', calca='#2d2f32', oculos=False, barba=False, velho=False, boca=0, braco_e=None, braco_d=None):
     """pessoa de olhos grandes (estilo MISTÉRIO), 600x1000, pés em y≈975. walk 0..1 = caminhada; phase = fase.
     penteado: curto, coque, longo, careca; velho=True põe rugas e cabelo ralo; expr: neutro, curioso, preocupado, desconfiado, choque, medo, sorriso."""
     PELE, PELED = hexc(pele), mul(hexc(pele), .87)
@@ -175,16 +175,25 @@ def menino(phase=0.0, walk=0.0, expr='neutro', look=0.0, blink=0, tilt=0.0, pele
         p.line([(hx, hy), ((hx + fx) / 2 + 8 * sg * walk, (hy + fy) / 2), (fx, fy)], CALCA, 46, 6)
         p.shape(ell_pts(fx + side * 6, fy + 8, 54, 24, 24), hexc('#d9dcd8'), hexc('#a9aeab'), 6, 6)
     # braços
-    for side, sg in ((-1, -1), (1, 1)):
+    def _braco(side, sg):
         a = .35 * sw * sg
+        ov = braco_e if side == -1 else braco_d   # 28/11/2026: gesto (ângulo em rad; + = mão para a direita da imagem)
+        if ov is not None: a = ov
         sx, sy = 300 + side * 112, 500
         hx, hy = sx + side * 18 + 200 * math.sin(a), sy + 200 * math.cos(a)
         p.line([(sx, sy), (hx, hy)], JAQ, 50, 6)
-        p.dot(hx, hy + 18, 26, PELE, 6)
-    # jaqueta
-    p.shape([(195, 470), (405, 470), (425, 560), (420, 745), (180, 745), (175, 560)], JAQ, JAQD, 7, 16)
+        p.dot(hx, hy + 18 * math.cos(a) + 0 * math.sin(a), 26, PELE, 6)
+    for side, sg in ((-1, -1), (1, 1)):
+        if (braco_e if side == -1 else braco_d) is None: _braco(side, sg)
+    # jaqueta (28/11/2026: ombros arredondados)
+    tor = [(205, 470), (395, 470)] + [(395 + 28 * math.sin(t), 500 - 30 * math.cos(t)) for t in [k * .35 for k in range(1, 5)]] + \
+          [(425, 560), (420, 735), (410, 748), (190, 748), (180, 735), (175, 560)] + \
+          [(205 - 28 * math.sin(t), 500 - 30 * math.cos(t)) for t in [k * .35 for k in range(4, 0, -1)]]
+    p.shape(tor, JAQ, JAQD, 7, 16)
     p.shape([(250, 600), (350, 600), (350, 680), (250, 680)], mul(JAQ, 1.06), None, 5, 0)
     p.shape([(255, 455), (345, 455), (330, 500), (270, 500)], JAQD, None, 5, 0)   # gola
+    for side, sg in ((-1, -1), (1, 1)):
+        if (braco_e if side == -1 else braco_d) is not None: _braco(side, sg)   # gesto: braço na frente do corpo
     # cabeça
     hy = 300
     p.shape(ell_pts(300, hy, 165, 158, 50), PELE, PELED, 7, 22)
@@ -230,7 +239,10 @@ def menino(phase=0.0, walk=0.0, expr='neutro', look=0.0, blink=0, tilt=0.0, pele
         for ex in (238, 362): p.arc(ex, 318, 60, 60, 0, 360, 7)
         p.stroke([(298, 318), (302, 318)], 7)
     # boca
-    if expr == 'sorriso':
+    if boca > 0:   # 28/11/2026: boca falando (0..1)
+        p.shape(ell_pts(300, 416, 22 + 6 * boca, 6 + 20 * boca, 20), hexc('#7a2e2e'), None, 6, 0)
+        if boca > .4: p.dot(300, 416 + 12 * boca, 9 * boca, hexc('#e0707a'))
+    elif expr == 'sorriso':
         p.arc(300, 410, 34, 20, 20, 160, 7)
     elif expr in ('choque', 'medo'):
         p.shape(ell_pts(300, 418, 24, 30 if expr == 'choque' else 20, 20), hexc('#7a2e2e'), None, 5, 0)
@@ -531,7 +543,7 @@ def mao_dir(x, feet, h):
 
 # ------------------------------------------------------------------ CLOSE no rosto (pedido do Luis em 20/11/2026)
 def rosto(expr='neutro', look=0.0, blink=0, pele='#e6c8ad', cabelo='#26241f', penteado='curto', roupa='#7b7863',
-          oculos=False, barba=False, velho=False, suor=0, tremor=0, calca=None):
+          oculos=False, barba=False, velho=False, suor=0, tremor=0, calca=None, boca=0):
     """rosto em close (1000x1700): cabeça grande + ombros até embaixo. expr: neutro, curioso, preocupado, choque, sorriso, medo, desconfiado.
     24/11/2026 (pedido do Luis, "cara de sono"): sem olheiras, íris viva, sobrancelhas altas, piscada em arco."""
     K = 2.6
@@ -601,7 +613,10 @@ def rosto(expr='neutro', look=0.0, blink=0, pele='#e6c8ad', cabelo='#26241f', pe
         for ex in (238, 362): p.arc(*T(ex, 318), 60 * K, 60 * K, 0, 360, 12)
     # boca
     mx, my = T(300, 420)
-    if expr == 'sorriso':
+    if boca > 0:   # 28/11/2026: boca falando no close (0..1)
+        p.shape([T(x, y) for x, y in ell_pts(300, 424, 26 + 8 * boca, 6 + 24 * boca, 28)], hexc('#7a2e2e'), None, 8, 0)
+        if boca > .4: p.shape([T(x, y) for x, y in ell_pts(300, 424 + 14 * boca, 14 * boca, 8 * boca, 20)], hexc('#e0707a'), None, 0, 0)
+    elif expr == 'sorriso':
         p.shape([(mx - 80, my - 10), (mx + 80, my - 10), (mx + 50, my + 50), (mx - 50, my + 50)], hexc('#7a2e2e'), None, 8, 0)
         p.poly([(mx - 70, my - 6), (mx + 70, my - 6), (mx + 60, my + 12), (mx - 60, my + 12)], hexc('#ffffff'))
     elif expr in ('choque', 'medo'):

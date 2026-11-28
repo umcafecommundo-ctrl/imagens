@@ -25,11 +25,19 @@ Alturas: Lipe h=700 (KID), adultos h=1000 (ADU). Sentados: pés = assento + .28*
 - Áudio: VOZ Antonio RATE '+2%' PITCH '-2Hz'; MUSICA = True, MUSICA_NIVEL = .14, STING = False e
   `def TRILHA(SC, N, SR): return trilha(SC, N, SR, [(0,'misteriosa'), (cena_conflito,'triste'), (cena_virada,'inspiradora')])`
   (trilha gerada em código, sem música de terceiros).
-- VOZ ELEVENLABS (pedido do Luis em 28/11/2026, vale a partir de 30/11): a narração sai da ElevenLabs (conector ElevenLabs), voz
-  Welliton `VtMklhKDP2Y2mBvBbLwL`, modelo `eleven_multilingual_v2`, 1 take. Passo a passo em `eleven.py` (gera o texto todo numa
-  chamada, transcreve com eleven_scribe_v1 para ter o tempo de cada palavra, e `python3 curiosidades/desenho/eleven.py $P <mp3> <words.json>`
-  monta voz/l{i}.wav + falas.json no lugar de `motor.py narrar`). Se faltar crédito (plano Starter, 40 mil/mês, ~1.700 por vídeo) ou
-  a ElevenLabs falhar 2 vezes, volte para `motor.py narrar` (voz Antonio) — decisão do Luis.
+- VOZ ELEVENLABS (pedido do Luis em 28/11/2026, vale a partir de 29/11): a narração sai da ElevenLabs (conector ElevenLabs), voz
+  MARCIO `plASsyS7JE6GCAvx9uIc` (escolhida pelo Luis: mais viva; a Welliton ficou "sem vida"), modelo `eleven_v3`, 1 take. Pode pôr
+  marcas de emoção em inglês só no texto enviado (ex.: `[whispers]`, `[emotional]` antes de uma fala), nunca nas LINES. Passo a passo em
+  `eleven.py` (gera o texto todo numa chamada, transcreve com eleven_scribe_v1 para ter o tempo de cada palavra, e
+  `python3 curiosidades/desenho/eleven.py $P <mp3> <words.json>` monta voz/l{i}.wav + falas.json no lugar de `motor.py narrar`).
+  Se faltar crédito (plano Starter, 40 mil/mês, ~1.800 por vídeo) ou a ElevenLabs falhar 2 vezes, volte para `motor.py narrar`
+  (voz Antonio) — decisão do Luis.
+- ANIMAÇÃO MAIS VIVA (pedido do Luis em 28/11/2026, "a animação está meio estranha, deixe parecida com a do Vitinho"):
+  `pessoa(..., gesto='acena'|'aponta'|'abraco'|'segura'|'comemora'|'maos_peito'|'ombros')` (ou braco_e/braco_d em radianos),
+  `boca=boca_fala(cena, f, 'primeira', 'ultima')` em TODO personagem que fala (boca mexe com a voz, também no close_fab),
+  sombra no chão e balanço leve já vêm de pessoa(). Personagens reagem (gesto/expressão) a cada frase; nada de gente parada
+  de braço caído a cena inteira. Exemplo completo: `curiosidades/2026-11-29-fabula/historia.py` (mochilas, pedras, escola,
+  pátio, sala de aula, balão de fala, poeira dourada).
 - FALA_TIKTOK = chamada curta de compartilhar ("Manda pro seu pai."), CTA_TEXTO em maiúsculas, ARROBA = ''. Nada de "segue"/"se inscreve".
 
 # MUDANÇAS DE 24/11/2026 — pedido do Luis ("cara de sono" e vídeos que não entregam). VALEM ACIMA DE TUDO ABAIXO.

@@ -58,7 +58,52 @@ def zf(z, f, k=.0008):
     return z * (1 + k * f)
 
 
-def pessoa(c, x, feet, h, f, cores, **kw):
+@lru_cache(maxsize=32)
+def _sombra_img(w):
+    """sombra macia no chão (elipse borrada) com largura w."""
+    hh = max(6, w // 6); im = Image.new('RGBA', (w + 40, hh + 40), (0, 0, 0, 0))
+    ImageDraw.Draw(im).ellipse((20, 20, w + 20, hh + 20), fill=(30, 20, 30, 85))
+    return im.filter(ImageFilter.GaussianBlur(8))
+
+
+# 28/11/2026 (pedido do Luis: "animação meio estranha", deixar mais viva): gestos, boca que fala, sombra no chão e balanço leve.
+GESTOS = {
+    'acena': lambda f: (None, 2.5 + .35 * math.sin(f * .5)),          # acenando com a mão direita
+    'aponta': lambda f: (None, 1.55 + .04 * math.sin(f * .2)),         # apontando para a direita da imagem
+    'abraco': lambda f: (1.15, -1.15),                                 # braços para a frente (abraçar/receber)
+    'segura': lambda f: (.55, -.55),                                   # segurando algo na frente do corpo
+    'comemora': lambda f: (-2.3 - .15 * math.sin(f * .4), 2.3 + .15 * math.sin(f * .4)),
+    'maos_peito': lambda f: (.95, -.95),
+    'ombros': lambda f: (-.6, .6),                                     # braços meio abertos (explicando / sem jeito)
+}
+
+
+def boca_fala(si, f, de=None, ate=None):
+    """abertura da boca (0..1) de quem está FALANDO na cena si, pelo tempo das palavras da voz.
+    de/ate = 1ª e última palavra da fala do personagem (se a frase mistura narrador e personagem)."""
+    try: ws = kit.T.falas[si]['words']
+    except Exception: return 0.0
+    i0 = 0; i1 = len(ws) - 1
+    if de: i0 = next((i for i, w in enumerate(ws) if kit._norm(w['w']) == kit._norm(de)), 0)
+    if ate: i1 = next((i for i in range(len(ws) - 1, -1, -1) if kit._norm(ws[i]['w']) == kit._norm(ate)), i1)
+    t = f / kit.FPS - kit.T.LEAD
+    for w in ws[i0:i1 + 1]:
+        if w['t'] - .03 <= t <= w['t'] + w['d']:
+            return round((.35 + .65 * abs(math.sin(t * 13))) * 4) / 4
+    return 0.0
+
+
+def pessoa(c, x, feet, h, f, cores, gesto=None, boca=0.0, sombra=True, vivo=True, **kw):
+    """personagem do formato FÁBULA. gesto = nome em GESTOS; boca = 0..1 (use boca_fala); sombra no chão; vivo = balanço leve."""
+    if sombra and h > 60:
+        sh = _sombra_img(int(h * .46 // 8 * 8)); c.alpha_composite(sh, (int(x - sh.width / 2), int(feet - sh.height / 2 + h * .01)))
+    if gesto:
+        ae, ad = GESTOS[gesto](f)
+        if ae is not None: kw['braco_e'] = round(ae * 10) / 10
+        if ad is not None: kw['braco_d'] = round(ad * 10) / 10
+    if boca: kw['boca'] = round(boca * 4) / 4
+    if vivo and not kw.get('walk') and 'tilt' not in kw:
+        kw['tilt'] = round(1.2 * math.sin(f * .045 + kw.get('seed', 2)) * 2) / 2
     put_menino(c, x, feet, h, f, **dict(cores, **kw))
 
 
@@ -578,7 +623,8 @@ def celular(c, x, y, h=120, mao='#e8bd96'):
 
 
 # ------------------------------------------------------------------ CLOSE no rosto (serve nas 2 versões)
-def close_fab(c, f, cx, cy, expr='neutro', look=0.0, s=1.0, escurece=0.0, shake=0.0, lagrima=0.0, dx=0, seed=2, **kw):
+def close_fab(c, f, cx, cy, expr='neutro', look=0.0, s=1.0, escurece=0.0, shake=0.0, lagrima=0.0, dx=0, seed=2, boca=0.0, **kw):
+    if boca: kw['boca'] = boca
     """recorta a vista em volta de (cx, cy), borra e põe o rosto grande. Devolve um palco BWxBH: use cam(BW/2, BH/2, 1.0x, 1.0x)."""
     BW, BH = kit.BW, kit.BH
     x0 = int(clamp(cx - BW / 2, 0, c.width - BW)); y0 = int(clamp(cy - BH / 2, 0, c.height - BH))
@@ -588,6 +634,7 @@ def close_fab(c, f, cx, cy, expr='neutro', look=0.0, s=1.0, escurece=0.0, shake=
     kw['blink'] = 1 if blinkAt(f, seed) > .6 and expr not in ('choque', 'medo') else 0
     q = dict(kw); q['look'] = round(look * 4) / 4
     q['tremor'] = round(f / 3) if shake > 0 else 0
+    if kw.get('boca'): q['boca'] = round(kw['boca'] * 4) / 4
     hh = int((1300 if HOR else 1700) * s)
     im = kit.sprite('rosto', tuple(sorted(dict(q, expr=expr).items())), hh, 1000 / 1700, False)
     bob = 6 * math.sin(f * .11); sx = shake * 8 * math.sin(f * 2.3)
