@@ -85,3 +85,16 @@
   -> Último dia completo do formato MISTÉRIO. Instagram: a manhã (07h) segue a melhor (2 mil views, 75% passou dos 3 s); a parte 1 das 19h
      quase não rodou (155 views no IG, 85 no TikTok) e as partes 2 ficaram com tempo médio de 33-46%. Comentários e compartilhamentos
      zerados em tudo. A partir de 27/11 o formato é FÁBULA (1 vídeo/dia às 11h, 2-3 min, CTA de compartilhar): acompanhar compartilhamentos.
+2026-11-26 | 07h | [MISTÉRIO] A lousa da sala quatro, parte 1 | instagram | 1763 | 57% (73,9% passou dos 3 s) | 24,1 s / 42 s | 1 (0 compart.)
+2026-11-26 | 07h | [MISTÉRIO] A lousa da sala quatro, parte 1 | tiktok | 428 | sem dado | sem dado / 42 s | 0 (0 compart.)
+2026-11-26 | 12h | [MISTÉRIO] A lousa da sala quatro, parte 2 | instagram | 180 | 39% (65,2% passou dos 3 s) | 18,9 s / 49 s | 0 (0 compart.)
+2026-11-26 | 12h | [MISTÉRIO] A lousa da sala quatro, parte 2 | tiktok | 421 | sem dado | sem dado / 49 s | 0 (0 compart.)
+2026-11-26 | 19h | [MISTÉRIO] A estação Girassol, parte 1 | instagram | 1548 | 47% (67,6% passou dos 3 s) | 21,8 s / 46 s | 0 (0 compart.)
+2026-11-26 | 19h | [MISTÉRIO] A estação Girassol, parte 1 | tiktok | 521 | sem dado | sem dado / 46 s | 0 (0 compart.)
+2026-11-26 | 21h | [MISTÉRIO] A estação Girassol, parte 2 | instagram | 1369 | 38% (67,3% passou dos 3 s) | 17,7 s / 46 s | 0 (1 compart.)
+2026-11-26 | 21h | [MISTÉRIO] A estação Girassol, parte 2 | tiktok | 415 | sem dado | sem dado / 46 s | 0 (0 compart.)
+2026-11-26 | longo + todas | YouTube | youtube | sem dado (métricas de vídeo do YouTube descontinuadas no Metricool) | sem dado | sem dado | sem dado
+  -> Último dia do formato MISTÉRIO. Parte 1 da manhã segue a melhor no Instagram (1,8 mil views, 74% passou dos 3 s); a Girassol das 19h
+     (1,5 mil) e a parte 2 das 21h (1,4 mil, 1º compartilhamento) rodaram bem; a parte 2 das 12h quase não rodou (180). TikTok 415-521 views.
+     Prévia (menos de 48 h) da 1ª FÁBULA, O pote de tempo (27/11, 11h): Instagram 1,5 mil views, 75,9% passou dos 3 s, tempo médio 55 s
+     (~42% de ~130 s, o maior tempo absoluto até agora); TikTok 381 views. Comentários/compartilhamentos ainda zerados.
